@@ -97,7 +97,7 @@ webase-bee数据导出组件基于区块高度进行导出，并支持指定高�
 
 ##### 2.2.1.1 下载安装包
 ```
-wget https://github.com/WeBankFinTech/webase-monkey/tree/dev/src/main/generate_bee.zip
+wget https://github.com/WeBankFinTech/webase-monkey/blob/dev/src/main/install_scripts/generate_bee.zip
 ```
 
 ##### 2.2.1.2 解压安装包
