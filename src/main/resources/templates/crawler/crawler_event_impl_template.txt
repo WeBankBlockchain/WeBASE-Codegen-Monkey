@@ -1,0 +1,59 @@
+/**
+ * Copyright (C) 2018 WeBank, Inc. All Rights Reserved.
+ */
+package ${group}.${projectName}.generated.event.crawler.impl;
+
+import java.math.BigInteger;
+import java.util.List;
+import org.bcos.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Service;
+import ${contractPackName}.${contractName};
+import ${contractPackName}.${contractName}.${eventName}EventResponse;
+import ${group}.${projectName}.crawler.face.BcosEventCrawlerInterface;
+import ${group}.${projectName}.generated.db.event.entity.${class_name};
+import ${group}.${projectName}.tools.AddressUtils;
+import ${group}.${projectName}.tools.BigIntegerUtils;
+import ${group}.${projectName}.tools.BoolUtils;
+import ${group}.${projectName}.tools.BytesUtils;
+import ${group}.${projectName}.generated.db.event.repository.${class_name}Repository;
+import lombok.extern.slf4j.Slf4j;
+import java.sql.Date;
+
+@Service
+@Slf4j
+@ConditionalOnProperty(name = "monitor.${contractName}.${eventName}CrawlerService", havingValue = "on")
+public class ${contractName}${eventName}CrawlerImpl implements BcosEventCrawlerInterface {
+	
+	@Autowired
+	private ${class_name}Repository repository;
+	
+	
+	@Override
+	public boolean handleReceipt(TransactionReceipt receipt, BigInteger blockTimeStamp) {
+		try {
+			List<${eventName}EventResponse> ${eventName}EventResponseList = ${contractName}.get${eventName}Events(receipt);
+			for (${eventName}EventResponse ${eventName}EventResponse : ${eventName}EventResponseList) {
+				${class_name} ${lowContractName}${eventName} = new ${class_name}();
+				${lowContractName}${eventName}.setBlockHeight(receipt.getBlockNumber().longValue());
+				${lowContractName}${eventName}.setTxHash(receipt.getTransactionHash());
+				<%
+				for(entry in list){
+					var javaCapName = entry.javaCapName;
+					var javaName = entry.javaName;
+					var typeMethod = entry.typeMethod;
+				%>
+				${lowContractName}${eventName}.set${javaCapName}(${typeMethod}(${eventName}EventResponse.${javaName}.getValue()));
+				<% } %>
+				${lowContractName}${eventName}.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));
+				log.debug("depot ${eventName}:{}", ${lowContractName}${eventName}.toString());
+				repository.save(${lowContractName}${eventName});
+			}
+			return true;
+		} catch (Exception e) {
+			log.error("handleReceipt OnError, {}", e.getMessage());
+			return false;
+		}
+	}
+}

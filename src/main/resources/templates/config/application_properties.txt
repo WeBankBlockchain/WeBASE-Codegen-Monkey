@@ -1,0 +1,79 @@
+### Springboot server config
+server.port=${port}
+spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
+spring.jackson.time-zone=GMT+8
+logging.file=webasebee.log
+logging.level.org.hibernate=ERROR 
+
+## Spring data jpa properties
+spring.datasource.test-on-borrow=false
+spring.datasource.test-while-idle=true
+spring.datasource.time-between-eviction-runs-millis= 3600000
+spring.jpa.properties.hibernate.hbm2ddl.auto=update
+spring.jpa.properties.hibernate.dialect=com.webank.webasebee.config.MysqlConfig
+spring.jpa.properties.hibernate.show_sql=true
+spring.profiles.active=sharding-tables
+
+## System config
+system.orgId=${orgId}
+system.nodeStr=${nodeStr}
+system.configPath=config/
+system.keystorePassword=${keystorePassword}
+system.clientCertPassWord=${clientCertPassWord}
+system.multiLiving=${multiLiving}
+
+#######
+
+<%
+	var flag =strutil.toLowerCase (multiLiving);
+	if(flag=="true"){
+%>
+## zookeeper config
+regcenter.serverList=${serverListStr}
+regcenter.namespace=${nameSpace}
+
+## job config 
+prepareTaskJob.cron=0/${frequency} * * * * ?
+prepareTaskJob.shardingTotalCount=1
+prepareTaskJob.shardingItemParameters=0=A
+
+dataflowJob.cron=0/${frequency} * * * * ?
+dataflowJob.shardingTotalCount=4
+dataflowJob.shardingItemParameters=0=A,1=B,2=C,3=D
+		
+<%
+	}else{
+%>
+system.maxScheduleThreadNo=${maxScheduleThreadNo}
+system.maxBlockHeightThreshold=${maxBlockHeightThreshold}
+system.crawlBatchUnit=${crawlBatchUnit}
+system.frequency=${frequency}
+<%
+	}
+%>
+
+##	Monitor buttons
+#### event buttons
+#monitor.[ContractName].[EventName]CrawlerService=off
+<%
+	 	for(var contract in eventList){
+	 		name = contract.name;	
+	 		contractName = contract.contractName;
+			println("monitor." + contractName + "." + name + "CrawlerService=on");
+	 	}
+	 	println("#### method buttons");	 	
+	 	for(var m in methodList){
+	 		name = m.name;	
+	 		contractName = m.contractName;
+			println("monitor." + contractName + "." + name + "MethodCrawlerService=on");
+	 	}
+%>
+#######
+
+system.group=${group}
+system.projectName=${projectName}
+system.contractPackName=${contractPackName}
+system.contractPath=${contractPath}
+
+
+
