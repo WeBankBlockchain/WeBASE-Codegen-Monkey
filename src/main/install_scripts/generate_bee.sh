@@ -35,7 +35,8 @@ esac
 echo "EXEC_OPTION: $EXEC_OPTION {build|run}"
 
 #### config props
-APPLICATION_FILE="config/application.properties"
+APPLICATION_FILE="config/resources/application.properties"
+APPLICATION_TMP_FILE="config/resources/application.properties.tmp"
 CONTRACT_DIR="config/contract"
 CERT_DIR="config/resources"
 RESOURCE_DIR="src/main/resources"
@@ -77,12 +78,14 @@ fi
 if [ -f "$APPLICATION_FILE" ]
 then
   echo "$APPLICATION_FILE exist."
+  grep -v "^#"  $APPLICATION_FILE | grep -v "^$"  > $APPLICATION_TMP_FILE
 
   while IFS='=' read -r key value
   do
     key=$(echo $key | tr '.' '_')
     eval "${key}='${value}'"
-  done < "$APPLICATION_FILE"
+  done < "$APPLICATION_TMP_FILE"
+  rm -f $APPLICATION_TMP_FILE
 else
   echo "$APPLICATION_FILE not found."
   exit 1
@@ -98,16 +101,16 @@ echo "group: "$group
 
 # download webase-monkey
 rm -rf $BM
-git clone git@gitee.com:maoplus/$BM.git
+git clone https://github.com/WeBankFinTech/$BM.git
 cd $BM
-git checkout master
+git checkout dev
 cd ..
 
 # download webase-bee
 rm -rf $BB
-git clone git@gitee.com:maoplus/$BB.git
+git clone https://github.com/WeBankFinTech/$BB.git
 cd $BB
-git checkout master
+git checkout dev
 cd ..
 
 # init config
@@ -157,7 +160,8 @@ rm -rf webase-monkey
 
 cd webase-bee
 mkdir -p $RESOURCE_DIR/
-cp -f  ../$CERT_DIR/* $RESOURCE_DIR/
+cp -f  ../$CERT_DIR/ca.crt $RESOURCE_DIR/
+cp -f  ../$CERT_DIR/client.keystore $RESOURCE_DIR/
 echo "copy certs done."
 mkdir -p $JAVA_CODE_DIR/$contractPath
 cp -f ../$CONTRACT_DIR/* $JAVA_CODE_DIR/$contractPath/
