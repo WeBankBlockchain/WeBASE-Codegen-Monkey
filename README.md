@@ -647,5 +647,5 @@ supervisord -c /etc/supervisord.d/webasebee_config1.ini
 ##### 关闭任务
 ```shell
 ps -ef|grep supervisord| awk '{print $2}'|xargs kill -9
-ps -ef|grep weturing|grep SNAPSHOT| awk '{print $2}'|xargs kill -9
+ps -ef|grep webase-bee|grep SNAPSHOT| awk '{print $2}'|xargs kill -9
 ```
