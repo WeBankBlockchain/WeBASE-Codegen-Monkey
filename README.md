@@ -159,9 +159,6 @@ system.dbPassword=[password]
 
 # 合约Java文件的包名
 monitor.contractPackName=[编译Solidity合约时指定的包名]
-
-# 合约中默认的String长度为1024，如果有超长的字段，请手动指定其长度，例如：
-length.XXcontractName.XXeventName.XXfieldName=1024
 ```
 
 更多配置详情可参考附件1：配置参数。
