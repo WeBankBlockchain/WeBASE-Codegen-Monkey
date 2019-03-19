@@ -100,7 +100,9 @@ webase-bee数据导出组件基于区块高度进行导出，并支持指定高�
 首先请clone或下载本代码库。下载完成后，进入本项目：
 
 ```shell
+git clone https://github.com/WeBankFinTech/webase-monkey.git 
 cd webase-monkey
+git checkout -b dev origin/dev
 ```
 
 ##### 2.2.1.2 进入安装路径
@@ -114,9 +116,12 @@ cd src/main/install_scripts/
 进入，获得如下的目录结构：
 
 ```
-├── config
-    ├── contract
-    └── resources
+├──install_scripts
+    └── config
+    	└── contract
+    	└── resources
+    		└── application.properties
+    └── generate_bee.sh
 ```
 #### 2.2.2 配置安装包
 
