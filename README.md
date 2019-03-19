@@ -113,14 +113,15 @@ git checkout -b dev origin/dev
 cd src/main/install_scripts/
 ```
 
-进入，获得如下的目录结构：
+进入，获得如下的目录结构，其中Evidence.java为合约示例。
 
 ```
 ├──install_scripts
     └── config
     	└── contract
+            └── Evidence.java
     	└── resources
-    		└── application.properties
+    	    └── application.properties
     └── generate_bee.sh
 ```
 #### 2.2.2 配置安装包
@@ -129,7 +130,7 @@ cd src/main/install_scripts/
 
 请注意，请确保你使用的Web3SDK的版本大于等于**V1.2.0**。
 
-找到你的业务工程（你要导出数据的那条区块链中，往区块链写数据的工程），复制合约产生的Java文件：请将Java文件**复制到./config/contract目录**下。
+找到你的业务工程（你要导出数据的那条区块链中，往区块链写数据的工程），复制合约产生的Java文件：请将Java文件**复制到./config/contract目录**下（请先删除目录结构中的合约示例Evidence.java文件）。
 
 如果你的业务工程并非Java工程，那就先找到你所有的合约代码。不清楚如何将Solidity合约生成为Java文件，请参考： [合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/v1.0.1/docs/web3sdk/advanced/gen_java_code.html?highlight=compile.sh)
 
