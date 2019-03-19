@@ -495,7 +495,6 @@ FISCO-BCOS节点配置用于配置FISCO-WEBASE-BEE服务连接的区块链节点
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
 | system.multiLiving | Y | 关闭多活开关 | false | false |
-| system.maxScheduleThreadNo | N | 服务运行的最大线程数 | 10 | 如不配置，则为该机器CPU核数 |
 | system.maxBlockHeightThreshold | N | 多线程开关阈值：当前区块落后区块高度的阈值，如果超过，系统将启动多线程执行任务 | 10 | 10 |
 | system.crawlBatchUnit | N | 线程处理单元：多线程任务模式下单个线程一次任务执行完成的区块数 | 100 | 100 |
 

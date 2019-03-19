@@ -44,7 +44,6 @@ dataflowJob.shardingItemParameters=0=A,1=B,2=C,3=D
 <%
 	}else{
 %>
-system.maxScheduleThreadNo=${maxScheduleThreadNo}
 system.maxBlockHeightThreshold=${maxBlockHeightThreshold}
 system.crawlBatchUnit=${crawlBatchUnit}
 system.frequency=${frequency}

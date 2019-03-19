@@ -67,7 +67,6 @@ public class ApplicationPropParas implements ConfigGenerateParas {
         map.put("multiLiving", systemEnvironmentConfig.getMultiLiving());
         map.put("contractPackName", systemEnvironmentConfig.getContractPackName());
         map.put("contractPath", ConfigConstants.contractPath);
-        map.put("maxScheduleThreadNo", systemEnvironmentConfig.getMaxScheduleThreadNo());
         map.put("maxBlockHeightThreshold", systemEnvironmentConfig.getMaxBlockHeightThreshold());
         map.put("crawlBatchUnit", systemEnvironmentConfig.getCrawlBatchUnit());
         map.put("frequency", systemEnvironmentConfig.getFrequency());
