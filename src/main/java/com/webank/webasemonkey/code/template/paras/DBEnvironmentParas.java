@@ -30,7 +30,6 @@ import com.webank.webasemonkey.constants.ConfigFileConstants;
 import com.webank.webasemonkey.constants.ParserConstants;
 import com.webank.webasemonkey.constants.TemplateConstants;
 import com.webank.webasemonkey.enums.SysTableEnum;
-import com.webank.webasemonkey.tools.JacksonUtils;
 import com.webank.webasemonkey.tools.PropertiesUtils;
 import com.webank.webasemonkey.tools.StringStyleUtils;
 import com.webank.webasemonkey.vo.ContractInfo;

@@ -1,5 +1,11 @@
 
-## WEBASE-MONKEY
+# WEBASE-MONKEY
+
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Gitter](https://badges.gitter.im/webase-monkey/webase-monkey.svg)](https://gitter.im/webase-monkey/community)
+[![Stargazers over time](https://starcharts.herokuapp.com/WeBankFinTech/webase-monkey.svg)](https://starcharts.herokuapp.com/WeBankFinTech/webase-monkey)
+
+
 > 道生一，一生二，二生三，三生万物。
 > 万物负阴而抱阳，冲气以为和。
 > 人之所恶，唯孤、寡、不谷，而王公以为称。
