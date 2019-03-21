@@ -481,7 +481,7 @@ FISCO-BCOS节点配置用于配置FISCO-WEBASE-BEE服务连接的区块链节点
 | system.dbUrl | Y | 访问数据的URL | jdbc:mysql://[IP]:[PORT]/[DB]?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2b8 | - |
 | system.dbUser | Y | 数据库用户名 | admin | - |
 | system.dbPassword | Y | 数据库密码 | 123456 | - |
-| system.sys.contractName[methodName or eventName].shardingNO | N | 合约数据分片数：数据库指定数据表的个数 | system.sys.RuleNewruleEvent.shardingNO = 3 | 1 |
+| system.contractName.[methodName or eventName].shardingNO | N | 合约数据分片数：数据库指定数据表的个数 | system.sys.RuleNewruleEvent.shardingNO = 3 | 1 |
 | system.sys.[sysTableName].shardingNO | N | 系统数据分片数 | system.sys.BlockTxDetailInfo.shardingNO=5 | 1 |
 
 其中**sysTableName**对应区块数据表和账户数据表，详情见 **数据存储模型** 章节。
