@@ -357,7 +357,7 @@ contract UserInfo {
 | pk_id | bigint(20) | Primary key & NOT NULL | 自增 | 主键Id |
 | block_height | bigint(20) | index |  | 区块高度 |
 | block_tiemstamp | datetime | index |  | 出块时间 |
-| **<event-paralist>** |  |  |  | 事件字段列表 |
+| **event-paralist** |  |  |  | 事件字段列表 |
 | tx_hash | varchar(225) | index |  | 交易哈希 |
 | depot_updatetime | datetime |  | 系统时间 | 记录插入/更新时间 |
 
@@ -393,7 +393,7 @@ contract UserInfo {
 | pk_id | bigint(20) | Primary key & NOT NULL | 自增 | 主键Id |
 | block_height | bigint(20) | index |  | 区块高度 |
 | block_tiemstamp | datetime | index |  | 出块时间 |
-| **<function-paralist>** |  |  |  | 方法字段列表 |
+| **function-paralist** |  |  |  | 方法字段列表 |
 | tx_hash | varchar(225) | index |  | 交易哈希 |
 | depot_updatetime | datetime |  | 系统时间 | 记录插入/更新时间 |
 
