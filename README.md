@@ -407,7 +407,7 @@ contract UserInfo {
 ## 4. 常见问题
 > **1. 为啥我的数据里自动生成的表里，只有block_info和block_detail_info表有数据？**
 
-A： block_info和block_detail_info表是链的基本数据，只要服务正常运行，这两个表肯定会有数据。
+A： 在单机运行的模式下，block_info和block_detail_info表是链的基本数据，只要服务正常运行，这两个表肯定会有数据。
 
 首先，请检查连接的区块链的地址、端口是否正确。
 
@@ -421,7 +421,7 @@ A： 可以。只需要手动将编译生成的合约代码的包名改为同一
 
 > **3. 如果我的链上所执行的合约是低于V1.2.0版本的怎么办？还可以导出来吗？**
 
-A: 可以，但需要进行特殊的操作。 实现找到你原有的历史合约，然后使用1.2.0版本的web3sdk进行编译得到V1.2.0版本的Java文件，[合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/v1.0.1/docs/web3sdk/advanced/gen_java_code.html?highlight=compile.sh) ，复制每个Java文件里的ABI字段。
+A: 可以，但需要进行特殊的操作。 首先，找到你原有的历史合约，然后使用1.2.0版本的web3sdk进行编译得到V1.2.0版本的Java文件，[合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/v1.0.1/docs/web3sdk/advanced/gen_java_code.html?highlight=compile.sh) ，复制每个Java文件里的ABI字段。
 
 然后找到你用之前版本的web3sdk曾经编译的Java代码，将刚才V1.2.0版本Java文件中的ABI字段手工拷贝到之前Java代码中。
 
@@ -429,7 +429,7 @@ A: 可以，但需要进行特殊的操作。 实现找到你原有的历史合�
 
 > **4. 假如我的合约升级了怎么办，能否导出历史和更新后的合约数据？**
 
-A： 可以。 但是会被作为两个数据库来进行存储，因为合约的数据结构等可能会该表。
+A： 可以。 但是会被作为两个数据库表来进行存储，因为合约的数据结构等可能会改变。
 
 操作方法： 你也猜到了，我们建议建立版本号，将升级的合约与旧版本的合约Java文件，使用不同的命名，保存到配置文件下面。
 
