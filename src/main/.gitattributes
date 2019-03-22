@@ -1,2 +1,0 @@
-.gz filter=lfs diff=lfs merge=lfs -text
-install_scripts.tar.gz filter=lfs diff=lfs merge=lfs -text
