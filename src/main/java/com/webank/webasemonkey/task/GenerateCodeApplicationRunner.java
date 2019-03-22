@@ -45,7 +45,6 @@ public class GenerateCodeApplicationRunner implements ApplicationRunner {
         log.info("Begin to generate code.");
         codeGenerateService.go();
         log.info("Code generation Finished!");
-        // auto exit.
         System.exit(0);
 
     }
