@@ -114,9 +114,7 @@ tar -zxf install_scripts.tar.gz
 
 ##### 2.2.1.2 进入安装路径
 
-安装文件的路径位于：
-
-进入，获得如下的目录结构，其中Evidence.java为合约示例。
+进入解压后的install_scripts文件夹目录，获得如下的目录结构，其中Evidence.java为合约示例。
 
 ```
 ├──install_scripts
