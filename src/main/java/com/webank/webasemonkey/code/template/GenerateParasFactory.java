@@ -33,7 +33,8 @@ import com.webank.webasemonkey.code.template.face.GenerateParas;
 @Component
 public class GenerateParasFactory {
     /** @Fields parasMap : typeName -> GenerateParas Interface */
-    @Autowired
+    @SuppressWarnings("rawtypes")
+	@Autowired
     private Map<String, GenerateParas> parasMap;
 
     /**
