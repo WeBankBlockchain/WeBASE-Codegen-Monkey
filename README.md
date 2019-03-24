@@ -108,6 +108,7 @@ webase-bee数据导出组件基于区块高度进行导出，并支持指定高�
 curl -LO https://github.com/WeBankFinTech/webase-monkey/raw/dev/src/main/install_scripts.tar.gz
 #解压安装包
 tar -zxf install_scripts.tar.gz 
+cd install_scripts
 ```
 
 ##### 2.2.1.2 进入安装路径
