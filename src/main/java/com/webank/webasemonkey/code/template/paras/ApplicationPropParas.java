@@ -72,6 +72,9 @@ public class ApplicationPropParas implements ConfigGenerateParas {
         map.put("frequency", systemEnvironmentConfig.getFrequency());
         map.put("serverListStr", zookeeperConfig.getServerList());
         map.put("nameSpace", zookeeperConfig.getNamespace());
+        map.put("startBlockHeight", systemEnvironmentConfig.getStartBlockHeight());
+        map.put("startDate", systemEnvironmentConfig.getStartDate());
+
         return map;
     }
 

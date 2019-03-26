@@ -74,5 +74,8 @@ system.projectName=${projectName}
 system.contractPackName=${contractPackName}
 system.contractPath=${contractPath}
 
+system.startBlockHeight=${startBlockHeight}
+system.startDate=${startDate}
+
 
 
