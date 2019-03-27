@@ -42,6 +42,6 @@ public class MethodCodeGeneratorTest extends WebasemonkeyApplicationTests {
     @Test
     public void go() {
         parasMap.forEach((k, v) -> System.out.println(k + " " + v));
-        codeGenerator.go();
+        codeGenerator.generateBee();
     }
 }

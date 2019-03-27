@@ -43,7 +43,7 @@ public class GenerateCodeApplicationRunner implements ApplicationRunner {
     public void run(ApplicationArguments var1) throws Exception {
 
         log.info("Begin to generate code.");
-        codeGenerateService.go();
+        codeGenerateService.generateBee();
         log.info("Code generation Finished!");
         System.exit(0);
 
