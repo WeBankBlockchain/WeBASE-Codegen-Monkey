@@ -99,8 +99,8 @@ webase-bee可与grafana深度集成，支持自动生成dashboard实例，让您
 | Java | >= Oracle JDK[1.8] |JAVA安装可参考附录2|
 | Git | 下载的安装包使用Git | Git安装可参考附录3|
 | MySQL | >= mysql-community-server[5.7] | MySQL安装可参考附录4|
-| zookeeper | >= zookeeper[3.4] | 只有在进行集群部署的时候需要安装，zookeeper安装可附录5|
-
+| zookeeper | >= zookeeper[3.4] | 只有在进行集群部署的时候需要安装，zookeeper安装可参考附录5|
+| docker    | >= docker[18.0.0] | 只有需要可视化监控页面的时候才需要安装，docker的安装可参考[docker安装手册](https://docker_practice.gitee.io/install/centos.html) |
 
 ### 2.2 部署步骤
 
@@ -247,6 +247,60 @@ mysql -u[用户名] -p[密码] -e "use [数据库名]; select count(*) from bloc
 ```
 ps -ef |grep webase-bee |grep -v grep|awk '{print $2}' |xargs kill -9
 ```
+
+恭喜您，到以上步骤，您已经完成了数据导出组件的安装和部署。如果您还需要额外获得可视化的监控页面，请参考2.3
+
+
+### 2.3 可视化监控程序安装和部署
+
+#### 2.3.1 安装软件
+
+首先，请安装docker，docker的安装可参考[docker安装手册](https://docker_practice.gitee.io/install/centos.html)
+
+等docker安装成功后，请下载grafana：
+
+```
+docker pull grafana/grafana
+
+```
+
+#### 2.3.2 启动grafana
+```
+docker run   -d   -p 3000:3000   --name=grafana   -e "GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource"   grafana/grafana
+```
+grafana将自动绑定3000端口。
+
+
+#### 2.3.3 登录grafana界面
+
+直接使用浏览器访问： http://your_ip:3000/ 
+
+请注意使用你机器的IP替换掉your_ip
+
+默认的用户名和密码为admin/admin
+
+
+#### 2.3.4 添加MySQL数据源
+在正常登录成功后，如图所示，选择左边栏设置按钮，点击『Data Sources』， 选择『MySQL』数据源
+
+![添加步骤：](https://github.com/WeBankFinTech/webase-monkey/blob/feature_datacheck.2019.03/photos/grafana_demo.png)
+
+随后按照提示的页面，配置 Host， Database， User 和 Password等。
+
+#### 2.3.5 导入Dashboard模板
+webase-monkey会自动生成数据的dashboard模板，数据的路径位于：webase-bee/src/main/scripts/default_dashboard.json
+
+请点击左边栏『+』，选择『import』，点击绿色按钮『Upload .json File』,选择刚才的webase-bee/src/main/scripts/default_dashboard.json文件
+
+![导入步骤：](https://github.com/WeBankFinTech/webase-monkey/blob/feature_datacheck.2019.03/photos/import_json.png)
+
+最后，点击『import』按钮。
+
+如果导入成功，dashboards下面会出现『FISCO-BCOS区块链监控视图』
+
+您可以选择右上方的时间按钮来选择和设置时间范围及刷新时间等。
+
+更多关于Grafana的自定义配置和开发文档，可参考 [Grafana官方文档](http://docs.grafana.org/guides/getting_started/)
 
 ## 3. 存储模型
 
