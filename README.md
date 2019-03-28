@@ -86,6 +86,8 @@ webase-bee数据导出组件基于区块高度进行导出，并支持指定高�
 webase-bee可与grafana深度集成，支持自动生成dashboard实例，让您的链上数据了如指掌。
 
 
+![效果图](https://github.com/WeBankFinTech/webase-monkey/blob/feature_datacheck.2019.03/photos/grafana_demo.png)
+
 ## 2. 快速开始
 
 ### 2.1 前置依赖
