@@ -283,7 +283,7 @@ grafana将自动绑定3000端口。
 #### 2.3.4 添加MySQL数据源
 在正常登录成功后，如图所示，选择左边栏设置按钮，点击『Data Sources』， 选择『MySQL』数据源
 
-![添加步骤：](https://github.com/WeBankFinTech/webase-monkey/blob/feature_datacheck.2019.03/photos/grafana_demo.png)
+![添加步骤：](https://github.com/WeBankFinTech/webase-monkey/blob/feature_datacheck.2019.03/photos/add_datasource.png)
 
 随后按照提示的页面，配置 Host， Database， User 和 Password等。
 
