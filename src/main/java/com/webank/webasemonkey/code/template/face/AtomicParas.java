@@ -15,20 +15,28 @@
  */
 package com.webank.webasemonkey.code.template.face;
 
+import java.util.Map;
+
 /**
- * RenderParas
+ * AtomicParas
  *
- * @Description: RenderParas
+ * @Description: AtomicParas
  * @author maojiayu
- * @date 2018-11-12 16:09:42
- * 
+ * @data Mar 27, 2019 5:07:07 PM
+ *
  */
-public interface GenerateParas<T> extends AtomicParas<T> {
+public interface AtomicParas<T> {
+    /**
+     * @Description: wrap the render data to a map. And the render data is basically read from a pojo.
+     * @param: @param t
+     * @return: Map<String,Object>
+     */
+    public Map<String, Object> getMap(T t);
 
     /**
-     * @Description: return the path of generated files.
-     * @param: @param t
+     * @Description: return the path of template.
      * @return: String
      */
-    public String getGeneratedFilePath(T t);
+    public String getTemplatePath();
+
 }

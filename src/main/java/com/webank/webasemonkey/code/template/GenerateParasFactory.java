@@ -20,7 +20,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.webank.webasemonkey.code.template.face.GenerateParas;
+import com.webank.webasemonkey.code.template.face.AtomicParas;
 
 /**
  * CodeFactory
@@ -35,7 +35,7 @@ public class GenerateParasFactory {
     /** @Fields parasMap : typeName -> GenerateParas Interface */
     @SuppressWarnings("rawtypes")
 	@Autowired
-    private Map<String, GenerateParas> parasMap;
+    private Map<String, AtomicParas> parasMap;
 
     /**
      * get paras by type name.
@@ -43,7 +43,7 @@ public class GenerateParasFactory {
      * @param typeName
      * @return GenerateParas contains template path, generation path and render properties.
      */
-    public GenerateParas getParasByType(String typeName) {
+    public AtomicParas getParasByType(String typeName) {
         return parasMap.get(typeName);
     }
 

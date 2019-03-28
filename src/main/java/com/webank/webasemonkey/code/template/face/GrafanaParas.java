@@ -15,20 +15,19 @@
  */
 package com.webank.webasemonkey.code.template.face;
 
-/**
- * RenderParas
- *
- * @Description: RenderParas
- * @author maojiayu
- * @date 2018-11-12 16:09:42
- * 
- */
-public interface GenerateParas<T> extends AtomicParas<T> {
+import java.util.List;
 
-    /**
-     * @Description: return the path of generated files.
-     * @param: @param t
-     * @return: String
-     */
-    public String getGeneratedFilePath(T t);
+/**
+ * GrafanaParas
+ *
+ * @Description: GrafanaParas
+ * @author maojiayu
+ * @param <T>
+ * @data Mar 28, 2019 11:05:12 AM
+ *
+ */
+public interface GrafanaParas<T> extends AtomicParas<List<String>> {
+
+    public String getGeneratedFilePath();
+
 }

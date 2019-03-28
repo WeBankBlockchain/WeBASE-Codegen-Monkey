@@ -20,7 +20,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.webank.webasemonkey.code.template.TemplateGenerateService;
+import com.webank.webasemonkey.code.template.CodeTemplateGenerateService;
 import com.webank.webasemonkey.code.template.face.ConfigGenerateParas;
 import com.webank.webasemonkey.code.template.face.EventGenerateParas;
 import com.webank.webasemonkey.code.template.face.MethodGenerateParas;
@@ -40,7 +40,7 @@ public class CodeGenerateService {
     /** @Fields templateGenerateService : template generate service */
     @SuppressWarnings("rawtypes")
     @Autowired
-    private TemplateGenerateService templateGenerateService;
+    private CodeTemplateGenerateService templateGenerateService;
     @Autowired
     private ContractInfoService contractInfoService;
     /** @Fields configParasMap : config params map for generating config files */
