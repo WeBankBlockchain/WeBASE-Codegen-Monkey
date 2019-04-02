@@ -3,7 +3,6 @@
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Gitter](https://badges.gitter.im/webase-monkey/webase-monkey.svg)](https://gitter.im/webase-monkey/community)
-[![Stargazers over time](https://starcharts.herokuapp.com/WeBankFinTech/webase-monkey.svg)](https://starcharts.herokuapp.com/WeBankFinTech/webase-monkey)
 
 
 > 道生一，一生二，二生三，三生万物。
@@ -12,7 +11,7 @@
 > 故物或损之而益，或益之而损。
 > 人之所教，亦我而教人。
 > 强梁者不得其死——吾将以为教父。
-> —— 老子
+> -- 老子
 
 ## 1. 组件介绍
 
@@ -310,29 +309,17 @@ webase-monkey会自动生成数据的dashboard模板，数据的路径位于：w
 
 区块数据存储模型包括三个数据存储模型，分别为区块基本数据存储模型、区块详细数据存储模型及区块交易数据存储模型。
 
-#### 3.1.1 区块基本数据存储模型
+#### 3.1.1 区块下载任务明细表
 
-##### 3.1.1.1 单机部署模式下
-
-在单机部署模式下，区块基本数据存储模型用于存储区块整体信息，包括链块高和链上当前交易总量，对应数据库表名称为**block_info**，该表中只会有一条记录，该表不能进行分表操作，如下所示。
-
-| 字段 | 类型 | 字段设置 | 默认值 | 说明 |
-| --- | --- | --- | --- | --- |
-| pk_id | bigint(20) | Primary key & NOT NULL | 自增 | 主键Id |
-| current_block_height | bigint(20) |  |  | 已抓取的块高 |
-| status | int |  | 2 | 独立服务使用，处理块信息是否正常 |
-| tx_count | bigint(20) |  |  | 链上总交易量 |
-| depot_updatetime | datetime |  | 系统时间 | 记录插入/更新时间 |
-
-##### 3.1.1.2 集群部署模式下
-在集群部署模式下，区块基本数据存储模型与单机模式略有不同；存储了所有区块的状态信息，对应数据库表名称为**block_task_pool**,如下所示:
+存储了所有区块的状态信息和下载情况，对应数据库表名称为**block_task_pool**,如下所示:
 
 | 字段 | 类型 | 字段设置 | 默认值 | 说明 |
 | --- | --- | --- | --- | --- |
 | pk_id | bigint(20) | Primary key & NOT NULL | 自增 | 主键Id |
 | block_height | bigint(20) |  |  | 块高 |
+| certainty   |  int(11)		| 是否可能分叉 | 0- 是； 1-否 |
 | handle_item | int(11) |  |  | 处理分片序号，默认为0 |
-| status | int |  | 2 | 0-待处理；1-处理中；2-已成功 |
+| sync_status | int |  | 2 | 0-待处理；1-处理中；2-已成功；3-处理失败；4-超时 |
 | depot_updatetime | datetime |  | 系统时间 | 记录插入/更新时间 |
 
 
