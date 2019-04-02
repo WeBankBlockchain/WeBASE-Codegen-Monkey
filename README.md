@@ -95,7 +95,7 @@ webase-bee可与grafana深度集成，支持自动生成dashboard实例，让您
 | 依赖软件 | 说明 |备注|
 | --- | --- | --- |
 | Bash | 需支持Bash（理论上来说支持所有ksh、zsh等其他unix shell，但未测试）|
-| Java | >= Oracle JDK[1.8] |JAVA安装可参考附录2|
+| Java | >= JDK[1.8] |JAVA安装可参考附录2|
 | Git | 下载的安装包使用Git | Git安装可参考附录3|
 | MySQL | >= mysql-community-server[5.7] | MySQL安装可参考附录4|
 | zookeeper | >= zookeeper[3.4] | 只有在进行集群部署的时候需要安装，zookeeper安装可参考附录5|
@@ -579,7 +579,7 @@ FISCO-BCOS节点配置用于配置FISCO-WEBASE-BEE服务连接的区块链节点
 
 ### 2. Java安装
 
-请参考链接：[Java安装](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/tools/oracle_java.html)
+请参考链接：[Java安装](https://openjdk.java.net/install/index.html)
 
 ### 3. Git安装
 
