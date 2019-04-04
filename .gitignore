@@ -30,7 +30,7 @@ config/*
 /nbdist/
 /.nb-gradle/
 
-src/main/resources/
+src/main/resources/*.properties
 
 ## contracts ##
 src/main/java/com/webank/blockchain/
