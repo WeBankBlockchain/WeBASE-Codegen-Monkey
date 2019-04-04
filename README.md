@@ -16,19 +16,19 @@
 ## 1. 组件介绍
 
 ### 1.1 数据导出组件： WEBASE-BEE
-WEBASE-BEE 是一个基于[FISCO-BCOS](https://github.com/FISCO-BCOS/FISCO-BCOS)平台的数据导出工具。
+[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04) 是一个基于[FISCO-BCOS](https://github.com/FISCO-BCOS/FISCO-BCOS)平台的数据导出工具。
 
-数据导出组件WEBASE-BEE的目的在于降低获取区块链数据的开发门槛，提升研发效率。研发人员几乎不需要编写任何代码，只需要进行简单配置，就可以把数据导出到指定的存储介质上，比如DB、ES、MQ、Hadoop等，并提供相关服务接口获取数据，以满足业务场景需求。
+数据导出组件[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)的目的在于降低获取区块链数据的开发门槛，提升研发效率。研发人员几乎不需要编写任何代码，只需要进行简单配置，就可以把数据导出到指定的存储介质上，比如DB、ES、MQ、Hadoop等，并提供相关服务接口获取数据，以满足业务场景需求。
 
-WEBASE-BEE可以导出区块链上的基础数据，如当前块高、交易总量等。
-如果正确配置了FISCO-BCOS上运行的所有合约，WEBASE-BEE可以导出区块链上这些合约的业务数据，包括event、构造函数、合约地址、执行函数的信息等。
+[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)可以导出区块链上的基础数据，如当前块高、交易总量等。
+如果正确配置了FISCO-BCOS上运行的所有合约，[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)可以导出区块链上这些合约的业务数据，包括event、构造函数、合约地址、执行函数的信息等。
 
-WEBASE-BEE提供了基于Restful的API，支持通过http的方式调用这些接口。
+[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)提供了基于Restful的API，支持通过http的方式调用这些接口。
 
 ### 1.2 代码自动生成组件：WEBASE-MONKEY
-WEBASE-BEE易于使用，且功能强大；但是仍有一定的开发门槛。为了更进一步地提升研发效率，我们开发了WEBASE-MONKEY。
+[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)易于使用，且功能强大；但是仍有一定的开发门槛。为了更进一步地提升研发效率，我们开发了WEBASE-MONKEY。
 
-只需要在一个配置文件中进行少量简单的配置，同时按照要求提供相关的智能合约信息；当前版本可支持自动生成WEBASE-BEE。
+只需要在一个配置文件中进行少量简单的配置，同时按照要求提供相关的智能合约信息；当前版本可支持自动生成[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)。
 
 ### 1.3 使用场景和解决方案
 区块链的数据存储在区块链上，需要使用智能合约暴露的接口来进行调用。由于智能合约暴露的接口的限制，区块链上不适合进行复杂的数据查询、大数据分析和数据可视化等工作。因此，我们致力于提供一种智能化、自动化的数据导出和备份的解决方案。
@@ -40,7 +40,7 @@ WEBASE-BEE易于使用，且功能强大；但是仍有一定的开发门槛。�
 
 - 解决方案
 
-该公司使用webase-monkey迅速生成了webase-bee的代码，并根据实际需求进行了定制化开发，在一天之内投入到线上使用。
+该公司使用webase-monkey迅速生成了[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)的代码，并根据实际需求进行了定制化开发，在一天之内投入到线上使用。
 
 导出到db的数据接入到了该公司的统一监控平台，该公司PM可以在业务后台系统上获得该业务的实时进展，该公司运维人员可以在公司运维监控室的大屏幕实时监控业务系统的状态。
 
@@ -50,7 +50,7 @@ WEBASE-BEE易于使用，且功能强大；但是仍有一定的开发门槛。�
 某公司基于FISCO-BCOS开发了区块链的业务系统，需要将本地数据与链上的数据进行对账。
 
 - 解决方案
-该公司使用webase-monkey迅速生成了webase-bee的代码，并根据实际需求进行了定制化开发。通过在智能合约中设计的各类event，相关的业务数据都被导出到数据库中；从而实现轻松对账的需求。
+该公司使用webase-monkey迅速生成了[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)的代码，并根据实际需求进行了定制化开发。通过在智能合约中设计的各类event，相关的业务数据都被导出到数据库中；从而实现轻松对账的需求。
 
 #### 案例 区块链业务数据查询系统
 - 背景
@@ -59,7 +59,7 @@ WEBASE-BEE易于使用，且功能强大；但是仍有一定的开发门槛。�
 
 - 解决方案
 
-该公司使用webase-monkey迅速生成了webase-bee的代码，并根据实际需求进行了定制化开发，区块链上的数据可以实时导出到数据库中。利用webase-bee自带的Restful API，该公司的报表系统实现了和区块链数据的对接，可以获得准实时的各类业务报表。
+该公司使用webase-monkey迅速生成了[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)的代码，并根据实际需求进行了定制化开发，区块链上的数据可以实时导出到数据库中。利用[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)自带的Restful API，该公司的报表系统实现了和区块链数据的对接，可以获得准实时的各类业务报表。
 
 ### 1.4 特性介绍
 
@@ -73,19 +73,19 @@ WEBASE-BEE易于使用，且功能强大；但是仍有一定的开发门槛。�
 自带常用的Restful API，支持查询块高、块信息、Event信息和函数信息等。
 
 #### 支持多数据源，支持读写分离和分库分表
-为了应对海量数据的导出，webase-bee数据导出组件支持可配置的多数据源存储，读写分离和分库分表：数据可以存储到多个表中，也可以存储到多个库中。同时，内置的Restful API可以自动无感知地返回正常的数据。
+为了应对海量数据的导出，[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)数据导出组件支持可配置的多数据源存储，读写分离和分库分表：数据可以存储到多个表中，也可以存储到多个库中。同时，内置的Restful API可以自动无感知地返回正常的数据。
 
 #### 支持多活部署，多节点自动导出
-webase-bee数据导出组件支持多活部署，可自动进行分布式任务调度。
+[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)数据导出组件支持多活部署，可自动进行分布式任务调度。
 
 #### 支持区块重置导出
-webase-bee数据导出组件基于区块高度进行导出，并支持指定高度重新导出数据。
+[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)数据导出组件基于区块高度进行导出，并支持指定高度重新导出数据。
 
 ### 支持可视化的监控页面
-webase-bee可与grafana深度集成，支持自动生成dashboard实例，让您的链上数据了如指掌。
+[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)可与grafana深度集成，支持自动生成dashboard实例，让您的链上数据了如指掌。
 
 #### 提供可视化的互动API控制台
-webase-bee集成了swagger插件，提供可视化互动API控制台
+[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)集成了swagger插件，提供可视化互动API控制台
 
 
 ![效果图](https://github.com/WeBankFinTech/webase-monkey/blob/feature_datacheck.2019.03/photos/grafana_demo.png)
@@ -135,7 +135,7 @@ cd install_scripts
 
 ##### 2.2.2.1 配置合约文件
 
-请注意，请确保你使用的Web3SDK的版本大于等于**V1.2.0**。
+请注意，请确保你使用的Web3SDK的版本大于等于**V1.2.0**。 同时请注意，上链程序所安装的[fisco-solc](https://github.com/FISCO-BCOS/fisco-solc)必须与编译的版本一致。
 
 找到你的业务工程（你要导出数据的那条区块链中，往区块链写数据的工程），复制合约产生的Java文件：请将Java文件**复制到./config/contract目录**下（请先删除目录结构中的合约示例Evidence.java文件）。
 
@@ -179,7 +179,7 @@ chmod +x generate_bee.sh
 sh generate_bee.sh 
 ```
 
-当前目录下会生成webase-bee工程代码。数据导出组件将直接启动，对应的执行日志会打印到终端上。
+当前目录下会生成[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)工程代码。数据导出组件将直接启动，对应的执行日志会打印到终端上。
 
 请注意: 请务必按照以上命令操作，**切莫使用sudo命令来操作**，否则会导致Gradlew没有权限，导致depot数据失败。
 
@@ -189,7 +189,7 @@ sh generate_bee.sh
 chmod +x generate_bee.sh
 sh generate_bee.sh build 
 ```
-当前目录下会生成webase-bee工程代码。请将此生成工程下的./webase-bee/dist文件夹复制到其他服务器上，并执行：
+当前目录下会生成[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)工程代码。请将此生成工程下的./webase-bee/dist文件夹复制到其他服务器上，并执行：
 
 ```
 chmod +x *.jar
@@ -306,7 +306,7 @@ webase-monkey会自动生成数据的dashboard模板，数据的路径位于：w
 
 
 ### 2.4 开启可视化的功能性测试
-WEBASE-BEE默认集成了swagger的插件，支持通过可视化的控制台来发送交易、生成报文、查看结果、调试交易等。
+[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)默认集成了swagger的插件，支持通过可视化的控制台来发送交易、生成报文、查看结果、调试交易等。
 
 ![swagger控制台：](https://github.com/WeBankFinTech/webase-monkey/blob/feature_datacheck.2019.03/photos/swagger.png)
 
@@ -319,7 +319,7 @@ WEBASE-BEE默认集成了swagger的插件，支持通过可视化的控制台来
 
 > http://your_ip:port/swagger-ui.html
 
-例如，当你在本机运行了webase-bee，且未修改默认的8080端口，则可以访问此地址：
+例如，当你在本机运行了[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)，且未修改默认的8080端口，则可以访问此地址：
 
 > http://localhost:8080/swagger-ui.html
 
@@ -498,9 +498,9 @@ contract UserInfo {
 | sex | int |  |  | 性别 |
 
 ## 4. 常见问题
-> **1. 为啥我的数据里自动生成的表里，只有block_info和block_detail_info表有数据？**
+> **1. 为啥我的数据里自动生成的表里，只有block_task_pool和block_detail_info表有数据？**
 
-A： 在单机运行的模式下，block_info和block_detail_info表是链的基本数据，只要服务正常运行，这两个表肯定会有数据。
+A： block_task_pool和block_detail_info表是链的基本数据，只要服务正常运行，这两个表肯定会有数据。
 
 首先，请检查连接的区块链的地址、端口是否正确。
 
@@ -516,7 +516,7 @@ A： 可以。只需要手动将编译生成的合约代码的包名改为同一
 
 A: 可以，但需要进行特殊的操作。 首先，找到你原有的历史合约，然后使用1.2.0版本的web3sdk进行编译得到V1.2.0版本的Java文件，[合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/v1.0.1/docs/web3sdk/advanced/gen_java_code.html?highlight=compile.sh) ，复制每个Java文件里的ABI字段。
 
-然后找到你用之前版本的web3sdk曾经编译的Java代码，将刚才V1.2.0版本Java文件中的ABI字段手工拷贝到之前Java代码中。
+然后找到你用之前版本的web3sdk曾经编译的Java代码，注意请保证你安装的fisco-solc与之前的版本一致，将刚才V1.2.0版本Java文件中的ABI字段手工拷贝到之前Java代码中。
 
 最后将此定制的Java代码放入到配置文件夹中，按手册生成和执行。
 
@@ -546,17 +546,17 @@ Elastic-Job-Lite - 分布式调度解决方案 | 轻量级无中心化解决方�
 
 ### 1. 配置参数说明
 
-WEBASE-MONKEY用于生成FISCO-WEBASE-BEE组件实例，在WEBASE-MONKEY组件中配置文件只有一个：application.properties。该配置文件覆盖了数据导出组件所需的所有配置，并提供了详细的说明和样例，开发者可根据需求进行灵活配置。
+WEBASE-MONKEY用于生成[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)组件实例，在WEBASE-MONKEY组件中配置文件只有一个：application.properties。该配置文件覆盖了数据导出组件所需的所有配置，并提供了详细的说明和样例，开发者可根据需求进行灵活配置。
 
 #### 1.1 Springboot服务配置
 
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
-| server.port | N | 启动FISCO-WEBASE-BEE组件实例的服务端口 | 8082 | 8080 |
+| server.port | N | 启动WEBASE-BEE组件实例的服务端口 | 8082 | 8080 |
 
 #### 1.2 FISCO-BCOS节点配置
 
-FISCO-BCOS节点配置用于配置FISCO-WEBASE-BEE服务连接的区块链节点，使得FISCO-WEBASE-BEE服务能够访问连接节点，并通过该节点获取区块链网络上的数据。
+FISCO-BCOS节点配置用于配置[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)服务连接的区块链节点，使得WEBASE-BEE服务能够访问连接节点，并通过该节点获取区块链网络上的数据。
 
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
