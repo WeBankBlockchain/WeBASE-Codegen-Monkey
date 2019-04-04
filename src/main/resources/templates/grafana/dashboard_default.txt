@@ -504,7 +504,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT block_height, status, handle_item, depot_updatetime from block_task_pool;",
+          "rawSql": "SELECT block_height, certainty, sync_status, handle_item, depot_updatetime from block_task_pool;",
           "refId": "A",
           "select": [
             [
