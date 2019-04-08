@@ -266,6 +266,12 @@ docker pull grafana/grafana
 
 ```
 
+如果你是使用sudo用户安装了docker，可能会提示『permission denied』的错误，建议执行:
+```
+sudo docker pull grafana/grafana
+
+```
+
 #### 2.3.2 启动grafana
 ```
 docker run   -d   -p 3000:3000   --name=grafana   -e "GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource"   grafana/grafana
@@ -290,9 +296,9 @@ grafana将自动绑定3000端口。
 随后按照提示的页面，配置 Host， Database， User 和 Password等。
 
 #### 2.3.5 导入Dashboard模板
-webase-monkey会自动生成数据的dashboard模板，数据的路径位于：webase-bee/src/main/scripts/default_dashboard.json
+webase-monkey会自动生成数据的dashboard模板，数据的路径位于：webase-bee/src/main/scripts/grafana/default_dashboard.json
 
-请点击左边栏『+』，选择『import』，点击绿色按钮『Upload .json File』,选择刚才的webase-bee/src/main/scripts/default_dashboard.json文件
+请点击左边栏『+』，选择『import』，点击绿色按钮『Upload .json File』,选择刚才的webase-bee/src/main/scripts/grafana/default_dashboard.json文件
 
 ![导入步骤：](https://github.com/WeBankFinTech/webase-monkey/blob/feature_datacheck.2019.03/photos/import_json.png)
 
