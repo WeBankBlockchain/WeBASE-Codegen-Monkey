@@ -37,7 +37,35 @@
       "thresholds": [],
       "type": "number",
       "unit": "short"
-    }
+    },
+    {
+      "alias": "",
+      "colorMode": "value",
+      "colors": [
+        "#73BF69",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(245, 54, 54, 0.9)"
+      ],
+      "decimals": 0,
+      "pattern": "block_height",
+      "thresholds": [],
+      "type": "string",
+      "unit": "short"
+     },
+    {
+      "alias": "",
+      "colorMode": "value",
+      "colors": [
+        "#73BF69",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(245, 54, 54, 0.9)"
+      ],
+      "decimals": 0,
+      "pattern": "pk_id",
+      "thresholds": [],
+      "type": "string",
+      "unit": "short"
+     }
   ],
   "targets": [
     {
