@@ -136,6 +136,7 @@ public enum Web3jTypeEnum {
     DYNAMICARRAY("DynamicArray","text","String","String.valueOf"),
     DYNAMICARRAYADDRESS("DynamicArray<Address>","text","String","String.valueOf"),
     DYNAMICARRAYBYTES32("DynamicArray<Bytes32>","varchar(1024)","String","BytesUtils.bytes32DynamicArrayToString"),
+    DYNAMICARRAYInt8("DynamicArray<Int8>","varchar(1024)","String","BytesUtils.int8DynamicArrayToString"),
     DYNAMICARRAYInt256("DynamicArray<Int256>","varchar(1024)","String","BytesUtils.int256DynamicArrayToString"),
     DYNAMICARRAYInt("DynamicArray<Int>","varchar(1024)","String","BytesUtils.intDynamicArrayToString"),
     DYNAMICARRAYUint256("DynamicArray<Uint256>","varchar(1024)","String","BytesUtils.uint256DynamicArrayToString"),
