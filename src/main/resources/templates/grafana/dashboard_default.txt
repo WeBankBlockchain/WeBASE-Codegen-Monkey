@@ -478,7 +478,7 @@
       },
       "styles": [
         {
-          "alias": "Time",
+          "alias": "depot_updatetime",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "pattern": "depot_updatetime",
           "type": "number"
