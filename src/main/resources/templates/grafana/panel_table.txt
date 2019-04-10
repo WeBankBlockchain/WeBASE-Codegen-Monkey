@@ -4,7 +4,7 @@
   "fontSize": "110%",
   "gridPos": {
     "h": 8,
-    "w": 12,
+    "w": 24,
     "x": ${gridXPos},
     "y": ${gridYPos}
   },

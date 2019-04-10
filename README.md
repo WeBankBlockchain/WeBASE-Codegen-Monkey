@@ -276,7 +276,7 @@ sudo docker pull grafana/grafana
 ```
 docker run   -d   -p 3000:3000   --name=grafana   -e "GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource"   grafana/grafana
 ```
-grafana将自动绑定3000端口。
+grafana将自动绑定3000端口并自动安装时钟和Json的插件。
 
 
 #### 2.3.3 登录grafana界面
@@ -307,6 +307,8 @@ webase-monkey会自动生成数据的dashboard模板，数据的路径位于：w
 如果导入成功，dashboards下面会出现『FISCO-BCOS区块链监控视图』
 
 您可以选择右上方的时间按钮来选择和设置时间范围及刷新时间等。
+
+您也可以选中具体的页面组件进行编辑，自由地移除或挪动组件的位置，达到更好的使用体验。
 
 更多关于Grafana的自定义配置和开发文档，可参考 [Grafana官方文档](http://docs.grafana.org/guides/getting_started/)
 

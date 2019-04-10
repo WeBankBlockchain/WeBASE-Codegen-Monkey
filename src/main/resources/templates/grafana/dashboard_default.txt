@@ -567,20 +567,6 @@
             "rgba(245, 54, 54, 0.9)"
           ],
           "decimals": 0,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": "value",
-          "colors": [
-            "#73BF69",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "decimals": 0,
           "pattern": "block_height",
           "thresholds": [],
           "type": "string",
@@ -710,78 +696,14 @@
       "type": "table"
     },
     {
-      "bgColor": null,
-      "clockType": "24 hour",
-      "countdownSettings": {
-        "customFormat": null,
-        "endCountdownTime": "2019-03-27T06:53:00.000Z",
-        "endText": "00:00:00"
-      },
-      "dateSettings": {
-        "dateFormat": "YYYY-MM-DD",
-        "fontSize": "20px",
-        "fontWeight": "normal",
-        "showDate": false
-      },
+      "content": "\n# 本页面来源于WEBASE-BEE\n\n\n点击详情获得更多支持: [WeBankFinTech/webase-bee](https://github.com/WeBankFinTech/webase-bee/tree/dev)\n\n\n# 本应用支持FISCO-BCOS公众联盟链\n\n点击详情获得更多支持: [FISCO-BCOS](https://www.fisco.com.cn/)\n\n\n",
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
         "y": 24
       },
-      "id": 17,
-      "mode": "time",
-      "offsetFromUtc": null,
-      "offsetFromUtcMinutes": null,
-      "refreshSettings": {
-        "syncWithDashboard": false
-      },
-      "targets": [
-        {
-          "format": "time_series",
-          "group": [],
-          "metricColumn": "none",
-          "rawQuery": false,
-          "refId": "A",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "column"
-              }
-            ]
-          ],
-          "timeColumn": "time",
-          "where": [
-            {
-              "name": "$__timeFilter",
-              "params": [],
-              "type": "macro"
-            }
-          ]
-        }
-      ],
-      "timeFrom": null,
-      "timeSettings": {
-        "customFormat": "HH:mm:ss",
-        "fontSize": "60px",
-        "fontWeight": "normal"
-      },
-      "timeShift": null,
-      "title": "Panel Title",
-      "type": "grafana-clock-panel"
-    },
-    {
-      "content": "\n# 本页面来源于WEBASE-BEE\n\n\n点击详情获得更多支持: [WeBankFinTech/webase-bee](https://github.com/WeBankFinTech/webase-bee/tree/dev)\n\n\n# 本应用支持FISCO-BCOS公众联盟链\n\n点击详情获得更多支持: [FISCO-BCOS](https://www.fisco.com.cn/)\n\n\n",
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 32
-      },
-      "id": 21,
+      "id": 20,
       "links": [],
       "mode": "markdown",
       "targets": [
@@ -813,7 +735,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "",
+      "title": "Learn More",
       "type": "text"
     }
     

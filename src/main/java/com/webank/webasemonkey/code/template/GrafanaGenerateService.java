@@ -97,21 +97,21 @@ public class GrafanaGenerateService {
     }
 
     public int getX(int index) {
-        if (index % 2 == 0) {
-            return 12;
-        } else {
-            return 0;
-        }
+        /*
+         * if (index % 2 == 0) { return 12; } else { return 0; }
+         */
+        return 0;
 
     }
 
     public int getY(int index) {
-        index = (index + 1) / 2;
-        return 32 + index * 8;
+        // index = (index + 1) / 2;
+        // return 32 + index * 8;
+        return 24 + index * 8;
     }
 
     public int getId(int index) {
-        return index + 20;
+        return index + 30;
     }
 
 }
