@@ -93,7 +93,7 @@
           ],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  max(block_height) AS \"block_height\"\nFROM block_task_pool\n",
+          "rawSql": "SELECT\n  max(block_height) AS \"block_height\"\nFROM block_task_pool where sync_status=2 \n",
           "refId": "A",
           "select": [
             [
@@ -391,7 +391,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  UNIX_TIMESTAMP(depot_updatetime) DIV 1 * 1 AS \"time\",\n  count(pk_id) as value\nFROM block_task_pool\nGROUP BY 1\nORDER BY 1",
+          "rawSql": "SELECT\n  UNIX_TIMESTAMP(depot_updatetime) DIV 1 * 1 AS \"time\",\n  count(pk_id) as value\nFROM block_task_pool where sync_status=2 \nGROUP BY 1\nORDER BY 1",
           "refId": "A",
           "select": [
             [
@@ -691,7 +691,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "EOA账户信息",
+      "title": "外部所有账户信息",
       "transform": "table",
       "type": "table"
     },
