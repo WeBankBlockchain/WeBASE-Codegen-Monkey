@@ -4,6 +4,8 @@
 package ${group}.${projectName}.generated.event.crawler.impl;
 
 import java.math.BigInteger;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import org.bcos.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,6 @@ import ${group}.${projectName}.tools.BoolUtils;
 import ${group}.${projectName}.tools.BytesUtils;
 import ${group}.${projectName}.generated.db.event.repository.${class_name}Repository;
 import lombok.extern.slf4j.Slf4j;
-import java.sql.Date;
 
 @Service
 @Slf4j
@@ -34,6 +35,7 @@ public class ${contractName}${eventName}CrawlerImpl implements BcosEventCrawlerI
 	public boolean handleReceipt(TransactionReceipt receipt, BigInteger blockTimeStamp) {
 		try {
 			List<${eventName}EventResponse> ${eventName}EventResponseList = ${contractName}.get${eventName}Events(receipt);
+			List<${class_name}> list = new ArrayList<>(${eventName}EventResponseList.size());
 			for (${eventName}EventResponse ${eventName}EventResponse : ${eventName}EventResponseList) {
 				${class_name} ${lowContractName}${eventName} = new ${class_name}();
 				${lowContractName}${eventName}.setBlockHeight(receipt.getBlockNumber().longValue());
@@ -48,8 +50,9 @@ public class ${contractName}${eventName}CrawlerImpl implements BcosEventCrawlerI
 				<% } %>
 				${lowContractName}${eventName}.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));
 				log.debug("depot ${eventName}:{}", ${lowContractName}${eventName}.toString());
-				repository.save(${lowContractName}${eventName});
+				list.add(${lowContractName}${eventName});
 			}
+			repository.saveAll(list);
 			return true;
 		} catch (Exception e) {
 			log.error("handleReceipt OnError, {}", e.getMessage());
