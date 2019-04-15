@@ -7,10 +7,13 @@ import java.math.BigInteger;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.bcos.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
 import ${contractPackName}.${contractName};
 import ${contractPackName}.${contractName}.${eventName}EventResponse;
 import ${group}.${projectName}.crawler.face.BcosEventCrawlerInterface;
@@ -33,30 +36,29 @@ public class ${contractName}${eventName}CrawlerImpl implements BcosEventCrawlerI
 	
 	@Override
 	public boolean handleReceipt(TransactionReceipt receipt, BigInteger blockTimeStamp) {
-		try {
-			List<${eventName}EventResponse> ${eventName}EventResponseList = ${contractName}.get${eventName}Events(receipt);
-			List<${class_name}> list = new ArrayList<>(${eventName}EventResponseList.size());
-			for (${eventName}EventResponse ${eventName}EventResponse : ${eventName}EventResponseList) {
-				${class_name} ${lowContractName}${eventName} = new ${class_name}();
-				${lowContractName}${eventName}.setBlockHeight(receipt.getBlockNumber().longValue());
-				${lowContractName}${eventName}.setTxHash(receipt.getTransactionHash());
-				<%
-				for(entry in list){
-					var javaCapName = entry.javaCapName;
-					var javaName = entry.javaName;
-					var typeMethod = entry.typeMethod;
-				%>
-				${lowContractName}${eventName}.set${javaCapName}(${typeMethod}(${eventName}EventResponse.${javaName}.getValue()));
-				<% } %>
-				${lowContractName}${eventName}.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));
-				log.debug("depot ${eventName}:{}", ${lowContractName}${eventName}.toString());
-				list.add(${lowContractName}${eventName});
-			}
-			repository.saveAll(list);
-			return true;
-		} catch (Exception e) {
-			log.error("handleReceipt OnError, {}", e.getMessage());
-			return false;
+		
+		List<${eventName}EventResponse> ${eventName}EventResponseList = ${contractName}.get${eventName}Events(receipt);
+		if(CollectionUtils.isEmpty(${eventName}EventResponseList)) {
+		    return false;
 		}
+		List<${class_name}> list = new ArrayList<>(${eventName}EventResponseList.size());
+		for (${eventName}EventResponse ${eventName}EventResponse : ${eventName}EventResponseList) {
+			${class_name} ${lowContractName}${eventName} = new ${class_name}();
+			${lowContractName}${eventName}.setBlockHeight(receipt.getBlockNumber().longValue());
+			${lowContractName}${eventName}.setTxHash(receipt.getTransactionHash());
+			<%
+			for(entry in list){
+				var javaCapName = entry.javaCapName;
+				var javaName = entry.javaName;
+				var typeMethod = entry.typeMethod;
+			%>
+			${lowContractName}${eventName}.set${javaCapName}(${typeMethod}(${eventName}EventResponse.${javaName}.getValue()));
+			<% } %>
+			${lowContractName}${eventName}.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));
+			log.debug("depot ${eventName}:{}", ${lowContractName}${eventName}.toString());
+			list.add(${lowContractName}${eventName});
+		}
+		repository.saveAll(list);
+		return true;
 	}
 }
