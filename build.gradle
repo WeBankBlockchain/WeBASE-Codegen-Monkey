@@ -28,6 +28,7 @@ repositories {
 	maven {       
         url "http://maven.aliyun.com/nexus/content/groups/public/"
     }
+    maven { url "https://dl.bintray.com/ethereum/maven/" }
     mavenLocal()
     mavenCentral()
 }
@@ -57,8 +58,15 @@ dependencies {
     compile('com.ibeetl:beetl:2.9.3')
     
      // web3j依赖
-    compile 'org.fisco-bcos:web3sdk:1.2.5'
+    compile 'org.fisco-bcos:web3sdk:2.0.0-rc1'
 }
+
+configurations {
+    all {
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
+}
+
 
 bootJar {
 	destinationDir file('dist')

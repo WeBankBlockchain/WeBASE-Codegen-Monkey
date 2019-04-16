@@ -15,14 +15,109 @@
  */
 package com.webank.webasemonkey.tools;
 
-import org.bcos.web3j.abi.TypeReference;
-import org.bcos.web3j.abi.datatypes.Address;
-import org.bcos.web3j.abi.datatypes.Bool;
-import org.bcos.web3j.abi.datatypes.DynamicArray;
-import org.bcos.web3j.abi.datatypes.DynamicBytes;
-import org.bcos.web3j.abi.datatypes.StaticArray;
-import org.bcos.web3j.abi.datatypes.Utf8String;
-import org.bcos.web3j.abi.datatypes.generated.*;
+import org.fisco.bcos.web3j.abi.TypeReference;
+import org.fisco.bcos.web3j.abi.datatypes.Address;
+import org.fisco.bcos.web3j.abi.datatypes.Bool;
+import org.fisco.bcos.web3j.abi.datatypes.DynamicArray;
+import org.fisco.bcos.web3j.abi.datatypes.DynamicBytes;
+import org.fisco.bcos.web3j.abi.datatypes.StaticArray;
+import org.fisco.bcos.web3j.abi.datatypes.Utf8String;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes1;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes10;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes11;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes12;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes13;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes14;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes15;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes16;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes17;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes18;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes19;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes2;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes20;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes21;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes22;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes23;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes24;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes25;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes26;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes27;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes28;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes29;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes3;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes30;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes31;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes32;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes4;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes5;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes6;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes7;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes8;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes9;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int104;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int112;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int120;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int128;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int136;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int144;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int152;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int16;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int160;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int168;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int176;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int184;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int192;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int200;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int208;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int216;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int224;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int232;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int24;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int240;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int248;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int256;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int32;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int40;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int48;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int56;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int64;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int72;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int8;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int80;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int88;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Int96;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint104;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint112;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint120;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint128;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint136;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint144;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint152;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint16;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint160;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint168;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint176;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint184;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint192;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint200;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint208;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint216;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint224;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint232;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint24;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint240;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint248;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint256;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint32;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint40;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint48;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint56;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint64;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint72;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint8;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint80;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint88;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Uint96;
 
 /**
  * AbiTypeRef
@@ -183,130 +278,6 @@ public final class AbiTypeRefUtils{
           return (TypeReference) new TypeReference<Uint256>() {};
       case "int256":
           return (TypeReference) new TypeReference<Int256>() {};
-      case "ufixed8x248":
-          return (TypeReference) new TypeReference<Ufixed8x248>() {};
-      case "fixed8x248":
-          return (TypeReference) new TypeReference<Fixed8x248>() {};
-      case "ufixed16x240":
-          return (TypeReference) new TypeReference<Ufixed16x240>() {};
-      case "fixed16x240":
-          return (TypeReference) new TypeReference<Fixed16x240>() {};
-      case "ufixed24x232":
-          return (TypeReference) new TypeReference<Ufixed24x232>() {};
-      case "fixed24x232":
-          return (TypeReference) new TypeReference<Fixed24x232>() {};
-      case "ufixed32x224":
-          return (TypeReference) new TypeReference<Ufixed32x224>() {};
-      case "fixed32x224":
-          return (TypeReference) new TypeReference<Fixed32x224>() {};
-      case "ufixed40x216":
-          return (TypeReference) new TypeReference<Ufixed40x216>() {};
-      case "fixed40x216":
-          return (TypeReference) new TypeReference<Fixed40x216>() {};
-      case "ufixed48x208":
-          return (TypeReference) new TypeReference<Ufixed48x208>() {};
-      case "fixed48x208":
-          return (TypeReference) new TypeReference<Fixed48x208>() {};
-      case "ufixed56x200":
-          return (TypeReference) new TypeReference<Ufixed56x200>() {};
-      case "fixed56x200":
-          return (TypeReference) new TypeReference<Fixed56x200>() {};
-      case "ufixed64x192":
-          return (TypeReference) new TypeReference<Ufixed64x192>() {};
-      case "fixed64x192":
-          return (TypeReference) new TypeReference<Fixed64x192>() {};
-      case "ufixed72x184":
-          return (TypeReference) new TypeReference<Ufixed72x184>() {};
-      case "fixed72x184":
-          return (TypeReference) new TypeReference<Fixed72x184>() {};
-      case "ufixed80x176":
-          return (TypeReference) new TypeReference<Ufixed80x176>() {};
-      case "fixed80x176":
-          return (TypeReference) new TypeReference<Fixed80x176>() {};
-      case "ufixed88x168":
-          return (TypeReference) new TypeReference<Ufixed88x168>() {};
-      case "fixed88x168":
-          return (TypeReference) new TypeReference<Fixed88x168>() {};
-      case "ufixed96x160":
-          return (TypeReference) new TypeReference<Ufixed96x160>() {};
-      case "fixed96x160":
-          return (TypeReference) new TypeReference<Fixed96x160>() {};
-      case "ufixed104x152":
-          return (TypeReference) new TypeReference<Ufixed104x152>() {};
-      case "fixed104x152":
-          return (TypeReference) new TypeReference<Fixed104x152>() {};
-      case "ufixed112x144":
-          return (TypeReference) new TypeReference<Ufixed112x144>() {};
-      case "fixed112x144":
-          return (TypeReference) new TypeReference<Fixed112x144>() {};
-      case "ufixed120x136":
-          return (TypeReference) new TypeReference<Ufixed120x136>() {};
-      case "fixed120x136":
-          return (TypeReference) new TypeReference<Fixed120x136>() {};
-      case "ufixed128x128":
-          return (TypeReference) new TypeReference<Ufixed128x128>() {};
-      case "fixed128x128":
-          return (TypeReference) new TypeReference<Fixed128x128>() {};
-      case "ufixed136x120":
-          return (TypeReference) new TypeReference<Ufixed136x120>() {};
-      case "fixed136x120":
-          return (TypeReference) new TypeReference<Fixed136x120>() {};
-      case "ufixed144x112":
-          return (TypeReference) new TypeReference<Ufixed144x112>() {};
-      case "fixed144x112":
-          return (TypeReference) new TypeReference<Fixed144x112>() {};
-      case "ufixed152x104":
-          return (TypeReference) new TypeReference<Ufixed152x104>() {};
-      case "fixed152x104":
-          return (TypeReference) new TypeReference<Fixed152x104>() {};
-      case "ufixed160x96":
-          return (TypeReference) new TypeReference<Ufixed160x96>() {};
-      case "fixed160x96":
-          return (TypeReference) new TypeReference<Fixed160x96>() {};
-      case "ufixed168x88":
-          return (TypeReference) new TypeReference<Ufixed168x88>() {};
-      case "fixed168x88":
-          return (TypeReference) new TypeReference<Fixed168x88>() {};
-      case "ufixed176x80":
-          return (TypeReference) new TypeReference<Ufixed176x80>() {};
-      case "fixed176x80":
-          return (TypeReference) new TypeReference<Fixed176x80>() {};
-      case "ufixed184x72":
-          return (TypeReference) new TypeReference<Ufixed184x72>() {};
-      case "fixed184x72":
-          return (TypeReference) new TypeReference<Fixed184x72>() {};
-      case "ufixed192x64":
-          return (TypeReference) new TypeReference<Ufixed192x64>() {};
-      case "fixed192x64":
-          return (TypeReference) new TypeReference<Fixed192x64>() {};
-      case "ufixed200x56":
-          return (TypeReference) new TypeReference<Ufixed200x56>() {};
-      case "fixed200x56":
-          return (TypeReference) new TypeReference<Fixed200x56>() {};
-      case "ufixed208x48":
-          return (TypeReference) new TypeReference<Ufixed208x48>() {};
-      case "fixed208x48":
-          return (TypeReference) new TypeReference<Fixed208x48>() {};
-      case "ufixed216x40":
-          return (TypeReference) new TypeReference<Ufixed216x40>() {};
-      case "fixed216x40":
-          return (TypeReference) new TypeReference<Fixed216x40>() {};
-      case "ufixed224x32":
-          return (TypeReference) new TypeReference<Ufixed224x32>() {};
-      case "fixed224x32":
-          return (TypeReference) new TypeReference<Fixed224x32>() {};
-      case "ufixed232x24":
-          return (TypeReference) new TypeReference<Ufixed232x24>() {};
-      case "fixed232x24":
-          return (TypeReference) new TypeReference<Fixed232x24>() {};
-      case "ufixed240x16":
-          return (TypeReference) new TypeReference<Ufixed240x16>() {};
-      case "fixed240x16":
-          return (TypeReference) new TypeReference<Fixed240x16>() {};
-      case "ufixed248x8":
-          return (TypeReference) new TypeReference<Ufixed248x8>() {};
-      case "fixed248x8":
-          return (TypeReference) new TypeReference<Fixed248x8>() {};
       case "bytes1":
           return (TypeReference) new TypeReference<Bytes1>() {};
       case "bytes2":

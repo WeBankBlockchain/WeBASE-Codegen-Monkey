@@ -155,8 +155,9 @@ cd install_scripts
 以下配置信息是必须要修改的，否则跑不起来：
 
 ```
-# 节点的IP及通讯端口。
+# 节点的IP及通讯端口、组号。
 system.nodeStr=[NODE_NAME]@[IP]:[PORT]
+system.groupId=[GROUP_ID]
 # 最新版本的FISCO-BCOS平台中的NODE_NAME可以为任意值。
 
 # 数据库的信息，暂时只支持mysql； serverTimezone 用来设置时区，characterEncoding 用来设置字符集

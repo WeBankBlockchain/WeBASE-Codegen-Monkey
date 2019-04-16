@@ -31,21 +31,22 @@ import lombok.Data;
 @ConfigurationProperties("system")
 @Data
 public class SystemEnvironmentConfig {
-     
+
     /** @Fields orgId : org Id */
     private int orgId = 1000;
     /** @Fields nodeStr : [name]@[IP]:[PORT] */
     private String nodeStr;
+    private int groupId;
     /** @Fields keystorePassword : default value 123456 */
     private String keystorePassword;
     /** @Fields clientCertPassword : default value 123456 */
     private String clientCertPassword;
-    
+
     private String dbUrl;
     private String dbUser;
     private String dbPassword;
-    
-    private String group; 
+
+    private String group;
     private String contractPackName;
     private String baseProjectPath;
     private int frequency = 5;
@@ -54,9 +55,9 @@ public class SystemEnvironmentConfig {
     private int maxBlockHeightThreshold = 50;
     /** @Fields crawlBatchUnit : to cut gaint mission to small missions, whose size is this */
     private int crawlBatchUnit = 100;
-    
+
     private String multiLiving;
-    
+
     private long startBlockHeight;
     private String startDate;
 }
