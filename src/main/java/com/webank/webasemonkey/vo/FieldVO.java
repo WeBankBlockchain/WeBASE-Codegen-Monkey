@@ -18,7 +18,6 @@ package com.webank.webasemonkey.vo;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-
 /**
  * FieldVO
  *
@@ -36,6 +35,7 @@ public class FieldVO {
     private String sqlType;
     private String solidityType;
     private String javaType;
+    private String entityType;
     private String typeMethod; // 转化方法
     private String javaCapName;
     private int length;

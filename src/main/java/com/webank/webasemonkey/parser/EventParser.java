@@ -20,11 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.fisco.bcos.web3j.protocol.core.methods.response.Log;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 import com.webank.webasemonkey.constants.ParserConstants;
-import com.webank.webasemonkey.enums.Web3jTypeEnum;
+import com.webank.webasemonkey.enums.JavaTypeEnum;
+import com.webank.webasemonkey.tools.JacksonUtils;
 import com.webank.webasemonkey.tools.PropertiesUtils;
 import com.webank.webasemonkey.tools.StringStyleUtils;
 import com.webank.webasemonkey.vo.EventMetaInfo;
@@ -48,41 +50,50 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
         Class<?>[] subClass = clazz.getClasses();
         List<EventMetaInfo> lists = Lists.newArrayList();
         for (Class<?> c : subClass) {
+            // filter web3sdk 2.0 embedded contract subclass EventValuesWithLog.
+            if (c.getSimpleName().equals("EventValuesWithLog")) {
+                continue;
+            }
             EventMetaInfo event = new EventMetaInfo();
             event.setContractName(clazz.getSimpleName());
             event.setName(StringUtils.substringBefore(c.getSimpleName(), ParserConstants.EVENT_RESPONSE));
-            String generatedFlag = PropertiesUtils.getPropertyWithoutDefault(ParserConstants.MONITOR, event.getContractName(),
-                    event.getName(), "generated");
+            String generatedFlag = PropertiesUtils.getPropertyWithoutDefault(ParserConstants.MONITOR,
+                    event.getContractName(), event.getName(), "generated");
             if (generatedFlag != null && generatedFlag.equalsIgnoreCase("false")) {
                 continue;
             }
 
-            String ignoreStr = PropertiesUtils.getPropertyWithoutDefault(ParserConstants.MONITOR, event.getContractName(),
-                    event.getName(), ParserConstants.IGNORE_PARAM);
+            String ignoreStr = PropertiesUtils.getPropertyWithoutDefault(ParserConstants.MONITOR,
+                    event.getContractName(), event.getName(), ParserConstants.IGNORE_PARAM);
             List<String> ignoreParam = StrSpliter.split(ignoreStr, ',', 0, true, true);
             event.setIgnoreParams(ignoreParam);
-            int shardingNO = Integer.parseInt(PropertiesUtils.getGlobalProperty(ParserConstants.SYSTEM, event.getContractName(),
-                    event.getName(), ParserConstants.SHARDINGNO, "1"));
+            int shardingNO = Integer.parseInt(PropertiesUtils.getGlobalProperty(ParserConstants.SYSTEM,
+                    event.getContractName(), event.getName(), ParserConstants.SHARDINGNO, "1"));
             event.setShardingNO(shardingNO);
             Field[] fields = c.getFields();
             ArrayList<FieldVO> fieldList = Lists.newArrayList();
             for (Field f : fields) {
+                // web3sdk 2.0 has a Log type, skip it temporary
+                if (f.getType() == Log.class) {
+                    continue;
+                }
+                System.out.println(f.getName());
                 FieldVO vo = new FieldVO();
                 String k = f.getName();
                 if (ignoreParam.contains(k)) {
-                    log.info("Contract:{}, event:{}, ignores param:{}", event.getContractName(), event.getName(),
-                            k);
+                    log.info("Contract:{}, event:{}, ignores param:{}", event.getContractName(), event.getName(), k);
                     continue;
                 }
                 String v = cleanType(f.getGenericType().getTypeName());
+                System.out.println(v);
                 // get the personal length
                 String length = PropertiesUtils.getGlobalProperty(ParserConstants.LENGTH, event.getContractName(),
                         event.getName(), k, "0");
-                vo.setSolidityName(k).setSqlName(StringStyleUtils.upper2underline(k)).setJavaName(k)
-                        .setSqlType(Web3jTypeEnum.parse(v).getSqlType()).setSolidityType(v)
-                        .setJavaType(Web3jTypeEnum.parse(v).getJavaType())
-                        .setTypeMethod(Web3jTypeEnum.parse(v).getTypeMethod()).setJavaCapName(StringUtils.capitalize(k))
-                        .setLength(Integer.parseInt(length));
+                vo.setSqlName(StringStyleUtils.upper2underline(k)).setJavaName(k)
+                        .setSqlType(JavaTypeEnum.parse(v).getSqlType()).setJavaType(v)
+                        .setEntityType(JavaTypeEnum.parse(v).getEntityType()).setJavaCapName(StringUtils.capitalize(k))
+                        .setTypeMethod(JavaTypeEnum.parse(v).getTypeMethod()).setLength(Integer.parseInt(length));
+                System.out.println("event " + JacksonUtils.toJson(vo));
                 fieldList.add(vo);
             }
             event.setList(fieldList);

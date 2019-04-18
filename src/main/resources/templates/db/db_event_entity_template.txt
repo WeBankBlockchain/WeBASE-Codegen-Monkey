@@ -36,6 +36,7 @@ public class ${class_name} extends IdEntity {
 		var javaName = entry.javaName;
         var javaType = entry.javaType;
         var sqlName =  entry.sqlName;
+        var entityType = entry.entityType;
         var length = entry.length;
         if(length>0){
         	println("	@Column(name = \"" + sqlName + "\", length = "+ length+")");
@@ -44,7 +45,7 @@ public class ${class_name} extends IdEntity {
         	println("	@Column(name = \"" + sqlName+ "\")");
         }
 	%>
-	private ${javaType} ${javaName};
+	private ${entityType} ${javaName};
 	<% } %>	
 	@Column(name = "block_timestamp")
 	private Date blockTimeStamp;	

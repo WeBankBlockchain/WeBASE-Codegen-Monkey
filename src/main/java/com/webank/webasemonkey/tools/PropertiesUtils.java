@@ -23,7 +23,6 @@ import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 
-
 /**
  * PropertiesUtils
  *
@@ -35,6 +34,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PropertiesUtils {
 
+    /**
+     * return the first mapping result of args.
+     *
+     * 
+     * @param property key
+     * @return property value
+     */
     public static String getProperty(String...args) {
         ClassPathResource resource = new ClassPathResource("application.properties");
         Properties properties = new Properties();
@@ -52,14 +58,14 @@ public class PropertiesUtils {
         } catch (IOException e) {
             log.error("getProperty error {}", e.getMessage());
         }
-        return args[args.length-1];
+        return args[args.length - 1];
     }
-    
+
     public static void main(String[] args) {
         String a = getProperty("system.crawlBatchUnit");
         System.out.println(a);
     }
-    
+
     /**
      * get the very specific value of settings. If the field is not set, then return the default value.
      * 
@@ -81,6 +87,8 @@ public class PropertiesUtils {
 
     /**
      * get the very specific value of settings without a default value.
+     * 
+     * return the specific config value, eg. return event property prefer to contract value.
      * 
      * @param contractName
      * @param eventName

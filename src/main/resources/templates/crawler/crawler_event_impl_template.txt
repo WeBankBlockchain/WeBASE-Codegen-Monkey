@@ -8,7 +8,11 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bcos.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.fisco.bcos.web3j.crypto.Credentials;
+import org.fisco.bcos.web3j.protocol.Web3j;
+import org.fisco.bcos.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.fisco.bcos.web3j.tx.gas.ContractGasProvider;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
@@ -18,10 +22,6 @@ import ${contractPackName}.${contractName};
 import ${contractPackName}.${contractName}.${eventName}EventResponse;
 import ${group}.${projectName}.crawler.face.BcosEventCrawlerInterface;
 import ${group}.${projectName}.generated.db.event.entity.${class_name};
-import ${group}.${projectName}.tools.AddressUtils;
-import ${group}.${projectName}.tools.BigIntegerUtils;
-import ${group}.${projectName}.tools.BoolUtils;
-import ${group}.${projectName}.tools.BytesUtils;
 import ${group}.${projectName}.generated.db.event.repository.${class_name}Repository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,15 +29,20 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @ConditionalOnProperty(name = "monitor.${contractName}.${eventName}CrawlerService", havingValue = "on")
 public class ${contractName}${eventName}CrawlerImpl implements BcosEventCrawlerInterface {
-	
+	@Autowired
+    private Web3j web3j;
+    @Autowired
+    private Credentials credentials;
+    @Autowired
+    private ContractGasProvider contractGasProvider;
 	@Autowired
 	private ${class_name}Repository repository;
 	
 	
 	@Override
 	public boolean handleReceipt(TransactionReceipt receipt, BigInteger blockTimeStamp) {
-		
-		List<${eventName}EventResponse> ${eventName}EventResponseList = ${contractName}.get${eventName}Events(receipt);
+		${contractName} contract = ${contractName}.load("0x0000000000000000000000000000000000000000", web3j, credentials, contractGasProvider); 
+		List<${eventName}EventResponse> ${eventName}EventResponseList = contract.get${eventName}Events(receipt);
 		if(CollectionUtils.isEmpty(${eventName}EventResponseList)) {
 		    return false;
 		}
@@ -52,7 +57,7 @@ public class ${contractName}${eventName}CrawlerImpl implements BcosEventCrawlerI
 				var javaName = entry.javaName;
 				var typeMethod = entry.typeMethod;
 			%>
-			${lowContractName}${eventName}.set${javaCapName}(${typeMethod}(${eventName}EventResponse.${javaName}.getValue()));
+			${lowContractName}${eventName}.set${javaCapName}(${eventName}EventResponse.${javaName}${typeMethod});
 			<% } %>
 			${lowContractName}${eventName}.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));
 			log.debug("depot ${eventName}:{}", ${lowContractName}${eventName}.toString());
