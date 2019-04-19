@@ -28,7 +28,6 @@ import org.springframework.stereotype.Service;
 
 import com.webank.webasemonkey.code.template.face.GenerateParas;
 import com.webank.webasemonkey.config.SystemEnvironmentConfig;
-import com.webank.webasemonkey.parser.ContractJavaParserInterface;
 import com.webank.webasemonkey.vo.ContractNameVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,13 +36,13 @@ import lombok.extern.slf4j.Slf4j;
  * TemplateGenerateService
  *
  * @Description: TemplateGenerateService
- * @author graysonzhang
+ * @author maojiayu
  * @data 2018-12-19 14:51:00
  *
  */
 @Slf4j
 @Service
-public class TemplateGenerateService<T> {
+public class CodeTemplateGenerateService<T> {
 
     /** @Fields gt : group template */
     @Autowired
@@ -51,13 +50,12 @@ public class TemplateGenerateService<T> {
     @Autowired
     protected SystemEnvironmentConfig systemEnvironmentConfig;
 
-
-    /**    
-     * write generated files to corresponding packages.  
+    /**
+     * write generated files to corresponding packages.
      * 
      * @param generateParas: paras for writing files
-     * @param vo      
-     * @return void       
+     * @param vo
+     * @return void
      */
     public void write(GenerateParas generateParas, ContractNameVO vo) {
         Template template = gt.getTemplate(generateParas.getTemplatePath());
@@ -73,34 +71,28 @@ public class TemplateGenerateService<T> {
         }
     }
 
-    /**    
+    /**
      * create java code files for crawling data from block chain network and write to corresponding packages.
      * 
      * @param clazz: contract class
      * @param parser: methodParser or eventParser
-     * @param map    
-     * @return List<T>       
+     * @param map
+     * @return List<T>
      */
-    public <T extends ContractNameVO> List<T> generate(Class<?> clazz, ContractJavaParserInterface<T> parser,
-            Map<String, GenerateParas> map) {
-
-        List<T> metaInfos = parser.parseToInfoList(clazz);
-        log.info("Begin to parse class: {}", clazz.getSimpleName());
+    public <T extends ContractNameVO> void generate(List<T> metaInfos, Map<String, GenerateParas> map) {
         for (T mataInfo : metaInfos) {
             map.forEach((k, v) -> {
                 write(v, mataInfo);
             });
         }
-        return metaInfos;
     }
 
-    
-    /**    
-     * create config files for crawling data from block chain network and write to corresponding packages.  
+    /**
+     * create config files for crawling data from block chain network and write to corresponding packages.
      * 
      * @param config
-     * @param map      
-     * @return void       
+     * @param map
+     * @return void
      */
     public <T extends ContractNameVO> void generate(T config, Map<String, GenerateParas> map) {
         map.forEach((k, v) -> {

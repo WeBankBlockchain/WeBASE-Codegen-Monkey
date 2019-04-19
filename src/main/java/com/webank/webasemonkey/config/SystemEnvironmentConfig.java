@@ -56,4 +56,7 @@ public class SystemEnvironmentConfig {
     private int crawlBatchUnit = 100;
     
     private String multiLiving;
+    
+    private long startBlockHeight;
+    private String startDate;
 }

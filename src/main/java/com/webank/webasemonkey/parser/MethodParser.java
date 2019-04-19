@@ -44,6 +44,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  * @Description: MethodParser
  * @author graysonzhang
+ * @author maojiayu
  * @data 2018-12-4 23:04:50
  *
  */
@@ -98,7 +99,8 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
                         .setJavaType(Web3jTypeEnum.parse(v).getJavaType())
                         .setTypeMethod(Web3jTypeEnum.parse(v).getTypeMethod()).setJavaCapName(StringUtils.capitalize(k))
                         .setLength(Integer.parseInt(length));
-                log.info("java name {}, java type {}, solidity type {}, type method {}", vo.getJavaName(), vo.getJavaType(), vo.getSolidityType(), vo.getTypeMethod());
+                log.debug("java name {}, java type {}, solidity type {}, type method {}", vo.getJavaName(),
+                        vo.getJavaType(), vo.getSolidityType(), vo.getTypeMethod());
                 fieldList.add(vo);
             }
             method.setList(fieldList);
@@ -136,7 +138,6 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
         } catch (IOException e) {
             e.printStackTrace();
         }
-        log.info(abiDefinition.toString());
         return abiDefinition;
     }
 
