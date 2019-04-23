@@ -61,11 +61,6 @@ public class PropertiesUtils {
         return args[args.length - 1];
     }
 
-    public static void main(String[] args) {
-        String a = getProperty("system.crawlBatchUnit");
-        System.out.println(a);
-    }
-
     /**
      * get the very specific value of settings. If the field is not set, then return the default value.
      * 

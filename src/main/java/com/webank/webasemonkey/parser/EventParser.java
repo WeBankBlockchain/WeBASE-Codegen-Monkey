@@ -77,7 +77,6 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
                 if (f.getType() == Log.class) {
                     continue;
                 }
-                System.out.println(f.getName());
                 FieldVO vo = new FieldVO();
                 String k = f.getName();
                 if (ignoreParam.contains(k)) {
@@ -85,7 +84,6 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
                     continue;
                 }
                 String v = cleanType(f.getGenericType().getTypeName());
-                System.out.println(v);
                 // get the personal length
                 String length = PropertiesUtils.getGlobalProperty(ParserConstants.LENGTH, event.getContractName(),
                         event.getName(), k, "0");
@@ -93,7 +91,6 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
                         .setSqlType(JavaTypeEnum.parse(v).getSqlType()).setJavaType(v)
                         .setEntityType(JavaTypeEnum.parse(v).getEntityType()).setJavaCapName(StringUtils.capitalize(k))
                         .setTypeMethod(JavaTypeEnum.parse(v).getTypeMethod()).setLength(Integer.parseInt(length));
-                System.out.println("event " + JacksonUtils.toJson(vo));
                 fieldList.add(vo);
             }
             event.setList(fieldList);

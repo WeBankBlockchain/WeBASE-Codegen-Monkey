@@ -100,8 +100,6 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
                         .setJavaType(Web3jTypeEnum.parse(v).getJavaType())
                         .setTypeMethod(Web3jTypeEnum.parse(v).getTypeMethod()).setJavaCapName(StringUtils.capitalize(k))
                         .setLength(Integer.parseInt(length));
-                System.out.println("method: " + k);
-                System.out.println(JacksonUtils.toJson(vo));
                 log.debug("java name {}, java type {}, solidity type {}, type method {}", vo.getJavaName(),
                         vo.getJavaType(), vo.getSolidityType(), vo.getTypeMethod());
                 fieldList.add(vo);
