@@ -147,7 +147,8 @@ cd install_scripts
 
 复制密钥相关的配置文件：请将你的配置文件**复制到./config/resources目录**下。配置文件包括：
 -     ca.crt
--     client.keystore     
+-     node.crt
+-     node.key
 
 ##### 2.2.2.3 配置应用
 
@@ -155,7 +156,7 @@ cd install_scripts
 以下配置信息是必须要修改的，否则跑不起来：
 
 ```
-# 节点的IP及通讯端口、组号。
+# 节点的IP及通讯端口、组号。 NODE_NAME可以是任意字符和数字的组合
 system.nodeStr=[NODE_NAME]@[IP]:[PORT]
 system.groupId=[GROUP_ID]
 # 最新版本的FISCO-BCOS平台中的NODE_NAME可以为任意值。
@@ -539,7 +540,7 @@ A： 可以。 但是会被作为两个数据库表来进行存储，因为合�
 
 框架 | 理由
 ---|---
-SpringBoot - Web框架 | 打开Spring全家桶的最佳方式。我们也同样推荐你使用。
+SpringBoot - 快速应用开发框架 | 易用而又强大，我们也同样推荐你使用。
 Gradle - 依赖属性管理 | 相比于Maven，Gradle更加简洁和强大。
 Beetl - 模板引擎 | Beetl在易用性和性能等维度上超越了知名的竞争对手。
 incubator-shardingsphere - 分布式数据库中间件 | 很棒的关系型数据库中间件，目前已经进入Apache孵化器。
@@ -571,8 +572,6 @@ FISCO-BCOS节点配置用于配置[WEBASE-BEE](https://github.com/WeBankFinTech/
 | --- | --- | --- | --- | --- |
 | system.orgId | N | 组织机构ID，用于区分不同的机构 | 10000 | FB001 |
 | system.nodeStr | Y | 连接区块链节点的nodeStr，nodeName@[IP]:[PORT], 其中prot为channel port | node1@106.12.31.123:8822 | - |
-| system.keystorePassword | Y | 节点密钥 | 123456 | - |
-| system.clientCertPassWord | Y | 证书密钥 | 123456 | - |
 
 #### 1.3 数据库配置
 

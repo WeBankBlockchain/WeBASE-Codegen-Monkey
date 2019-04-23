@@ -37,10 +37,6 @@ public class SystemEnvironmentConfig {
     /** @Fields nodeStr : [name]@[IP]:[PORT] */
     private String nodeStr;
     private int groupId;
-    /** @Fields keystorePassword : default value 123456 */
-    private String keystorePassword;
-    /** @Fields clientCertPassword : default value 123456 */
-    private String clientCertPassword;
 
     private String dbUrl;
     private String dbUser;

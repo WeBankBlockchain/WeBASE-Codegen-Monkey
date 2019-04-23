@@ -61,8 +61,6 @@ public class ApplicationPropParas implements ConfigGenerateParas {
         map.put("orgId", systemEnvironmentConfig.getOrgId());
         map.put("nodeStr", systemEnvironmentConfig.getNodeStr());
         map.put("groupId", systemEnvironmentConfig.getGroupId());
-        map.put("keystorePassword", systemEnvironmentConfig.getKeystorePassword());
-        map.put("clientCertPassWord", systemEnvironmentConfig.getClientCertPassword());
         map.put("group", systemEnvironmentConfig.getGroup());
         map.put("projectName", ConfigConstants.projectName);
         map.put("multiLiving", systemEnvironmentConfig.getMultiLiving());

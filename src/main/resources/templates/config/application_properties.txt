@@ -19,8 +19,6 @@ system.orgId=${orgId}
 system.nodeStr=${nodeStr}
 system.groupId=${groupId}
 system.configPath=config/
-system.keystorePassword=${keystorePassword}
-system.clientCertPassWord=${clientCertPassWord}
 system.multiLiving=${multiLiving}
 
 #######
