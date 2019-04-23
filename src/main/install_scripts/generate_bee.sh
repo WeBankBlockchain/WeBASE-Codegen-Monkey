@@ -161,7 +161,10 @@ rm -rf webase-monkey
 cd webase-bee
 mkdir -p $RESOURCE_DIR/
 cp -f  ../$CERT_DIR/ca.crt $RESOURCE_DIR/
-cp -f  ../$CERT_DIR/client.keystore $RESOURCE_DIR/
+# cp -f  ../$CERT_DIR/client.keystore $RESOURCE_DIR/
+cp -f  ../$CERT_DIR/node.crt $RESOURCE_DIR/
+cp -f  ../$CERT_DIR/node.key $RESOURCE_DIR/
+
 echo "copy certs done."
 mkdir -p $JAVA_CODE_DIR/$contractPath
 cp -f ../$CONTRACT_DIR/* $JAVA_CODE_DIR/$contractPath/
