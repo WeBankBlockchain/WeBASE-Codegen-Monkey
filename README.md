@@ -774,8 +774,8 @@ user = app          ; 用哪个用户启动
 redirect_stderr = true  ; 把 stderr 重定向到 stdout，默认 false
 stdout_logfile_maxbytes = 150MB  ; stdout 日志文件大小，默认 50MB
 stdout_logfile_backups = 20     ; stdout 日志文件备份数
-stderr_logfile=【你的日志路径】/webase-bee/dist/log/weevent_bee_error.log
-stdout_logfile = 【你的日志路径】/webase-bee/dist/log/weevent_out.log  ;日志统一放在log目录下
+stderr_logfile=【你的日志路径】/webase-bee/dist/log/webase_bee_error.log
+stdout_logfile = 【你的日志路径】/webase-bee/dist/log/webase_out.log  ;日志统一放在log目录下
 [supervisord]
 ```
 
@@ -789,6 +789,6 @@ supervisord -c /etc/supervisord.d/webasebee_config1.ini
 
 ##### 关闭任务
 ```shell
-ps -ef|grep supervisord| awk '{print $2}'|xargs kill -9
-ps -ef|grep webase-bee|grep SNAPSHOT| awk '{print $2}'|xargs kill -9
+ps -ef|grep supervisord|grep webasebee| awk '{print $2}'|xargs kill -9
+ps -ef|grep webase-bee|grep -v grep| awk '{print $2}'|xargs kill -9
 ```
