@@ -29,5 +29,7 @@ public class ConfigFileConstants {
 	public static final String GENERATED_APPLICATION_PROPERTIES_FILE_PATH = "src/main/resources/application.properties";
 	/** @Fields GENERATED_DB_ENV_FILE_PATH : generated db-env.xml file path */
 	public static final String GENERATED_DB_ENV_FILE_PATH = "src/main/resources/application-sharding-tables.properties";
+	
+	public static final String GENERATED_GRAFANA_DEFAULT_DASHBOARD_PATH = "src/main/scripts/grafana/default_dashboard.json";
 
 }

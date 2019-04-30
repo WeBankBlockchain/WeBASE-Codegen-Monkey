@@ -54,23 +54,20 @@ public class ${methodName}MethodCrawlerImpl implements BcosMethodCrawlerInterfac
 		}
 		
 		log.debug("input : {}", input);
-		
-		try{
-			List<NamedType> list = contractMapsInfo.getMethodFiledsMap().get(mapKey);
-			List<Type> params = FunctionReturnDecoder.decode(input, MethodUtils.getMethodTypeReferenceList(list));
+				
+		List<NamedType> list = contractMapsInfo.getMethodFiledsMap().get(mapKey);
+		List<Type> params = FunctionReturnDecoder.decode(input, MethodUtils.getMethodTypeReferenceList(list));
 		
 		<%
 			for(var index = 0; index < list.~size; index++){
 				var javaCapName = list[index].javaCapName;
 				var typeMethod = list[index].typeMethod;
-			%>
-			entity.set${javaCapName}(${typeMethod}(params.get(${index}).getValue()));
+		%>
+		entity.set${javaCapName}(${typeMethod}(params.get(${index}).getValue()));
 		<%  } %>
-			entity.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));		
-			repository.save(entity);
-		}catch (Exception e) {
-			log.error("${methodName} entry does't insert successfully! The detail info : {}", e.getMessage());
-		}	
+		entity.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));		
+		repository.save(entity);
+		
 		log.info("end process ${methodName} Transaction");
 	}
 }

@@ -24,28 +24,32 @@ package com.webank.webasemonkey.constants;
  *
  */
 public class TemplateConstants {
-	
-	/** @Fields CRAWLER_EVENT_IMPL_TEMPLATE_PATH : crawler event impl template path */
-	public static final String CRAWLER_EVENT_IMPL_TEMPLATE_PATH = "templates/crawler/crawler_event_impl_template.txt";
-	/** @Fields CRAWLER_METHOD_IMPL_TEMPLATE_PATH : crawler method impl template path */
-	public static final String CRAWLER_METHOD_IMPL_TEMPLATE_PATH = "templates/crawler/crawler_method_impl_template.txt";
-	
-	/** @Fields DB_EVENT_ENTITY_TEMPLATE_PATH : event entity template path */
-	public static final String DB_EVENT_ENTITY_TEMPLATE_PATH = "templates/db/db_event_entity_template.txt";
-	/** @Fields DB_EVENT_REPOSITORY_TEMPLATE_PATH : event repository template path */
-	public static final String DB_EVENT_REPOSITORY_TEMPLATE_PATH = "templates/db/db_event_repository_template.txt";
-	/** @Fields SQL_EVENT_TEMPLATE_PATH : event sql template path */
-	public static final String SQL_EVENT_TEMPLATE_PATH = "templates/db/sql_event_template.sql";
-	
-	/** @Fields DB_METHOD_ENTITY_TEMPLATE_PATH : method entity template path */
-	public static final String DB_METHOD_ENTITY_TEMPLATE_PATH = "templates/db/db_method_entity_template.txt";
-	/** @Fields DB_MEHTOD_REPOSITORY_TEMPLATE_PATH : method repository template path */
-	public static final String DB_MEHTOD_REPOSITORY_TEMPLATE_PATH = "templates/db/db_method_repository_template.txt";
-	/** @Fields SQL_METHOD_TEMPLATE_PATH : method sql template path */
-	public static final String SQL_METHOD_TEMPLATE_PATH = "templates/db/sql_method_template.sql";
 
-	/** @Fields APPLICATION_PROPERTIES_PATH : applicaiton properties path */
-	public static final String APPLICATION_PROPERTIES_PATH = "templates/config/application_properties.txt";
+    /** @Fields CRAWLER_EVENT_IMPL_TEMPLATE_PATH : crawler event impl template path */
+    public static final String CRAWLER_EVENT_IMPL_TEMPLATE_PATH = "templates/crawler/crawler_event_impl_template.txt";
+    /** @Fields CRAWLER_METHOD_IMPL_TEMPLATE_PATH : crawler method impl template path */
+    public static final String CRAWLER_METHOD_IMPL_TEMPLATE_PATH = "templates/crawler/crawler_method_impl_template.txt";
+
+    /** @Fields DB_EVENT_ENTITY_TEMPLATE_PATH : event entity template path */
+    public static final String DB_EVENT_ENTITY_TEMPLATE_PATH = "templates/db/db_event_entity_template.txt";
+    /** @Fields DB_EVENT_REPOSITORY_TEMPLATE_PATH : event repository template path */
+    public static final String DB_EVENT_REPOSITORY_TEMPLATE_PATH = "templates/db/db_event_repository_template.txt";
+    /** @Fields SQL_EVENT_TEMPLATE_PATH : event sql template path */
+    public static final String SQL_EVENT_TEMPLATE_PATH = "templates/db/sql_event_template.sql";
+
+    /** @Fields DB_METHOD_ENTITY_TEMPLATE_PATH : method entity template path */
+    public static final String DB_METHOD_ENTITY_TEMPLATE_PATH = "templates/db/db_method_entity_template.txt";
+    /** @Fields DB_MEHTOD_REPOSITORY_TEMPLATE_PATH : method repository template path */
+    public static final String DB_MEHTOD_REPOSITORY_TEMPLATE_PATH = "templates/db/db_method_repository_template.txt";
+    /** @Fields SQL_METHOD_TEMPLATE_PATH : method sql template path */
+    public static final String SQL_METHOD_TEMPLATE_PATH = "templates/db/sql_method_template.sql";
+
+    /** @Fields APPLICATION_PROPERTIES_PATH : applicaiton properties path */
+    public static final String APPLICATION_PROPERTIES_PATH = "templates/config/application_properties.txt";
     /** @Fields DB_PROPERTIES_PATH : db properties path */
     public static final String DB_PROPERTIES_PATH = "templates/config/application-sharding-tables.txt";
+
+    public static final String GRAFANA_PANEL_TABLE_PATH = "templates/grafana/panel_table.txt";
+    public static final String GRAFANA_DASHBOARD_PATH = "templates/grafana/dashboard_default.txt";
+
 }

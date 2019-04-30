@@ -15,33 +15,30 @@
  */
 package com.webank.webasemonkey.code.auto;
 
-import java.util.Map;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.webank.webasemonkey.WebasemonkeyApplicationTests;
-import com.webank.webasemonkey.code.service.CodeGenerateService;
-import com.webank.webasemonkey.code.template.face.GenerateParas;
+import com.webank.webasemonkey.code.template.GrafanaGenerateService;
+import com.webank.webasemonkey.code.template.paras.GrafanaPanelTableParas;
 
 /**
- * MethodCodeGeneratorTest
+ * GrafanaGenerateService
  *
- * @Description: MethodCodeGeneratorTest
- * @author graysonzhang
- * @data 2018年12月4日 下午4:57:44
+ * @Description: GrafanaGenerateService
+ * @author maojiayu
+ * @data Mar 27, 2019 5:42:59 PM
  *
  */
-public class MethodCodeGeneratorTest extends WebasemonkeyApplicationTests {
-	
-	@Autowired
-    private CodeGenerateService codeGenerator;
+public class GrafanaGenerateServiceTest extends WebasemonkeyApplicationTests {
     @Autowired
-    private Map<String, GenerateParas> parasMap;
-
+    private GrafanaGenerateService service;
+    @Autowired
+    private GrafanaPanelTableParas para;
+    
     @Test
-    public void go() {
-        parasMap.forEach((k, v) -> System.out.println(k + " " + v));
-        codeGenerator.generateBee();
+    public void testGenerate() {
+        service.genereate();
     }
+
 }

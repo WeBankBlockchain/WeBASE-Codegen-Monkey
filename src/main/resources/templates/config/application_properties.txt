@@ -38,8 +38,8 @@ prepareTaskJob.shardingTotalCount=1
 prepareTaskJob.shardingItemParameters=0=A
 
 dataflowJob.cron=0/${frequency} * * * * ?
-dataflowJob.shardingTotalCount=4
-dataflowJob.shardingItemParameters=0=A,1=B,2=C,3=D
+dataflowJob.shardingTotalCount=8
+dataflowJob.shardingItemParameters=0=A,1=B,2=C,3=D,4=E,5=F,6=G,7=H
 		
 <%
 	}else{
@@ -73,6 +73,9 @@ system.group=${group}
 system.projectName=${projectName}
 system.contractPackName=${contractPackName}
 system.contractPath=${contractPath}
+
+system.startBlockHeight=${startBlockHeight}
+system.startDate=${startDate}
 
 
 
