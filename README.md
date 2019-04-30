@@ -761,7 +761,7 @@ files = supervisord.d/*.ini
 [supervisord]
 ```
 
-在/etc/supervisord.d目录下配置以下启动配置文件webasebee_config1.ini，注意修改相关的路径。
+在/etc/supervisord.d目录下配置以下启动配置文件webasebee_config1.ini（请注意配置文件里需要包含webasebee，否则会导致关闭任务命令失效），注意修改相关的路径。
 ```shell
 [program:supervisor_webasebee]
 directory =【你的程序路径】/webase-bee/dist ; 程序的启动目录
@@ -775,7 +775,7 @@ redirect_stderr = true  ; 把 stderr 重定向到 stdout，默认 false
 stdout_logfile_maxbytes = 150MB  ; stdout 日志文件大小，默认 50MB
 stdout_logfile_backups = 20     ; stdout 日志文件备份数
 stderr_logfile=【你的日志路径】/webase-bee/dist/log/webase_bee_error.log
-stdout_logfile = 【你的日志路径】/webase-bee/dist/log/webase_out.log  ;日志统一放在log目录下
+stdout_logfile = 【你的日志路径】/webase-bee/dist/log/webase_bee_out.log  ;日志统一放在log目录下
 [supervisord]
 ```
 
