@@ -38,7 +38,7 @@ public class ${methodName}MethodCrawlerImpl implements BcosMethodCrawlerInterfac
 
 	@Override
 	public void transactionHandler(Transaction transaction, BigInteger blockTimeStamp, Map.Entry<String, String> entry, String methodName) {
-		log.info("Begin process ${methodName} Transaction");
+		log.debug("Begin process ${methodName} Transaction");
 		${methodName} entity = new ${methodName}();
 		entity.setTxHash(transaction.getHash());
 		entity.setBlockHeight(transaction.getBlockNumber().longValue());
@@ -68,6 +68,6 @@ public class ${methodName}MethodCrawlerImpl implements BcosMethodCrawlerInterfac
 		entity.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));		
 		repository.save(entity);
 		
-		log.info("end process ${methodName} Transaction");
+		log.debug("end process ${methodName} Transaction");
 	}
 }
