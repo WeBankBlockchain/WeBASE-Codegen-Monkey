@@ -113,7 +113,7 @@
 
 ```shell
 #下载安装包
-curl -LO https://github.com/WeBankFinTech/webase-monkey/raw/dev/src/main/install_scripts.tar.gz
+curl -LO https://github.com/WeBankFinTech/webase-monkey/raw/dev_v0.6.0.2019.04/src/main/install_scripts.tar.gz
 #解压安装包
 tar -zxf install_scripts.tar.gz 
 cd install_scripts
