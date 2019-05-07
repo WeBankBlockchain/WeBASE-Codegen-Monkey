@@ -18,6 +18,14 @@ package com.webank.webasemonkey.tools;
 import java.util.PrimitiveIterator.OfInt;
 import java.util.stream.IntStream;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.webank.webasemonkey.config.SystemEnvironmentConfig;
+import com.webank.webasemonkey.enums.NameStyleEnum;
+
 /**
  * StringStyleUtils
  *
@@ -26,7 +34,19 @@ import java.util.stream.IntStream;
  * @data Dec 28, 2018 4:11:29 PM
  *
  */
+@Component
 public class StringStyleUtils {
+
+    @Autowired
+    private SystemEnvironmentConfig systemEnvironmentConfig;
+
+    private static String nameStyle;
+
+    @PostConstruct
+    public void init() {
+        this.nameStyle = systemEnvironmentConfig.getNameStyle();
+    }
+
     /**
      * Camel -> underline e.g. aBc -> a_bc
      * 
@@ -34,6 +54,9 @@ public class StringStyleUtils {
      * @return
      */
     public static String upper2underline(String str) {
+        if (nameStyle.equalsIgnoreCase(NameStyleEnum.RAW_CASE.getStyle())) {
+            return str;
+        }
         if (str.length() == 1) {
             return str.toLowerCase();
         }

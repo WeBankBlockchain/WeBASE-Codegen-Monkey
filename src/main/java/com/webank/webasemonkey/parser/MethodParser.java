@@ -32,7 +32,6 @@ import com.webank.webasemonkey.constants.AbiTypeConstants;
 import com.webank.webasemonkey.constants.ParserConstants;
 import com.webank.webasemonkey.enums.Web3jTypeEnum;
 import com.webank.webasemonkey.tools.AbiTypeRefUtils;
-import com.webank.webasemonkey.tools.JacksonUtils;
 import com.webank.webasemonkey.tools.PropertiesUtils;
 import com.webank.webasemonkey.tools.StringStyleUtils;
 import com.webank.webasemonkey.vo.FieldVO;

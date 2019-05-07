@@ -18,6 +18,8 @@ package com.webank.webasemonkey.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import com.webank.webasemonkey.enums.NameStyleEnum;
+
 import lombok.Data;
 
 /**
@@ -51,6 +53,8 @@ public class SystemEnvironmentConfig {
     private int maxBlockHeightThreshold = 50;
     /** @Fields crawlBatchUnit : to cut gaint mission to small missions, whose size is this */
     private int crawlBatchUnit = 100;
+
+    private String nameStyle = NameStyleEnum.UNDER_SCORE_CASE.getStyle();
 
     private String multiLiving;
 

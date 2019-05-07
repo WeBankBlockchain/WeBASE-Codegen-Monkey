@@ -162,8 +162,8 @@ system.nodeStr=[NODE_NAME]@[IP]:[PORT]
 system.groupId=[GROUP_ID]
 # 最新版本的FISCO-BCOS平台中的NODE_NAME可以为任意值。
 
-# 数据库的信息，暂时只支持mysql； serverTimezone 用来设置时区，characterEncoding 用来设置字符集
-system.dbUrl=jdbc:mysql://[IP]:[PORT]/[database]?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2b8
+# 数据库的信息，暂时只支持mysql； serverTimezone 用来设置时区
+system.dbUrl=jdbc:mysql://[IP]:[PORT]/[database]?useSSL=false&serverTimezone=GMT%2b8
 system.dbUser=[user_name]
 system.dbPassword=[password]
 
@@ -605,11 +605,12 @@ FISCO-BCOS节点配置用于配置[WEBASE-BEE](https://github.com/WeBankFinTech/
 
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
-| system.dbUrl | Y | 访问数据的URL | jdbc:mysql://[IP]:[PORT]/[DB]?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2b8 | - |
+| system.dbUrl | Y | 访问数据的URL | jdbc:mysql://[IP]:[PORT]/[DB]?useSSL=false&serverTimezone=GMT%2b8 | - |
 | system.dbUser | Y | 数据库用户名 | admin | - |
 | system.dbPassword | Y | 数据库密码 | 123456 | - |
 | system.contractName.[methodName or eventName].shardingNO | N | 合约数据分片数：数据库指定数据表的个数 | system.Rule.NewruleEvent.shardingNO = 3 | 1 |
 | system.sys.[sysTableName].shardingNO | N | 系统数据分片数 | system.sys.BlockTxDetailInfo.shardingNO=5 | 1 |
+| system.nameStyle | N | 数据库表名和字段命名规则，支持下划线命名和原始数据命名 | system.nameStyle=rawCase | underScoreCase |
 
 其中**sysTableName**对应区块数据表和账户数据表，详情见 **数据存储模型** 章节。
 

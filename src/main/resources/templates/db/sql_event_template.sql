@@ -21,4 +21,4 @@ CREATE TABLE ${table_name} (
 	%>
   	`updatetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
  	PRIMARY KEY (pk_id)
-) COMMENT='${table_name}' ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) COMMENT='${table_name}' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

@@ -26,7 +26,6 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import com.webank.webasemonkey.constants.ParserConstants;
 import com.webank.webasemonkey.enums.JavaTypeEnum;
-import com.webank.webasemonkey.tools.JacksonUtils;
 import com.webank.webasemonkey.tools.PropertiesUtils;
 import com.webank.webasemonkey.tools.StringStyleUtils;
 import com.webank.webasemonkey.vo.EventMetaInfo;
