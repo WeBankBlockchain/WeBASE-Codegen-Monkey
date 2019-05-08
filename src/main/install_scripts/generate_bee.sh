@@ -78,7 +78,7 @@ fi
 if [ -f "$APPLICATION_FILE" ]
 then
   echo "$APPLICATION_FILE exist."
-  grep -v "^#"  $APPLICATION_FILE | grep -v "^$"  > $APPLICATION_TMP_FILE
+  grep -v "^#"  $APPLICATION_FILE | grep -v "^$" | grep "="  > $APPLICATION_TMP_FILE
 
   while IFS='=' read -r key value
   do
