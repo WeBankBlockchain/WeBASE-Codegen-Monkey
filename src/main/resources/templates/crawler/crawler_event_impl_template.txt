@@ -23,6 +23,8 @@ import ${contractPackName}.${contractName}.${eventName}EventResponse;
 import ${group}.${projectName}.crawler.face.BcosEventCrawlerInterface;
 import ${group}.${projectName}.generated.db.event.entity.${class_name};
 import ${group}.${projectName}.generated.db.event.repository.${class_name}Repository;
+import com.webank.webasebee.tools.BigIntegerUtils;
+import com.webank.webasebee.tools.BytesUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -57,7 +59,7 @@ public class ${contractName}${eventName}CrawlerImpl implements BcosEventCrawlerI
 				var javaName = entry.javaName;
 				var typeMethod = entry.typeMethod;
 			%>
-			${lowContractName}${eventName}.set${javaCapName}(${eventName}EventResponse.${javaName}${typeMethod});
+			${lowContractName}${eventName}.set${javaCapName}(${typeMethod}(${eventName}EventResponse.${javaName}));
 			<% } %>
 			${lowContractName}${eventName}.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));
 			log.debug("depot ${eventName}:{}", ${lowContractName}${eventName}.toString());

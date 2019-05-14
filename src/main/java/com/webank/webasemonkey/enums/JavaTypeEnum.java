@@ -32,8 +32,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public enum JavaTypeEnum {
 
-    BIGINTEGER("BigInteger", "Long", "bigint", ".longValue()"),
-    STRING("String", "String", "varchar(255)", "");
+    BIGINTEGER("BigInteger", "Long", "bigint", "BigIntegerUtils.toLong"),
+    STRING("String", "String", "varchar(255)", "String.valueOf"),
+    ByteArray("byte[]", "String", "varchar(2048)", "BytesUtils.bytesArrayToString" )
+    ;
 
     private String javaType;
     private String entityType;
@@ -43,7 +45,6 @@ public enum JavaTypeEnum {
     public static JavaTypeEnum parse(String javaType) {
         for (JavaTypeEnum type : JavaTypeEnum.values()) {
             if (type.getJavaType().equalsIgnoreCase(javaType)) {
-                System.out.println(type + " " + javaType);
                 return type;
             }
         }

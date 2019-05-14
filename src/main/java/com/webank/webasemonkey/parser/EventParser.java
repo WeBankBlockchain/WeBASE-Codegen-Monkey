@@ -86,6 +86,9 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
                 // get the personal length
                 String length = PropertiesUtils.getGlobalProperty(ParserConstants.LENGTH, event.getContractName(),
                         event.getName(), k, "0");
+                if (StringUtils.isEmpty(k) || StringUtils.isEmpty(v)) {
+                    continue;
+                }
                 vo.setSqlName(StringStyleUtils.upper2underline(k)).setJavaName(k)
                         .setSqlType(JavaTypeEnum.parse(v).getSqlType()).setJavaType(v)
                         .setEntityType(JavaTypeEnum.parse(v).getEntityType()).setJavaCapName(StringUtils.capitalize(k))
@@ -99,6 +102,9 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
     }
 
     public String cleanType(String genericType) {
+        if (genericType.equals("byte[]")) {
+            return genericType;
+        }
         if (genericType.contains("<")) {
             return StringUtils.substringAfterLast(StringUtils.substringBefore(genericType, "<"), ".") + "<"
                     + StringUtils.substringAfterLast(StringUtils.substringAfter(genericType, "<"), ".");
