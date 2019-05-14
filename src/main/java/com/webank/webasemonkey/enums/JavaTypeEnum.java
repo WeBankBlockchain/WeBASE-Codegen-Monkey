@@ -43,10 +43,11 @@ public enum JavaTypeEnum {
     public static JavaTypeEnum parse(String javaType) {
         for (JavaTypeEnum type : JavaTypeEnum.values()) {
             if (type.getJavaType().equalsIgnoreCase(javaType)) {
+                System.out.println(type + " " + javaType);
                 return type;
             }
         }
-        log.error("{} can't be converted.", javaType);
+        log.error("javaType {} can't be converted.", javaType);
         return null;
     }
 
