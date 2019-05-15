@@ -76,9 +76,9 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
             } else {
                 method.setName(Name);
             }
-            String generatedFlag = PropertiesUtils.getPropertyWithoutDefault(ParserConstants.MONITOR,
-                    method.getContractName(), method.getName(), "generated");
-            if (generatedFlag != null && generatedFlag.equalsIgnoreCase("false")) {
+            String generatedFlag = PropertiesUtils.getGlobalProperty(ParserConstants.MONITOR, method.getContractName(),
+                    method.getName(), "generated", "on");
+            if (generatedFlag != null && generatedFlag.equalsIgnoreCase("off")) {
                 continue;
             }
             int shardingNO = Integer.parseInt(PropertiesUtils.getGlobalProperty(ParserConstants.SYSTEM,

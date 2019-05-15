@@ -56,9 +56,9 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
             EventMetaInfo event = new EventMetaInfo();
             event.setContractName(clazz.getSimpleName());
             event.setName(StringUtils.substringBefore(c.getSimpleName(), ParserConstants.EVENT_RESPONSE));
-            String generatedFlag = PropertiesUtils.getPropertyWithoutDefault(ParserConstants.MONITOR,
-                    event.getContractName(), event.getName(), "generated");
-            if (generatedFlag != null && generatedFlag.equalsIgnoreCase("false")) {
+            String generatedFlag = PropertiesUtils.getGlobalProperty(ParserConstants.MONITOR, event.getContractName(),
+                    event.getName(), "generated", "on");
+            if (generatedFlag != null && generatedFlag.equalsIgnoreCase("off")) {
                 continue;
             }
 
