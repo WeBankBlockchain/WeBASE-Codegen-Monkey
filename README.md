@@ -280,6 +280,56 @@ ps -ef |grep webase-bee |grep -v grep|awk '{print $2}' |xargs kill -9
 
 恭喜您，到以上步骤，您已经完成了数据导出组件的安装和部署。如果您还需要额外获得可视化的监控页面，请参考2.3
 
+#### 2.2.4 监控数据导出
+在webase-bee工程最终编译后，生成的dist目录会有个monitor.sh脚本.  执行该脚本可以用来监控数据导出服务是否正常启动或者数据导出是否正常工作。
+
+##### 2.2.4.0 个性化配置
+
+打开monitor.sh，可以修改相关的个性化配置：
+
+```
+# webase-bee服务启动的IP地址
+ip=127.0.0.1
+# webase-bee服务启动的端口
+port=8082
+# 数据导出的进度落后于链高度的报警阈值；如当前进度落后当前链高度达到20个以上，输出报警日志。
+threshold=20
+# 当链高度增长，数据导出完成块高的报警阈值；如当前块高增长，但完成导出的区块数量增长小于等于1.
+warn_number=1
+```
+
+##### 2.2.4.1  使用
+monitor.sh脚本可以直接执行. 
+```
+./monitor.sh 
+block height now is 47
+download number is 48
+Now have 0 blocks to depot
+OK! to do blocks is lesss than 20
+OK! done blocks from 48 to 48, and height is from 48 to 48
+```
+
+##### 2.2.4.2 提示
+```OK! to do blocks is lesss than $threshold```  区块导出总体进度正常.
+
+```OK! done blocks from $prev_done to $b, and height is from $prev_height to $a```  上个时间周期区块导出进度正常.
+
+```ERROR! $todo_blocks:the block height is far behind.```    区块总体下载进度异常.
+
+```ERROR! Depot task stuck in trouble, done block is $prev_done to $b , but block height is from $prev_height to $a ```  上个时间周期数据导出进度异常.
+
+```ERROR! Get block height error.```    获取块高失败.
+
+```ERROR! Get done block count error.```    获取区块下载数量失败。
+
+##### 2.2.5.3  配置crontab
+ 建议将monitor.sh添加到crontab中，设置为每分钟执行一次，并将输出重定向到日志文件。可以日常扫描日志中的```ERROR!```字段就能找出节点服务异常的时段, 也可以在节点挂掉情况下及时将节点重启。  
+ 在crontab的配置可以参考如下：
+ ```
+ */1  * * * * /data/app/fisco-bcos/webase-bee/dist/monitor.sh >> /data/app/fisco-bcos/webase-bee/dist/monitor.log 2>&1
+ ```
+ 用户在实际中使用时将monitor.sh、monitor.log的路径修改即可。
+
 
 ### 2.3 可视化监控程序安装和部署
 
