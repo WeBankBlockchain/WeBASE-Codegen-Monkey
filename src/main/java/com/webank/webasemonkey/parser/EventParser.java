@@ -51,18 +51,18 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
             EventMetaInfo event = new EventMetaInfo();
             event.setContractName(clazz.getSimpleName());
             event.setName(StringUtils.substringBefore(c.getSimpleName(), ParserConstants.EVENT_RESPONSE));
-            String generatedFlag = PropertiesUtils.getPropertyWithoutDefault(ParserConstants.MONITOR, event.getContractName(),
-                    event.getName(), "generated");
-            if (generatedFlag != null && generatedFlag.equalsIgnoreCase("false")) {
+            String generatedFlag = PropertiesUtils.getGlobalProperty(ParserConstants.MONITOR, event.getContractName(),
+                    event.getName(), "generated", "on");
+            if (generatedFlag != null && generatedFlag.equalsIgnoreCase("off")) {
                 continue;
             }
 
-            String ignoreStr = PropertiesUtils.getPropertyWithoutDefault(ParserConstants.MONITOR, event.getContractName(),
-                    event.getName(), ParserConstants.IGNORE_PARAM);
+            String ignoreStr = PropertiesUtils.getPropertyWithoutDefault(ParserConstants.MONITOR,
+                    event.getContractName(), event.getName(), ParserConstants.IGNORE_PARAM);
             List<String> ignoreParam = StrSpliter.split(ignoreStr, ',', 0, true, true);
             event.setIgnoreParams(ignoreParam);
-            int shardingNO = Integer.parseInt(PropertiesUtils.getGlobalProperty(ParserConstants.SYSTEM, event.getContractName(),
-                    event.getName(), ParserConstants.SHARDINGNO, "1"));
+            int shardingNO = Integer.parseInt(PropertiesUtils.getGlobalProperty(ParserConstants.SYSTEM,
+                    event.getContractName(), event.getName(), ParserConstants.SHARDINGNO, "1"));
             event.setShardingNO(shardingNO);
             Field[] fields = c.getFields();
             ArrayList<FieldVO> fieldList = Lists.newArrayList();
@@ -70,8 +70,7 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
                 FieldVO vo = new FieldVO();
                 String k = f.getName();
                 if (ignoreParam.contains(k)) {
-                    log.info("Contract:{}, event:{}, ignores param:{}", event.getContractName(), event.getName(),
-                            k);
+                    log.info("Contract:{}, event:{}, ignores param:{}", event.getContractName(), event.getName(), k);
                     continue;
                 }
                 String v = cleanType(f.getGenericType().getTypeName());
