@@ -21,9 +21,11 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.fisco.bcos.web3j.protocol.core.methods.response.Log;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.constants.ParserConstants;
 import com.webank.webasemonkey.enums.JavaTypeEnum;
 import com.webank.webasemonkey.tools.PropertiesUtils;
@@ -44,6 +46,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
+    @Autowired
+    private SystemEnvironmentConfig systemEnvironmentConfig;
 
     public List<EventMetaInfo> parseToInfoList(Class<?> clazz) {
         Class<?>[] subClass = clazz.getClasses();
@@ -89,7 +93,8 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
                 if (StringUtils.isEmpty(k) || StringUtils.isEmpty(v)) {
                     continue;
                 }
-                vo.setSqlName(StringStyleUtils.upper2underline(k)).setJavaName(k)
+                vo.setSqlName(systemEnvironmentConfig.getNamePrefix() + StringStyleUtils.upper2underline(k)
+                        + systemEnvironmentConfig.getNamePostfix()).setJavaName(k)
                         .setSqlType(JavaTypeEnum.parse(v).getSqlType()).setJavaType(v)
                         .setEntityType(JavaTypeEnum.parse(v).getEntityType()).setJavaCapName(StringUtils.capitalize(k))
                         .setTypeMethod(JavaTypeEnum.parse(v).getTypeMethod()).setLength(Integer.parseInt(length));

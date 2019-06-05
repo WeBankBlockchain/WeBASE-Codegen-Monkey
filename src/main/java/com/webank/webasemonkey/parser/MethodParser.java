@@ -24,10 +24,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.fisco.bcos.web3j.protocol.ObjectMapperFactory;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition.NamedType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
+import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.constants.AbiTypeConstants;
 import com.webank.webasemonkey.constants.ParserConstants;
 import com.webank.webasemonkey.enums.Web3jTypeEnum;
@@ -51,6 +53,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo> {
+    @Autowired
+    private SystemEnvironmentConfig systemEnvironmentConfig;
+
     public List<MethodMetaInfo> parseToInfoList(Class<?> clazz) {
         AbiDefinition[] abiDefinitions = getContractAbiList(clazz);
         if (abiDefinitions == null || abiDefinitions.length == 0)
@@ -94,8 +99,10 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
                 String v = solidityType2SolidityReferenceType(type);
                 String length = PropertiesUtils.getGlobalProperty(ParserConstants.LENGTH, method.getContractName(),
                         method.getName(), k, "0");
-                vo.setSolidityName(k).setSqlName(StringStyleUtils.upper2underline(k)).setJavaName(k)
-                        .setSqlType(Web3jTypeEnum.parse(v).getSqlType()).setSolidityType(v)
+                vo.setSolidityName(k)
+                        .setSqlName(systemEnvironmentConfig.getNamePrefix() + StringStyleUtils.upper2underline(k)
+                                + systemEnvironmentConfig.getNamePostfix())
+                        .setJavaName(k).setSqlType(Web3jTypeEnum.parse(v).getSqlType()).setSolidityType(v)
                         .setJavaType(Web3jTypeEnum.parse(v).getJavaType())
                         .setTypeMethod(Web3jTypeEnum.parse(v).getTypeMethod()).setJavaCapName(StringUtils.capitalize(k))
                         .setLength(Integer.parseInt(length));

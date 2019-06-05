@@ -611,6 +611,9 @@ FISCO-BCOS节点配置用于配置[WEBASE-BEE](https://github.com/WeBankFinTech/
 | system.contractName.[methodName or eventName].shardingNO | N | 合约数据分片数：数据库指定数据表的个数 | system.Rule.NewruleEvent.shardingNO = 3 | 1 |
 | system.sys.[sysTableName].shardingNO | N | 系统数据分片数 | system.sys.BlockTxDetailInfo.shardingNO=5 | 1 |
 | system.nameStyle | N | 数据库表名和字段命名规则，支持下划线命名和原始数据命名 | system.nameStyle=rawCase | underScoreCase |
+| system.namePrefix | N | 数据库表字段命名前缀，默认为空 | system.namePrefix=_ | 空 |
+| system.namePostfix | N | 数据库表字段命名后缀，默认为空 | system.namePostfix=_ | 空 |
+
 
 其中**sysTableName**对应区块数据表和账户数据表，详情见 **数据存储模型** 章节。
 
