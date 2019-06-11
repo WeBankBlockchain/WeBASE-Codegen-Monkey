@@ -163,7 +163,7 @@ system.groupId=[GROUP_ID]
 # 最新版本的FISCO-BCOS平台中的NODE_NAME可以为任意值。
 
 # 数据库的信息，暂时只支持mysql； serverTimezone 用来设置时区
-system.dbUrl=jdbc:mysql://[IP]:[PORT]/[database]?useSSL=false&serverTimezone=GMT%2b8
+system.dbUrl=jdbc:mysql://[IP]:[PORT]/[database]?useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8
 system.dbUser=[user_name]
 system.dbPassword=[password]
 
@@ -605,7 +605,7 @@ FISCO-BCOS节点配置用于配置[WEBASE-BEE](https://github.com/WeBankFinTech/
 
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
-| system.dbUrl | Y | 访问数据的URL | jdbc:mysql://[IP]:[PORT]/[DB]?useSSL=false&serverTimezone=GMT%2b8 | - |
+| system.dbUrl | Y | 访问数据的URL | jdbc:mysql://[IP]:[PORT]/[DB]?useSSL=false&serverTimezone=GMT%2b8&useUnicode=true&characterEncoding=UTF-8 | - |
 | system.dbUser | Y | 数据库用户名 | admin | - |
 | system.dbPassword | Y | 数据库密码 | 123456 | - |
 | system.contractName.[methodName or eventName].shardingNO | N | 合约数据分片数：数据库指定数据表的个数 | system.Rule.NewruleEvent.shardingNO = 3 | 1 |
