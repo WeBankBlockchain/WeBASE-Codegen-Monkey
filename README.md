@@ -1,8 +1,8 @@
 
-# WEBASE-MONKEY
+# WeBASE-codegen-monkey
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![Gitter](https://badges.gitter.im/webase-monkey/webase-monkey.svg)](https://gitter.im/webase-monkey/community)
+[![Gitter](https://badges.gitter.im/WeBASE-codegen-monkey/WeBASE-codegen-monkey.svg)](https://gitter.im/WeBASE-codegen-monkey/community)
 
 
 > 道生一，一生二，二生三，三生万物。
@@ -15,20 +15,20 @@
 
 ## 1. 组件介绍
 
-### 1.1 数据导出组件： WEBASE-BEE
-[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04) 是一个基于[FISCO-BCOS](https://github.com/FISCO-BCOS/FISCO-BCOS)平台的数据导出工具。
+### 1.1 数据导出组件： WeBASE-collect-bee
+[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04) 是一个基于[FISCO-BCOS](https://github.com/FISCO-BCOS/FISCO-BCOS)平台的数据导出工具。
 
-数据导出组件[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)的目的在于降低获取区块链数据的开发门槛，提升研发效率。研发人员几乎不需要编写任何代码，只需要进行简单配置，就可以把数据导出到指定的存储介质上，比如DB、ES、MQ、Hadoop等，并提供相关服务接口获取数据，以满足业务场景需求。
+数据导出组件[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)的目的在于降低获取区块链数据的开发门槛，提升研发效率。研发人员几乎不需要编写任何代码，只需要进行简单配置，就可以把数据导出到指定的存储介质上，比如DB、ES、MQ、Hadoop等，并提供相关服务接口获取数据，以满足业务场景需求。
 
-[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)可以导出区块链上的基础数据，如当前块高、交易总量等。
-如果正确配置了FISCO-BCOS上运行的所有合约，[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)可以导出区块链上这些合约的业务数据，包括event、构造函数、合约地址、执行函数的信息等。
+[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)可以导出区块链上的基础数据，如当前块高、交易总量等。
+如果正确配置了FISCO-BCOS上运行的所有合约，[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)可以导出区块链上这些合约的业务数据，包括event、构造函数、合约地址、执行函数的信息等。
 
-[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)提供了基于Restful的API，支持通过http的方式调用这些接口。
+[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)提供了基于Restful的API，支持通过http的方式调用这些接口。
 
-### 1.2 代码自动生成组件：WEBASE-MONKEY
-[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)易于使用，且功能强大；但是仍有一定的开发门槛。为了更进一步地提升研发效率，我们开发了WEBASE-MONKEY。
+### 1.2 代码自动生成组件：WeBASE-codegen-monkey
+[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)易于使用，且功能强大；但是仍有一定的开发门槛。为了更进一步地提升研发效率，我们开发了WeBASE-codegen-monkey。
 
-只需要在一个配置文件中进行少量简单的配置，同时按照要求提供相关的智能合约信息；当前版本可支持自动生成[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)。
+只需要在一个配置文件中进行少量简单的配置，同时按照要求提供相关的智能合约信息；当前版本可支持自动生成[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)。
 
 ### 1.3 使用场景和解决方案
 区块链的数据存储在区块链上，需要使用智能合约暴露的接口来进行调用。由于智能合约暴露的接口的限制，区块链上不适合进行复杂的数据查询、大数据分析和数据可视化等工作。因此，我们致力于提供一种智能化、自动化的数据导出和备份的解决方案。
@@ -40,7 +40,7 @@
 
 - 解决方案
 
-该公司使用webase-monkey迅速生成了[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)的代码，并根据实际需求进行了定制化开发，在一天之内投入到线上使用。
+该公司使用WeBASE-codegen-monkey迅速生成了[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)的代码，并根据实际需求进行了定制化开发，在一天之内投入到线上使用。
 
 导出到db的数据接入到了该公司的统一监控平台，该公司PM可以在业务后台系统上获得该业务的实时进展，该公司运维人员可以在公司运维监控室的大屏幕实时监控业务系统的状态。
 
@@ -50,7 +50,7 @@
 某公司基于FISCO-BCOS开发了区块链的业务系统，需要将本地数据与链上的数据进行对账。
 
 - 解决方案
-该公司使用webase-monkey迅速生成了[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)的代码，并根据实际需求进行了定制化开发。通过在智能合约中设计的各类event，相关的业务数据都被导出到数据库中；从而实现轻松对账的需求。
+该公司使用WeBASE-codegen-monkey迅速生成了[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)的代码，并根据实际需求进行了定制化开发。通过在智能合约中设计的各类event，相关的业务数据都被导出到数据库中；从而实现轻松对账的需求。
 
 #### 案例 区块链业务数据查询系统
 - 背景
@@ -59,12 +59,12 @@
 
 - 解决方案
 
-该公司使用webase-monkey迅速生成了[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)的代码，并根据实际需求进行了定制化开发，区块链上的数据可以实时导出到数据库中。利用[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)自带的Restful API，该公司的报表系统实现了和区块链数据的对接，可以获得准实时的各类业务报表。
+该公司使用WeBASE-codegen-monkey迅速生成了[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)的代码，并根据实际需求进行了定制化开发，区块链上的数据可以实时导出到数据库中。利用[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)自带的Restful API，该公司的报表系统实现了和区块链数据的对接，可以获得准实时的各类业务报表。
 
 ### 1.4 特性介绍
 
 #### 自动生成数据导出组件
-只需用户提供智能合约编译后的Java代码和相关的底层链、数据库的基本信息，webase-monkey就能帮助你自动生成一个区块链数据导出的组件。现阶段，支持将数据导出到Mysql数据库中。
+只需用户提供智能合约编译后的Java代码和相关的底层链、数据库的基本信息，WeBASE-codegen-monkey就能帮助你自动生成一个区块链数据导出的组件。现阶段，支持将数据导出到Mysql数据库中。
 
 #### 支持自定义导出数据内容
 可以支持导出区块链的基本信息、智能合约的函数、Event等信息。可以对导出的数据库表、字段进行定制。也可以修改导出数据字段的长度。
@@ -73,22 +73,22 @@
 自带常用的Restful API，支持查询块高、块信息、Event信息和函数信息等。
 
 #### 支持多数据源，支持读写分离和分库分表
-为了应对海量数据的导出，[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)数据导出组件支持可配置的多数据源存储，读写分离和分库分表：数据可以存储到多个表中，也可以存储到多个库中。同时，内置的Restful API可以自动无感知地返回正常的数据。
+为了应对海量数据的导出，[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)数据导出组件支持可配置的多数据源存储，读写分离和分库分表：数据可以存储到多个表中，也可以存储到多个库中。同时，内置的Restful API可以自动无感知地返回正常的数据。
 
 #### 支持多活部署，多节点自动导出
-[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)数据导出组件支持多活部署，可自动进行分布式任务调度。
+[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)数据导出组件支持多活部署，可自动进行分布式任务调度。
 
 #### 支持区块重置导出
-[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)数据导出组件基于区块高度进行导出，并支持指定高度重新导出数据。
+[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)数据导出组件基于区块高度进行导出，并支持指定高度重新导出数据。
 
 ### 支持可视化的监控页面
-[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)可与grafana深度集成，支持自动生成dashboard实例，让您的链上数据了如指掌。
+[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)可与grafana深度集成，支持自动生成dashboard实例，让您的链上数据了如指掌。
 
 #### 提供可视化的互动API控制台
-[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)集成了swagger插件，提供可视化互动API控制台
+[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)集成了swagger插件，提供可视化互动API控制台
 
 
-![效果图](https://github.com/WeBankFinTech/webase-monkey/blob/feature_datacheck.2019.03/photos/grafana_demo.png)
+![效果图](https://github.com/WeBankFinTech/WeBASE-codegen-monkey/blob/feature_datacheck.2019.03/photos/grafana_demo.png)
 
 ## 2. 快速开始
 
@@ -113,7 +113,7 @@
 
 ```shell
 #下载安装包
-curl -LO https://github.com/WeBankFinTech/webase-monkey/raw/dev_v0.6.0.2019.04/src/main/install_scripts.tar.gz
+curl -LO https://github.com/WeBankFinTech/WeBASE-codegen-monkey/raw/dev_v0.6.0.2019.04/src/main/install_scripts.tar.gz
 #解压安装包
 tar -zxf install_scripts.tar.gz 
 cd install_scripts
@@ -182,7 +182,7 @@ chmod +x generate_bee.sh
 sh generate_bee.sh 
 ```
 
-当前目录下会生成[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)工程代码。数据导出组件将直接启动，对应的执行日志会打印到终端上。
+当前目录下会生成[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)工程代码。数据导出组件将直接启动，对应的执行日志会打印到终端上。
 
 请注意: 请务必按照以上命令操作，**切莫使用sudo命令来操作**，否则会导致Gradlew没有权限，导致depot数据失败。
 
@@ -192,7 +192,7 @@ sh generate_bee.sh
 chmod +x generate_bee.sh
 sh generate_bee.sh build 
 ```
-当前目录下会生成[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)工程代码。请将此生成工程下的./webase-bee/dist文件夹复制到其他服务器上，并执行：
+当前目录下会生成[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)工程代码。请将此生成工程下的./WeBASE-collect-bee/dist文件夹复制到其他服务器上，并执行：
 
 ```
 chmod +x *.jar
@@ -214,11 +214,11 @@ supervisor还提供了一个功能，可以为supervisord或者每个子进程�
 
 ##### 2.2.3.1 检查程序进程是否正常运行
 ```
-ps -ef |grep webase-bee
+ps -ef |grep WeBASE-collect-bee
 ```
 如果看到如下信息，则代表进程执行正常：
 ```
-app   21980 24843  0 15:23 pts/3    00:00:44 java -jar webase-bee0.3.0-SNAPSHOT.jar
+app   21980 24843  0 15:23 pts/3    00:00:44 java -jar WeBASE-collect-bee0.3.0-SNAPSHOT.jar
 ```
 
 ##### 2.2.3.2 检查程序是否已经正常执行
@@ -275,7 +275,7 @@ mysql -u[用户名] -p[密码] -e "use [数据库名]; select count(*) from bloc
 ##### 2.2.3.4 停止导入程序
 
 ```
-ps -ef |grep webase-bee |grep -v grep|awk '{print $2}' |xargs kill -9
+ps -ef |grep WeBASE-collect-bee |grep -v grep|awk '{print $2}' |xargs kill -9
 ```
 
 恭喜您，到以上步骤，您已经完成了数据导出组件的安装和部署。如果您还需要额外获得可视化的监控页面，请参考2.3
@@ -319,16 +319,16 @@ grafana将自动绑定3000端口并自动安装时钟和Json的插件。
 #### 2.3.4 添加MySQL数据源
 在正常登录成功后，如图所示，选择左边栏设置按钮，点击『Data Sources』， 选择『MySQL』数据源
 
-![添加步骤：](https://github.com/WeBankFinTech/webase-monkey/blob/feature_datacheck.2019.03/photos/add_datasource.png)
+![添加步骤：](https://github.com/WeBankFinTech/WeBASE-codegen-monkey/blob/feature_datacheck.2019.03/photos/add_datasource.png)
 
 随后按照提示的页面，配置 Host， Database， User 和 Password等。
 
 #### 2.3.5 导入Dashboard模板
-webase-monkey会自动生成数据的dashboard模板，数据的路径位于：webase-bee/src/main/scripts/grafana/default_dashboard.json
+WeBASE-codegen-monkey会自动生成数据的dashboard模板，数据的路径位于：WeBASE-collect-bee/src/main/scripts/grafana/default_dashboard.json
 
-请点击左边栏『+』，选择『import』，点击绿色按钮『Upload .json File』,选择刚才的webase-bee/src/main/scripts/grafana/default_dashboard.json文件
+请点击左边栏『+』，选择『import』，点击绿色按钮『Upload .json File』,选择刚才的WeBASE-collect-bee/src/main/scripts/grafana/default_dashboard.json文件
 
-![导入步骤：](https://github.com/WeBankFinTech/webase-monkey/blob/feature_datacheck.2019.03/photos/import_json.png)
+![导入步骤：](https://github.com/WeBankFinTech/WeBASE-codegen-monkey/blob/feature_datacheck.2019.03/photos/import_json.png)
 
 最后，点击『import』按钮。
 
@@ -342,9 +342,9 @@ webase-monkey会自动生成数据的dashboard模板，数据的路径位于：w
 
 
 ### 2.4 开启可视化的功能性测试
-[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)默认集成了swagger的插件，支持通过可视化的控制台来发送交易、生成报文、查看结果、调试交易等。
+[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)默认集成了swagger的插件，支持通过可视化的控制台来发送交易、生成报文、查看结果、调试交易等。
 
-![swagger控制台：](https://github.com/WeBankFinTech/webase-monkey/blob/feature_datacheck.2019.03/photos/swagger.png)
+![swagger控制台：](https://github.com/WeBankFinTech/WeBASE-codegen-monkey/blob/feature_datacheck.2019.03/photos/swagger.png)
 
 
 **请注意， swagger插件仅推荐在开发或测试环境调试使用，在正式上生产环境时，请关闭此插件**
@@ -355,7 +355,7 @@ webase-monkey会自动生成数据的dashboard模板，数据的路径位于：w
 
 > http://your_ip:port/swagger-ui.html
 
-例如，当你在本机运行了[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)，且未修改默认的8080端口，则可以访问此地址：
+例如，当你在本机运行了[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)，且未修改默认的8080端口，则可以访问此地址：
 
 > http://localhost:8080/swagger-ui.html
 
@@ -368,11 +368,11 @@ webase-monkey会自动生成数据的dashboard模板，数据的路径位于：w
 
 我们以查询区块信息为例，如下列图所示：
 
-![选择请求：](https://github.com/WeBankFinTech/webase-monkey/blob/feature_datacheck.2019.03/photos/swag_test1.png)
+![选择请求：](https://github.com/WeBankFinTech/WeBASE-codegen-monkey/blob/feature_datacheck.2019.03/photos/swag_test1.png)
 
-![编辑报文：](https://github.com/WeBankFinTech/webase-monkey/blob/feature_datacheck.2019.03/photos/swag_test2.png)
+![编辑报文：](https://github.com/WeBankFinTech/WeBASE-codegen-monkey/blob/feature_datacheck.2019.03/photos/swag_test2.png)
 
-![查收结果：](https://github.com/WeBankFinTech/webase-monkey/blob/feature_datacheck.2019.03/photos/swag_test3.png)
+![查收结果：](https://github.com/WeBankFinTech/WeBASE-codegen-monkey/blob/feature_datacheck.2019.03/photos/swag_test3.png)
 
 
 
@@ -582,17 +582,17 @@ Elastic-Job-Lite - 分布式调度解决方案 | 轻量级无中心化解决方�
 
 ### 1. 配置参数说明
 
-WEBASE-MONKEY用于生成[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)组件实例，在WEBASE-MONKEY组件中配置文件只有一个：application.properties。该配置文件覆盖了数据导出组件所需的所有配置，并提供了详细的说明和样例，开发者可根据需求进行灵活配置。
+WeBASE-codegen-monkey用于生成[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)组件实例，在WeBASE-codegen-monkey组件中配置文件只有一个：application.properties。该配置文件覆盖了数据导出组件所需的所有配置，并提供了详细的说明和样例，开发者可根据需求进行灵活配置。
 
 #### 1.1 Springboot服务配置
 
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
-| server.port | N | 启动WEBASE-BEE组件实例的服务端口 | 8082 | 8080 |
+| server.port | N | 启动WeBASE-collect-bee组件实例的服务端口 | 8082 | 8080 |
 
 #### 1.2 FISCO-BCOS节点配置
 
-FISCO-BCOS节点配置用于配置[WEBASE-BEE](https://github.com/WeBankFinTech/webase-bee/tree/feature_error_handler_2019.04)服务连接的区块链节点，使得WEBASE-BEE服务能够访问连接节点，并通过该节点获取区块链网络上的数据。
+FISCO-BCOS节点配置用于配置[WeBASE-collect-bee](https://github.com/WeBankFinTech/WeBASE-collect-bee/tree/feature_error_handler_2019.04)服务连接的区块链节点，使得WeBASE-collect-bee服务能够访问连接节点，并通过该节点获取区块链网络上的数据。
 
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
@@ -617,7 +617,7 @@ FISCO-BCOS节点配置用于配置[WEBASE-BEE](https://github.com/WeBankFinTech/
 
 其中**sysTableName**对应区块数据表和账户数据表，详情见 **数据存储模型** 章节。
 
-#### 1.4 FISCO-WEBASE-BEE工程配置
+#### 1.4 FISCO-WeBASE-collect-bee工程配置
 
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
@@ -793,8 +793,8 @@ files = supervisord.d/*.ini
 在/etc/supervisord.d目录下配置以下启动配置文件webasebee_config1.ini（请注意配置文件里需要包含webasebee，否则会导致关闭任务命令失效），注意修改相关的路径。
 ```shell
 [program:supervisor_webasebee]
-directory =【你的程序路径】/webase-bee/dist ; 程序的启动目录
-command = nohup java -jar 【你的安装包名，如webase-bee0.3.0-SNAPSHOT.jar】 & ; 启动命令，与命令行启动的命令是一样的
+directory =【你的程序路径】/WeBASE-collect-bee/dist ; 程序的启动目录
+command = nohup java -jar 【你的安装包名，如WeBASE-collect-bee0.3.0-SNAPSHOT.jar】 & ; 启动命令，与命令行启动的命令是一样的
 autostart = true     ; 在 supervisord 启动的时候也自动启动
 startsecs = 15        ; 启动 15 秒后没有异常退出，就当作已经正常启动了
 autorestart = true   ; 程序异常退出后自动重启
@@ -803,8 +803,8 @@ user = app          ; 用哪个用户启动
 redirect_stderr = true  ; 把 stderr 重定向到 stdout，默认 false
 stdout_logfile_maxbytes = 150MB  ; stdout 日志文件大小，默认 50MB
 stdout_logfile_backups = 20     ; stdout 日志文件备份数
-stderr_logfile=【你的日志路径】/webase-bee/dist/log/webase_bee_error.log
-stdout_logfile = 【你的日志路径】/webase-bee/dist/log/webase_bee_out.log  ;日志统一放在log目录下
+stderr_logfile=【你的日志路径】/WeBASE-collect-bee/dist/log/webase_bee_error.log
+stdout_logfile = 【你的日志路径】/WeBASE-collect-bee/dist/log/webase_bee_out.log  ;日志统一放在log目录下
 [supervisord]
 ```
 
@@ -819,5 +819,5 @@ supervisord -c /etc/supervisord.d/webasebee_config1.ini
 ##### 关闭任务
 ```shell
 ps -ef|grep supervisord|grep webasebee| awk '{print $2}'|xargs kill -9
-ps -ef|grep webase-bee|grep -v grep| awk '{print $2}'|xargs kill -9
+ps -ef|grep WeBASE-collect-bee|grep -v grep| awk '{print $2}'|xargs kill -9
 ```
