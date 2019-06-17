@@ -115,7 +115,7 @@
 
 ```shell
 #下载安装包
-curl -LO https://github.com/WeBankFinTech/webase-codegen-monkey/raw/V0.5.1_FISCO-BCOS1.3.x/src/main/install_scripts.tar.gz
+curl -LO https://github.com/WeBankFinTech/webase-codegen-monkey/raw/dev/src/main/install_scripts.tar.gz
 #解压安装包
 tar -zxf install_scripts.tar.gz 
 cd install_scripts
