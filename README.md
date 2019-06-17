@@ -88,7 +88,7 @@
 [webase-collect-bee](https://github.com/WeBankFinTech/webase-collect-bee/tree/dev)集成了swagger插件，提供可视化互动API控制台
 
 
-![效果图](https://github.com/WeBankFinTech/webase-codegen-monkey/blob/feature_datacheck.2019.03/photos/grafana_demo.png)
+![效果图](https://github.com/WeBankFinTech/webase-codegen-monkey/blob/dev/photos/grafana_demo.png)
 
 ## 2. 快速开始
 
@@ -369,7 +369,7 @@ grafana将自动绑定3000端口并自动安装时钟和Json的插件。
 #### 2.3.4 添加MySQL数据源
 在正常登录成功后，如图所示，选择左边栏设置按钮，点击『Data Sources』， 选择『MySQL』数据源
 
-![添加步骤：](https://github.com/WeBankFinTech/webase-codegen-monkey/blob/feature_datacheck.2019.03/photos/add_datasource.png)
+![添加步骤：](https://github.com/WeBankFinTech/webase-codegen-monkey/blob/dev/photos/add_datasource.png)
 
 随后按照提示的页面，配置 Host， Database， User 和 Password等。
 
@@ -378,7 +378,7 @@ webase-codegen-monkey会自动生成数据的dashboard模板，数据的路径�
 
 请点击左边栏『+』，选择『import』，点击绿色按钮『Upload .json File』,选择刚才的WeBASE-collect-bee/src/main/scripts/grafana/default_dashboard.json文件
 
-![导入步骤：](https://github.com/WeBankFinTech/webase-codegen-monkey/blob/feature_datacheck.2019.03/photos/import_json.png)
+![导入步骤：](https://github.com/WeBankFinTech/webase-codegen-monkey/blob/dev/photos/import_json.png)
 
 最后，点击『import』按钮。
 
@@ -394,7 +394,7 @@ webase-codegen-monkey会自动生成数据的dashboard模板，数据的路径�
 ### 2.4 开启可视化的功能性测试
 [webase-collect-bee](https://github.com/WeBankFinTech/webase-collect-bee/tree/dev)默认集成了swagger的插件，支持通过可视化的控制台来发送交易、生成报文、查看结果、调试交易等。
 
-![swagger控制台：](https://github.com/WeBankFinTech/webase-codegen-monkey/blob/feature_datacheck.2019.03/photos/swagger.png)
+![swagger控制台：](https://github.com/WeBankFinTech/webase-codegen-monkey/blob/dev/photos/swagger.png)
 
 
 **请注意， swagger插件仅推荐在开发或测试环境调试使用，在正式上生产环境时，请关闭此插件**
@@ -418,11 +418,11 @@ webase-codegen-monkey会自动生成数据的dashboard模板，数据的路径�
 
 我们以查询区块信息为例，如下列图所示：
 
-![选择请求：](https://github.com/WeBankFinTech/webase-codegen-monkey/blob/feature_datacheck.2019.03/photos/swag_test1.png)
+![选择请求：](https://github.com/WeBankFinTech/webase-codegen-monkey/blob/dev/photos/swag_test1.png)
 
-![编辑报文：](https://github.com/WeBankFinTech/webase-codegen-monkey/blob/feature_datacheck.2019.03/photos/swag_test2.png)
+![编辑报文：](https://github.com/WeBankFinTech/webase-codegen-monkey/blob/dev/photos/swag_test2.png)
 
-![查收结果：](https://github.com/WeBankFinTech/webase-codegen-monkey/blob/feature_datacheck.2019.03/photos/swag_test3.png)
+![查收结果：](https://github.com/WeBankFinTech/webase-codegen-monkey/blob/dev/photos/swag_test3.png)
 
 
 
