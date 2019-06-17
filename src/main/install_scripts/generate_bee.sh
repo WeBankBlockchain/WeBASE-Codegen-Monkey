@@ -43,8 +43,8 @@ RESOURCE_DIR="src/main/resources"
 JAVA_CODE_DIR="src/main/java"
 BUILD_DIR="dist"
 
-BM="webase-monkey"
-BB="webase-bee"
+BM="webase-codegen-monkey"
+BB="webase-collect-bee"
 
 #### check the config file exists.
 if [ -f "$APPLICATION_FILE" ];then
@@ -114,7 +114,7 @@ git checkout dev
 cd ..
 
 # init config
-cd webase-monkey
+cd $BM
 mkdir -p $RESOURCE_DIR/
 cp -f ../$APPLICATION_FILE $RESOURCE_DIR/
 echo "copy application.properties done."
@@ -126,7 +126,7 @@ echo "copy java contract codes done."
 
 # build
 sh gradlew clean bootJar
-echo "webase-monkey build done"
+echo "$BM build done"
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then
@@ -156,9 +156,9 @@ chmod +x webase*
 $JAVACMD -jar webase* 
 echo "webase-bee generate done."
 cd ../../
-rm -rf webase-monkey
+rm -rf $BM
 
-cd webase-bee
+cd $BB
 mkdir -p $RESOURCE_DIR/
 cp -f  ../$CERT_DIR/ca.crt $RESOURCE_DIR/
 cp -f  ../$CERT_DIR/client.keystore $RESOURCE_DIR/
@@ -171,7 +171,7 @@ echo "copy java contract codes done."
 
 sh gradlew clean bootJar
 
-echo "webase-bee build done"
+echo "$BB build done"
 
 
 if [ "$EXEC_OPTION" == "$RUN_OPTION" ];then
