@@ -132,9 +132,9 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
             }
             abi = (String) field.get(ParserConstants.ABI);
         } catch (NoSuchFieldException | SecurityException e) {
-            e.printStackTrace();
+            log.error("Exception: {}", e.getMessage());
         } catch (IllegalArgumentException | IllegalAccessException e) {
-            e.printStackTrace();
+            log.error("Illegal Exception: {}", e.getMessage());
         }
 
         ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
@@ -143,7 +143,7 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
         try {
             abiDefinition = objectMapper.readValue(abi, AbiDefinition[].class);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("IOException: {}", e.getMessage());
         }
         return abiDefinition;
     }
@@ -152,7 +152,7 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
         try {
             return AbiTypeRefUtils.getTypeRef(type).getClassType().getSimpleName();
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            log.error("ClassNotFoundException: {}", e.getMessage());
         }
         return null;
     }
