@@ -131,29 +131,6 @@ public class JacksonUtils {
         return objectMapper.convertValue(map, retClazz);
     }
 
-    public static <T> T strToObject(String str, Class<T> clazz) {
-        ObjectMapper mapper = new ObjectMapper();
-        T t = null;
-        try {
-            t = mapper.readValue(str, clazz);
-            return t;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return t;
-    }
-
-    public static <T> String objectToStr(T t) {
-        ObjectMapper mapper = new ObjectMapper();
-        String str = null;
-        try {
-            str = mapper.writeValueAsString(t);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return str;
-    }
-
     public static <T> List<T> strToList(String str, Class<T> clazz) {
         JSONArray jsonArray = JSONArray.parseArray(str);
         for (int i = 0; i < jsonArray.size(); i++) {
