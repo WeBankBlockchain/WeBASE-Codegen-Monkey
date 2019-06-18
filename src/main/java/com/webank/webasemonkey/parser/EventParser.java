@@ -21,7 +21,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.fisco.bcos.web3j.protocol.core.methods.response.Log;
-import org.fisco.bcos.web3j.tx.Contract.EventValuesWithLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,12 +54,7 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
         List<EventMetaInfo> lists = Lists.newArrayList();
         for (Class<?> c : subClass) {
             // filter web3sdk 2.0 embedded contract subclass EventValuesWithLog.
-            try {
-                if (Class.forName(c.getSimpleName()).newInstance() instanceof EventValuesWithLog) {
-                    continue;
-                }
-            } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-                log.error("Exception: {}", e.getMessage());
+            if (c.getSimpleName().equalsIgnoreCase("EventValuesWithLog")) {
                 continue;
             }
             EventMetaInfo event = new EventMetaInfo();
