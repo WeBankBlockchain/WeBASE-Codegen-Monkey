@@ -46,7 +46,7 @@ public class ${methodName}MethodCrawlerImpl implements BcosMethodCrawlerInterfac
 		String input = transaction.getInput();
 		String mapKey = null;
 		if(transaction.getTo() == null || transaction.getTo().equals("0x0000000000000000000000000000000000000000")){
-			input = input.substring(2).replaceFirst(entry.getKey(), "");
+			input = input.substring(2 + entry.getKey().length());
 			mapKey = entry.getValue() + entry.getValue();
 		}else{
 			input = input.substring(10);
