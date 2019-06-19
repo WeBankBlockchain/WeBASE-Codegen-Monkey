@@ -2,8 +2,8 @@
 LANG=zh_CN.UTF-8
 ##############################################################################
 ##
-##  webase-codegen-monkey start up script for UN*X.
-##  webase-codegen-monkey is an automatic code Generator. 
+##  WeBASE-Codegen-Monkey start up script for UN*X.
+##  WeBASE-Codegen-Monkey is an automatic code Generator. 
 ##
 ##  created by jiayumao
 ##
@@ -43,8 +43,8 @@ RESOURCE_DIR="src/main/resources"
 JAVA_CODE_DIR="src/main/java"
 BUILD_DIR="dist"
 
-BM="webase-codegen-monkey"
-BB="webase-collect-bee"
+BM="WeBASE-Codegen-Monkey"
+BB="WeBASE-Collect-Bee"
 
 #### check the config file exists.
 if [ -f "$APPLICATION_FILE" ];then
