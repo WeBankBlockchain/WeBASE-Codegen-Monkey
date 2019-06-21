@@ -150,8 +150,8 @@ echo "JAVACMD: $JAVACMD"
 
 # run
 cd $BUILD_DIR
-chmod +x webase*
-$JAVACMD -jar webase* 
+chmod +x WeBASE*
+$JAVACMD -jar WeBASE* 
 echo "$BB generate done."
 cd ../../
 rm -rf $BM
@@ -177,8 +177,8 @@ echo "$BB build done"
 
 if [ "$EXEC_OPTION" == "$RUN_OPTION" ];then
 cd $BUILD_DIR
-chmod +x webase*
-$JAVACMD -jar webase* 
+chmod +x WeBASE*
+$JAVACMD -jar WeBASE* 
 fi
 
 function prop {
