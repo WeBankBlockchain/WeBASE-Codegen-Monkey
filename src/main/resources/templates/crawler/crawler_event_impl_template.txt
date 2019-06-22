@@ -1,0 +1,71 @@
+/**
+ * Copyright (C) 2018 WeBank, Inc. All Rights Reserved.
+ */
+package ${group}.${projectName}.generated.event.crawler.impl;
+
+import java.math.BigInteger;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.fisco.bcos.web3j.crypto.Credentials;
+import org.fisco.bcos.web3j.protocol.Web3j;
+import org.fisco.bcos.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.fisco.bcos.web3j.tx.gas.ContractGasProvider;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import ${contractPackName}.${contractName};
+import ${contractPackName}.${contractName}.${eventName}EventResponse;
+import ${group}.${projectName}.crawler.face.BcosEventCrawlerInterface;
+import ${group}.${projectName}.generated.db.event.entity.${class_name};
+import ${group}.${projectName}.generated.db.event.repository.${class_name}Repository;
+import com.webank.webasebee.tools.BigIntegerUtils;
+import com.webank.webasebee.tools.BytesUtils;
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Slf4j
+@ConditionalOnProperty(name = "monitor.${contractName}.${eventName}CrawlerService", havingValue = "on")
+public class ${contractName}${eventName}CrawlerImpl implements BcosEventCrawlerInterface {
+	@Autowired
+    private Web3j web3j;
+    @Autowired
+    private Credentials credentials;
+    @Autowired
+    private ContractGasProvider contractGasProvider;
+	@Autowired
+	private ${class_name}Repository repository;
+	
+	
+	@Override
+	public boolean handleReceipt(TransactionReceipt receipt, BigInteger blockTimeStamp) {
+		${contractName} contract = ${contractName}.load("0x0000000000000000000000000000000000000000", web3j, credentials, contractGasProvider); 
+		List<${eventName}EventResponse> ${eventName}EventResponseList = contract.get${eventName}Events(receipt);
+		if(CollectionUtils.isEmpty(${eventName}EventResponseList)) {
+		    return false;
+		}
+		List<${class_name}> list = new ArrayList<>(${eventName}EventResponseList.size());
+		for (${eventName}EventResponse ${eventName}EventResponse : ${eventName}EventResponseList) {
+			${class_name} ${lowContractName}${eventName} = new ${class_name}();
+			${lowContractName}${eventName}.setBlockHeight(receipt.getBlockNumber().longValue());
+			${lowContractName}${eventName}.setTxHash(receipt.getTransactionHash());
+			<%
+			for(entry in list){
+				var javaCapName = entry.javaCapName;
+				var javaName = entry.javaName;
+				var typeMethod = entry.typeMethod;
+			%>
+			${lowContractName}${eventName}.set${javaCapName}(${typeMethod}(${eventName}EventResponse.${javaName}));
+			<% } %>
+			${lowContractName}${eventName}.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));
+			log.debug("depot ${eventName}:{}", ${lowContractName}${eventName}.toString());
+			list.add(${lowContractName}${eventName});
+		}
+		repository.saveAll(list);
+		return true;
+	}
+}
