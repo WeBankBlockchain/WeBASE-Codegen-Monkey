@@ -50,12 +50,12 @@
 某公司基于FISCO-BCOS开发了区块链的业务系统，需要将本地数据与链上的数据进行对账。
 
 - 解决方案
-该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)的代码，并根据实际需求进行了定制化开发。通过在智能合约中设计的各类event，相关的业务数据都被导出到数据库中；从而实现轻松对账的需求。
+该公司使用WeBASE-Codegen-Monkey迅速生成了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)的代码，并根据实际需求进行了定制化开发。通过在智能合约中设计的各类event的埋点，相关的业务数据都被记录到event logs中，最终利用数据导出组件导出到数据库中；从而实现轻松对账的需求。
 
-#### 案例 区块链业务数据查询系统
+#### 案例 区块链业务数据查询系统（OLAP）
 - 背景
 
-某互联网公司基于FISCO-BCOS开发了区块链的业务系统，但是发现智能合约对业务报表的支持不佳。但是，公司的一线业务部门要求实时查看各类复杂的业务报表。
+某互联网公司基于FISCO-BCOS开发了区块链的业务系统，但是发现智能合约对OLAP类的业务，如数据业务报表的支持不佳。但是，公司的一线业务部门要求实时查看各类复杂的业务报表。
 
 - 解决方案
 
@@ -67,13 +67,13 @@
 只需用户提供智能合约编译后的Java代码和相关的底层链、数据库的基本信息，WeBASE-Codegen-Monkey就能帮助你自动生成一个区块链数据导出的组件。现阶段，支持将数据导出到Mysql数据库中。
 
 #### 支持自定义导出数据内容
-可以支持导出区块链的基本信息、智能合约的函数、Event等信息。可以对导出的数据库表、字段进行定制。也可以修改导出数据字段的长度。
+可以支持导出区块链的基本信息、智能合约的函数、Event等信息。可以对导出的数据库表、字段进行定制。也可以修改导出数据字段的名称、长度等属性。
 
 #### 内置Restful API，提供常用的查询功能
 自带常用的Restful API，支持查询块高、块信息、Event信息和函数信息等。
 
 #### 支持多数据源，支持读写分离和分库分表
-为了应对海量数据的导出，[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)数据导出组件支持可配置的多数据源存储，读写分离和分库分表：数据可以存储到多个表中，也可以存储到多个库中。同时，内置的Restful API可以自动无感知地返回正常的数据。
+为了应对海量数据的导出，[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)数据导出组件集成了sharding-jdbc,支持可配置的多数据源存储，读写分离和分库分表：数据可以存储到多个表中，也可以存储到多个库中。同时，内置的Restful API可以自动无感知地返回正常的数据。
 
 #### 支持多活部署，多节点自动导出
 [WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)数据导出组件支持多活部署，可自动进行分布式任务调度。
@@ -121,13 +121,13 @@ cd install_scripts
 
 ##### 2.2.1.2 进入安装路径
 
-进入解压后的install_scripts文件夹目录，获得如下的目录结构，其中Evidence.java为合约示例。
+进入解压后的install_scripts文件夹目录，获得如下的目录结构，其中HelloWorld.java为合约示例。
 
 ```
 ├──install_scripts
     └── config
     	└── contract
-            └── Evidence.java
+            └── HelloWorld.java
     	└── resources
     	    └── application.properties
     └── generate_bee.sh
@@ -135,14 +135,11 @@ cd install_scripts
 #### 2.2.2 配置安装包
 
 ##### 2.2.2.1 配置合约文件
+找到你的业务工程（你要导出数据的那条区块链中，往区块链写数据的工程），复制合约产生的Java文件：请将Java文件**复制到./config/contract目录**下（请先删除目录结构中的合约示例HelloWorld.java文件）。
 
-请注意，请确保你使用的Web3SDK的版本大于等于**V1.2.0**。 同时请注意，上链程序所安装的[fisco-solc](https://github.com/FISCO-BCOS/fisco-solc)必须与编译的版本一致。
+如果你的业务工程并非Java工程，那就先找到你所有的合约代码。不清楚如何将Solidity合约生成为Java文件，请参考： [利用控制台将合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html)
 
-找到你的业务工程（你要导出数据的那条区块链中，往区块链写数据的工程），复制合约产生的Java文件：请将Java文件**复制到./config/contract目录**下（请先删除目录结构中的合约示例Evidence.java文件）。
-
-如果你的业务工程并非Java工程，那就先找到你所有的合约代码。不清楚如何将Solidity合约生成为Java文件，请参考： [合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/release-1.3/docs/web3sdk/advanced/gen_java_code.html)
-
-请注意:  **请勿使用数据库SQL语言的保留字来定义合约内部的变量、函数名定义**，否则会导致数据库无法成功建表。如定义一个变量名为key或定义一个函数为select或delete等。
+请注意:  **请勿使用数据库SQL语言的保留字来定义合约内部的变量、函数名定义**，否则会导致数据库无法成功建表。如定义一个变量名为key或定义一个函数为select或delete等。但是，如果你不幸地发现你的合约命名中已经有了这些关键词；那么，针对这种情况，我们为你考虑了数据库建表字段的转义配置的规则；你可以为数据库建表字段配置前缀和后缀，如配置『_』的前缀，那么你建立的"select"字段将会自动被转为"_select"，以规避这种尴尬的问题。详细的配置方法请参考附录1.3 数据库配置。
 
 ##### 2.2.2.2 配置密钥文件
 
@@ -218,7 +215,7 @@ ps -ef |grep WeBASE-Collect-Bee
 ```
 如果看到如下信息，则代表进程执行正常：
 ```
-app   21980 24843  0 15:23 pts/3    00:00:44 java -jar WeBASE-Collect-Bee0.3.0-SNAPSHOT.jar
+app   21980 24843  0 15:23 pts/3    00:00:44 java -jar WeBASE-Collect-Bee0.7.0-SNAPSHOT.jar
 ```
 
 ##### 2.2.3.2 检查程序是否已经正常执行
@@ -538,7 +535,7 @@ contract UserInfo {
 
 A： block_task_pool和block_detail_info表是链的基本数据，只要服务正常运行，这两个表肯定会有数据。
 
-首先，请检查连接的区块链的地址、端口是否正确。
+首先，请检查连接的区块链的地址、端口、群组Id是否正确。
 
 其次，你需要检查合约的版本。如果你升级了合约，但链上执行的合约都是老版本的合约，这个时候就无法获得数据。
 
