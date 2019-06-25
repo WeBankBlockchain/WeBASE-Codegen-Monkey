@@ -21,7 +21,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * webasemonkeyApplication
  *
- * @Description: webase-monkey is a powerful code generation project serving for fisco-bcos. In this version, it can
+ * @Description: WeBASE-Codegen-Monkey is a powerful code generation project serving for fisco-bcos. In this version, it can
  *               generate webase-bee, which could crawl data from fisco-bcos network, including block data，event data,
  *               transaction data and account data.
  * @author maojiayu

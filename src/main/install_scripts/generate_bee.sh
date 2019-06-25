@@ -99,7 +99,7 @@ echo "contractPath: "$contractPath
 group=$(echo ${system_group} | tr '.' '/')
 echo "group: "$group
 
-# download webase-monkey
+# download WeBASE-Codegen-Monkey 
 rm -rf $BM
 git clone https://github.com/WeBankFinTech/$BM.git
 cd $BM
