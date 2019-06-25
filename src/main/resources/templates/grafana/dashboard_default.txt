@@ -696,7 +696,7 @@
       "type": "table"
     },
     {
-      "content": "\n# 本页面来源于WEBASE-BEE\n\n\n点击详情获得更多支持: [WeBankFinTech/webase-bee](https://github.com/WeBankFinTech/webase-bee/tree/dev)\n\n\n# 本应用支持FISCO-BCOS公众联盟链\n\n点击详情获得更多支持: [FISCO-BCOS](https://www.fisco.com.cn/)\n\n\n",
+      "content": "\n# 本页面来源于WEBASE-BEE\n\n\n点击详情获得更多支持: [WeBankFinTech/WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)\n\n\n# 本应用支持FISCO-BCOS公众联盟链\n\n点击详情获得更多支持: [FISCO-BCOS](https://www.fisco.com.cn/)\n\n\n",
       "gridPos": {
         "h": 8,
         "w": 12,
