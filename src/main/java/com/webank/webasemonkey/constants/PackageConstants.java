@@ -25,7 +25,7 @@ package com.webank.webasemonkey.constants;
  */
 public class PackageConstants {
 	
-	public static final String PACKAGE_MIDDLE_FIX = "webasebee.generated";
+	public static final String PACKAGE_MIDDLE_FIX = "webasebee.core.generated";
 	
 	//event package postfix
 	public static final String DB_EVENT_ENTRY_PACKAGE_POSTFIX = "db.event.entity";

@@ -23,8 +23,8 @@ import ${contractPackName}.${contractName}.${eventName}EventResponse;
 import ${group}.${projectName}.crawler.face.BcosEventCrawlerInterface;
 import ${group}.${projectName}.generated.db.event.entity.${class_name};
 import ${group}.${projectName}.generated.db.event.repository.${class_name}Repository;
-import com.webank.webasebee.tools.BigIntegerUtils;
-import com.webank.webasebee.tools.BytesUtils;
+import ${group}.${projectName}.tools.BigIntegerUtils;
+import ${group}.${projectName}.tools.BytesUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Service

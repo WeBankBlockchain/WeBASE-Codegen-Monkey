@@ -13,16 +13,16 @@ import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition.NamedTy
 import org.fisco.bcos.web3j.protocol.core.methods.response.Transaction;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
-import com.webank.webasebee.generated.db.method.entity.${methodName};
-import com.webank.webasebee.generated.db.method.repository.${methodName}MethodRepository;
-import com.webank.webasebee.crawler.face.BcosMethodCrawlerInterface;
+import ${group}.${projectName}.generated.db.method.entity.${methodName};
+import ${group}.${projectName}.generated.db.method.repository.${methodName}MethodRepository;
+import ${group}.${projectName}.crawler.face.BcosMethodCrawlerInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.webank.webasebee.bo.ContractMapsInfo;
+import ${group}.${projectName}.bo.ContractMapsInfo;
 import ${group}.${projectName}.tools.AddressUtils;
 import ${group}.${projectName}.tools.BigIntegerUtils;
 import ${group}.${projectName}.tools.BoolUtils;
 import ${group}.${projectName}.tools.BytesUtils;
-import com.webank.webasebee.tools.MethodUtils;
+import ${group}.${projectName}.tools.MethodUtils;
 import lombok.extern.slf4j.Slf4j;
 import java.sql.Date;
 

@@ -230,13 +230,13 @@ Hibernate: select blockheigh0_.pk_id as pk_id1_2_, blockheigh0_.block_height as 
 
 还可以通过以下命令来查看区块的同步状态：
 ```
-tail -f webasebee.log| grep "sync block"
+tail -f webasebee-core.log| grep "sync block"
 ```
 
 当看到以下滚动的日志时，则代表区块同步状态正常，开始执行下载任务。
 
 ```
- $ tail -f webasebee.log| grep "sync block"
+ $ tail -f webasebee-core.log| grep "sync block"
 2019-05-05 14:41:07.348  INFO 60538 --- [main] c.w.w.c.service.CommonCrawlerService     : Try to sync block number 0 to 90 of 90
 2019-05-05 14:41:07.358  INFO 60538 --- [main] c.w.w.c.service.BlockTaskPoolService     : Begin to prepare sync blocks from 0 to 90
 2019-05-05 14:41:17.142  INFO 60538 --- [main] c.w.w.crawler.service.BlockSyncService   : Block 0 of 90 sync block succeed.

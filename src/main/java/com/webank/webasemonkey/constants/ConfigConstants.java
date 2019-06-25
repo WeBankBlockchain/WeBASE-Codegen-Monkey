@@ -30,7 +30,7 @@ public class ConfigConstants {
 	/** @Fields TASK_FREQUENCY : thread sleep time */
 	public static final String TASK_FREQUENCY = "5";
 	
-	public static final String projectName="webasebee";
+	public static final String projectName="webasebee.core";
 	public static final String contractPath = "config/contract/";
 
 }
