@@ -97,7 +97,7 @@
 
 | 依赖软件 | 说明 |备注|
 | --- | --- | --- |
-| FISCO-BCOS | 仅支持FISCO-BCOS1.X版本，正在加紧适配2.0，敬请期待|
+| FISCO-BCOS | 仅支持FISCO-BCOS1.X版本，不支持2.0及以上版本|
 | Bash | 需支持Bash（理论上来说支持所有ksh、zsh等其他unix shell，但未测试）|
 | Java | >= JDK[1.8] |JAVA安装可参考附录2|
 | Git | 下载的安装包使用Git | Git安装可参考附录3|
