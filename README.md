@@ -547,7 +547,7 @@ A： 可以。只需要手动将编译生成的合约代码的包名改为同一
 
 > **3. 如果我的链上所执行的合约是低于V1.2.0版本的怎么办？还可以导出来吗？**
 
-A: 可以，但需要进行特殊的操作。 首先，找到你原有的历史合约，然后使用1.2.0版本的web3sdk进行编译得到V1.2.0版本的Java文件，[合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/v1.0.1/docs/web3sdk/advanced/gen_java_code.html?highlight=compile.sh) ，复制每个Java文件里的ABI字段。
+A: 可以，但需要进行特殊的操作。 首先，找到你原有的历史合约，然后使用1.2.0版本的web3sdk进行编译得到V1.2.0版本的Java文件，[合约代码转换为java代码](https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/console.html) ，复制每个Java文件里的ABI字段。
 
 然后找到你用之前版本的web3sdk曾经编译的Java代码，注意请保证你安装的fisco-solc与之前的版本一致，将刚才V1.2.0版本Java文件中的ABI字段手工拷贝到之前Java代码中。
 
