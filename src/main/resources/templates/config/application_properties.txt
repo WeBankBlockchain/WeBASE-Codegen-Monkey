@@ -4,6 +4,7 @@ spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
 spring.jackson.time-zone=GMT+8
 logging.file=webasebee.log
 logging.level.org.hibernate=ERROR 
+logging.level.org.fisco.bcos=ERROR
 
 ## Spring data jpa properties
 spring.datasource.test-on-borrow=false
