@@ -49,8 +49,6 @@ public class SystemEnvironmentConfig {
     private String baseProjectPath;
     private int frequency = 5;
 
-    /** @Fields maxBlockHeightThreshold : whether to start multi-thread modern */
-    private int maxBlockHeightThreshold = 50;
     /** @Fields crawlBatchUnit : to cut gaint mission to small missions, whose size is this */
     private int crawlBatchUnit = 100;
 

@@ -620,7 +620,7 @@ FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBank
 | --- | --- | --- | --- | --- |
 | system.group | Y | 同spring项目的group | com.example | - |
 | system.contractPackName | Y | 编译智能合约所输入的包名 | com.webank.blockchain.wecredit.contracts | - |
-| monitor.default.frequency | N | 所有method和event的抓取频率 | 10 | 5 |
+| monitor.default.frequency | N | 所有method和event的抓取频率，默认几秒轮询一次 | 10 | 5 |
 
 #### 1.5 线程池配置
 
@@ -629,7 +629,6 @@ FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBank
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
 | system.multiLiving | Y | 关闭多活开关 | false | false |
-| system.maxBlockHeightThreshold | N | 多线程开关阈值：当前区块落后区块高度的阈值，如果超过，系统将启动多线程执行任务 | 10 | 10 |
 | system.crawlBatchUnit | N | 线程处理单元：多线程任务模式下单个线程一次任务执行完成的区块数 | 100 | 100 |
 
 #### 1.6 集群多活配置
