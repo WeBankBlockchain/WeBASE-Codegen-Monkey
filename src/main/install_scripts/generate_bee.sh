@@ -102,13 +102,13 @@ echo "group: "$group
 rm -rf $BM
 git clone https://github.com/WeBankFinTech/$BM.git
 cd $BM
-git checkout dev_v0.7.0.2019.06 
+git checkout master 
 cd ..
 
 rm -rf $BB
 git clone https://github.com/WeBankFinTech/$BB.git
 cd $BB
-git checkout dev_v0.7.0.2019.06
+git checkout master
 cd ..
 
 # init config
