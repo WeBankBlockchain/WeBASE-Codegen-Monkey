@@ -97,7 +97,7 @@
 
 | 依赖软件 | 说明 |备注|
 | --- | --- | --- |
-| FISCO-BCOS | >= 2.0， 1.x版本请参考V0.5版本 |
+| FISCO-BCOS | >= 2.0， 1.x版本请参考V0.5版本 dev分支|
 | Bash | 需支持Bash（理论上来说支持所有ksh、zsh等其他unix shell，但未测试）|
 | Java | >= JDK[1.8] |JAVA安装可参考附录2|
 | Git | 下载的安装包使用Git | Git安装可参考附录3|
@@ -176,7 +176,7 @@ monitor.contractPackName=[编译Solidity合约时指定的包名]
 
 ```
 chmod +x generate_bee.sh
-sh generate_bee.sh 
+./generate_bee.sh 
 ```
 
 当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)工程代码。数据导出组件将直接启动，对应的执行日志会打印到终端上。
@@ -187,7 +187,7 @@ sh generate_bee.sh
 
 ```
 chmod +x generate_bee.sh
-sh generate_bee.sh build 
+./generate_bee.sh build 
 ```
 当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)工程代码。请将此生成工程下的./WeBASE-Collect-Bee/dist文件夹复制到其他服务器上，并执行：
 
