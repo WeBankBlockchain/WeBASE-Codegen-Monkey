@@ -125,7 +125,7 @@ cp -f ../$CONTRACT_DIR/* ./$CONTRACT_DIR
 echo "copy java contract codes done."
 
 # build
-sh gradlew clean bootJar
+./gradlew clean bootJar
 echo "$BM build done"
 
 # Determine the Java command to use to start the JVM.
@@ -169,7 +169,7 @@ mkdir -p ./$CONTRACT_DIR
 cp -f ../$CONTRACT_DIR/* ./$CONTRACT_DIR
 echo "copy java contract codes done."
 
-sh gradlew clean bootJar
+./gradlew clean bootJar
 
 echo "$BB build done"
 
