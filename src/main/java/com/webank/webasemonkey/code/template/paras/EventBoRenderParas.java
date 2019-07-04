@@ -15,6 +15,7 @@
  */
 package com.webank.webasemonkey.code.template.paras;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,44 +28,52 @@ import com.webank.webasemonkey.constants.PackageConstants;
 import com.webank.webasemonkey.constants.TemplateConstants;
 import com.webank.webasemonkey.tools.PackagePath;
 import com.webank.webasemonkey.vo.EventMetaInfo;
+import com.webank.webasemonkey.vo.FieldVO;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * EventRepositoryRenderParas to generate repository of events.
+ * EventBoRenderParas
  *
+ * @Description: EventBoRenderParas
  * @author maojiayu
- * @data Dec 28, 2018 3:05:42 PM
+ * @data Jul 2, 2019 10:41:01 AM
  *
  */
 @Component
-public class EventRepositoryRenderParas implements EventGenerateParas {
+public class EventBoRenderParas implements EventGenerateParas {
+
     @Autowired
     protected SystemEnvironmentConfig systemEnvironmentConfig;
 
-    /*
-     * input: 0-String 类名;
-     */
     @Override
     public Map<String, Object> getMap(EventMetaInfo event) {
+        List<FieldVO> list = event.getList();
         Map<String, Object> map = Maps.newLinkedHashMap();
-        String className = event.getContractName() + event.getName();
+        map.put("list", list);
+        String className = getClassName(event);
         map.put("class_name", className);
         map.put("group", systemEnvironmentConfig.getGroup());
-        map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_CORE);
+        map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_PARSER);
         return map;
     }
 
     @Override
     public String getTemplatePath() {
-        return TemplateConstants.DB_EVENT_REPOSITORY_TEMPLATE_PATH;
+        return TemplateConstants.EVENT_BO_TEMPLATE_PATH;
     }
 
     @Override
     public String getGeneratedFilePath(EventMetaInfo event) {
-        String packagePath = PackagePath.getPackagePath(PackageConstants.DB_EVENT_REPOSITORY_PACKAGE_POSTFIX,
-                systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_CORE);
-        String className = event.getContractName() + event.getName();
-        String javaFilePath = packagePath + "/" + className + "Repository.java";
+        String packagePath = PackagePath.getPackagePath(PackageConstants.EVENT_BO_PACKAGE_POSTFIX,
+                systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_PARSER);
+        String className = getClassName(event);
+        String javaFilePath = packagePath + "/" + className + ".java";
         return javaFilePath;
+    }
+
+    private String getClassName(EventMetaInfo event) {
+        return event.getContractName() + event.getName() + "BO";
     }
 
 }

@@ -59,13 +59,13 @@ public class CodeTemplateGenerateService<T> {
      */
     public void write(GenerateParas generateParas, ContractNameVO vo) {
         Template template = gt.getTemplate(generateParas.getTemplatePath());
-        log.info("Begin to create file: {}", generateParas.getGeneratedFilePath(vo));
         template.binding(generateParas.getMap(vo));
         String renderResult = template.render();
         try {
-            FileUtils.write(new File(systemEnvironmentConfig.getBaseProjectPath() + File.separator
-                    + generateParas.getGeneratedFilePath(vo)), renderResult, "utf-8", false);
-            log.info("Write succeed: {}", generateParas.getGeneratedFilePath(vo));
+            String filePath = systemEnvironmentConfig.getBaseProjectPath() + File.separator
+                    + generateParas.getGeneratedFilePath(vo);
+            FileUtils.write(new File(filePath), renderResult, "utf-8", false);
+            log.info("Write succeed: {}", filePath);
         } catch (IOException e) {
             log.error("GeneratedFiles write fail. cause: {}", e.getMessage());
         }

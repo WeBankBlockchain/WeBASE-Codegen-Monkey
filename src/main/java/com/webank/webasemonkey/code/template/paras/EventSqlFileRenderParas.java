@@ -15,6 +15,7 @@
  */
 package com.webank.webasemonkey.code.template.paras;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ import com.google.common.collect.Maps;
 import com.webank.webasemonkey.code.template.face.EventGenerateParas;
 import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.constants.TemplateConstants;
+import com.webank.webasemonkey.enums.SubProjectEnum;
 import com.webank.webasemonkey.tools.StringStyleUtils;
 import com.webank.webasemonkey.vo.EventMetaInfo;
 import com.webank.webasemonkey.vo.FieldVO;
@@ -63,8 +65,8 @@ public class EventSqlFileRenderParas implements EventGenerateParas {
 
     @Override
     public String getGeneratedFilePath(EventMetaInfo event) {
-        String javaFilePath =
-                "src/main/scripts/event/" + StringStyleUtils.upper2underline(event.getName()) + ".sql";
+        String javaFilePath = SubProjectEnum.CORE.getPathName() + File.separator + "src/main/scripts/event/"
+                + StringStyleUtils.upper2underline(event.getName()) + ".sql";
         return javaFilePath;
     }
 

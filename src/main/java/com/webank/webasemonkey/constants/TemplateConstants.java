@@ -30,6 +30,9 @@ public class TemplateConstants {
     /** @Fields CRAWLER_METHOD_IMPL_TEMPLATE_PATH : crawler method impl template path */
     public static final String CRAWLER_METHOD_IMPL_TEMPLATE_PATH = "templates/crawler/crawler_method_impl_template.txt";
 
+    public static final String EVENT_BO_TEMPLATE_PATH = "templates/bo/event_bo_template.txt";
+    public static final String METHOD_BO_TEMPLATE_PATH = "templates/bo/method_bo_template.txt";
+
     /** @Fields DB_EVENT_ENTITY_TEMPLATE_PATH : event entity template path */
     public static final String DB_EVENT_ENTITY_TEMPLATE_PATH = "templates/db/db_event_entity_template.txt";
     /** @Fields DB_EVENT_REPOSITORY_TEMPLATE_PATH : event repository template path */

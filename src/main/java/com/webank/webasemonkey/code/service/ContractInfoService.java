@@ -60,7 +60,7 @@ public class ContractInfoService {
      */
     public ContractInfo parseFromContract() {
         Set<Class<?>> clazzSet =
-                ClazzScanUtils.scan(ConfigConstants.contractPath, systemEnvironmentConfig.getContractPackName());
+                ClazzScanUtils.scan(ConfigConstants.CONTRACT_PATH, systemEnvironmentConfig.getContractPackName());
         List<EventMetaInfo> eventMetaInfoList = Lists.newArrayList();
         List<MethodMetaInfo> methodMetaInfoList = Lists.newArrayList();
         for (Class<?> clazz : clazzSet) {

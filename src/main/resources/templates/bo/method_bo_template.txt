@@ -1,0 +1,22 @@
+/**
+ * Copyright (C) 2018 WeBank, Inc. All Rights Reserved.
+ */
+package ${group}.${projectName}.generated.bo.method;
+
+import com.webank.webasebee.common.bo.data.MethodBO;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+@Data
+@Accessors(chain = true)
+public class ${class_name} extends MethodBO {
+    <%
+	for(entry in list){
+		var javaName = entry.javaName;
+        var javaType = entry.javaType;
+        var sqlName =  entry.sqlName;
+        var length = entry.length;
+	%>
+	private ${javaType} ${javaName};
+	<% } %>
+}

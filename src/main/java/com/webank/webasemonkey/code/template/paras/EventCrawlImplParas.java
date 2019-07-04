@@ -21,16 +21,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+
 import com.google.common.collect.Maps;
 import com.webank.webasemonkey.code.template.face.EventGenerateParas;
 import com.webank.webasemonkey.config.SystemEnvironmentConfig;
-import com.webank.webasemonkey.constants.ConfigConstants;
 import com.webank.webasemonkey.constants.PackageConstants;
 import com.webank.webasemonkey.constants.TemplateConstants;
 import com.webank.webasemonkey.tools.PackagePath;
 import com.webank.webasemonkey.vo.EventMetaInfo;
 import com.webank.webasemonkey.vo.FieldVO;
-
 
 /**
  * EventCrawlImplParas to generate EventCrawler.
@@ -53,10 +52,10 @@ public class EventCrawlImplParas implements EventGenerateParas {
         map.put("contractName", event.getContractName());
         map.put("lowContractName", StringUtils.uncapitalize(event.getContractName()));
         map.put("group", systemEnvironmentConfig.getGroup());
-        map.put("projectName", ConfigConstants.projectName);
+        map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_PARSER);
         map.put("contractPackName", systemEnvironmentConfig.getContractPackName());
         map.put("eventName", event.getName());
-        String className = event.getContractName() + event.getName();
+        String className = event.getContractName() + event.getName() + "BO";
         map.put("class_name", className);
         return map;
     }
@@ -69,7 +68,7 @@ public class EventCrawlImplParas implements EventGenerateParas {
     @Override
     public String getGeneratedFilePath(EventMetaInfo event) {
         String packagePath = PackagePath.getPackagePath(PackageConstants.CRAWLER_EVENT_IMPL_PACKAGE_POSTFIX,
-                systemEnvironmentConfig.getGroup());
+                systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_PARSER);
         String javaFilePath = packagePath + "/" + event.getContractName() + StringUtils.capitalize(event.getName())
                 + "CrawlerImpl.java";
         return javaFilePath;

@@ -25,7 +25,6 @@ import org.springframework.util.StringUtils;
 import com.google.common.collect.Maps;
 import com.webank.webasemonkey.code.template.face.MethodGenerateParas;
 import com.webank.webasemonkey.config.SystemEnvironmentConfig;
-import com.webank.webasemonkey.constants.ConfigConstants;
 import com.webank.webasemonkey.constants.PackageConstants;
 import com.webank.webasemonkey.constants.TemplateConstants;
 import com.webank.webasemonkey.tools.PackagePath;
@@ -33,7 +32,8 @@ import com.webank.webasemonkey.vo.FieldVO;
 import com.webank.webasemonkey.vo.MethodMetaInfo;
 
 /**
- * MethodCrawlerImplParas uses to installing params for generating method crawler class that implements BcosMethodCrawlerInterface.
+ * MethodCrawlerImplParas uses to installing params for generating method crawler class that implements
+ * BcosMethodCrawlerInterface.
  *
  * @Description: MethodCrawlerImplParas
  * @author graysonzhang
@@ -51,12 +51,12 @@ public class MethodCrawlerImplParas implements MethodGenerateParas {
         List<FieldVO> list = method.getList();
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("list", list);
-        String Name = method.getContractName() + StringUtils.capitalize(method.getName());
+        String name = method.getContractName() + StringUtils.capitalize(method.getName());
         map.put("contractName", method.getContractName());
-        map.put("methodName", Name);
+        map.put("methodName", name);
         map.put("oriMethodName", method.getName());
         map.put("group", systemEnvironmentConfig.getGroup());
-        map.put("projectName", ConfigConstants.projectName);
+        map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_PARSER);
         return map;
     }
 
@@ -68,7 +68,7 @@ public class MethodCrawlerImplParas implements MethodGenerateParas {
     @Override
     public String getGeneratedFilePath(MethodMetaInfo method) {
         String packagePath = PackagePath.getPackagePath(PackageConstants.CRAWLER_METHOD_IMPL_PACKAGE_POSTFIX,
-                systemEnvironmentConfig.getGroup());
+                systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_PARSER);
         String className = method.getContractName() + StringUtils.capitalize(method.getName());
         String javaFilePath = packagePath + "/" + className + "MethodCrawlerImpl.java";
         return javaFilePath;

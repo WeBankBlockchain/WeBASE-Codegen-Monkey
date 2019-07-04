@@ -15,6 +15,7 @@
  */
 package com.webank.webasemonkey.code.template.paras;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,7 @@ import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.constants.ConfigFileConstants;
 import com.webank.webasemonkey.constants.ParserConstants;
 import com.webank.webasemonkey.constants.TemplateConstants;
+import com.webank.webasemonkey.enums.SubProjectEnum;
 import com.webank.webasemonkey.enums.SysTableEnum;
 import com.webank.webasemonkey.tools.PropertiesUtils;
 import com.webank.webasemonkey.tools.StringStyleUtils;
@@ -103,6 +105,6 @@ public class DBEnvironmentParas implements ConfigGenerateParas {
 
     @Override
     public String getGeneratedFilePath(ContractInfo contractsInfo) {
-        return ConfigFileConstants.GENERATED_DB_ENV_FILE_PATH;
+        return SubProjectEnum.CORE.getPathName() + File.separator + ConfigFileConstants.GENERATED_DB_ENV_FILE_PATH;
     }
 }

@@ -16,6 +16,7 @@
 package com.webank.webasemonkey.tools;
 
 import com.webank.webasemonkey.constants.PackageConstants;
+import com.webank.webasemonkey.enums.SubProjectEnum;
 
 /**
  * PackageProcessor
@@ -30,8 +31,10 @@ public class PackagePath {
     /** @Fields ROOT_PATH : root path */
     public static final String ROOT_PATH = "src/main/java/";
 
-    public static String getPackagePath(String postfix, String group) {
-        String packagePath = ROOT_PATH + group + "/" + PackageConstants.PACKAGE_MIDDLE_FIX + "/" + postfix;
+    public static String getPackagePath(String postfix, String group, String subProjectPkg) {
+        String packagePath = SubProjectEnum.valueOf(subProjectPkg.toUpperCase()).getPathName() + "/" + ROOT_PATH + group
+                + "/" + PackageConstants.PROJECT_PKG_NAME + "/" + subProjectPkg + "/" + PackageConstants.GENERATED + "/"
+                + postfix;
         packagePath = packagePath.replaceAll("\\.", "/");
         return packagePath;
     }

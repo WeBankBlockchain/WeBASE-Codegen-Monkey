@@ -21,10 +21,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+
 import com.google.common.collect.Maps;
 import com.webank.webasemonkey.code.template.face.MethodGenerateParas;
 import com.webank.webasemonkey.config.SystemEnvironmentConfig;
-import com.webank.webasemonkey.constants.ConfigConstants;
 import com.webank.webasemonkey.constants.PackageConstants;
 import com.webank.webasemonkey.constants.TemplateConstants;
 import com.webank.webasemonkey.tools.PackagePath;
@@ -57,7 +57,7 @@ public class MethodEntityRenderParas implements MethodGenerateParas {
         map.put("table_name", tableName);
         map.put("class_name", className);
         map.put("group", systemEnvironmentConfig.getGroup());
-        map.put("projectName", ConfigConstants.projectName);
+        map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_CORE);
         return map;
     }
 
@@ -69,7 +69,7 @@ public class MethodEntityRenderParas implements MethodGenerateParas {
     @Override
     public String getGeneratedFilePath(MethodMetaInfo method) {
         String packagePath = PackagePath.getPackagePath(PackageConstants.DB_METHOD_ENTRY_PACKAGE_POSTFIX,
-                systemEnvironmentConfig.getGroup());
+                systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_CORE);
         String className = method.getContractName() + StringUtils.capitalize(method.getName());
         String javaFilePath = packagePath + "/" + className + ".java";
         return javaFilePath;

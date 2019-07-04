@@ -15,56 +15,64 @@
  */
 package com.webank.webasemonkey.code.template.paras;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.google.common.collect.Maps;
-import com.webank.webasemonkey.code.template.face.EventGenerateParas;
+import com.webank.webasemonkey.code.template.face.MethodGenerateParas;
 import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.constants.PackageConstants;
 import com.webank.webasemonkey.constants.TemplateConstants;
 import com.webank.webasemonkey.tools.PackagePath;
-import com.webank.webasemonkey.vo.EventMetaInfo;
+import com.webank.webasemonkey.tools.StringStyleUtils;
+import com.webank.webasemonkey.vo.FieldVO;
+import com.webank.webasemonkey.vo.MethodMetaInfo;
 
 /**
- * EventRepositoryRenderParas to generate repository of events.
+ * MethodBoRenderParas
  *
+ * @Description: MethodBoRenderParas
  * @author maojiayu
- * @data Dec 28, 2018 3:05:42 PM
+ * @data Jul 2, 2019 10:51:37 AM
  *
  */
 @Component
-public class EventRepositoryRenderParas implements EventGenerateParas {
+public class MethodBoRenderParas implements MethodGenerateParas {
+
     @Autowired
     protected SystemEnvironmentConfig systemEnvironmentConfig;
 
-    /*
-     * input: 0-String 类名;
-     */
     @Override
-    public Map<String, Object> getMap(EventMetaInfo event) {
+    public Map<String, Object> getMap(MethodMetaInfo method) {
+        List<FieldVO> list = method.getList();
         Map<String, Object> map = Maps.newLinkedHashMap();
-        String className = event.getContractName() + event.getName();
+        map.put("list", list);
+        String className = getClassName(method);
         map.put("class_name", className);
         map.put("group", systemEnvironmentConfig.getGroup());
-        map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_CORE);
+        map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_PARSER);
         return map;
     }
 
     @Override
     public String getTemplatePath() {
-        return TemplateConstants.DB_EVENT_REPOSITORY_TEMPLATE_PATH;
+        return TemplateConstants.METHOD_BO_TEMPLATE_PATH;
     }
 
     @Override
-    public String getGeneratedFilePath(EventMetaInfo event) {
-        String packagePath = PackagePath.getPackagePath(PackageConstants.DB_EVENT_REPOSITORY_PACKAGE_POSTFIX,
-                systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_CORE);
-        String className = event.getContractName() + event.getName();
-        String javaFilePath = packagePath + "/" + className + "Repository.java";
+    public String getGeneratedFilePath(MethodMetaInfo method) {
+        String packagePath = PackagePath.getPackagePath(PackageConstants.METHOD_BO_PACKAGE_POSTFIX,
+                systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_PARSER);
+        String className = getClassName(method);
+        String javaFilePath = packagePath + "/" + className + ".java";
         return javaFilePath;
     }
 
+    private String getClassName(MethodMetaInfo method) {
+        return method.getContractName() + StringUtils.capitalize(method.getName()) + "BO";
+    }
 }
