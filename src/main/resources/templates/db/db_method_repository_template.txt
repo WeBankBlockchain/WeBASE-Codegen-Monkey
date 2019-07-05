@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2018 WeBank, Inc. All Rights Reserved.
  */
-package ${group}.${projectName}.generated.db.method.repository;
+package ${group}.${projectName}.generated.repository.method;
 
 import javax.transaction.Transactional;
 
@@ -11,8 +11,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import ${group}.${projectName}.generated.db.method.entity.${class_name};
-import ${group}.${projectName}.sys.db.repository.RollbackInterface;
+import ${group}.${projectName}.generated.entity.method.${class_name};
+import ${group}.${projectName}.repository.RollbackInterface;
 
 
 @Repository

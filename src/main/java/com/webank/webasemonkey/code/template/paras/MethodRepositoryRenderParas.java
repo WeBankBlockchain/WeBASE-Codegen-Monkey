@@ -48,7 +48,7 @@ public class MethodRepositoryRenderParas implements MethodGenerateParas {
         String className = method.getContractName() + StringUtils.capitalize(method.getName());
         map.put("class_name", className);
         map.put("group", systemEnvironmentConfig.getGroup());
-        map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_CORE);
+        map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_DB);
         return map;
     }
 
@@ -60,7 +60,7 @@ public class MethodRepositoryRenderParas implements MethodGenerateParas {
     @Override
     public String getGeneratedFilePath(MethodMetaInfo method) {
         String packagePath = PackagePath.getPackagePath(PackageConstants.DB__METHOD_REPOSITORY_PACKAGE_POSTFIX,
-                systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_CORE);
+                systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_DB);
         String className = method.getContractName() + StringUtils.capitalize(method.getName());
         String javaFilePath = packagePath + "/" + className + "MethodRepository.java";
         return javaFilePath;

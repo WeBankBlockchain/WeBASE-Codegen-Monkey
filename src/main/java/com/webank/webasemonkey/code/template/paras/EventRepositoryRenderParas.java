@@ -49,7 +49,7 @@ public class EventRepositoryRenderParas implements EventGenerateParas {
         String className = event.getContractName() + event.getName();
         map.put("class_name", className);
         map.put("group", systemEnvironmentConfig.getGroup());
-        map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_CORE);
+        map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_DB);
         return map;
     }
 
@@ -61,7 +61,7 @@ public class EventRepositoryRenderParas implements EventGenerateParas {
     @Override
     public String getGeneratedFilePath(EventMetaInfo event) {
         String packagePath = PackagePath.getPackagePath(PackageConstants.DB_EVENT_REPOSITORY_PACKAGE_POSTFIX,
-                systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_CORE);
+                systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_DB);
         String className = event.getContractName() + event.getName();
         String javaFilePath = packagePath + "/" + className + "Repository.java";
         return javaFilePath;

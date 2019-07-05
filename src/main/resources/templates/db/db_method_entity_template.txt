@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2018 WeBank, Inc. All Rights Reserved.
  */
-package ${group}.${projectName}.generated.db.method.entity;
+package ${group}.${projectName}.generated.entity.method;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.UpdateTimestamp;
 import java.util.Date;
-import ${group}.${projectName}.entity.IdEntity;
+import com.webank.webasebee.db.entity.IdEntity;
 
 @SuppressWarnings("serial")
 @Data

@@ -30,6 +30,7 @@ import lombok.Getter;
 @Getter 
 public enum SubProjectEnum {
     CORE("core", "WeBASE-Collect-Bee-core"),
+    DB("db", "WeBASE-Collect-Bee-db"),
     PARSER("parser", "WeBASE-Collect-Bee-parser");
     
     private String pakageName;

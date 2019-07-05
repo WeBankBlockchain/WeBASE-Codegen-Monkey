@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2018 WeBank, Inc. All Rights Reserved.
  */
-package ${group}.${projectName}.generated.db.event.entity;
+package ${group}.${projectName}.generated.entity.event;
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import ${group}.${projectName}.entity.IdEntity;
+import com.webank.webasebee.db.entity.IdEntity;
 
 @SuppressWarnings("serial")
 @Data

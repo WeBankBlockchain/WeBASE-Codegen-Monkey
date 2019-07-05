@@ -57,7 +57,7 @@ public class MethodEntityRenderParas implements MethodGenerateParas {
         map.put("table_name", tableName);
         map.put("class_name", className);
         map.put("group", systemEnvironmentConfig.getGroup());
-        map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_CORE);
+        map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_DB);
         return map;
     }
 
@@ -69,7 +69,7 @@ public class MethodEntityRenderParas implements MethodGenerateParas {
     @Override
     public String getGeneratedFilePath(MethodMetaInfo method) {
         String packagePath = PackagePath.getPackagePath(PackageConstants.DB_METHOD_ENTRY_PACKAGE_POSTFIX,
-                systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_CORE);
+                systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_DB);
         String className = method.getContractName() + StringUtils.capitalize(method.getName());
         String javaFilePath = packagePath + "/" + className + ".java";
         return javaFilePath;
