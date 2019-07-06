@@ -14,7 +14,9 @@ import org.fisco.bcos.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.fisco.bcos.web3j.tx.gas.ContractGasProvider;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -37,10 +39,18 @@ public class ${contractName}${eventName}CrawlerImpl implements BcosEventCrawlerI
     private Credentials credentials;
     @Autowired
     private ContractGasProvider contractGasProvider;
+    @Autowired
+    private ${contractName} contract;
+    
+    @Bean
+    @ConditionalOnMissingBean
+    public ${contractName} get${contractName}() {
+        return ${contractName}.load("0x0000000000000000000000000000000000000000", web3j, credentials, contractGasProvider); 
+
+    }
 	
 	@Override
 	public List<EventBO> handleReceipt(TransactionReceipt receipt, BigInteger blockTimeStamp) {
-		${contractName} contract = ${contractName}.load("0x0000000000000000000000000000000000000000", web3j, credentials, contractGasProvider); 
 		List<${eventName}EventResponse> ${eventName}EventResponseList = contract.get${eventName}Events(receipt);
 		List<EventBO> list = new ArrayList<>(${eventName}EventResponseList.size());
 		if(CollectionUtils.isEmpty(${eventName}EventResponseList)) {
