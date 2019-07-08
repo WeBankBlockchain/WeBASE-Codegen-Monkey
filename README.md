@@ -113,7 +113,7 @@
 
 ```shell
 #下载安装包
-curl -LO https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/raw/dev_v0.7.0.2019.06/src/main/install_scripts.tar.gz
+curl -LO https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/raw/dev_multi_proj_2019.06/src/main/install_scripts.tar.gz
 #解压安装包
 tar -zxf install_scripts.tar.gz 
 cd install_scripts
