@@ -189,7 +189,7 @@ sh generate_bee.sh
 chmod +x generate_bee.sh
 sh generate_bee.sh build 
 ```
-当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)工程代码。请将此生成工程下的./WeBASE-Collect-Bee/dist文件夹复制到其他服务器上，并执行：
+当前目录下会生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)工程代码。请将此生成工程下的./WeBASE-Collect-Bee/WeBASE-Collect-Bee-core/dist文件夹复制到其他服务器上，并执行：
 
 ```
 chmod +x *.jar
