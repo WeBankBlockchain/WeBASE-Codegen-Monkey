@@ -32,7 +32,7 @@ case "$1" in
         EXEC_OPTION=$RUN_OPTION
 esac
 
-echo "EXEC_OPTION: $EXEC_OPTION {build|run}"
+echo "EXEC_OPTION: $EXEC_OPTION [ build|run ]"
 
 #### config props
 APPLICATION_FILE="config/resources/application.properties"
@@ -45,6 +45,7 @@ BUILD_DIR="dist"
 
 BM="WeBASE-Codegen-Monkey"
 BB="WeBASE-Collect-Bee"
+BBC="WeBASE-Collect-Bee-core"
 
 #### check the config file exists.
 if [ -f "$APPLICATION_FILE" ];then
@@ -102,13 +103,13 @@ echo "group: "$group
 rm -rf $BM
 git clone https://github.com/WeBankFinTech/$BM.git
 cd $BM
-git checkout dev_v0.7.0.2019.06 
+git checkout dev_multi_proj_2019.06 
 cd ..
 
 rm -rf $BB
 git clone https://github.com/WeBankFinTech/$BB.git
 cd $BB
-git checkout dev_v0.7.0.2019.06
+git checkout dev_multi_proj_2019.06
 cd ..
 
 # init config
@@ -123,7 +124,7 @@ cp -f ../$CONTRACT_DIR/* ./$CONTRACT_DIR
 echo "copy java contract codes done."
 
 # build
-sh gradlew clean bootJar
+bash gradlew clean bootJar
 echo "$BM build done"
 
 # Determine the Java command to use to start the JVM.
@@ -157,20 +158,21 @@ cd ../../
 rm -rf $BM
 
 cd $BB
+cd $BBC
 mkdir -p $RESOURCE_DIR/
-cp -f  ../$CERT_DIR/ca.crt $RESOURCE_DIR/
+cp -f  ../../$CERT_DIR/ca.crt $RESOURCE_DIR/
 # cp -f  ../$CERT_DIR/client.keystore $RESOURCE_DIR/
-cp -f  ../$CERT_DIR/node.crt $RESOURCE_DIR/
-cp -f  ../$CERT_DIR/node.key $RESOURCE_DIR/
+cp -f  ../../$CERT_DIR/node.crt $RESOURCE_DIR/
+cp -f  ../../$CERT_DIR/node.key $RESOURCE_DIR/
 
 echo "copy certs done."
 mkdir -p $JAVA_CODE_DIR/$contractPath
-cp -f ../$CONTRACT_DIR/* $JAVA_CODE_DIR/$contractPath/
+cp -f ../../$CONTRACT_DIR/* $JAVA_CODE_DIR/$contractPath/
 mkdir -p ./$CONTRACT_DIR
-cp -f ../$CONTRACT_DIR/* ./$CONTRACT_DIR
+cp -f ../../$CONTRACT_DIR/* ./$CONTRACT_DIR
 echo "copy java contract codes done."
 
-sh gradlew clean bootJar
+bash gradlew clean bootJar
 
 echo "$BB build done"
 
