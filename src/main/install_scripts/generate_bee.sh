@@ -45,6 +45,7 @@ BUILD_DIR="dist"
 
 BM="WeBASE-Codegen-Monkey"
 BB="WeBASE-Collect-Bee"
+BBCOMMON="WeBASE-Collect-Bee-common"
 BBC="WeBASE-Collect-Bee-core"
 
 #### check the config file exists.
@@ -166,19 +167,20 @@ cp -f  ../../$CERT_DIR/node.crt $RESOURCE_DIR/
 cp -f  ../../$CERT_DIR/node.key $RESOURCE_DIR/
 
 echo "copy certs done."
-mkdir -p $JAVA_CODE_DIR/$contractPath
-cp -f ../../$CONTRACT_DIR/* $JAVA_CODE_DIR/$contractPath/
+mkdir -p ../$BBCOMMON/$JAVA_CODE_DIR/$contractPath
+cp -f ../../$CONTRACT_DIR/* ../$BBCOMMON/$JAVA_CODE_DIR/$contractPath/
 mkdir -p ./$CONTRACT_DIR
 cp -f ../../$CONTRACT_DIR/* ./$CONTRACT_DIR
 echo "copy java contract codes done."
 
+cd ..
 bash gradlew clean bootJar
 
 echo "$BB build done"
 
 
 if [ "$EXEC_OPTION" == "$RUN_OPTION" ];then
-cd $BUILD_DIR
+cd $BBC/$BUILD_DIR
 chmod +x WeBASE*
 $JAVACMD -jar WeBASE* 
 fi

@@ -5,10 +5,12 @@ package ${group}.${projectName}.generated.bo.event;
 
 import com.webank.webasebee.common.bo.data.EventBO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
+@EqualsAndHashCode(callSuper=true)
 public class ${class_name} extends EventBO {
     
     <%
