@@ -16,7 +16,7 @@ import ${group}.${projectName}.repository.RollbackInterface;
 
 
 @Repository
-public interface ${class_name}Repository extends JpaRepository<${class_name}, Long>, JpaSpecificationExecutor<${class_name}>, RollbackInterface {
+public interface ${class_name}EventRepository extends JpaRepository<${class_name}, Long>, JpaSpecificationExecutor<${class_name}>, RollbackInterface {
 	public ${class_name} findTopByOrderByBlockHeightDesc();
 	
 	@Transactional

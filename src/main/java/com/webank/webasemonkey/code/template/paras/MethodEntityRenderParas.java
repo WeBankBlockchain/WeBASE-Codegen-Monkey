@@ -53,7 +53,7 @@ public class MethodEntityRenderParas implements MethodGenerateParas {
         map.put("list", list);
         String className = method.getContractName() + StringUtils.capitalize(method.getName());
         String tableName = StringStyleUtils.upper2underline(method.getContractName()) + "_"
-                + StringStyleUtils.upper2underline(method.getName());
+                + StringStyleUtils.upper2underline(method.getName())+"_method";
         map.put("table_name", tableName);
         map.put("class_name", className);
         map.put("group", systemEnvironmentConfig.getGroup());

@@ -53,7 +53,8 @@ public class EventSqlFileRenderParas implements EventGenerateParas {
         List<FieldVO> list = event.getList();
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("list", list);
-        String tableName = StringStyleUtils.upper2underline(event.getName());
+        String tableName = StringStyleUtils.upper2underline(event.getContractName()) + "_"
+                + StringStyleUtils.upper2underline(event.getName())+"_event";
         map.put("table_name", tableName);
         return map;
     }

@@ -50,7 +50,7 @@ public class MethodSqlRenderParas implements MethodGenerateParas {
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("list", list);
         String tableName = StringStyleUtils.upper2underline(method.getContractName()) + "_"
-                + StringStyleUtils.upper2underline(method.getName());
+                + StringStyleUtils.upper2underline(method.getName()) + "_method";
         map.put("table_name", tableName);
         return map;
     }

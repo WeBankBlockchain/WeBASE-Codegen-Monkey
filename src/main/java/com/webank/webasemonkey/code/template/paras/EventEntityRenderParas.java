@@ -50,7 +50,7 @@ public class EventEntityRenderParas implements EventGenerateParas {
         map.put("list", list);
         String className = event.getContractName() + event.getName();
         String tableName = StringStyleUtils.upper2underline(event.getContractName()) + "_"
-                + StringStyleUtils.upper2underline(event.getName());
+                + StringStyleUtils.upper2underline(event.getName())+"_event";
         map.put("table_name", tableName);
         map.put("class_name", className);
         map.put("group", systemEnvironmentConfig.getGroup());

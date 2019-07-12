@@ -63,7 +63,7 @@ public class EventRepositoryRenderParas implements EventGenerateParas {
         String packagePath = PackagePath.getPackagePath(PackageConstants.DB_EVENT_REPOSITORY_PACKAGE_POSTFIX,
                 systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_DB);
         String className = event.getContractName() + event.getName();
-        String javaFilePath = packagePath + "/" + className + "Repository.java";
+        String javaFilePath = packagePath + "/" + className + "EventRepository.java";
         return javaFilePath;
     }
 
