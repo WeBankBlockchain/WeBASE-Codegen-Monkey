@@ -39,8 +39,9 @@ public class ClazzScanUtils {
      * @param contractPath
      * @param packageName
      * @return
+     * @throws ClassNotFoundException
      */
-    public static Set<Class<?>> scan(String contractPath, String packageName) {
+    public static Set<Class<?>> scan(String contractPath, String packageName) throws ClassNotFoundException {
         Set<Class<?>> classes = new HashSet<>();
         log.info("Scan package path is {}", contractPath);
         File dir = new File(contractPath);
@@ -57,11 +58,7 @@ public class ClazzScanUtils {
         for (File file : dirfiles) {
             log.info("begin to scan file: {}", file.getName());
             String className = StringUtils.substringBefore(file.getName(), ".");
-            try {
-                classes.add(Thread.currentThread().getContextClassLoader().loadClass(packageName + '.' + className));
-            } catch (ClassNotFoundException e) {
-                log.error("添加用户自定义视图类错误 找不到此类的.class文件");
-            }
+            classes.add(Thread.currentThread().getContextClassLoader().loadClass(packageName + '.' + className));
 
         }
         return classes;

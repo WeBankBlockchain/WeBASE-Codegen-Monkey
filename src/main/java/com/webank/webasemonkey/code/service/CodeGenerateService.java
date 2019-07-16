@@ -54,7 +54,7 @@ public class CodeGenerateService {
     @Autowired
     private Map<String, EventGenerateParas> eventParasMap;
 
-    public void generateBee() {
+    public void generateBee() throws ClassNotFoundException {
         ContractInfo info = contractInfoService.parseFromContract();
         // generate java code files for crawling event data from block chain network
         templateGenerateService.generate(info.getEventList(), eventParasMap);

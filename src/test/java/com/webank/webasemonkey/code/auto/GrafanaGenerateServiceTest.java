@@ -37,7 +37,7 @@ public class GrafanaGenerateServiceTest extends WebasemonkeyApplicationTests {
     private GrafanaPanelTableParas para;
     
     @Test
-    public void testGenerate() {
+    public void testGenerate() throws ClassNotFoundException {
         service.genereate();
     }
 

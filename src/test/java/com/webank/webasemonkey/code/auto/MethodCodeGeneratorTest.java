@@ -40,7 +40,7 @@ public class MethodCodeGeneratorTest extends WebasemonkeyApplicationTests {
     private Map<String, GenerateParas> parasMap;
 
     @Test
-    public void go() {
+    public void go() throws ClassNotFoundException {
         parasMap.forEach((k, v) -> System.out.println(k + " " + v));
         codeGenerator.generateBee();
     }
