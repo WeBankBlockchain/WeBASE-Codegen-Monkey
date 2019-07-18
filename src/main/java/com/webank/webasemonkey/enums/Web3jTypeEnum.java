@@ -133,6 +133,7 @@ public enum Web3jTypeEnum {
     Bytes32("Bytes32", "varchar(256)", "String", "BytesUtils.bytesArrayToString"), 
     STATICARRAY("StaticArray","text","String","BytesUtils.bytes32ListToString"),
     STATICARRAYBYTES32("StaticArray<Bytes32>","text","String","BytesUtils.bytes32ListToString"),
+    DYNAMICBYTES("DynamicBytes", "text", "String", "String.valueOf"),
     DYNAMICARRAY("DynamicArray","text","String","String.valueOf"),
     DYNAMICARRAYADDRESS("DynamicArray<Address>","text","String","String.valueOf"),
     DYNAMICARRAYBYTES32("DynamicArray<Bytes32>","varchar(1024)","String","BytesUtils.bytes32DynamicArrayToString"),
