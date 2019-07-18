@@ -33,6 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 public enum JavaTypeEnum {
 
     BIGINTEGER("BigInteger", "Long", "bigint", "BigIntegerUtils.toLong"),
+    BOOL("Boolean", "String", "varchar(8)", "String.valueOf"),
     STRING("String", "String", "varchar(255)", "String.valueOf"),
     ByteArray("byte[]", "String", "varchar(2048)", "BytesUtils.bytesArrayToString" )
     ;
