@@ -60,6 +60,7 @@ public class ${contractName}${eventName}CrawlerImpl implements BcosEventCrawlerI
 			${class_name} ${lowContractName}${eventName} = new ${class_name}();
 			${lowContractName}${eventName}.setIdentifier("${contractName}${eventName}");		
 			${lowContractName}${eventName}.setBlockHeight(receipt.getBlockNumber().longValue());
+			${lowContractName}${eventName}.setEventContractAddress(receipt.getContractAddress());
 			${lowContractName}${eventName}.setTxHash(receipt.getTransactionHash());
 			<%
 			for(entry in list){
