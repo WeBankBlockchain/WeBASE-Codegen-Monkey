@@ -277,6 +277,18 @@ ps -ef |grep WeBASE-Collect-Bee |grep -v grep|awk '{print $2}' |xargs kill -9
 
 恭喜您，到以上步骤，您已经完成了数据导出组件的安装和部署。如果您还需要额外获得可视化的监控页面，请参考2.3
 
+#### 2.2.4 注意事项
+
+在生成的工程中，我们使用了Hibernate auto-ddl 的特性来自动创建数据库表，该特性仅供提供快速的演示，但请勿使用该特性上线；否则可能会造成生产系统的安全隐患。
+
+你可以修改WeBASE-Collect-Bee/WeBASE-Collect/src/main/resources/appliction.properties:
+
+```
+
+spring.jpa.properties.hibernate.hbm2ddl.auto=none
+
+```
+
 
 ### 2.3 可视化监控程序安装和部署
 
