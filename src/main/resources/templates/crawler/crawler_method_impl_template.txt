@@ -35,7 +35,8 @@ public class ${methodName}MethodCrawlerImpl implements BcosMethodCrawlerInterfac
 	private ContractMapsInfo contractMapsInfo; 
 
 	@Override
-	public MethodBO transactionHandler(Transaction transaction, BigInteger blockTimeStamp, Map.Entry<String, String> entry, String methodName) {
+	public MethodBO transactionHandler(Transaction transaction, BigInteger blockTimeStamp,
+	 Map.Entry<String, String> entry, String methodName, Map<String, String> txHashContractAddress) {
 		log.debug("Begin process ${methodName} Transaction");
 		${methodName}BO entity = new ${methodName}BO();
 		entity.setTxHash(transaction.getHash());
@@ -46,9 +47,11 @@ public class ${methodName}MethodCrawlerImpl implements BcosMethodCrawlerInterfac
 		if(transaction.getTo() == null || transaction.getTo().equals("0x0000000000000000000000000000000000000000")){
 			input = input.substring(2 + entry.getKey().length());
 			mapKey = entry.getValue() + entry.getValue();
+			entity.setContractAddress(txHashContractAddress.get(entity.getTxHash()));
 		}else{
 			input = input.substring(10);
 			mapKey = methodName;
+			entity.setContractAddress(transaction.getTo());
 		}
 		
 		log.debug("input : {}", input);

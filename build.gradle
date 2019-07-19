@@ -57,7 +57,7 @@ dependencies {
     compile('com.ibeetl:beetl:2.9.3')
     
      // web3j依赖
-    compile ('org.fisco-bcos:web3sdk:2.0.4')
+    compile ('org.fisco-bcos:web3sdk:2.0.5')
 }
 
 configurations {
