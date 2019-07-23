@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import ${group}.${projectName}.crawler.face.BcosMethodCrawlerInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.webank.webasebee.common.constants.ContractConstants;
 import com.webank.webasebee.common.tools.AddressUtils;
 import com.webank.webasebee.common.tools.BigIntegerUtils;
 import com.webank.webasebee.common.tools.BoolUtils;
@@ -44,7 +45,7 @@ public class ${methodName}MethodCrawlerImpl implements BcosMethodCrawlerInterfac
 		
 		String input = transaction.getInput();
 		String mapKey = null;
-		if(transaction.getTo() == null || transaction.getTo().equals("0x0000000000000000000000000000000000000000")){
+		if(transaction.getTo() == null || transaction.getTo().equals(ContractConstants.EMPTY_ADDRESS)){
 			input = input.substring(2 + entry.getKey().length());
 			mapKey = entry.getValue() + entry.getValue();
 			entity.setContractAddress(txHashContractAddress.get(entity.getTxHash()));

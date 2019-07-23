@@ -25,6 +25,7 @@ import ${contractPackName}.${contractName}.${eventName}EventResponse;
 import ${group}.webasebee.common.bo.data.EventBO;
 import ${group}.${projectName}.crawler.face.BcosEventCrawlerInterface;
 import ${group}.${projectName}.generated.bo.event.${class_name};
+import com.webank.webasebee.common.constants.ContractConstants;
 import com.webank.webasebee.common.tools.BigIntegerUtils;
 import com.webank.webasebee.common.tools.BytesUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +46,7 @@ public class ${contractName}${eventName}CrawlerImpl implements BcosEventCrawlerI
     @Bean
     @ConditionalOnMissingBean
     public ${contractName} get${contractName}() {
-        return ${contractName}.load("0x0000000000000000000000000000000000000000", web3j, credentials, contractGasProvider); 
+        return ${contractName}.load(ContractConstants.EMPTY_ADDRESS, web3j, credentials, contractGasProvider); 
 
     }
 	
