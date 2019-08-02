@@ -28,6 +28,7 @@ import ${group}.${projectName}.generated.bo.event.${class_name};
 import com.webank.webasebee.common.constants.ContractConstants;
 import com.webank.webasebee.common.tools.BigIntegerUtils;
 import com.webank.webasebee.common.tools.BytesUtils;
+import com.webank.webasebee.common.tools.JacksonUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
