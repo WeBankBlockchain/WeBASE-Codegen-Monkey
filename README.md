@@ -364,9 +364,9 @@ WeBASE-Codegen-Monkey会自动生成数据的dashboard模板，数据的路径�
 
 > http://your_ip:port/swagger-ui.html
 
-例如，当你在本机运行了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)，且未修改默认的8080端口，则可以访问此地址：
+例如，当你在本机运行了[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/dev_v0.7.0.2019.06)，且未修改默认的5200端口，则可以访问此地址：
 
-> http://localhost:8080/swagger-ui.html
+> http://localhost:5200/swagger-ui.html
 
 此时，你可以看到上述页面，可以看到页面主要包括了http请求页面和数据模型两部分。
 
@@ -597,7 +597,7 @@ WeBASE-Codegen-Monkey用于生成[WeBASE-Collect-Bee](https://github.com/WeBankF
 
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
-| server.port | N | 启动WeBASE-Collect-Bee组件实例的服务端口 | 8082 | 8080 |
+| server.port | N | 启动WeBASE-Collect-Bee组件实例的服务端口 | 8082 | 5200 |
 
 #### 1.2 FISCO-BCOS节点配置
 
