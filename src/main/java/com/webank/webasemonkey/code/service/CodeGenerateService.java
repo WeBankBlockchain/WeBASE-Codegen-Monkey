@@ -21,10 +21,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webank.webasemonkey.code.template.CodeTemplateGenerateService;
+import com.webank.webasemonkey.code.template.GrafanaGenerateService;
 import com.webank.webasemonkey.code.template.face.ConfigGenerateParas;
 import com.webank.webasemonkey.code.template.face.EventGenerateParas;
 import com.webank.webasemonkey.code.template.face.MethodGenerateParas;
 import com.webank.webasemonkey.vo.ContractInfo;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * CodeGenerateService
@@ -35,6 +38,7 @@ import com.webank.webasemonkey.vo.ContractInfo;
  *
  */
 @Service
+@Slf4j
 public class CodeGenerateService {
 
     /** @Fields templateGenerateService : template generate service */
@@ -43,6 +47,8 @@ public class CodeGenerateService {
     private CodeTemplateGenerateService templateGenerateService;
     @Autowired
     private ContractInfoService contractInfoService;
+    @Autowired
+    private GrafanaGenerateService grafanaGenerateService;
     /** @Fields configParasMap : config params map for generating config files */
     @Autowired
     private Map<String, ConfigGenerateParas> configParasMap;
@@ -62,5 +68,8 @@ public class CodeGenerateService {
         templateGenerateService.generate(info.getMethodList(), methodParasMap);
         // generate config files for crawling data.
         templateGenerateService.generate(info, configParasMap);
+        log.info("Begin to generate grafana dashboard json.");
+        grafanaGenerateService.genereate();
+        log.info("Grafana json generation Finished!");
     }
 }
