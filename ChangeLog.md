@@ -3,9 +3,28 @@
 ### V1.1.0 
 - 大幅重构了系统的代码，使得系统安装多模块的方式可以灵活组装。
 - 重构了系统服务层的代码。
-- 适配了FISCO-BCOS2.0.0
-- 修改了自动生成的函数和事件的表名规则
+- 适配了FISCO-BCOS2.0.0 和 web3sdk2.0.5
 - 修改了Java文件包名和类名映射的检查，修改了报错提示的方式
+- 新增两个Event API查询，支持通过指定任意and和or条件或任意两个参数进行查询。
+- 增加对method解析中selector方法忽略的判断
+- 适配DynamicBytes和Boolean的支持
+- 对所有method表，增加了contractAddress字段
+- 修复了sharding-jdbc-spring-boot-starter分页查询的问题
+- 修改了event表的命名方式，数据库表明以_event为后缀
+- 修改了account、constuctor method解析的方式，改为了读取runtime code来判断
+- 增加了对异构合约相同methodId场景的支持，将method解析改为按合约为维度
+- 新增了account specification API查询
+- 优化了部分性能，如优化了调用流程，添加了部分查询的EhCache机制
+- 修改了文档的组织样式
+- 支持了部分定长数组的映射方式
+- 支持了Java文件中，byte数组和List
+- 修改了服务启停的方式，增加了全路径判断，防止进程误杀
+- 修改了默认启动端口为5200
+- 修改了数据库默认字段添加前缀『_』
+- 修改了证书加载的默认方式，改为默认从config路径下加载
+- 修复了部分API参数为空的检测
+- 修复了byte数组转换错误的bug
+- 修复了默认分库inline表达式下不支持between的错误
 
 
 ---
