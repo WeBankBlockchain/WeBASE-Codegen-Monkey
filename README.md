@@ -26,30 +26,21 @@
 
 ## 关键特性
 
-#### 自动生成数据导出组件
-只需用户提供智能合约编译后的Java代码和相关的底层链、数据库的基本信息，WeBASE-Codegen-Monkey就能帮助你自动生成一个区块链数据导出的组件。现阶段，支持将数据导出到Mysql数据库中。
+- 自动生成数据导出组件
 
-#### 支持自定义导出数据内容
-可以支持导出区块链的基本信息、智能合约的函数、Event等信息。可以对导出的数据库表、字段进行定制。也可以修改导出数据字段的名称、长度等属性。
+- 支持自定义导出数据内容
 
-#### 内置Restful API，提供常用的查询功能
-自带常用的Restful API，支持查询块高、块信息、Event信息和函数信息等。
+- 内置Restful API，提供常用的查询功能
 
-#### 支持多数据源，支持读写分离和分库分表
-为了应对海量数据的导出，[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)数据导出组件集成了sharding-jdbc,支持可配置的多数据源存储，读写分离和分库分表：数据可以存储到多个表中，也可以存储到多个库中。同时，内置的Restful API可以自动无感知地返回正常的数据。
+- 支持多数据源，支持读写分离和分库分表
 
-#### 支持多活部署，多节点自动导出
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)数据导出组件支持多活部署，可自动进行分布式任务调度。
+- 支持多活部署，多节点自动导出
 
-#### 支持区块重置导出
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)数据导出组件基于区块高度进行导出，并支持指定高度重新导出数据。
+- 支持区块重置导出
 
-### 支持可视化的监控页面
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)可与grafana深度集成，支持自动生成dashboard实例，让您的链上数据了如指掌。
+- 支持可视化的监控页面
 
-#### 提供可视化的互动API控制台
-[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)集成了swagger插件，提供可视化互动API控制台。
-
+- 提供可视化的互动API控制台
 
 ## 环境要求
 
