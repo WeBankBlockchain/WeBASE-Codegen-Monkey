@@ -647,7 +647,7 @@ FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBank
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
 | system.orgId | N | 组织机构ID，用于区分不同的机构 | 10000 | FB001 |
-| system.nodeStr | Y | 连接区块链节点的nodeStr，nodeName@[IP]:[PORT], 其中prot为channel port | node1@106.12.31.123:8822 | - |
+| system.nodeStr | Y | 连接区块链节点的nodeStr，nodeName@[IP]:[PORT], 其中prot为channel port | node1@[ip]:8822 | - |
 | system.keystorePassword | Y | 节点密钥 | 123456 | - |
 | system.clientCertPassWord | Y | 证书密钥 | 123456 | - |
 
@@ -690,7 +690,7 @@ FISCO-BCOS节点配置用于配置[WeBASE-Collect-Bee](https://github.com/WeBank
 | 配置项 | 是否必输 | 说明 | 举例 | 默认值 |
 | --- | --- | --- | --- | --- |
 | system.multiLiving | Y | 启动多活开关 | true | false |
-| regcenter.serverList | N | 注册中心服务器列表 | [12.00.10.1:2181;12.00.10.2:2181] | - |
+| regcenter.serverList | N | 注册中心服务器列表 | [ip:2181;ip:2181] | - |
 | regcenter.namespace | N | 注册中心命名空间 | wecredit_bee | - |
 
 
