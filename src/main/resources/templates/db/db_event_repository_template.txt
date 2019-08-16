@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2018 WeBank, Inc. All Rights Reserved.
  */
-package ${group}.${projectName}.generated.db.event.repository;
+package ${group}.${projectName}.generated.repository.event;
 
 import javax.transaction.Transactional;
 
@@ -11,12 +11,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import ${group}.${projectName}.generated.db.event.entity.${class_name};
-import ${group}.${projectName}.sys.db.repository.RollbackInterface;
+import ${group}.${projectName}.generated.entity.event.${class_name};
+import ${group}.${projectName}.repository.RollbackInterface;
 
 
 @Repository
-public interface ${class_name}Repository extends JpaRepository<${class_name}, Long>, JpaSpecificationExecutor<${class_name}>, RollbackInterface {
+public interface ${class_name}EventRepository extends JpaRepository<${class_name}, Long>, JpaSpecificationExecutor<${class_name}>, RollbackInterface {
 	public ${class_name} findTopByOrderByBlockHeightDesc();
 	
 	@Transactional

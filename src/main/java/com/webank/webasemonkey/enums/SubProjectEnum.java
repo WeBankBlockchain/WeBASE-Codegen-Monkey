@@ -13,23 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.webank.webasemonkey.constants;
+package com.webank.webasemonkey.enums;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
- * ConfigConstants for default config
+ * SubProjectEnum
  *
- * @Description: ConfigConstants
- * @author graysonzhang
- * @data 2018-11-11 17:15:52
+ * @Description: SubProjectEnum
+ * @author maojiayu
+ * @data Jul 2, 2019 11:10:06 AM
  *
  */
-public class ConfigConstants {
-
-    /** @Fields TABLE_COUNT : table sharding detault 1 */
-    public static final int TABLE_COUNT = 1;
-    /** @Fields TASK_FREQUENCY : thread sleep time */
-    public static final String TASK_FREQUENCY = "5";
-
-    public static final String CONTRACT_PATH = "config/contract/";
+@AllArgsConstructor
+@Getter 
+public enum SubProjectEnum {
+    CORE("core", "WeBASE-Collect-Bee-core"),
+    DB("db", "WeBASE-Collect-Bee-db"),
+    PARSER("parser", "WeBASE-Collect-Bee-parser");
+    
+    private String pakageName;
+    private String pathName;
 
 }

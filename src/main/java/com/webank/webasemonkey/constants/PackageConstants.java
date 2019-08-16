@@ -16,7 +16,7 @@
 package com.webank.webasemonkey.constants;
 
 /**
- * PackageConstants 
+ * PackageConstants
  *
  * @Description: PackageConstants
  * @author graysonzhang
@@ -24,17 +24,25 @@ package com.webank.webasemonkey.constants;
  *
  */
 public class PackageConstants {
-	
-	public static final String PACKAGE_MIDDLE_FIX = "webasebee.generated";
-	
-	//event package postfix
-	public static final String DB_EVENT_ENTRY_PACKAGE_POSTFIX = "db.event.entity";
-	public static final String DB_EVENT_REPOSITORY_PACKAGE_POSTFIX = "db.event.repository"; 
-	public static final String CRAWLER_EVENT_IMPL_PACKAGE_POSTFIX = "event.crawler.impl";
-	
-	//method package postfix
-	public static final String DB_METHOD_ENTRY_PACKAGE_POSTFIX = "db.method.entity";
-	public static final String DB__METHOD_REPOSITORY_PACKAGE_POSTFIX = "db.method.repository"; 
-	public static final String CRAWLER_METHOD_IMPL_PACKAGE_POSTFIX = "method.crawler.impl";
-	
+    // project package name define
+    public static final String PROJECT_PKG_NAME = "webasebee";
+    public static final String SUB_PROJECT_PKG_CORE = "core";
+    public static final String SUB_PROJECT_PKG_PARSER = "parser";
+    public static final String SUB_PROJECT_PKG_DB = "db";
+
+
+    public static final String GENERATED = "generated";
+
+    // event package postfix
+    public static final String EVENT_BO_PACKAGE_POSTFIX = "bo.event";
+    public static final String DB_EVENT_ENTRY_PACKAGE_POSTFIX = "entity.event";
+    public static final String DB_EVENT_REPOSITORY_PACKAGE_POSTFIX = "repository.event";
+    public static final String CRAWLER_EVENT_IMPL_PACKAGE_POSTFIX = "crawler.event";
+
+    // method package postfix
+    public static final String METHOD_BO_PACKAGE_POSTFIX = "bo.method";
+    public static final String DB_METHOD_ENTRY_PACKAGE_POSTFIX = "entity.method";
+    public static final String DB__METHOD_REPOSITORY_PACKAGE_POSTFIX = "repository.method";
+    public static final String CRAWLER_METHOD_IMPL_PACKAGE_POSTFIX = "crawler.method";
+
 }

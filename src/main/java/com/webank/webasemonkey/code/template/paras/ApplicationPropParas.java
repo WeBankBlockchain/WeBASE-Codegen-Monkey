@@ -15,6 +15,7 @@
  */
 package com.webank.webasemonkey.code.template.paras;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +29,9 @@ import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.config.ZookeeperConfig;
 import com.webank.webasemonkey.constants.ConfigConstants;
 import com.webank.webasemonkey.constants.ConfigFileConstants;
+import com.webank.webasemonkey.constants.PackageConstants;
 import com.webank.webasemonkey.constants.TemplateConstants;
+import com.webank.webasemonkey.enums.SubProjectEnum;
 import com.webank.webasemonkey.vo.ContractInfo;
 import com.webank.webasemonkey.vo.EventMetaInfo;
 import com.webank.webasemonkey.vo.MethodMetaInfo;
@@ -62,10 +65,10 @@ public class ApplicationPropParas implements ConfigGenerateParas {
         map.put("nodeStr", systemEnvironmentConfig.getNodeStr());
         map.put("groupId", systemEnvironmentConfig.getGroupId());
         map.put("group", systemEnvironmentConfig.getGroup());
-        map.put("projectName", ConfigConstants.projectName);
+        map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_CORE);
         map.put("multiLiving", systemEnvironmentConfig.getMultiLiving());
         map.put("contractPackName", systemEnvironmentConfig.getContractPackName());
-        map.put("contractPath", ConfigConstants.contractPath);
+        map.put("contractPath", ConfigConstants.CONTRACT_PATH);
         map.put("crawlBatchUnit", systemEnvironmentConfig.getCrawlBatchUnit());
         map.put("frequency", systemEnvironmentConfig.getFrequency());
         map.put("serverListStr", zookeeperConfig.getServerList());
@@ -83,6 +86,7 @@ public class ApplicationPropParas implements ConfigGenerateParas {
 
     @Override
     public String getGeneratedFilePath(ContractInfo info) {
-        return ConfigFileConstants.GENERATED_APPLICATION_PROPERTIES_FILE_PATH;
+        return SubProjectEnum.CORE.getPathName() + File.separator
+                + ConfigFileConstants.GENERATED_APPLICATION_PROPERTIES_FILE_PATH;
     }
 }

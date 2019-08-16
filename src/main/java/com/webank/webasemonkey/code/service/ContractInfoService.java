@@ -57,10 +57,11 @@ public class ContractInfoService {
      * Scan all contracts file from contracts' package, get event meta info list and method meta info list.
      * 
      * @return void
+     * @throws ClassNotFoundException
      */
-    public ContractInfo parseFromContract() {
+    public ContractInfo parseFromContract() throws ClassNotFoundException {
         Set<Class<?>> clazzSet =
-                ClazzScanUtils.scan(ConfigConstants.contractPath, systemEnvironmentConfig.getContractPackName());
+                ClazzScanUtils.scan(ConfigConstants.CONTRACT_PATH, systemEnvironmentConfig.getContractPackName());
         List<EventMetaInfo> eventMetaInfoList = Lists.newArrayList();
         List<MethodMetaInfo> methodMetaInfoList = Lists.newArrayList();
         for (Class<?> clazz : clazzSet) {

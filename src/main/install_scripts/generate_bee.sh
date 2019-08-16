@@ -9,6 +9,54 @@ LANG=zh_CN.UTF-8
 ##
 ##############################################################################
 
+# functions
+function prop {
+    grep "${1}" application.properties|cut -d'=' -f2
+}
+
+function is_empty_dir(){ 
+    ls -A $1|wc -w
+}
+
+function LOG_ERROR()
+{
+    local content=${1}
+    echo -e "\033[31m"${content}"\033[0m"
+}
+
+# @function: output information log
+# @param: content: information message
+function LOG_INFO()
+{
+    local content=${1}
+    echo -e "\033[32m"${content}"\033[0m"
+}
+
+function check_java(){
+   version=$($JAVACMD -version 2>&1 |grep version |awk '{print $3}')
+   len=${#version}-2
+   version=${version:1:len}
+
+   IFS='.' arr=($version)
+   IFS=' '
+   if [ -z ${arr[0]} ];then
+      LOG_ERROR "At least Java8 is required."
+      exit 1
+   fi
+   if [ ${arr[0]} -eq 1 ];then
+      if [ ${arr[1]} -lt 8 ];then
+           LOG_ERROR "At least Java8 is required."
+           exit 1
+      fi
+   elif [ ${arr[0]} -gt 8 ];then
+          :
+   else
+       LOG_ERROR "At least Java8 is required."
+       exit 1
+   fi
+}
+
+
 #### valid input args
 EXEC_OPTION="run"
 RUN_OPTION="run"
@@ -28,11 +76,11 @@ case "$1" in
         EXEC_OPTION=$BUILD_OPTION
         ;;
     *)
-        echo "invalid option! default run!"
+        LOG_ERROR "invalid option! default run!"
         EXEC_OPTION=$RUN_OPTION
 esac
 
-echo "EXEC_OPTION: $EXEC_OPTION {build|run}"
+LOG_INFO "EXEC_OPTION: $EXEC_OPTION [ build|run ]"
 
 #### config props
 APPLICATION_FILE="config/resources/application.properties"
@@ -45,39 +93,41 @@ BUILD_DIR="dist"
 
 BM="WeBASE-Codegen-Monkey"
 BB="WeBASE-Collect-Bee"
+BBCOMMON="WeBASE-Collect-Bee-common"
+BBC="WeBASE-Collect-Bee-core"
 
 #### check the config file exists.
 if [ -f "$APPLICATION_FILE" ];then
-  echo "Check [appliction.properties] done."
+  LOG_INFO "Check [appliction.properties] done."
 else
-  echo "The config file [appliction.properties] doesn't exist. Please don't delete it."
+  LOG_ERROR "The config file [appliction.properties] doesn't exist. Please don't delete it."
   exit 1
 fi
 if [ -d "$CONTRACT_DIR" ];then
-  echo "Check [contracts] done."
+  LOG_INFO "Check [contracts] done."
 else
-  echo "The config dir [contracts] doesn't exist. Please don't delete it."
+  LOG_ERROR "The config dir [contracts] doesn't exist. Please don't delete it."
   exit 1
 fi
 if [ "`ls -A $CONTRACT_DIR`" = "" ]; then
-  echo "$CONTRACT_DIR is indeed empty"
+  LOG_ERROR "$CONTRACT_DIR is indeed empty"
   exit 1
 fi
 if [ -d "$CERT_DIR" ];then
-  echo "Check [resources] done."
+  LOG_INFO "Check [resources] done."
 else
-  echo "The config dir [resources] doesn't exist. Please don't delete it."
+  LOG_ERROR "The config dir [resources] doesn't exist. Please don't delete it."
   exit 1
 fi
 if [ "`ls -A $CERT_DIR`" = "" ]; then
-  echo "$CERT_DIR is indeed empty"
+  LOG_ERROR "$CERT_DIR is indeed empty"
   exit 1
 fi
 
 # Begin to read parameters from application.properties
 if [ -f "$APPLICATION_FILE" ]
 then
-  echo "$APPLICATION_FILE exist."
+  LOG_INFO "$APPLICATION_FILE exist."
   grep -v "^#"  $APPLICATION_FILE | grep -v "^$" | grep "="  > $APPLICATION_TMP_FILE
 
   while IFS='=' read -r key value
@@ -87,44 +137,25 @@ then
   done < "$APPLICATION_TMP_FILE"
   rm -f $APPLICATION_TMP_FILE
 else
-  echo "$APPLICATION_FILE not found."
+  LOG_ERROR "$APPLICATION_FILE not found."
   exit 1
 fi
 
-echo "system.contractPackName = " ${system_contractPackName}
-echo "system.group            = " ${system_group}
+LOG_INFO "system.contractPackName =  ${system_contractPackName} "
+LOG_INFO "system.group            =  ${system_group} "
+LOG_INFO "server.port             =  ${server_port} "
 
-contractPath=$(echo ${system_contractPackName} | tr '.' '/')
-echo "contractPath: "$contractPath
-group=$(echo ${system_group} | tr '.' '/')
-echo "group: "$group
-
-rm -rf $BM
-git clone https://github.com/WeBankFinTech/$BM.git
-cd $BM
-git checkout V1.0.1 
-cd ..
-
-rm -rf $BB
-git clone https://github.com/WeBankFinTech/$BB.git
-cd $BB
-git checkout V1.0.1
-cd ..
-
-# init config
-cd $BM
-mkdir -p $RESOURCE_DIR/
-cp -f ../$APPLICATION_FILE $RESOURCE_DIR/
-echo "copy application.properties done."
-mkdir -p $JAVA_CODE_DIR/$contractPath
-cp -f ../$CONTRACT_DIR/* $JAVA_CODE_DIR/$contractPath/
-mkdir -p ./$CONTRACT_DIR
-cp -f ../$CONTRACT_DIR/* ./$CONTRACT_DIR
-echo "copy java contract codes done."
-
-# build
-./gradlew clean bootJar
-echo "$BM build done"
+# check the environment
+## check server port is used
+check_port() {
+        LOG_INFO "Checking instance port ..."
+        netstat -tlpn | grep "\b$1\b"
+}
+if check_port $server_port
+then
+        LOG_ERROR "ERROR: the port of server is used, please check it or modify server.port in application.properties."
+    exit 1
+fi
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then
@@ -145,46 +176,78 @@ else
 Please set the JAVA_HOME variable in your environment to match the
 location of your Java installation."
 fi
-echo "JAVACMD: $JAVACMD"
-#exec $JAVACMD -jar dist/
+LOG_INFO "JAVACMD: $JAVACMD"
+
+## check the version of Java
+check_java
+
+contractPath=$(echo ${system_contractPackName} | tr '.' '/')
+LOG_INFO "contractPath: $contractPath"
+group=$(echo ${system_group} | tr '.' '/')
+LOG_INFO "group: $group"
+
+rm -rf $BM
+git clone https://github.com/WeBankFinTech/$BM.git
+cd $BM
+
+git checkout dev_multi_proj_2019.06 
+cd ..
+
+rm -rf $BB
+git clone https://github.com/WeBankFinTech/$BB.git
+cd $BB
+git checkout dev_multi_proj_2019.06
+cd ..
+
+# init config
+cd $BM
+mkdir -p $RESOURCE_DIR/
+cp -f ../$APPLICATION_FILE $RESOURCE_DIR/
+LOG_INFO "copy application.properties done."
+mkdir -p $JAVA_CODE_DIR/$contractPath
+cp -f ../$CONTRACT_DIR/* $JAVA_CODE_DIR/$contractPath/
+mkdir -p ./$CONTRACT_DIR
+cp -f ../$CONTRACT_DIR/* ./$CONTRACT_DIR
+LOG_INFO "copy java contract codes done."
+
+# build
+bash gradlew clean bootJar
+LOG_INFO "$BM build done"
 
 # run
 cd $BUILD_DIR
 chmod +x WeBASE*
 $JAVACMD -jar WeBASE* 
-echo "$BB generate done."
+LOG_INFO "$BB generate done."
 cd ../../
 rm -rf $BM
 
 cd $BB
+cd $BBC
 mkdir -p $RESOURCE_DIR/
-cp -f  ../$CERT_DIR/ca.crt $RESOURCE_DIR/
+cp -f  ../../$CERT_DIR/ca.crt $RESOURCE_DIR/
 # cp -f  ../$CERT_DIR/client.keystore $RESOURCE_DIR/
-cp -f  ../$CERT_DIR/node.crt $RESOURCE_DIR/
-cp -f  ../$CERT_DIR/node.key $RESOURCE_DIR/
+cp -f  ../../$CERT_DIR/node.crt $RESOURCE_DIR/
+cp -f  ../../$CERT_DIR/node.key $RESOURCE_DIR/
 
-echo "copy certs done."
-mkdir -p $JAVA_CODE_DIR/$contractPath
-cp -f ../$CONTRACT_DIR/* $JAVA_CODE_DIR/$contractPath/
+LOG_INFO "copy certs done."
+mkdir -p ../$BBCOMMON/$JAVA_CODE_DIR/$contractPath
+cp -f ../../$CONTRACT_DIR/* ../$BBCOMMON/$JAVA_CODE_DIR/$contractPath/
 mkdir -p ./$CONTRACT_DIR
-cp -f ../$CONTRACT_DIR/* ./$CONTRACT_DIR
-echo "copy java contract codes done."
+cp -f ../../$CONTRACT_DIR/* ./$CONTRACT_DIR
+LOG_INFO "copy java contract codes done."
 
-./gradlew clean bootJar
 
-echo "$BB build done"
+cd ..
+bash gradlew clean bootJar
+
+LOG_INFO "$BB build done"
 
 
 if [ "$EXEC_OPTION" == "$RUN_OPTION" ];then
-cd $BUILD_DIR
+cd $BBC/$BUILD_DIR
 chmod +x WeBASE*
 $JAVACMD -jar WeBASE* 
 fi
 
-function prop {
-    grep "${1}" application.properties|cut -d'=' -f2
-}
 
-function is_empty_dir(){ 
-    ls -A $1|wc -w
-}

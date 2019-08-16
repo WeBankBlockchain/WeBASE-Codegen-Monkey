@@ -22,7 +22,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.webank.webasemonkey.code.service.CodeGenerateService;
-import com.webank.webasemonkey.code.template.GrafanaGenerateService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,18 +38,13 @@ import lombok.extern.slf4j.Slf4j;
 public class GenerateCodeApplicationRunner implements ApplicationRunner {
     @Autowired
     private CodeGenerateService codeGenerateService;
-    @Autowired
-    private GrafanaGenerateService grafanaGenerateService;
 
     @Override
     public void run(ApplicationArguments var1) throws Exception {
 
         log.info("Begin to generate code.");
         codeGenerateService.generateBee();
-        log.info("Code generation Finished!");
-        log.info("Begin to generate grafana dashboard json.");
-        grafanaGenerateService.genereate();
-        log.info("Grafana json generation Finished!");
+        log.info("Code generation Finished!");       
         System.exit(0);
 
     }

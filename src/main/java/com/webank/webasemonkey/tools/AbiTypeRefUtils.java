@@ -15,6 +15,7 @@
  */
 package com.webank.webasemonkey.tools;
 
+import org.apache.commons.lang3.StringUtils;
 import org.fisco.bcos.web3j.abi.TypeReference;
 import org.fisco.bcos.web3j.abi.datatypes.Address;
 import org.fisco.bcos.web3j.abi.datatypes.Bool;
@@ -133,6 +134,27 @@ public final class AbiTypeRefUtils{
 
   public static TypeReference getTypeRef(String type)
   {
+        if (StringUtils.contains(type, "[") && StringUtils.contains(type, "]")) {
+            String digitStr = StringUtils.substringAfter(StringUtils.substringBefore(type, "]"), "[").trim();
+            if (StringUtils.isNumeric(digitStr)) {
+                if (StringUtils.startsWithIgnoreCase(type, "int256")) {
+                    return (TypeReference) new TypeReference<StaticArray<Int256>>() {
+                    };
+                }
+                if (StringUtils.startsWithIgnoreCase(type, "bytes32")) {
+                    return (TypeReference) new TypeReference<StaticArray<Bytes32>>() {
+                    };
+                }
+                if (StringUtils.startsWithIgnoreCase(type, "address")) {
+                    return (TypeReference) new TypeReference<StaticArray<Address>>() {
+                    };
+                }
+                if (StringUtils.startsWithIgnoreCase(type, "uint256")) {
+                    return (TypeReference) new TypeReference<StaticArray<Uint256>>() {
+                    };
+                }
+            }
+        }
 	  switch (type) {
       case "address":
           return   new TypeReference<Address>() {};
@@ -342,26 +364,6 @@ public final class AbiTypeRefUtils{
           return (TypeReference) new TypeReference<Bytes31>() {};
       case "bytes32":
           return (TypeReference) new TypeReference<Bytes32>() {};
-      case "bytes32[2]":
-          return (TypeReference) new TypeReference<StaticArray<Bytes32>>() {};
-      case "bytes32[3]":
-          return (TypeReference) new TypeReference<StaticArray<Bytes32>>() {};
-      case "bytes32[4]":
-          return (TypeReference) new TypeReference<StaticArray<Bytes32>>() {};
-      case "bytes32[5]":
-          return (TypeReference) new TypeReference<StaticArray<Bytes32>>() {};
-      case "bytes32[6]":
-          return (TypeReference) new TypeReference<StaticArray<Bytes32>>() {};
-      case "bytes32[7]":
-          return (TypeReference) new TypeReference<StaticArray<Bytes32>>() {};
-      case "bytes32[8]":
-          return (TypeReference) new TypeReference<StaticArray<Bytes32>>() {};
-      case "bytes32[9]":
-          return (TypeReference) new TypeReference<StaticArray<Bytes32>>() {};
-      case "bytes32[10]":
-          return (TypeReference) new TypeReference<StaticArray<Bytes32>>() {};
-      case "bytes32[11]":
-          return (TypeReference) new TypeReference<StaticArray<Bytes32>>() {};
 
       default:
           throw new UnsupportedOperationException("Unsupported type encountered: " + type);

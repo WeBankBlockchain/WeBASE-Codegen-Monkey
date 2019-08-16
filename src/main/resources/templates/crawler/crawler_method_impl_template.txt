@@ -1,10 +1,11 @@
 /**
  * Copyright (C) 2018 WeBank, Inc. All Rights Reserved.
  */
-package ${group}.${projectName}.generated.method.crawler.impl;
+package ${group}.${projectName}.generated.crawler.method;
 
 
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.fisco.bcos.web3j.abi.FunctionReturnDecoder;
@@ -13,18 +14,18 @@ import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition.NamedTy
 import org.fisco.bcos.web3j.protocol.core.methods.response.Transaction;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
-import com.webank.webasebee.generated.db.method.entity.${methodName};
-import com.webank.webasebee.generated.db.method.repository.${methodName}MethodRepository;
-import com.webank.webasebee.crawler.face.BcosMethodCrawlerInterface;
+import ${group}.${projectName}.crawler.face.BcosMethodCrawlerInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.webank.webasebee.bo.ContractMapsInfo;
-import ${group}.${projectName}.tools.AddressUtils;
-import ${group}.${projectName}.tools.BigIntegerUtils;
-import ${group}.${projectName}.tools.BoolUtils;
-import ${group}.${projectName}.tools.BytesUtils;
-import com.webank.webasebee.tools.MethodUtils;
+import com.webank.webasebee.common.constants.ContractConstants;
+import com.webank.webasebee.common.tools.AddressUtils;
+import com.webank.webasebee.common.tools.BigIntegerUtils;
+import com.webank.webasebee.common.tools.BoolUtils;
+import com.webank.webasebee.common.tools.BytesUtils;
+import com.webank.webasebee.common.tools.MethodUtils;
 import lombok.extern.slf4j.Slf4j;
-import java.sql.Date;
+import ${group}.webasebee.common.bo.contract.ContractMapsInfo;
+import ${group}.webasebee.common.bo.data.MethodBO;
+import ${group}.${projectName}.generated.bo.method.${methodName}BO;
 
 @Slf4j
 @Service
@@ -33,24 +34,25 @@ public class ${methodName}MethodCrawlerImpl implements BcosMethodCrawlerInterfac
 
 	@Autowired
 	private ContractMapsInfo contractMapsInfo; 
-	@Autowired
-	private ${methodName}MethodRepository repository;
 
 	@Override
-	public void transactionHandler(Transaction transaction, BigInteger blockTimeStamp, Map.Entry<String, String> entry, String methodName) {
+	public MethodBO transactionHandler(Transaction transaction, BigInteger blockTimeStamp,
+	 Map.Entry<String, String> entry, String methodName, Map<String, String> txHashContractAddress) {
 		log.debug("Begin process ${methodName} Transaction");
-		${methodName} entity = new ${methodName}();
+		${methodName}BO entity = new ${methodName}BO();
 		entity.setTxHash(transaction.getHash());
 		entity.setBlockHeight(transaction.getBlockNumber().longValue());
 		
 		String input = transaction.getInput();
 		String mapKey = null;
-		if(transaction.getTo() == null || transaction.getTo().equals("0x0000000000000000000000000000000000000000")){
+		if(transaction.getTo() == null || transaction.getTo().equals(ContractConstants.EMPTY_ADDRESS)){
 			input = input.substring(2 + entry.getKey().length());
 			mapKey = entry.getValue() + entry.getValue();
+			entity.setContractAddress(txHashContractAddress.get(entity.getTxHash()));
 		}else{
 			input = input.substring(10);
 			mapKey = methodName;
+			entity.setContractAddress(transaction.getTo());
 		}
 		
 		log.debug("input : {}", input);
@@ -65,9 +67,10 @@ public class ${methodName}MethodCrawlerImpl implements BcosMethodCrawlerInterfac
 		%>
 		entity.set${javaCapName}(${typeMethod}(params.get(${index}).getValue()));
 		<%  } %>
-		entity.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));		
-		repository.save(entity);
+		entity.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));	
+		entity.setIdentifier("${methodName}");			
 		
 		log.debug("end process ${methodName} Transaction");
+		return entity;
 	}
 }

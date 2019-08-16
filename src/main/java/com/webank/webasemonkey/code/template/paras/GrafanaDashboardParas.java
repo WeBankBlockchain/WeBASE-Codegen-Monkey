@@ -15,6 +15,7 @@
  */
 package com.webank.webasemonkey.code.template.paras;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ import com.google.common.collect.Maps;
 import com.webank.webasemonkey.code.template.face.GrafanaParas;
 import com.webank.webasemonkey.constants.ConfigFileConstants;
 import com.webank.webasemonkey.constants.TemplateConstants;
+import com.webank.webasemonkey.enums.SubProjectEnum;
 
 /**
  * GrafanaDashboardParas
@@ -50,7 +52,8 @@ public class GrafanaDashboardParas implements GrafanaParas<List<String>> {
 
     @Override
     public String getGeneratedFilePath() {
-        return ConfigFileConstants.GENERATED_GRAFANA_DEFAULT_DASHBOARD_PATH;
+        return SubProjectEnum.CORE.getPathName() + File.separator
+                + ConfigFileConstants.GENERATED_GRAFANA_DEFAULT_DASHBOARD_PATH;
     }
 
 }

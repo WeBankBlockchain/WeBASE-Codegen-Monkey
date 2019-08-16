@@ -15,6 +15,7 @@
  */
 package com.webank.webasemonkey.code.template.paras;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ import com.google.common.collect.Maps;
 import com.webank.webasemonkey.code.template.face.MethodGenerateParas;
 import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.constants.TemplateConstants;
+import com.webank.webasemonkey.enums.SubProjectEnum;
 import com.webank.webasemonkey.tools.StringStyleUtils;
 import com.webank.webasemonkey.vo.FieldVO;
 import com.webank.webasemonkey.vo.MethodMetaInfo;
@@ -48,7 +50,7 @@ public class MethodSqlRenderParas implements MethodGenerateParas {
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("list", list);
         String tableName = StringStyleUtils.upper2underline(method.getContractName()) + "_"
-                + StringStyleUtils.upper2underline(method.getName());
+                + StringStyleUtils.upper2underline(method.getName()) + "_method";
         map.put("table_name", tableName);
         return map;
     }
@@ -60,8 +62,9 @@ public class MethodSqlRenderParas implements MethodGenerateParas {
 
     @Override
     public String getGeneratedFilePath(MethodMetaInfo method) {
-        String javaFilePath = "src/main/scripts/method/" + StringStyleUtils.upper2underline(method.getContractName())
-                + "_" + StringStyleUtils.upper2underline(method.getName()) + ".sql";
+        String javaFilePath = SubProjectEnum.CORE.getPathName() + File.separator + "src/main/scripts/method/"
+                + StringStyleUtils.upper2underline(method.getContractName()) + "_"
+                + StringStyleUtils.upper2underline(method.getName()) + ".sql";
         return javaFilePath;
     }
 }

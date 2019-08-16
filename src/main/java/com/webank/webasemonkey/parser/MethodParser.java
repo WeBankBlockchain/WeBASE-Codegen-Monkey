@@ -70,6 +70,10 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
             if (inputs == null || inputs.isEmpty()) {
                 continue;
             }
+            // solidity new feature: selector(which returns a method id) may have no name.
+            if (StringUtils.isEmpty(inputs.get(0).getName())) {
+                continue;
+            }
 
             MethodMetaInfo method = new MethodMetaInfo();
             method.setContractName(clazz.getSimpleName());

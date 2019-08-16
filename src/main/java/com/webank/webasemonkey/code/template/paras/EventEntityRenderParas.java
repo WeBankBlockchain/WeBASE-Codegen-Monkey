@@ -17,12 +17,13 @@ package com.webank.webasemonkey.code.template.paras;
 
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import com.google.common.collect.Maps;
 import com.webank.webasemonkey.code.template.face.EventGenerateParas;
 import com.webank.webasemonkey.config.SystemEnvironmentConfig;
-import com.webank.webasemonkey.constants.ConfigConstants;
 import com.webank.webasemonkey.constants.PackageConstants;
 import com.webank.webasemonkey.constants.TemplateConstants;
 import com.webank.webasemonkey.tools.PackagePath;
@@ -49,11 +50,11 @@ public class EventEntityRenderParas implements EventGenerateParas {
         map.put("list", list);
         String className = event.getContractName() + event.getName();
         String tableName = StringStyleUtils.upper2underline(event.getContractName()) + "_"
-                + StringStyleUtils.upper2underline(event.getName());
+                + StringStyleUtils.upper2underline(event.getName())+"_event";
         map.put("table_name", tableName);
         map.put("class_name", className);
         map.put("group", systemEnvironmentConfig.getGroup());
-        map.put("projectName", ConfigConstants.projectName);
+        map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_DB);
         return map;
     }
 
@@ -65,7 +66,7 @@ public class EventEntityRenderParas implements EventGenerateParas {
     @Override
     public String getGeneratedFilePath(EventMetaInfo event) {
         String packagePath = PackagePath.getPackagePath(PackageConstants.DB_EVENT_ENTRY_PACKAGE_POSTFIX,
-                systemEnvironmentConfig.getGroup());
+                systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_DB);
         String className = event.getContractName() + event.getName();
         String javaFilePath = packagePath + "/" + className + ".java";
         return javaFilePath;

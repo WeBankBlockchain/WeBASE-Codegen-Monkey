@@ -15,6 +15,8 @@
  */
 package com.webank.webasemonkey.enums;
 
+import org.apache.commons.lang.StringUtils;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -33,8 +35,10 @@ import lombok.extern.slf4j.Slf4j;
 public enum JavaTypeEnum {
 
     BIGINTEGER("BigInteger", "Long", "bigint", "BigIntegerUtils.toLong"),
+    BOOL("Boolean", "String", "varchar(8)", "String.valueOf"),
     STRING("String", "String", "varchar(255)", "String.valueOf"),
-    ByteArray("byte[]", "String", "varchar(2048)", "BytesUtils.bytesArrayToString" )
+    ByteArray("byte[]", "String", "varchar(2048)", "BytesUtils.bytesArrayToString" ),
+    LIST("List", "String", "varchar(2048)", "JacksonUtils.toJson" )
     ;
 
     private String javaType;
@@ -44,7 +48,7 @@ public enum JavaTypeEnum {
 
     public static JavaTypeEnum parse(String javaType) {
         for (JavaTypeEnum type : JavaTypeEnum.values()) {
-            if (type.getJavaType().equalsIgnoreCase(javaType)) {
+            if (type.getJavaType().equalsIgnoreCase(StringUtils.substringBefore(javaType, "<"))) {
                 return type;
             }
         }

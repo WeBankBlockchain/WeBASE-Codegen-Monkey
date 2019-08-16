@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2018 WeBank, Inc. All Rights Reserved.
  */
-package ${group}.${projectName}.generated.event.crawler.impl;
+package ${group}.${projectName}.generated.crawler.event;
 
 import java.math.BigInteger;
 import java.sql.Date;
@@ -14,17 +14,21 @@ import org.fisco.bcos.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.fisco.bcos.web3j.tx.gas.ContractGasProvider;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import ${contractPackName}.${contractName};
 import ${contractPackName}.${contractName}.${eventName}EventResponse;
+import ${group}.webasebee.common.bo.data.EventBO;
 import ${group}.${projectName}.crawler.face.BcosEventCrawlerInterface;
-import ${group}.${projectName}.generated.db.event.entity.${class_name};
-import ${group}.${projectName}.generated.db.event.repository.${class_name}Repository;
-import com.webank.webasebee.tools.BigIntegerUtils;
-import com.webank.webasebee.tools.BytesUtils;
+import ${group}.${projectName}.generated.bo.event.${class_name};
+import com.webank.webasebee.common.constants.ContractConstants;
+import com.webank.webasebee.common.tools.BigIntegerUtils;
+import com.webank.webasebee.common.tools.BytesUtils;
+import com.webank.webasebee.common.tools.JacksonUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -37,21 +41,28 @@ public class ${contractName}${eventName}CrawlerImpl implements BcosEventCrawlerI
     private Credentials credentials;
     @Autowired
     private ContractGasProvider contractGasProvider;
-	@Autowired
-	private ${class_name}Repository repository;
-	
+    @Autowired
+    private ${contractName} contract;
+    
+    @Bean
+    @ConditionalOnMissingBean
+    public ${contractName} get${contractName}() {
+        return ${contractName}.load(ContractConstants.EMPTY_ADDRESS, web3j, credentials, contractGasProvider); 
+
+    }
 	
 	@Override
-	public boolean handleReceipt(TransactionReceipt receipt, BigInteger blockTimeStamp) {
-		${contractName} contract = ${contractName}.load("0x0000000000000000000000000000000000000000", web3j, credentials, contractGasProvider); 
+	public List<EventBO> handleReceipt(TransactionReceipt receipt, BigInteger blockTimeStamp) {
 		List<${eventName}EventResponse> ${eventName}EventResponseList = contract.get${eventName}Events(receipt);
+		List<EventBO> list = new ArrayList<>(${eventName}EventResponseList.size());
 		if(CollectionUtils.isEmpty(${eventName}EventResponseList)) {
-		    return false;
+		    return list;
 		}
-		List<${class_name}> list = new ArrayList<>(${eventName}EventResponseList.size());
 		for (${eventName}EventResponse ${eventName}EventResponse : ${eventName}EventResponseList) {
 			${class_name} ${lowContractName}${eventName} = new ${class_name}();
+			${lowContractName}${eventName}.setIdentifier("${contractName}${eventName}");		
 			${lowContractName}${eventName}.setBlockHeight(receipt.getBlockNumber().longValue());
+			${lowContractName}${eventName}.setEventContractAddress(receipt.getContractAddress());
 			${lowContractName}${eventName}.setTxHash(receipt.getTransactionHash());
 			<%
 			for(entry in list){
@@ -65,7 +76,6 @@ public class ${contractName}${eventName}CrawlerImpl implements BcosEventCrawlerI
 			log.debug("depot ${eventName}:{}", ${lowContractName}${eventName}.toString());
 			list.add(${lowContractName}${eventName});
 		}
-		repository.saveAll(list);
-		return true;
+		return list;
 	}
 }

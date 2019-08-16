@@ -20,41 +20,39 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import com.google.common.collect.Maps;
-import com.webank.webasemonkey.code.template.face.MethodGenerateParas;
+import com.webank.webasemonkey.code.template.face.EventGenerateParas;
 import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.constants.PackageConstants;
 import com.webank.webasemonkey.constants.TemplateConstants;
 import com.webank.webasemonkey.tools.PackagePath;
+import com.webank.webasemonkey.vo.EventMetaInfo;
 import com.webank.webasemonkey.vo.FieldVO;
-import com.webank.webasemonkey.vo.MethodMetaInfo;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * MethodCrawlerImplParas uses to installing params for generating method crawler class that implements
- * BcosMethodCrawlerInterface.
+ * EventBoRenderParas
  *
- * @Description: MethodCrawlerImplParas
- * @author graysonzhang
- * @data 2018-12-11 12:16:24
+ * @Description: EventBoRenderParas
+ * @author maojiayu
+ * @data Jul 2, 2019 10:41:01 AM
  *
  */
 @Component
-public class MethodCrawlerImplParas implements MethodGenerateParas {
+public class EventBoRenderParas implements EventGenerateParas {
 
     @Autowired
     protected SystemEnvironmentConfig systemEnvironmentConfig;
 
     @Override
-    public Map<String, Object> getMap(MethodMetaInfo method) {
-        List<FieldVO> list = method.getList();
+    public Map<String, Object> getMap(EventMetaInfo event) {
+        List<FieldVO> list = event.getList();
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("list", list);
-        String name = method.getContractName() + StringUtils.capitalize(method.getName());
-        map.put("contractName", method.getContractName());
-        map.put("methodName", name);
-        map.put("oriMethodName", method.getName());
+        String className = getClassName(event);
+        map.put("class_name", className);
         map.put("group", systemEnvironmentConfig.getGroup());
         map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_PARSER);
         return map;
@@ -62,15 +60,20 @@ public class MethodCrawlerImplParas implements MethodGenerateParas {
 
     @Override
     public String getTemplatePath() {
-        return TemplateConstants.CRAWLER_METHOD_IMPL_TEMPLATE_PATH;
+        return TemplateConstants.EVENT_BO_TEMPLATE_PATH;
     }
 
     @Override
-    public String getGeneratedFilePath(MethodMetaInfo method) {
-        String packagePath = PackagePath.getPackagePath(PackageConstants.CRAWLER_METHOD_IMPL_PACKAGE_POSTFIX,
+    public String getGeneratedFilePath(EventMetaInfo event) {
+        String packagePath = PackagePath.getPackagePath(PackageConstants.EVENT_BO_PACKAGE_POSTFIX,
                 systemEnvironmentConfig.getGroup(), PackageConstants.SUB_PROJECT_PKG_PARSER);
-        String className = method.getContractName() + StringUtils.capitalize(method.getName());
-        String javaFilePath = packagePath + "/" + className + "MethodCrawlerImpl.java";
+        String className = getClassName(event);
+        String javaFilePath = packagePath + "/" + className + ".java";
         return javaFilePath;
     }
+
+    private String getClassName(EventMetaInfo event) {
+        return event.getContractName() + event.getName() + "BO";
+    }
+
 }

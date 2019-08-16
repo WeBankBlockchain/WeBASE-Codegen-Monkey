@@ -2,17 +2,20 @@
 server.port=${port}
 spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
 spring.jackson.time-zone=GMT+8
-logging.file=webasebee.log
+logging.file=webasebee-core.log
 logging.level.org.hibernate=ERROR 
-logging.level.org.fisco.bcos=ERROR
+logging.level.org.fisco.bcos=ERROR 
 
 ## Spring data jpa properties
 spring.datasource.test-on-borrow=false
 spring.datasource.test-while-idle=true
 spring.datasource.time-between-eviction-runs-millis= 3600000
+## WARN!: please don't TURN ON this option in pruduce environment. Create the tables munally. 
+## Please turn off this option in produce environment. eg.
+## spring.jpa.properties.hibernate.hbm2ddl.auto=none
 spring.jpa.properties.hibernate.hbm2ddl.auto=update
-spring.jpa.properties.hibernate.dialect=com.webank.webasebee.config.MysqlConfig
-spring.jpa.hibernate.naming.physical-strategy=com.webank.webasebee.config.DatabaseNamingStrategy
+spring.jpa.properties.hibernate.dialect=${group}.${projectName}.config.MysqlConfig
+spring.jpa.hibernate.naming.physical-strategy=${group}.${projectName}.config.DatabaseNamingStrategy
 spring.jpa.properties.hibernate.show_sql=true
 spring.profiles.active=sharding-tables
 
