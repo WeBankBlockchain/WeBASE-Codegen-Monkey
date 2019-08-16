@@ -56,8 +56,8 @@
 | docker    | >= docker[18.0.0] | 只有需要可视化监控页面的时候才需要安装|
 
 ## 文档
-- [**中文**](https://webasedoc.readthedocs.io/zh_CN/dev-1.0.2/docs/WeBASE-Codegen-Monkey/index.html)
-- [**快速安装**](https://webasedoc.readthedocs.io/zh_CN/dev-1.0.2/docs/WeBASE-Codegen-Monkey/install.html#)
+- [**中文**](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Codegen-Monkey/index.html)
+- [**快速安装**](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Codegen-Monkey/install.html#)
 
 ## 贡献代码
 欢迎参与本项目的社区建设：
