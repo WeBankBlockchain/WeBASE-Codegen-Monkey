@@ -31,6 +31,8 @@ public class ${class_name} extends IdEntity {
     private long blockHeight;
     @Column(name = "tx_hash")
 	private String txHash;
+	@Column(name = "event_contract_address")
+    private String eventContractAddress;
     <%
 	for(entry in list){
 		var javaName = entry.javaName;
