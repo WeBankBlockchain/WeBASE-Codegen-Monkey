@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.fisco.bcos.web3j.abi.TypeReference;
 import org.fisco.bcos.web3j.protocol.ObjectMapperFactory;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition.NamedType;
@@ -154,6 +155,13 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
 
     public String solidityType2SolidityReferenceType(String type) {
         try {
+            TypeReference tr = AbiTypeRefUtils.getTypeRef(type);
+            if (StringUtils.endsWith(tr.getType().getTypeName(), ">")) {
+                if (StringUtils.startsWithIgnoreCase(type, "bytes")) {
+                    return AbiTypeRefUtils.getTypeRef(type).getClassType().getSimpleName();
+                }
+                return tr.getClassType().getSimpleName() + "<" + StringUtils.substringBefore(type, "[") + ">";
+            }
             return AbiTypeRefUtils.getTypeRef(type).getClassType().getSimpleName();
         } catch (ClassNotFoundException e) {
             log.error("ClassNotFoundException: {}", e.getMessage());
