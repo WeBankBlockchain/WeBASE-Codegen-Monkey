@@ -100,6 +100,10 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
             for (NamedType namedType : inputs) {
                 FieldVO vo = new FieldVO();
                 String k = namedType.getName();
+                // 增加is前缀变量的特殊处理
+                if (StringUtils.startsWith(k, "is") && k.length() > 2 && Character.isUpperCase(k.charAt(2))) {
+                    k = StringUtils.uncapitalize(StringUtils.substring(k, 2));
+                }
                 String type = namedType.getType().split(" ")[0];
                 String v = solidityType2SolidityReferenceType(type);
                 String length = PropertiesUtils.getGlobalProperty(ParserConstants.LENGTH, method.getContractName(),
