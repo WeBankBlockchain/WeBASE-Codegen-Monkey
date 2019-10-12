@@ -60,4 +60,7 @@ public class SystemEnvironmentConfig {
 
     private long startBlockHeight;
     private String startDate;
+    
+    private String dbIdentifierSplit = "false";
+
 }

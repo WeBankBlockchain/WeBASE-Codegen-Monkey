@@ -108,11 +108,10 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
                 String v = solidityType2SolidityReferenceType(type);
                 String length = PropertiesUtils.getGlobalProperty(ParserConstants.LENGTH, method.getContractName(),
                         method.getName(), k, "0");
-                vo.setSolidityName(k)
-                        .setSqlName(systemEnvironmentConfig.getNamePrefix() + StringStyleUtils.upper2underline(k)
-                                + systemEnvironmentConfig.getNamePostfix())
-                        .setJavaName(k).setSqlType(Web3jTypeEnum.parse(v).getSqlType()).setSolidityType(v)
-                        .setJavaType(Web3jTypeEnum.parse(v).getJavaType())
+                String sqlName = systemEnvironmentConfig.getNamePrefix() + StringStyleUtils.upper2underline(k)
+                        + systemEnvironmentConfig.getNamePostfix();
+                vo.setSolidityName(k).setSqlName(sqlName).setJavaName(k).setSqlType(Web3jTypeEnum.parse(v).getSqlType())
+                        .setSolidityType(v).setJavaType(Web3jTypeEnum.parse(v).getJavaType())
                         .setTypeMethod(Web3jTypeEnum.parse(v).getTypeMethod()).setJavaCapName(StringUtils.capitalize(k))
                         .setLength(Integer.parseInt(length));
                 log.debug("java name {}, java type {}, solidity type {}, type method {}", vo.getJavaName(),

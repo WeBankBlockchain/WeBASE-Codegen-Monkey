@@ -27,6 +27,7 @@ import com.webank.webasemonkey.code.template.face.EventGenerateParas;
 import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.constants.TemplateConstants;
 import com.webank.webasemonkey.enums.SubProjectEnum;
+import com.webank.webasemonkey.tools.SqlNameUtils;
 import com.webank.webasemonkey.tools.StringStyleUtils;
 import com.webank.webasemonkey.vo.EventMetaInfo;
 import com.webank.webasemonkey.vo.FieldVO;
@@ -44,6 +45,8 @@ import com.webank.webasemonkey.vo.FieldVO;
 public class EventSqlFileRenderParas implements EventGenerateParas {
     @Autowired
     protected SystemEnvironmentConfig systemEnvironmentConfig;
+    @Autowired
+    private SqlNameUtils sqlNameUtils;
 
     /*
      * input: 0-List<FieldVO> 字段属性; 1-String SQL表名;
@@ -53,8 +56,7 @@ public class EventSqlFileRenderParas implements EventGenerateParas {
         List<FieldVO> list = event.getList();
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("list", list);
-        String tableName = StringStyleUtils.upper2underline(event.getContractName()) + "_"
-                + StringStyleUtils.upper2underline(event.getName())+"_event";
+        String tableName = sqlNameUtils.getSqlName(event.getContractName(), event.getName()) + "_event";
         map.put("table_name", tableName);
         return map;
     }

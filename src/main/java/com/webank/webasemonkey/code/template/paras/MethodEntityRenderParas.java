@@ -28,7 +28,7 @@ import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.constants.PackageConstants;
 import com.webank.webasemonkey.constants.TemplateConstants;
 import com.webank.webasemonkey.tools.PackagePath;
-import com.webank.webasemonkey.tools.StringStyleUtils;
+import com.webank.webasemonkey.tools.SqlNameUtils;
 import com.webank.webasemonkey.vo.FieldVO;
 import com.webank.webasemonkey.vo.MethodMetaInfo;
 
@@ -45,6 +45,8 @@ public class MethodEntityRenderParas implements MethodGenerateParas {
 
     @Autowired
     protected SystemEnvironmentConfig systemEnvironmentConfig;
+    @Autowired
+    private SqlNameUtils sqlNameUtils;
 
     @Override
     public Map<String, Object> getMap(MethodMetaInfo method) {
@@ -52,8 +54,7 @@ public class MethodEntityRenderParas implements MethodGenerateParas {
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("list", list);
         String className = method.getContractName() + StringUtils.capitalize(method.getName());
-        String tableName = StringStyleUtils.upper2underline(method.getContractName()) + "_"
-                + StringStyleUtils.upper2underline(method.getName())+"_method";
+        String tableName = sqlNameUtils.getSqlName(method.getContractName(), method.getName()) + "_method";
         map.put("table_name", tableName);
         map.put("class_name", className);
         map.put("group", systemEnvironmentConfig.getGroup());

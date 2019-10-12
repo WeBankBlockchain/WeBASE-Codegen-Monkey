@@ -27,7 +27,7 @@ import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.constants.PackageConstants;
 import com.webank.webasemonkey.constants.TemplateConstants;
 import com.webank.webasemonkey.tools.PackagePath;
-import com.webank.webasemonkey.tools.StringStyleUtils;
+import com.webank.webasemonkey.tools.SqlNameUtils;
 import com.webank.webasemonkey.vo.EventMetaInfo;
 import com.webank.webasemonkey.vo.FieldVO;
 
@@ -42,6 +42,8 @@ import com.webank.webasemonkey.vo.FieldVO;
 public class EventEntityRenderParas implements EventGenerateParas {
     @Autowired
     protected SystemEnvironmentConfig systemEnvironmentConfig;
+    @Autowired
+    private SqlNameUtils sqlNameUtils;
 
     @Override
     public Map<String, Object> getMap(EventMetaInfo event) {
@@ -49,8 +51,7 @@ public class EventEntityRenderParas implements EventGenerateParas {
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("list", list);
         String className = event.getContractName() + event.getName();
-        String tableName = StringStyleUtils.upper2underline(event.getContractName()) + "_"
-                + StringStyleUtils.upper2underline(event.getName())+"_event";
+        String tableName = sqlNameUtils.getSqlName(event.getContractName(), event.getName()) + "_event";
         map.put("table_name", tableName);
         map.put("class_name", className);
         map.put("group", systemEnvironmentConfig.getGroup());
