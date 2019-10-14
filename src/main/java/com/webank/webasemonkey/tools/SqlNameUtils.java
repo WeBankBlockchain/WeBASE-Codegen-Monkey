@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webank.webasemonkey.config.SystemEnvironmentConfig;
+import com.webank.webasemonkey.enums.NameStyleEnum;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,12 +39,16 @@ public class SqlNameUtils {
     private SystemEnvironmentConfig systemEnvironmentConfig;
 
     public String getSqlName(String contractName, String subName) {
+
         String sqlName =
                 StringStyleUtils.upper2underline(contractName) + "_" + StringStyleUtils.upper2underline(subName);
+        if (systemEnvironmentConfig.getNameStyle().equalsIgnoreCase(NameStyleEnum.RAW_CASE.getStyle())) {
+            sqlName = contractName + subName;
+        }
         // mysql最大支持64位，超过64位进行截取
-        if (systemEnvironmentConfig.getDbIdentifierSplit().equalsIgnoreCase("true") && sqlName.length() > 64) {
+        if (systemEnvironmentConfig.getDbIdentifierSplit().equalsIgnoreCase("true") && sqlName.length() > 55) {
             log.info("Cut sqlName {}", sqlName);
-            sqlName = StringUtils.substring(sqlName, 0, 63);
+            sqlName = StringUtils.substring(sqlName, 0, 54);
         }
         return sqlName;
     }

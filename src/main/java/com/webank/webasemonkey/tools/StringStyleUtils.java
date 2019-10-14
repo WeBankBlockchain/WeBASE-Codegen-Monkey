@@ -72,7 +72,8 @@ public class StringStyleUtils {
         if (sb.indexOf("_") == 0) {
             sb.deleteCharAt(0);
         }
-        return sb.toString();
+        String r = sb.toString();
+        return r.replaceAll("__", "_");
     }
 
     /**
