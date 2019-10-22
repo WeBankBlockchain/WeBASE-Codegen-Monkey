@@ -84,6 +84,7 @@ LOG_INFO "EXEC_OPTION: $EXEC_OPTION [ build|run ]"
 
 #### config props
 APPLICATION_FILE="config/resources/application.properties"
+DEF_FILE="config/resources/*.def"
 APPLICATION_TMP_FILE="config/resources/application.properties.tmp"
 CONTRACT_DIR="config/contract"
 CERT_DIR="config/resources"
@@ -190,19 +191,21 @@ rm -rf $BM
 git clone https://github.com/WeBankFinTech/$BM.git
 cd $BM
 
-git checkout dev_event_address_2019.08
+git checkout dev_type_handle_2019.10
 cd ..
 
 rm -rf $BB
 git clone https://github.com/WeBankFinTech/$BB.git
 cd $BB
-git checkout dev_event_address_2019.08
+git checkout dev_type_handle_2019.10
 cd ..
 
 # init config
 cd $BM
 mkdir -p $RESOURCE_DIR/
 cp -f ../$APPLICATION_FILE $RESOURCE_DIR/
+cp -f ../$DEF_FILE $RESOURCE_DIR/
+
 LOG_INFO "copy application.properties done."
 mkdir -p $JAVA_CODE_DIR/$contractPath
 cp -f ../$CONTRACT_DIR/* $JAVA_CODE_DIR/$contractPath/
