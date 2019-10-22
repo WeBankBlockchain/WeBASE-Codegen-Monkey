@@ -18,6 +18,7 @@ package com.webank.webasemonkey.parser;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.fisco.bcos.web3j.protocol.core.methods.response.Log;
@@ -32,6 +33,7 @@ import com.webank.webasemonkey.tools.PropertiesUtils;
 import com.webank.webasemonkey.tools.StringStyleUtils;
 import com.webank.webasemonkey.vo.EventMetaInfo;
 import com.webank.webasemonkey.vo.FieldVO;
+import com.webank.webasemonkey.vo.Web3jTypeVO;
 
 import cn.hutool.core.text.StrSpliter;
 import lombok.extern.slf4j.Slf4j;
@@ -48,6 +50,8 @@ import lombok.extern.slf4j.Slf4j;
 public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
     @Autowired
     private SystemEnvironmentConfig systemEnvironmentConfig;
+    @Autowired
+    private Map<String, Web3jTypeVO> customMap;
 
     public List<EventMetaInfo> parseToInfoList(Class<?> clazz) {
         Class<?>[] subClass = clazz.getClasses();
@@ -95,9 +99,18 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
                 }
                 String sqlName = systemEnvironmentConfig.getNamePrefix() + StringStyleUtils.upper2underline(k)
                         + systemEnvironmentConfig.getNamePostfix();
-                vo.setSqlName(sqlName).setJavaName(k).setSqlType(JavaTypeEnum.parse(v).getSqlType()).setJavaType(v)
-                        .setEntityType(JavaTypeEnum.parse(v).getEntityType()).setJavaCapName(StringUtils.capitalize(k))
-                        .setTypeMethod(JavaTypeEnum.parse(v).getTypeMethod()).setLength(Integer.parseInt(length));
+                // get type from customMap
+                if (customMap.containsKey(v)) {
+                    Web3jTypeVO typeVo = customMap.get(v);
+                    vo.setSqlType(typeVo.getSqlType()).setTypeMethod(typeVo.getTypeMethod())
+                            .setEntityType(typeVo.getJavaType());
+                } else {
+                    vo.setSqlType(JavaTypeEnum.parse(v).getSqlType())
+                            .setEntityType(JavaTypeEnum.parse(v).getEntityType())
+                            .setTypeMethod(JavaTypeEnum.parse(v).getTypeMethod());
+                }
+                vo.setSqlName(sqlName).setJavaName(k).setJavaType(v).setJavaCapName(StringUtils.capitalize(k))
+                        .setLength(Integer.parseInt(length));
                 fieldList.add(vo);
             }
             event.setList(fieldList);
