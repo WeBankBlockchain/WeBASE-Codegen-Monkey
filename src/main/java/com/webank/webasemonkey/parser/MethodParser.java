@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.fisco.bcos.web3j.abi.TypeReference;
@@ -39,6 +40,7 @@ import com.webank.webasemonkey.tools.PropertiesUtils;
 import com.webank.webasemonkey.tools.StringStyleUtils;
 import com.webank.webasemonkey.vo.FieldVO;
 import com.webank.webasemonkey.vo.MethodMetaInfo;
+import com.webank.webasemonkey.vo.Web3jTypeVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -56,6 +58,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo> {
     @Autowired
     private SystemEnvironmentConfig systemEnvironmentConfig;
+    @Autowired
+    private Map<String, Web3jTypeVO> customMap;
 
     public List<MethodMetaInfo> parseToInfoList(Class<?> clazz) {
         AbiDefinition[] abiDefinitions = getContractAbiList(clazz);
@@ -110,10 +114,17 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
                         method.getName(), k, "0");
                 String sqlName = systemEnvironmentConfig.getNamePrefix() + StringStyleUtils.upper2underline(k)
                         + systemEnvironmentConfig.getNamePostfix();
-                vo.setSolidityName(k).setSqlName(sqlName).setJavaName(k).setSqlType(Web3jTypeEnum.parse(v).getSqlType())
-                        .setSolidityType(v).setJavaType(Web3jTypeEnum.parse(v).getJavaType())
-                        .setTypeMethod(Web3jTypeEnum.parse(v).getTypeMethod()).setJavaCapName(StringUtils.capitalize(k))
-                        .setLength(Integer.parseInt(length));
+                // get type from customMap
+                if (customMap.containsKey(v)) {
+                    Web3jTypeVO typeVo = customMap.get(v);
+                    vo.setSqlType(typeVo.getSqlType()).setTypeMethod(typeVo.getTypeMethod())
+                            .setJavaType(typeVo.getJavaType());
+                } else {
+                    vo.setSqlType(Web3jTypeEnum.parse(v).getSqlType()).setJavaType(Web3jTypeEnum.parse(v).getJavaType())
+                            .setTypeMethod(Web3jTypeEnum.parse(v).getTypeMethod());
+                }
+                vo.setSolidityName(k).setSqlName(sqlName).setJavaName(k).setSolidityType(v)
+                        .setJavaCapName(StringUtils.capitalize(k)).setLength(Integer.parseInt(length));
                 log.debug("java name {}, java type {}, solidity type {}, type method {}", vo.getJavaName(),
                         vo.getJavaType(), vo.getSolidityType(), vo.getTypeMethod());
                 fieldList.add(vo);

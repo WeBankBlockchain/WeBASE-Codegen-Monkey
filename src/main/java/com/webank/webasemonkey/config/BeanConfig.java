@@ -15,14 +15,27 @@
  */
 package com.webank.webasemonkey.config;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.resource.ClasspathResourceLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+
+import com.webank.webasemonkey.tools.JacksonUtils;
+import com.webank.webasemonkey.vo.Web3jTypeVO;
 
 import cn.hutool.core.io.resource.ClassPathResource;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * BeanConfig
@@ -33,6 +46,7 @@ import cn.hutool.core.io.resource.ClassPathResource;
  *
  */
 @Configuration
+@Slf4j
 public class BeanConfig {
 
     /**
@@ -57,6 +71,32 @@ public class BeanConfig {
     @Bean
     public ClassPathResource getClassPathResource() {
         return new ClassPathResource("application.properties");
+    }
+
+    @Bean
+    public Map<String, Web3jTypeVO> getCustomDefineWeb3jMap() throws IOException {
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        Resource def = resolver.getResource("file:./config/web3j.def");
+        File defFile = def.getFile();
+        Map<String, Web3jTypeVO> map = new HashMap<String, Web3jTypeVO>();
+        if (defFile.exists()) {
+            log.info("defFile detect.");
+            List<String> lines = FileUtils.readLines(defFile, "utf8");
+            if (!CollectionUtils.isEmpty(lines)) {
+                for (String line : lines) {
+                    line = line.replaceAll("\"", "");
+                    String[] tokens = StringUtils.split(line, ",");
+                    if (tokens.length < 4) {
+                        continue;
+                    }
+                    Web3jTypeVO vo = new Web3jTypeVO();
+                    vo.setSolidityType(tokens[0]).setSqlType(tokens[1]).setJavaType(tokens[2]).setTypeMethod(tokens[3]);
+                    map.put(tokens[0], vo);
+                    log.info("Find Web3j type definetion : {}", JacksonUtils.toJson(vo));
+                }
+            }
+        }
+        return map;
     }
 
 }
