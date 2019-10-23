@@ -132,7 +132,7 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
      * @return AbiDefinition[]
      */
     public AbiDefinition[] getContractAbiList(Class<?> clazz) {
-        String abi = null;
+        String abi = "";
         try {
             Field field = clazz.getField(ParserConstants.ABI);
             if (!field.isAccessible()) {
