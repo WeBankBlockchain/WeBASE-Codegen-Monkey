@@ -46,6 +46,7 @@ public class SystemEnvironmentConfig {
 
     private String group;
     private String contractPackName;
+    private String contractName;
     private String baseProjectPath;
     private int frequency = 5;
 
