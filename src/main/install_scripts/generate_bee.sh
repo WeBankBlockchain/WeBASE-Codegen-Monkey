@@ -190,13 +190,13 @@ rm -rf $BM
 git clone https://github.com/WeBankFinTech/$BM.git
 cd $BM
 
-git checkout dev_event_address_2019.08
+git checkout master
 cd ..
 
 rm -rf $BB
 git clone https://github.com/WeBankFinTech/$BB.git
 cd $BB
-git checkout dev_event_address_2019.08
+git checkout master
 cd ..
 
 # init config
