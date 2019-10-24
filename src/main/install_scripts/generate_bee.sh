@@ -191,13 +191,13 @@ rm -rf $BM
 git clone https://github.com/WeBankFinTech/$BM.git
 cd $BM
 
-git checkout master
+git checkout dev_type_handle_2019.10
 cd ..
 
 rm -rf $BB
 git clone https://github.com/WeBankFinTech/$BB.git
 cd $BB
-git checkout master
+git checkout dev_type_handle_2019.10
 cd ..
 
 # init config
