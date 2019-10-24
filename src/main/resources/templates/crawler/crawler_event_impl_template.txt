@@ -26,6 +26,7 @@ import ${group}.webasebee.common.bo.data.EventBO;
 import ${group}.${projectName}.crawler.face.BcosEventCrawlerInterface;
 import ${group}.${projectName}.generated.bo.event.${class_name};
 import com.webank.webasebee.common.constants.ContractConstants;
+import com.webank.webasebee.common.tools.AddressUtils;
 import com.webank.webasebee.common.tools.BigIntegerUtils;
 import com.webank.webasebee.common.tools.BytesUtils;
 import com.webank.webasebee.common.tools.JacksonUtils;

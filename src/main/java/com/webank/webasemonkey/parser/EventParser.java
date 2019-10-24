@@ -93,9 +93,9 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
                 if (StringUtils.isEmpty(k) || StringUtils.isEmpty(v)) {
                     continue;
                 }
-                vo.setSqlName(systemEnvironmentConfig.getNamePrefix() + StringStyleUtils.upper2underline(k)
-                        + systemEnvironmentConfig.getNamePostfix()).setJavaName(k)
-                        .setSqlType(JavaTypeEnum.parse(v).getSqlType()).setJavaType(v)
+                String sqlName = systemEnvironmentConfig.getNamePrefix() + StringStyleUtils.upper2underline(k)
+                        + systemEnvironmentConfig.getNamePostfix();
+                vo.setSqlName(sqlName).setJavaName(k).setSqlType(JavaTypeEnum.parse(v).getSqlType()).setJavaType(v)
                         .setEntityType(JavaTypeEnum.parse(v).getEntityType()).setJavaCapName(StringUtils.capitalize(k))
                         .setTypeMethod(JavaTypeEnum.parse(v).getTypeMethod()).setLength(Integer.parseInt(length));
                 fieldList.add(vo);

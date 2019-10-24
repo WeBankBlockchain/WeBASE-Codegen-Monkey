@@ -33,6 +33,7 @@ import com.webank.webasemonkey.constants.TemplateConstants;
 import com.webank.webasemonkey.enums.SubProjectEnum;
 import com.webank.webasemonkey.enums.SysTableEnum;
 import com.webank.webasemonkey.tools.PropertiesUtils;
+import com.webank.webasemonkey.tools.SqlNameUtils;
 import com.webank.webasemonkey.tools.StringStyleUtils;
 import com.webank.webasemonkey.vo.ContractInfo;
 import com.webank.webasemonkey.vo.ContractStructureMetaInfo;
@@ -54,6 +55,8 @@ public class DBEnvironmentParas implements ConfigGenerateParas {
 
     @Autowired
     protected SystemEnvironmentConfig systemEnvironmentConfig;
+    @Autowired
+    private SqlNameUtils sqlNameUtils;
 
     @Override
     public Map<String, Object> getMap(ContractInfo contractsInfo) {
@@ -89,8 +92,7 @@ public class DBEnvironmentParas implements ConfigGenerateParas {
         List<ContractStructureMetaInfo> list = new ArrayList<>();
         for (ContractStructureMetaInfo info : ContractStructureMetaInfoList) {
             if (info.getShardingNO() > 1) {
-                String tableName = StringStyleUtils.upper2underline(info.getContractName()) + "_"
-                        + StringStyleUtils.upper2underline(info.getName());
+                String tableName = sqlNameUtils.getSqlName(info.getContractName(), info.getName());
                 info.setName(tableName);
                 list.add(info);
             }

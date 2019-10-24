@@ -18,13 +18,14 @@ package com.webank.webasemonkey.code.template.paras;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.google.common.collect.Maps;
 import com.webank.webasemonkey.code.template.face.AtomicParas;
 import com.webank.webasemonkey.constants.TemplateConstants;
-import com.webank.webasemonkey.tools.StringStyleUtils;
+import com.webank.webasemonkey.tools.SqlNameUtils;
 import com.webank.webasemonkey.vo.ContractStructureMetaInfo;
 import com.webank.webasemonkey.vo.FieldVO;
 
@@ -38,6 +39,8 @@ import com.webank.webasemonkey.vo.FieldVO;
  */
 @Component
 public class GrafanaPanelTableParas implements AtomicParas<ContractStructureMetaInfo> {
+    @Autowired
+    private SqlNameUtils sqlNameUtils;
 
     @Override
     public Map<String, Object> getMap(ContractStructureMetaInfo info) {
@@ -45,8 +48,7 @@ public class GrafanaPanelTableParas implements AtomicParas<ContractStructureMeta
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("list", list);
         String className = info.getContractName() + StringUtils.capitalize(info.getName());
-        String tableName = StringStyleUtils.upper2underline(info.getContractName()) + "_"
-                + StringStyleUtils.upper2underline(info.getName());
+        String tableName = sqlNameUtils.getSqlName(info.getContractName(), info.getName());
         map.put("table_name", tableName);
         map.put("title", className);
         return map;

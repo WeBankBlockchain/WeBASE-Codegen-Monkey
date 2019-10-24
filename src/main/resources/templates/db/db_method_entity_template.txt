@@ -33,6 +33,8 @@ public class ${class_name} extends IdEntity {
     private String txHash;
     @Column(name = "contract_address")
     private String contractAddress;
+    @Column(name = "method_status")
+    private String methodStatus;
     <%
 	for(entry in list){
 		var javaName = entry.javaName;

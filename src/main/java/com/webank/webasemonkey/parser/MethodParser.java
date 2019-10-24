@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.fisco.bcos.web3j.abi.TypeReference;
 import org.fisco.bcos.web3j.protocol.ObjectMapperFactory;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition.NamedType;
@@ -99,15 +100,18 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
             for (NamedType namedType : inputs) {
                 FieldVO vo = new FieldVO();
                 String k = namedType.getName();
+                // 增加is前缀变量的特殊处理
+                if (StringUtils.startsWith(k, "is") && k.length() > 2 && Character.isUpperCase(k.charAt(2))) {
+                    k = StringUtils.uncapitalize(StringUtils.substring(k, 2));
+                }
                 String type = namedType.getType().split(" ")[0];
                 String v = solidityType2SolidityReferenceType(type);
                 String length = PropertiesUtils.getGlobalProperty(ParserConstants.LENGTH, method.getContractName(),
                         method.getName(), k, "0");
-                vo.setSolidityName(k)
-                        .setSqlName(systemEnvironmentConfig.getNamePrefix() + StringStyleUtils.upper2underline(k)
-                                + systemEnvironmentConfig.getNamePostfix())
-                        .setJavaName(k).setSqlType(Web3jTypeEnum.parse(v).getSqlType()).setSolidityType(v)
-                        .setJavaType(Web3jTypeEnum.parse(v).getJavaType())
+                String sqlName = systemEnvironmentConfig.getNamePrefix() + StringStyleUtils.upper2underline(k)
+                        + systemEnvironmentConfig.getNamePostfix();
+                vo.setSolidityName(k).setSqlName(sqlName).setJavaName(k).setSqlType(Web3jTypeEnum.parse(v).getSqlType())
+                        .setSolidityType(v).setJavaType(Web3jTypeEnum.parse(v).getJavaType())
                         .setTypeMethod(Web3jTypeEnum.parse(v).getTypeMethod()).setJavaCapName(StringUtils.capitalize(k))
                         .setLength(Integer.parseInt(length));
                 log.debug("java name {}, java type {}, solidity type {}, type method {}", vo.getJavaName(),
@@ -128,7 +132,7 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
      * @return AbiDefinition[]
      */
     public AbiDefinition[] getContractAbiList(Class<?> clazz) {
-        String abi = null;
+        String abi = "";
         try {
             Field field = clazz.getField(ParserConstants.ABI);
             if (!field.isAccessible()) {
@@ -154,6 +158,13 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
 
     public String solidityType2SolidityReferenceType(String type) {
         try {
+            TypeReference tr = AbiTypeRefUtils.getTypeRef(type);
+            if (StringUtils.endsWith(tr.getType().getTypeName(), ">")) {
+                if (StringUtils.startsWithIgnoreCase(type, "bytes")) {
+                    return AbiTypeRefUtils.getTypeRef(type).getClassType().getSimpleName();
+                }
+                return tr.getClassType().getSimpleName() + "<" + StringUtils.substringBefore(type, "[") + ">";
+            }
             return AbiTypeRefUtils.getTypeRef(type).getClassType().getSimpleName();
         } catch (ClassNotFoundException e) {
             log.error("ClassNotFoundException: {}", e.getMessage());
