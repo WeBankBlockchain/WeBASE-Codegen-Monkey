@@ -15,9 +15,13 @@
  */
 package com.webank.webasemonkey.code.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,8 +64,7 @@ public class ContractInfoService {
      * @throws ClassNotFoundException
      */
     public ContractInfo parseFromContract() throws ClassNotFoundException {
-        Set<Class<?>> clazzSet =
-                ClazzScanUtils.scan(ConfigConstants.CONTRACT_PATH, systemEnvironmentConfig.getContractPackName());
+        Set<Class<?>> clazzSet = scanContract();
         List<EventMetaInfo> eventMetaInfoList = Lists.newArrayList();
         List<MethodMetaInfo> methodMetaInfoList = Lists.newArrayList();
         for (Class<?> clazz : clazzSet) {
@@ -75,5 +78,22 @@ public class ContractInfoService {
         ContractInfo info = new ContractInfo().setEventList(eventMetaInfoList).setMethodList(methodMetaInfoList);
         return info;
     }
-
+    
+    private Set<Class<?>> scanContract() throws ClassNotFoundException {
+        Set<Class<?>> clazzSet = ClazzScanUtils.scan(ConfigConstants.CONTRACT_PATH,
+            systemEnvironmentConfig.getContractPackName());
+        if (CollectionUtils.isNotEmpty(clazzSet)) {
+            return clazzSet;
+        }
+        clazzSet = ClazzScanUtils.scanJar(ConfigConstants.CONTRACT_PATH,
+            systemEnvironmentConfig.getContractPackName());
+        if (clazzSet != null && StringUtils.isNotBlank(systemEnvironmentConfig.getContractName())) {
+            return clazzSet.stream()
+                .filter(clz -> 
+                    Arrays.asList(StringUtils.split(systemEnvironmentConfig.getContractName(), ","))
+                        .contains(clz.getSimpleName()))
+                .collect(Collectors.toSet()); 
+        }
+        return clazzSet;
+    }
 }

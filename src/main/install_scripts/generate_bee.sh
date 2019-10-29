@@ -226,6 +226,16 @@ cd ../../
 rm -rf $BM
 
 cd $BB
+for file in ../$CONTRACT_DIR/*
+do
+  file=${file##*/}
+  if [[ $file == *.jar ]];
+  then
+    cp -f ../$CONTRACT_DIR/$file ./libs/
+  fi
+done
+
+
 cd $BBC
 mkdir -p $RESOURCE_DIR/
 cp -f  ../../$CERT_DIR/ca.crt $RESOURCE_DIR/
@@ -234,8 +244,17 @@ cp -f  ../../$CERT_DIR/node.crt $RESOURCE_DIR/
 cp -f  ../../$CERT_DIR/node.key $RESOURCE_DIR/
 
 LOG_INFO "copy certs done."
+
+
 mkdir -p ../$BBCOMMON/$JAVA_CODE_DIR/$contractPath
-cp -f ../../$CONTRACT_DIR/* ../$BBCOMMON/$JAVA_CODE_DIR/$contractPath/
+for file in ../../$CONTRACT_DIR/* 
+do
+  file=${file##*/}
+  if [[ $file == *.java ]];
+  then
+    cp -f ../../$CONTRACT_DIR/$file ../$BBCOMMON/$JAVA_CODE_DIR/$contractPath/
+  fi
+done
 mkdir -p ./$CONTRACT_DIR
 cp -f ../../$CONTRACT_DIR/* ./$CONTRACT_DIR
 LOG_INFO "copy java contract codes done."
