@@ -7,6 +7,7 @@
 [![Documentation Status](https://readthedocs.org/projects/webasedoc/badge/?version=latest)](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Codegen-Monkey/index.html)
 [![snyk](https://snyk.io/test/github/WeBankFinTech/WeBASE-Codegen-Monkey/badge.svg?targetFile=build.gradle)](https://snyk.io/test/github/WeBankFinTech/WeBASE-Codegen-Monkey?targetFile=build.gradle&tab=issues)
 [![Total Lines](https://tokei.rs/b1/github/WeBankFinTech/WeBASE-Codegen-Monkey?category=lines)](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey)
+[![Latest release](https://github.com/WeBankFinTech/WeBASE-Codegen-Monke/releases/latest)](https://img.shields.io/github/release/WeBankFinTech/WeBASE-Codegen-Monke.svg)
 
 > 道生一，一生二，二生三，三生万物。
 > 万物负阴而抱阳，冲气以为和。
