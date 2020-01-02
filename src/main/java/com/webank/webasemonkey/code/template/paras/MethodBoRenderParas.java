@@ -28,7 +28,6 @@ import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.constants.PackageConstants;
 import com.webank.webasemonkey.constants.TemplateConstants;
 import com.webank.webasemonkey.tools.PackagePath;
-import com.webank.webasemonkey.tools.StringStyleUtils;
 import com.webank.webasemonkey.vo.FieldVO;
 import com.webank.webasemonkey.vo.MethodMetaInfo;
 
