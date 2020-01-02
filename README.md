@@ -3,6 +3,7 @@
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Gitter](https://badges.gitter.im/WeBASE-Codegen-Monkey/WeBASE-Codegen-Monkey.svg)](https://gitter.im/webase-monkey/community)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bd49c17906cd42f69fb1f6b1fa8c6760)](https://www.codacy.com/manual/dalaocu/WeBASE-Codegen-Monkey?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=WeBankFinTech/WeBASE-Codegen-Monkey&amp;utm_campaign=Badge_Grade)
+[![Total Lines](https://tokei.rs/b1/github/WeBankFinTech/WeBASE-Codegen-Monkey?category=lines)](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey)
 
 > 道生一，一生二，二生三，三生万物。
 > 万物负阴而抱阳，冲气以为和。
