@@ -1,9 +1,7 @@
-
 # WeBASE-Codegen-Monkey
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Gitter](https://badges.gitter.im/WeBASE-Codegen-Monkey/WeBASE-Codegen-Monkey.svg)](https://gitter.im/webase-monkey/community)
-
 
 > 道生一，一生二，二生三，三生万物。
 > 万物负阴而抱阳，冲气以为和。
@@ -39,7 +37,6 @@
 
 ## 环境要求
 
-
 在使用本组件前，请确认系统环境已安装相关依赖软件，清单如下：
 
 | 依赖软件 | 说明 |备注|
@@ -67,9 +64,7 @@
 
 FISCO BCOS开源社区是国内活跃的开源社区，社区长期为机构和个人开发者提供各类支持与帮助。已有来自各行业的数千名技术爱好者在研究和使用FISCO BCOS。如您对FISCO BCOS开源技术及应用感兴趣，欢迎加入社区获得更多支持与帮助。
 
-
 ![](https://media.githubusercontent.com/media/FISCO-BCOS/LargeFiles/master/images/QR_image.png)
-
 
 ## License
 ![license](http://img.shields.io/badge/license-Apache%20v2-blue.svg)
