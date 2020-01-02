@@ -107,7 +107,7 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
     }
 
     public String cleanType(String genericType) {
-        if (genericType.equals("byte[]")) {
+        if ("byte[]".equals(genericType)) {
             return genericType;
         }
         if (genericType.contains("<")) {
