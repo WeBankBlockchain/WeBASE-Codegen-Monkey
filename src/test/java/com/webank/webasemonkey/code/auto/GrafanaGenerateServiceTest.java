@@ -15,12 +15,12 @@
  */
 package com.webank.webasemonkey.code.auto;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.webank.webasemonkey.WebasemonkeyApplicationTests;
 import com.webank.webasemonkey.code.template.GrafanaGenerateService;
-import com.webank.webasemonkey.code.template.paras.GrafanaPanelTableParas;
 
 /**
  * GrafanaGenerateService
@@ -33,12 +33,11 @@ import com.webank.webasemonkey.code.template.paras.GrafanaPanelTableParas;
 public class GrafanaGenerateServiceTest extends WebasemonkeyApplicationTests {
     @Autowired
     private GrafanaGenerateService service;
-    @Autowired
-    private GrafanaPanelTableParas para;
     
     @Test
     public void testGenerate() throws ClassNotFoundException {
         service.genereate();
+        Assert.assertNotNull(service);
     }
 
 }

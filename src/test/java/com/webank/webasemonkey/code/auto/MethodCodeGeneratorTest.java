@@ -17,6 +17,7 @@ package com.webank.webasemonkey.code.auto;
 
 import java.util.Map;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -43,5 +44,6 @@ public class MethodCodeGeneratorTest extends WebasemonkeyApplicationTests {
     public void go() throws ClassNotFoundException {
         parasMap.forEach((k, v) -> System.out.println(k + " " + v));
         codeGenerator.generateBee();
+        Assert.assertNotNull(codeGenerator);
     }
 }

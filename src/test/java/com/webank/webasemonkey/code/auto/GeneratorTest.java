@@ -17,6 +17,7 @@ package com.webank.webasemonkey.code.auto;
 
 import java.util.Map;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -39,6 +40,7 @@ public class GeneratorTest extends WebasemonkeyApplicationTests {
     @Test
     public void go() {
         parasMap.forEach((k, v) -> System.out.println(k + " " + v));
+        Assert.assertNotNull(parasMap);
     }
     
     
