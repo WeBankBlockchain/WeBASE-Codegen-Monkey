@@ -5,7 +5,9 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bd49c17906cd42f69fb1f6b1fa8c6760)](https://www.codacy.com/manual/dalaocu/WeBASE-Codegen-Monkey?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=WeBankFinTech/WeBASE-Codegen-Monkey&amp;utm_campaign=Badge_Grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/webankfintech/webase-codegen-monkey/badge)](https://www.codefactor.io/repository/github/webankfintech/webase-codegen-monkey)
 [![Documentation Status](https://readthedocs.org/projects/webasedoc/badge/?version=latest)](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Codegen-Monkey/index.html)
+[![snyk](https://snyk.io/test/github/WeBankFinTech/WeBASE-Codegen-Monkey/badge.svg?targetFile=build.gradle)](https://snyk.io/test/github/WeBankFinTech/WeBASE-Codegen-Monkey?targetFile=build.gradle&tab=issues)
 [![Total Lines](https://tokei.rs/b1/github/WeBankFinTech/WeBASE-Codegen-Monkey?category=lines)](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey)
+[![Latest release](https://img.shields.io/github/release/WeBankFinTech/WeBASE-Codegen-Monkey.svg)](https://github.com/WeBankFinTech/WeBASE-Codegen-Monkey/releases/latest)
 
 > 道生一，一生二，二生三，三生万物。
 > 万物负阴而抱阳，冲气以为和。
