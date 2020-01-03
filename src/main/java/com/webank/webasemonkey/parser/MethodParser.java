@@ -18,11 +18,11 @@ package com.webank.webasemonkey.parser;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.assertj.core.util.Arrays;
 import org.fisco.bcos.web3j.abi.TypeReference;
 import org.fisco.bcos.web3j.protocol.ObjectMapperFactory;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition;
@@ -42,6 +42,7 @@ import com.webank.webasemonkey.tools.StringStyleUtils;
 import com.webank.webasemonkey.vo.FieldVO;
 import com.webank.webasemonkey.vo.MethodMetaInfo;
 
+import cn.hutool.core.util.ArrayUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -61,7 +62,7 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
 
     public List<MethodMetaInfo> parseToInfoList(Class<?> clazz) {
         AbiDefinition[] abiDefinitions = getContractAbiList(clazz);
-        if (Arrays.isNullOrEmpty(abiDefinitions)) {
+        if (ArrayUtil.isEmpty(abiDefinitions)) {
             return null;
         }
         List<MethodMetaInfo> lists = Lists.newArrayList();
