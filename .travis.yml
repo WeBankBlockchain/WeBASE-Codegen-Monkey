@@ -1,6 +1,7 @@
 branches:
   only:
-      - /.*/
+      - master
+      - code_refactor_2020.01
 
 matrix:
   fast_finish: true
