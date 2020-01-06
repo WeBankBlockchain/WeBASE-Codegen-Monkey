@@ -15,6 +15,7 @@
  */
 package com.webank.webasemonkey.code.service;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -62,8 +63,9 @@ public class ContractInfoService {
      * 
      * @return void
      * @throws ClassNotFoundException
+     * @throws IOException 
      */
-    public ContractInfo parseFromContract() throws ClassNotFoundException {
+    public ContractInfo parseFromContract() throws ClassNotFoundException, IOException {
         Set<Class<?>> clazzSet = scanContract();
         List<EventMetaInfo> eventMetaInfoList = Lists.newArrayList();
         List<MethodMetaInfo> methodMetaInfoList = Lists.newArrayList();
@@ -79,7 +81,7 @@ public class ContractInfoService {
         return info;
     }
     
-    private Set<Class<?>> scanContract() throws ClassNotFoundException {
+    private Set<Class<?>> scanContract() throws ClassNotFoundException, IOException {
         Set<Class<?>> clazzSet = ClazzScanUtils.scan(ConfigConstants.CONTRACT_PATH,
             systemEnvironmentConfig.getContractPackName());
         if (CollectionUtils.isNotEmpty(clazzSet)) {

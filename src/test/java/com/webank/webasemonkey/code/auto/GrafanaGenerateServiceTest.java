@@ -15,6 +15,8 @@
  */
 package com.webank.webasemonkey.code.auto;
 
+import java.io.IOException;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,7 @@ public class GrafanaGenerateServiceTest extends WebasemonkeyApplicationTests {
     private GrafanaGenerateService service;
     
     @Test
-    public void testGenerate() throws ClassNotFoundException {
+    public void testGenerate() throws ClassNotFoundException, IOException {
         service.genereate();
         Assert.assertNotNull(service);
     }
