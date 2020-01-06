@@ -84,6 +84,7 @@ LOG_INFO "EXEC_OPTION: $EXEC_OPTION [ build|run ]"
 
 #### config props
 APPLICATION_FILE="config/resources/application.properties"
+DEF_FILE="config/resources/*.def"
 APPLICATION_TMP_FILE="config/resources/application.properties.tmp"
 CONTRACT_DIR="config/contract"
 CERT_DIR="config/resources"
@@ -190,19 +191,22 @@ rm -rf $BM
 git clone https://github.com/WeBankFinTech/$BM.git
 cd $BM
 
-git checkout V1.2.0
+git checkout code_refactor_2020.01
 cd ..
 
 rm -rf $BB
 git clone https://github.com/WeBankFinTech/$BB.git
 cd $BB
 git checkout V1.2.0
+git checkout code_refactor_2020.01
 cd ..
 
 # init config
 cd $BM
 mkdir -p $RESOURCE_DIR/
 cp -f ../$APPLICATION_FILE $RESOURCE_DIR/
+cp -f ../$DEF_FILE $RESOURCE_DIR/
+
 LOG_INFO "copy application.properties done."
 mkdir -p $JAVA_CODE_DIR/$contractPath
 cp -f ../$CONTRACT_DIR/* $JAVA_CODE_DIR/$contractPath/
@@ -223,6 +227,16 @@ cd ../../
 rm -rf $BM
 
 cd $BB
+for file in ../$CONTRACT_DIR/*
+do
+  file=${file##*/}
+  if [[ $file == *.jar ]];
+  then
+    cp -f ../$CONTRACT_DIR/$file ./libs/
+  fi
+done
+
+
 cd $BBC
 mkdir -p $RESOURCE_DIR/
 cp -f  ../../$CERT_DIR/ca.crt $RESOURCE_DIR/
@@ -231,8 +245,17 @@ cp -f  ../../$CERT_DIR/node.crt $RESOURCE_DIR/
 cp -f  ../../$CERT_DIR/node.key $RESOURCE_DIR/
 
 LOG_INFO "copy certs done."
+
+
 mkdir -p ../$BBCOMMON/$JAVA_CODE_DIR/$contractPath
-cp -f ../../$CONTRACT_DIR/* ../$BBCOMMON/$JAVA_CODE_DIR/$contractPath/
+for file in ../../$CONTRACT_DIR/* 
+do
+  file=${file##*/}
+  if [[ $file == *.java ]];
+  then
+    cp -f ../../$CONTRACT_DIR/$file ../$BBCOMMON/$JAVA_CODE_DIR/$contractPath/
+  fi
+done
 mkdir -p ./$CONTRACT_DIR
 cp -f ../../$CONTRACT_DIR/* ./$CONTRACT_DIR
 LOG_INFO "copy java contract codes done."

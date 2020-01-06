@@ -1,0 +1,4 @@
+"StaticArray<Bytes32>","blob","byte[]","String.valueOf"
+"DynamicArray<Bytes32>","blob","byte[]","String.valueOf"
+# java type 
+"byte[]", "blob", "byte []", ""

@@ -157,6 +157,7 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
         return abiDefinition;
     }
 
+    @SuppressWarnings("rawtypes")
     public String solidityType2SolidityReferenceType(String type) {
         try {
             TypeReference tr = AbiTypeRefUtils.getTypeRef(type);
