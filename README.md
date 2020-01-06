@@ -4,6 +4,7 @@
 [![Gitter](https://badges.gitter.im/WeBASE-Codegen-Monkey/WeBASE-Codegen-Monkey.svg)](https://gitter.im/webase-monkey/community)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bd49c17906cd42f69fb1f6b1fa8c6760)](https://www.codacy.com/manual/dalaocu/WeBASE-Codegen-Monkey?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=WeBankFinTech/WeBASE-Codegen-Monkey&amp;utm_campaign=Badge_Grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/webankfintech/webase-codegen-monkey/badge)](https://www.codefactor.io/repository/github/webankfintech/webase-codegen-monkey)
+[![codecov](https://codecov.io/gh/WeBankFinTech/WeBASE-Codegen-Monkey/branch/code_refactor_2020.01/graph/badge.svg)](https://codecov.io/gh/WeBankFinTech/WeBASE-Codegen-Monkey)
 [![buildStatus](https://travis-ci.org/WeBankFinTech/WeBASE-Codegen-Monkey.svg?branch=code_refactor_2020.01)](https://travis-ci.org/WeBankFinTech/WeBASE-Codegen-Monkey)
 [![Documentation Status](https://readthedocs.org/projects/webasedoc/badge/?version=latest)](https://webasedoc.readthedocs.io/zh_CN/latest/docs/WeBASE-Codegen-Monkey/index.html)
 [![snyk](https://snyk.io/test/github/WeBankFinTech/WeBASE-Codegen-Monkey/badge.svg?targetFile=build.gradle)](https://snyk.io/test/github/WeBankFinTech/WeBASE-Codegen-Monkey?targetFile=build.gradle&tab=issues)
