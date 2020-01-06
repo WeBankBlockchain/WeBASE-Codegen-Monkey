@@ -19,6 +19,11 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Properties;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +37,18 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
+@Component
 public class PropertiesUtils {
+
+    @Autowired
+    private ClassPathResource autoResource;
+
+    private static ClassPathResource resource;
+
+    @PostConstruct
+    private void init() {
+        resource = this.autoResource;
+    }
 
     /**
      * return the first mapping result of args.
@@ -42,7 +58,6 @@ public class PropertiesUtils {
      * @return property value
      */
     public static String getProperty(String...args) {
-        ClassPathResource resource = new ClassPathResource("application.properties");
         Properties properties = new Properties();
         try {
             properties.load(resource.getStream());
