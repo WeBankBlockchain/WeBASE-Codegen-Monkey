@@ -33,4 +33,4 @@ cache:
 
 script: 
   - chmod +x gradlew
-  - gradlew test bootJar
+  - ./gradlew test bootJar
