@@ -112,7 +112,6 @@ public class ClazzScanUtils {
     private static Set<Class<?>> findClassesByJar(String packageName, JarFile jar) throws ClassNotFoundException {
         final String pkgDir = packageName.replace(".", "/");
         Enumeration<JarEntry> entry = jar.entries();
-
         Set<Class<?>> classes = new HashSet<>();
         JarEntry jarEntry;
         String name;
