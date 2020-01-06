@@ -10,6 +10,7 @@ apply plugin: 'maven'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: "jacoco"
 
 group = 'com.webank'
 version = '1.2.0'
@@ -63,7 +64,6 @@ configurations {
     }
 }
 
-
 bootJar {
 	destinationDir file('dist')
 	archiveName project.name + version + '.jar'
@@ -94,3 +94,12 @@ bootJar {
         }
 	}
 }
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
+}
+
+check.dependsOn jacocoTestReport

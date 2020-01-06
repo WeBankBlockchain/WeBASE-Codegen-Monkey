@@ -10,6 +10,8 @@ matrix:
       jdk: openjdk8
       os: linux
       sudo: required
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
 
     - language: java
       jdk: openjdk9
@@ -31,7 +33,12 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-script:
+before_script:
   - mv config/contract_example config/contract
   - chmod +x gradlew
+
+script:
   - ./gradlew test bootJar
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
