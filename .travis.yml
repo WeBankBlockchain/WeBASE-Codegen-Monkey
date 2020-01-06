@@ -9,25 +9,21 @@ matrix:
     - language: java
       jdk: openjdk8
       os: linux
-      dist: xenial
       sudo: required
 
     - language: java
       jdk: openjdk9
       os: linux
-      dist: xenial
       sudo: required
 
     - language: java
       jdk: openjdk10
       os: linux
-      dist: xenial
       sudo: required
 
     - language: java
       jdk: openjdk11
       os: linux
-      dist: xenial
       sudo: required
 
 cache:
