@@ -21,6 +21,7 @@ import org.beetl.core.GroupTemplate;
 import org.beetl.core.resource.ClasspathResourceLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import cn.hutool.core.io.resource.ClassPathResource;
 
@@ -55,8 +56,15 @@ public class BeanConfig {
      * @return ClassPathResource
      */
     @Bean
+    @Profile("!test")
     public ClassPathResource getClassPathResource() {
         return new ClassPathResource("application.properties");
+    }
+    
+    @Bean
+    @Profile("test")
+    public ClassPathResource getTestClassPathResource() {
+        return new ClassPathResource("application-test.properties");
     }
 
 }
