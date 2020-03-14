@@ -29,6 +29,7 @@ import com.google.common.collect.Lists;
 import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.constants.ParserConstants;
 import com.webank.webasemonkey.enums.JavaTypeEnum;
+import com.webank.webasemonkey.tools.JacksonUtils;
 import com.webank.webasemonkey.tools.PropertiesUtils;
 import com.webank.webasemonkey.tools.StringStyleUtils;
 import com.webank.webasemonkey.vo.EventMetaInfo;
@@ -111,6 +112,7 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
                 }
                 vo.setSqlName(sqlName).setJavaName(k).setJavaType(v).setJavaCapName(StringUtils.capitalize(k))
                         .setLength(Integer.parseInt(length));
+                log.debug(JacksonUtils.toJson(vo));
                 fieldList.add(vo);
             }
             event.setList(fieldList);
@@ -122,6 +124,9 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
     public String cleanType(String genericType) {
         if ("byte[]".equals(genericType)) {
             return genericType;
+        }
+        if ("java.util.List<byte[]>".equals(genericType)) {
+            return "List<byte[]>";
         }
         if (genericType.contains("<")) {
             return StringUtils.substringAfterLast(StringUtils.substringBefore(genericType, "<"), ".") + "<"
