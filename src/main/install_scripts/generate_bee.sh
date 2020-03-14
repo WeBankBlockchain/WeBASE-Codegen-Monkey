@@ -197,7 +197,6 @@ cd ..
 rm -rf $BB
 git clone https://github.com/WeBankFinTech/$BB.git
 cd $BB
-git checkout V1.2.0
 git checkout code_refactor_2020.01
 cd ..
 

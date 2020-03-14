@@ -162,9 +162,6 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
         try {
             TypeReference tr = AbiTypeRefUtils.getTypeRef(type);
             if (StringUtils.endsWith(tr.getType().getTypeName(), ">")) {
-                if (StringUtils.startsWithIgnoreCase(type, "bytes")) {
-                    return AbiTypeRefUtils.getTypeRef(type).getClassType().getSimpleName();
-                }
                 return tr.getClassType().getSimpleName() + "<" + StringUtils.substringBefore(type, "[") + ">";
             }
             return AbiTypeRefUtils.getTypeRef(type).getClassType().getSimpleName();
