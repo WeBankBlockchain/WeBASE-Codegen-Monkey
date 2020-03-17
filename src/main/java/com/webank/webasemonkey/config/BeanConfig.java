@@ -84,7 +84,7 @@ public class BeanConfig {
     @Bean
     public Map<String, Web3jTypeVO> getCustomDefineWeb3jMap() throws IOException {
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        Resource def = resolver.getResource("classpath:web3j.def");
+        Resource def = resolver.getResource("file:config/web3j.def");
         File defFile = def.getFile();
         Map<String, Web3jTypeVO> map = new HashMap<String, Web3jTypeVO>();
         if (defFile.exists()) {
