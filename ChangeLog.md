@@ -1,8 +1,14 @@
 ## 更新历史
 
 ### V1.2.1
+- 添加github勋章，包括coderefactor、travisci、codecov、synk、codacy等。
+- 升级web3sdk版本
+- 升级junit版本
 - 增加swagger开关，可通过配置关闭。
-- 增加国密/RSA的密码开关 
+- 增加国密/RSA的密码开关。
+- 增加对用户配置项的检查。
+- 修改项目的下载项，优化用户体验。
+- 支持通过config文件的方式配置solidity类型与Java类型的映射和个性化处理。
 
 ### V1.2.0 (2019-10-24)
 - 在导出的事件表，添加事件合约地址。

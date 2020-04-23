@@ -18,8 +18,8 @@ package com.webank.webasemonkey.code.auto;
 import java.io.IOException;
 import java.util.Map;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.webank.webasemonkey.WebasemonkeyApplicationTests;
@@ -45,6 +45,6 @@ public class MethodCodeGeneratorTest extends WebasemonkeyApplicationTests {
     public void go() throws ClassNotFoundException, IOException {
         parasMap.forEach((k, v) -> System.out.println(k + " " + v));
         codeGenerator.generateBee();
-        Assert.assertNotNull(codeGenerator);
+        Assertions.assertNotNull(codeGenerator);
     }
 }
