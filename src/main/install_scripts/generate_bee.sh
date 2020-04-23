@@ -251,6 +251,7 @@ if [ -d "$BMP/$BM" ];then
   git checkout $BRANCH_NAME
 else
   LOG_INFO "Begin to download Monkey ..."
+  mkdir -p $BMP
   cd $BMP
   git clone https://github.com/WeBankFinTech/$BM.git
   cd $BM
