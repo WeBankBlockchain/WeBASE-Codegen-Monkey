@@ -248,6 +248,7 @@ if [ -d "$BMP/$BM" ];then
   LOG_INFO "Monkey already exist."
   cd $BMP/$BM
   git reset --hard HEAD
+  git pull
   git checkout $BRANCH_NAME
 else
   LOG_INFO "Begin to download Monkey ..."
@@ -263,6 +264,7 @@ if [ -d "$BB" ];then
   LOG_INFO "Bee already exist."
   cd $BB
   git reset --hard HEAD
+  git pull
   git checkout $BRANCH_NAME
 else
   LOG_INFO "Begin to download Bee ..."
