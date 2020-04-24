@@ -2,14 +2,19 @@
 
 ### V1.3.0
 - 添加github勋章，包括coderefactor、travisci、codecov、synk、codacy等。
+- 升级bee的gradle版本
 - 升级web3sdk版本
-- 升级junit版本
+- 升级spring和junit版本
 - 升级shardingjdbc版本
 - 增加swagger开关，可通过配置关闭。
 - 增加国密/RSA的密码开关。
 - 增加对用户配置项的检查。
 - 修改项目的下载项，优化用户体验。
 - 支持通过config文件的方式配置solidity类型与Java类型的映射和个性化处理。
+- 修复grafana部分事件和日志无法展示的错误。
+- 优化部分系统表结构，使得占用空间更小。
+- 优化solidity转TypeReference的功能。
+- 去除bee项目编译中的部分报警信息。
 
 ### V1.2.0 (2019-10-24)
 - 在导出的事件表，添加事件合约地址。
