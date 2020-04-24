@@ -107,8 +107,6 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
                     vo.setSqlType(typeVo.getSqlType()).setTypeMethod(typeVo.getTypeMethod())
                             .setEntityType(typeVo.getJavaType());
                 } else {
-                    System.out.println(JacksonUtils.toJson(f));
-                    System.out.println(javaType);
                     JavaTypeEnum e = JavaTypeEnum.parse(javaType);
                     vo.setSqlType(e.getSqlType())
                             .setEntityType(e.getEntityType())
