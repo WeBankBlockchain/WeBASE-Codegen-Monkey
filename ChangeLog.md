@@ -1,9 +1,10 @@
 ## 更新历史
 
-### V1.2.1
+### V1.3.0
 - 添加github勋章，包括coderefactor、travisci、codecov、synk、codacy等。
 - 升级web3sdk版本
 - 升级junit版本
+- 升级shardingjdbc版本
 - 增加swagger开关，可通过配置关闭。
 - 增加国密/RSA的密码开关。
 - 增加对用户配置项的检查。

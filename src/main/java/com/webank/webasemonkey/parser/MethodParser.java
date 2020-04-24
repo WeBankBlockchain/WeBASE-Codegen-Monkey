@@ -26,6 +26,7 @@ import org.fisco.bcos.web3j.abi.TypeReference;
 import org.fisco.bcos.web3j.protocol.ObjectMapperFactory;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition.NamedType;
+import org.fisco.bcos.web3j.tx.txdecode.BaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,9 +36,9 @@ import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.constants.AbiTypeConstants;
 import com.webank.webasemonkey.constants.ParserConstants;
 import com.webank.webasemonkey.enums.Web3jTypeEnum;
-import com.webank.webasemonkey.tools.AbiTypeRefUtils;
 import com.webank.webasemonkey.tools.PropertiesUtils;
 import com.webank.webasemonkey.tools.StringStyleUtils;
+import com.webank.webasemonkey.tools.TypeReferenceUtils;
 import com.webank.webasemonkey.vo.FieldVO;
 import com.webank.webasemonkey.vo.MethodMetaInfo;
 
@@ -80,6 +81,7 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
             }
             MethodMetaInfo method = new MethodMetaInfo();
             method.setContractName(clazz.getSimpleName());
+            method.setType("method");
             log.debug("method name : {}", abiDefinition.getName());
             if (abiType.equals(AbiTypeConstants.ABI_CONSTRUCTOR_TYPE)) {
                 method.setName(clazz.getSimpleName());
@@ -160,13 +162,13 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
     @SuppressWarnings("rawtypes")
     public String solidityType2SolidityReferenceType(String type) {
         try {
-            TypeReference tr = AbiTypeRefUtils.getTypeRef(type);
+            TypeReference tr = TypeReferenceUtils.getTypeRef(type);
             if (StringUtils.endsWith(tr.getType().getTypeName(), ">")) {
                 return tr.getClassType().getSimpleName() + "<" + StringUtils.substringBefore(type, "[") + ">";
             }
-            return AbiTypeRefUtils.getTypeRef(type).getClassType().getSimpleName();
-        } catch (ClassNotFoundException e) {
-            log.error("ClassNotFoundException: {}", e.getMessage());
+            return TypeReferenceUtils.getTypeRef(type).getClassType().getSimpleName();
+        } catch (ClassNotFoundException | BaseException e) {
+            log.error("Exception: {}", e.getMessage());
         }
         return null;
     }

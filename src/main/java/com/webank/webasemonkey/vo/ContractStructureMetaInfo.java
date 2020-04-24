@@ -38,6 +38,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper=true)
 public class ContractStructureMetaInfo extends ContractNameVO{
     private String name;
+    private String type;
     /** @Fields shardingNO : event sharding NO of db*/
     private int shardingNO;
     private List<FieldVO> list;

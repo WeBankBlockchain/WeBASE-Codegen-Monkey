@@ -64,6 +64,7 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
             }
             EventMetaInfo event = new EventMetaInfo();
             event.setContractName(clazz.getSimpleName());
+            event.setType("event");
             event.setName(StringUtils.substringBefore(c.getSimpleName(), ParserConstants.EVENT_RESPONSE));
             String generatedFlag = PropertiesUtils.getGlobalProperty(ParserConstants.MONITOR, event.getContractName(),
                     event.getName(), "generated", "on");
@@ -91,26 +92,29 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
                     log.info("Contract:{}, event:{}, ignores param:{}", event.getContractName(), event.getName(), k);
                     continue;
                 }
-                String v = cleanType(f.getGenericType().getTypeName());
+                String javaType = cleanType(f.getGenericType().getTypeName());
                 // get the personal length
                 String length = PropertiesUtils.getGlobalProperty(ParserConstants.LENGTH, event.getContractName(),
                         event.getName(), k, "0");
-                if (StringUtils.isEmpty(k) || StringUtils.isEmpty(v)) {
+                if (StringUtils.isEmpty(k) || StringUtils.isEmpty(javaType)) {
                     continue;
                 }
                 String sqlName = systemEnvironmentConfig.getNamePrefix() + StringStyleUtils.upper2underline(k)
                         + systemEnvironmentConfig.getNamePostfix();
                 // get type from customMap
-                if (customMap.containsKey(v)) {
-                    Web3jTypeVO typeVo = customMap.get(v);
+                if (customMap.containsKey(javaType)) {
+                    Web3jTypeVO typeVo = customMap.get(javaType);
                     vo.setSqlType(typeVo.getSqlType()).setTypeMethod(typeVo.getTypeMethod())
                             .setEntityType(typeVo.getJavaType());
                 } else {
-                    vo.setSqlType(JavaTypeEnum.parse(v).getSqlType())
-                            .setEntityType(JavaTypeEnum.parse(v).getEntityType())
-                            .setTypeMethod(JavaTypeEnum.parse(v).getTypeMethod());
+                    System.out.println(JacksonUtils.toJson(f));
+                    System.out.println(javaType);
+                    JavaTypeEnum e = JavaTypeEnum.parse(javaType);
+                    vo.setSqlType(e.getSqlType())
+                            .setEntityType(e.getEntityType())
+                            .setTypeMethod(e.getTypeMethod());
                 }
-                vo.setSqlName(sqlName).setJavaName(k).setJavaType(v).setJavaCapName(StringUtils.capitalize(k))
+                vo.setSqlName(sqlName).setJavaName(k).setJavaType(javaType).setJavaCapName(StringUtils.capitalize(k))
                         .setLength(Integer.parseInt(length));
                 log.debug(JacksonUtils.toJson(vo));
                 fieldList.add(vo);
