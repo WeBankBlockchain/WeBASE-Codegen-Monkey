@@ -8,8 +8,10 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.fisco.bcos.web3j.abi.EventValues;
 import org.fisco.bcos.web3j.crypto.Credentials;
 import org.fisco.bcos.web3j.protocol.Web3j;
+import org.fisco.bcos.web3j.protocol.core.methods.response.Log;
 import org.fisco.bcos.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.fisco.bcos.web3j.tx.gas.ContractGasProvider;
 
@@ -54,29 +56,35 @@ public class ${contractName}${eventName}CrawlerImpl implements BcosEventCrawlerI
 	
 	@Override
 	public List<EventBO> handleReceipt(TransactionReceipt receipt, BigInteger blockTimeStamp) {
-		List<${eventName}EventResponse> ${eventName}EventResponseList = contract.get${eventName}Events(receipt);
-		List<EventBO> list = new ArrayList<>(${eventName}EventResponseList.size());
-		if(CollectionUtils.isEmpty(${eventName}EventResponseList)) {
-		    return list;
-		}
-		for (${eventName}EventResponse ${eventName}EventResponse : ${eventName}EventResponseList) {
-			${class_name} ${lowContractName}${eventName} = new ${class_name}();
+			<%
+				var upperEvent = strutil.toUpperCase(eventName);
+			%>
+		List<EventBO> list = new ArrayList<>();
+		for (Log l : receipt.getLogs()) {
+            EventValues eventValues = contract.staticExtractEventParameters(contract.${upperEvent}_EVENT, l);
+            if (eventValues == null || CollectionUtils.isEmpty(eventValues.getNonIndexedValues())) {
+                continue;
+            }
+            	${class_name} ${lowContractName}${eventName} = new ${class_name}();
 			${lowContractName}${eventName}.setIdentifier("${contractName}${eventName}");		
 			${lowContractName}${eventName}.setBlockHeight(receipt.getBlockNumber().longValue());
 			${lowContractName}${eventName}.setEventContractAddress(receipt.getContractAddress());
 			${lowContractName}${eventName}.setTxHash(receipt.getTransactionHash());
+			
 			<%
-			for(entry in list){
+			for(var i=0;i<list.~size;i++){
+				var entry = list[i];
 				var javaCapName = entry.javaCapName;
 				var javaName = entry.javaName;
-				var typeMethod = entry.typeMethod;
+				var typeMethod = entry.typeMethod;			
 			%>
-			${lowContractName}${eventName}.set${javaCapName}(${typeMethod}(${eventName}EventResponse.${javaName}));
+			${lowContractName}${eventName}.set${javaCapName}(${typeMethod}(eventValues.getNonIndexedValues().get(${i}).getValue()));
 			<% } %>
 			${lowContractName}${eventName}.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));
 			log.debug("depot ${eventName}:{}", ${lowContractName}${eventName}.toString());
 			list.add(${lowContractName}${eventName});
-		}
+        }
+		
 		return list;
 	}
 }

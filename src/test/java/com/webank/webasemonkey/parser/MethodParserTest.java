@@ -16,7 +16,9 @@
 package com.webank.webasemonkey.parser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.fisco.bcos.web3j.abi.TypeReference;
 import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes1;
@@ -84,8 +86,8 @@ public class MethodParserTest extends WebasemonkeyApplicationTests {
     
     public static void main(String[] args) {
         String s = "[{\"value\":\"aw==\",\"typeAsString\":\"bytes1\"},{\"value\":\"dg==\",\"typeAsString\":\"bytes1\"}]";
-        List<Bytes1> list = JacksonUtils.fromJson(s, List.class, Bytes1.class);
-        System.out.println(JacksonUtils.toJson(list.get(0).getValue()));
+        List<Map<String, byte[]>> list = JacksonUtils.fromJson(s, List.class, Map.class);
+        System.out.println(JacksonUtils.toJson(list.get(0).get("value")));
     }
 
 }
