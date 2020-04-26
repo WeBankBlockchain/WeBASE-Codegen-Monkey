@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.fisco.bcos.web3j.abi.TypeReference;
+import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes1;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition.NamedType;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition.NamedType.Type;
 import org.fisco.bcos.web3j.tx.txdecode.BaseException;
@@ -62,7 +63,7 @@ public class MethodParserTest extends WebasemonkeyApplicationTests {
                 "{\"contractName\":\"RecordData\",\"name\":\"insertRecord\",\"shardingNO\":1,\"list\":null}";
         String inputsStaticArray = "[{\"name\":\"record\",\"type\":\"bytes[]\",\"type0\":null,\"indexed\":false}]";
         String fieldList2 =
-                "[{\"sqlName\":\"_record_\",\"solidityName\":\"record\",\"javaName\":\"record\",\"sqlType\":\"varchar(10240)\",\"solidityType\":\"DynamicArray<bytes>\",\"javaType\":\"String\",\"entityType\":null,\"typeMethod\":\"BytesUtils.dynamicBytesListObjectToString\",\"javaCapName\":\"Record\",\"length\":10240}]";
+                "[{\"sqlName\":\"_record_\",\"solidityName\":\"record\",\"javaName\":\"record\",\"sqlType\":\"varchar(10240)\",\"solidityType\":\"DynamicArray<bytes>\",\"javaType\":\"String\",\"entityType\":null,\"typeMethod\":\"BytesUtils.dynamicBytesListObjectToString\",\"javaCapName\":\"Record\",\"length\":0}]";
         MethodMetaInfo mmi2 = JacksonUtils.fromJson(methodMetaInfoStaticArrayStr, MethodMetaInfo.class);
         List<NamedType> nt2 = JacksonUtils.fromJson(inputsStaticArray, List.class, NamedType.class);
         ArrayList<FieldVO> list2 = methodParser.getFieldList(mmi2, nt2);
@@ -77,10 +78,14 @@ public class MethodParserTest extends WebasemonkeyApplicationTests {
            System.out.println(JacksonUtils.toJson(type));
            TypeReference<?> tr = DynamicArrayReference.create(type.getBaseName(), n.isIndexed());
            System.out.println(tr.getClass().getSimpleName());
-        }
-        
-        
-
+        }     
+    }
+    
+    
+    public static void main(String[] args) {
+        String s = "[{\"value\":\"aw==\",\"typeAsString\":\"bytes1\"},{\"value\":\"dg==\",\"typeAsString\":\"bytes1\"}]";
+        List<Bytes1> list = JacksonUtils.fromJson(s, List.class, Bytes1.class);
+        System.out.println(JacksonUtils.toJson(list.get(0).getValue()));
     }
 
 }
