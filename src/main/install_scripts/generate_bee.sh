@@ -162,45 +162,65 @@ LOG_INFO "server.port             =  ${server_port} "
 
 # begin to check config nt null
 if  [ ! -n "${system_nodeStr}" ] ;then
-echo "invalid system nodestr! Please check the application.properties."
+LOG_ERROR "invalid system nodestr! Please check the application.properties."
 exit 1
 fi
 if  [ ! -n "${system_groupId}" ] ;then
-echo "invalid system groupId! Please check the application.properties."
+LOG_ERROR "invalid system groupId! Please check the application.properties."
 exit 1
 fi
 if  [ ! -n "${system_orgId}" ] ;then
-echo "invalid system orgId! Please check the application.properties."
+LOG_ERROR "invalid system orgId! Please check the application.properties."
 exit 1
 fi
 if  [ ! -n "${system_dbUrl}" ] ;then
-echo "invalid system dbUrl! Please check the application.properties."
+LOG_ERROR "invalid system dbUrl! Please check the application.properties."
 exit 1
 fi
 if  [ ! -n "${system_dbUser}" ] ;then
-echo "invalid system dbUser! Please check the application.properties."
+LOG_ERROR "invalid system dbUser! Please check the application.properties."
 exit 1
 fi
 if  [ ! -n "${system_dbPassword}" ] ;then
-echo "invalid system dbPassword! Please check the application.properties."
+LOG_ERROR "invalid system dbPassword! Please check the application.properties."
 exit 1
 fi
 if  [ ! -n "${system_group}" ] ;then
-echo "invalid system group! Please check the application.properties."
+LOG_ERROR "invalid system group! Please check the application.properties."
 exit 1
 fi
 if  [ ! -n "${system_baseProjectPath}" ] ;then
-echo "invalid system baseProjectPath! Please check the application.properties."
+LOG_ERROR "invalid system baseProjectPath! Please check the application.properties."
 exit 1
 fi
 if  [ ! -n "${system_contractPackName}" ] ;then
-echo "invalid system contractPackName! Please check the application.properties."
+LOG_ERROR "invalid system contractPackName! Please check the application.properties."
 exit 1
 fi
 if  [ ! -n "${server_port}" ] ;then
-echo "invalid server port! Please check the application.properties."
+LOG_ERROR "invalid server port! Please check the application.properties."
 exit 1
 fi
+
+count=`find $BASE_DIR/$CONTRACT_DIR -type f -print |grep ".java" | wc -l`
+LOG_INFO "Find $count java files"
+if [[ $count -lt 1 ]];then
+  LOG_ERROR "Not find java files."
+  exit 1
+fi
+
+## begin to check java package name 
+LOG_INFO "Checking your java contract package name ..."
+for file in $BASE_DIR/$CONTRACT_DIR/*
+do
+  if head -n 1 $file | grep "${system_contractPackName}">/dev/null
+  then
+    continue
+  else
+    LOG_ERROR "Invalid java package name. Please make sure your config is equal to your package name."
+    exit 1
+  fi
+done
 
 # check the environment
 ## check server port is used
