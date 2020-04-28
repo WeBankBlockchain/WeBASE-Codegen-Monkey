@@ -15,13 +15,10 @@
  */
 package com.webank.webasemonkey.parser;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import org.fisco.bcos.web3j.abi.TypeReference;
-import org.fisco.bcos.web3j.abi.datatypes.generated.Bytes1;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition.NamedType;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition.NamedType.Type;
 import org.fisco.bcos.web3j.tx.txdecode.BaseException;
@@ -49,6 +46,7 @@ public class MethodParserTest extends WebasemonkeyApplicationTests {
     @Autowired
     private MethodParser methodParser;
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testGetField() throws BaseException, ClassNotFoundException {
         String methodMetaInfoStr =
@@ -84,6 +82,7 @@ public class MethodParserTest extends WebasemonkeyApplicationTests {
     }
     
     
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         String s = "[{\"value\":\"aw==\",\"typeAsString\":\"bytes1\"},{\"value\":\"dg==\",\"typeAsString\":\"bytes1\"}]";
         List<Map<String, byte[]>> list = JacksonUtils.fromJson(s, List.class, Map.class);

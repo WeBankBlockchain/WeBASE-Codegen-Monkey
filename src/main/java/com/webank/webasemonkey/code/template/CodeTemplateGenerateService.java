@@ -57,6 +57,7 @@ public class CodeTemplateGenerateService<T> {
      * @param vo
      * @return void
      */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void write(GenerateParas generateParas, ContractNameVO vo) {
         Template template = gt.getTemplate(generateParas.getTemplatePath());
         template.binding(generateParas.getMap(vo));

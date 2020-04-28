@@ -34,19 +34,11 @@ public class JavaBasicTypeBO {
     private boolean isArray;
 
     public boolean isStaticArray() {
-        if (StringUtils.contains(classType, "StaticArray")) {
-            return true;
-        } else {
-            return false;
-        }
+        return StringUtils.contains(classType, "StaticArray");
     }
 
     public boolean isDyanmicArray() {
-        if (StringUtils.contains(classType, "DynamicArray")) {
-            return true;
-        } else {
-            return false;
-        }
+        return (StringUtils.contains(classType, "DynamicArray"));
     }
 
 }

@@ -33,6 +33,7 @@ import com.webank.webasemonkey.bo.JavaArrayTypeBO;
  */
 public class AbiTypeRefUtilsTest extends WebasemonkeyApplicationTests {
 
+    @SuppressWarnings("rawtypes")
     @Test
     public void testTypeReference() throws BaseException {
         System.out.println(JacksonUtils.toJson(TypeReferenceUtils.getTypeRef("address")));

@@ -38,6 +38,7 @@ public class MethodCodeGeneratorTest extends WebasemonkeyApplicationTests {
 	
 	@Autowired
     private CodeGenerateService codeGenerator;
+    @SuppressWarnings("rawtypes")
     @Autowired
     private Map<String, GenerateParas> parasMap;
 

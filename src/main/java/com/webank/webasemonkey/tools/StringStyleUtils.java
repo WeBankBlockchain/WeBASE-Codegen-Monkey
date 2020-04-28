@@ -42,6 +42,7 @@ public class StringStyleUtils {
 
     private static String nameStyle;
 
+    @SuppressWarnings("static-access")
     @PostConstruct
     public void init() {
         this.nameStyle = systemEnvironmentConfig.getNameStyle();

@@ -34,6 +34,7 @@ import com.webank.webasemonkey.code.template.face.GenerateParas;
  */
 public class GeneratorTest extends WebasemonkeyApplicationTests {
 
+    @SuppressWarnings("rawtypes")
     @Autowired
     private Map<String, GenerateParas> parasMap;
 

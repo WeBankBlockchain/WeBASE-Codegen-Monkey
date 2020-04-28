@@ -57,6 +57,7 @@ public class TypeReferenceUtils {
         return typeReference;
     }
 
+    @SuppressWarnings("rawtypes")
     public static JavaBasicTypeBO convertType(String solType) {
         try {
             TypeReference t = getTypeRef(solType);
