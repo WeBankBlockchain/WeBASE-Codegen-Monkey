@@ -48,8 +48,10 @@ public class MethodBoRenderParas implements MethodGenerateParas {
     @Override
     public Map<String, Object> getMap(MethodMetaInfo method) {
         List<FieldVO> list = method.getList();
+        List<FieldVO> outputList = method.getOutputList();
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("list", list);
+        map.put("outputList", outputList);
         String className = getClassName(method);
         map.put("class_name", className);
         map.put("group", systemEnvironmentConfig.getGroup());

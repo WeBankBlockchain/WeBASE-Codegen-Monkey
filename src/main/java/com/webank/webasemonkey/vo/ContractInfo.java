@@ -31,7 +31,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper=false)
 public class ContractInfo extends ContractNameVO {
     /** @Fields eventList : event meta info list */
     private List<EventMetaInfo> eventList;

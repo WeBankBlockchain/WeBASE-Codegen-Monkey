@@ -49,8 +49,10 @@ public class MethodCrawlerImplParas implements MethodGenerateParas {
     @Override
     public Map<String, Object> getMap(MethodMetaInfo method) {
         List<FieldVO> list = method.getList();
+        List<FieldVO> outputList = method.getOutputList();
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("list", list);
+        map.put("outputList", outputList);
         String name = method.getContractName() + StringUtils.capitalize(method.getName());
         map.put("contractName", method.getContractName());
         map.put("methodName", name);

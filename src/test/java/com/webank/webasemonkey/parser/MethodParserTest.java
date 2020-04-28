@@ -58,7 +58,7 @@ public class MethodParserTest extends WebasemonkeyApplicationTests {
                 "[{\"sqlName\":\"_user_\",\"solidityName\":\"_user\",\"javaName\":\"_user\",\"sqlType\":\"varchar(255)\",\"solidityType\":\"Address\",\"javaType\":\"String\",\"entityType\":null,\"typeMethod\":\"AddressUtils.bigIntegerToString\",\"javaCapName\":\"_user\",\"length\":0}]";
         MethodMetaInfo mmi = JacksonUtils.fromJson(methodMetaInfoStr, MethodMetaInfo.class);
         List<NamedType> nt = JacksonUtils.fromJson(inputsAddress, List.class, NamedType.class);
-        ArrayList<FieldVO> list = methodParser.getFieldList(mmi, nt);
+        List<FieldVO> list = methodParser.getFieldList(mmi, nt);
         Assertions.assertEquals(JacksonUtils.toJson(list), fieldList);
         
         String methodMetaInfoStaticArrayStr =
@@ -68,7 +68,7 @@ public class MethodParserTest extends WebasemonkeyApplicationTests {
                 "[{\"sqlName\":\"_record_\",\"solidityName\":\"record\",\"javaName\":\"record\",\"sqlType\":\"varchar(10240)\",\"solidityType\":\"DynamicArray<bytes>\",\"javaType\":\"String\",\"entityType\":null,\"typeMethod\":\"BytesUtils.dynamicBytesListObjectToString\",\"javaCapName\":\"Record\",\"length\":0}]";
         MethodMetaInfo mmi2 = JacksonUtils.fromJson(methodMetaInfoStaticArrayStr, MethodMetaInfo.class);
         List<NamedType> nt2 = JacksonUtils.fromJson(inputsStaticArray, List.class, NamedType.class);
-        ArrayList<FieldVO> list2 = methodParser.getFieldList(mmi2, nt2);
+        List<FieldVO> list2 = methodParser.getFieldList(mmi2, nt2);
         Assertions.assertEquals(JacksonUtils.toJson(list2), fieldList2);
         
         List<TypeReference<?>> listOfTypeReference = ContractAbiUtil.paramFormat(nt);

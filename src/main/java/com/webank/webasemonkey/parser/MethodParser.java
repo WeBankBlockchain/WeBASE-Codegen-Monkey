@@ -71,16 +71,12 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
                 continue;
             }
             List<NamedType> inputs = abiDefinition.getInputs();
-            if (CollectionUtils.isEmpty(inputs)) {
+            if (CollectionUtils.isEmpty(inputs) || StringUtils.isEmpty(inputs.get(0).getName())) {
                 continue;
             }
-            // solidity new feature: selector(which returns a method id) may have no name.
-            if (StringUtils.isEmpty(inputs.get(0).getName())) {
-                continue;
-            }
+            List<NamedType> outputs = abiDefinition.getOutputs();
             MethodMetaInfo method = new MethodMetaInfo();
-            method.setContractName(clazz.getSimpleName());
-            method.setType("method");
+            method.setType("method").setContractName(clazz.getSimpleName());
             log.debug("method name : {}", abiDefinition.getName());
             if (abiType.equals(AbiTypeConstants.ABI_CONSTRUCTOR_TYPE)) {
                 method.setName(clazz.getSimpleName());
@@ -94,30 +90,54 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
             }
             int shardingNO = Integer.parseInt(PropertiesUtils.getGlobalProperty(ParserConstants.SYSTEM,
                     method.getContractName(), method.getName(), ParserConstants.SHARDINGNO, "1"));
-            method.setShardingNO(shardingNO).setList(getFieldList(method, inputs));
+            method.setShardingNO(shardingNO).setList(getFieldList(method, inputs))
+                    .setOutputList(getOutputList(method, outputs));
             lists.add(method);
         }
         return lists;
     }
 
-    public ArrayList<FieldVO> getFieldList(MethodMetaInfo method, List<NamedType> inputs) {
+    public List<FieldVO> getOutputList(MethodMetaInfo method, List<NamedType> outputs) {
+        if (CollectionUtils.isEmpty(outputs)) {
+            return new ArrayList<FieldVO>();
+        }
+        List<FieldVO> list = Lists.newArrayListWithExpectedSize(outputs.size());
+        for (int i = 0; i < outputs.size(); i++) {
+            String javaName = "output" + (i + 1);
+            String solType = outputs.get(i).getType();
+            String length = PropertiesUtils.getGlobalProperty(ParserConstants.LENGTH, method.getContractName(),
+                    method.getName(), javaName, "0");
+            FieldVO vo = new FieldVO();
+            vo.setJavaName(javaName).setJavaCapName(StringUtils.capitalize(javaName)).setSqlName(javaName)
+                    .setSqlType(SolSqlTypeMappingUtils.fromSolBasicTypeToSqlType(solType)).setSolidityType(solType)
+                    .setJavaType(SolJavaTypeMappingUtils.fromSolBasicTypeToJavaType(solType))
+                    .setTypeMethod(SolTypeMethodMappingUtils.fromSolBasicTypeToTypeMethod(solType))
+                    .setLength(Integer.parseInt(length));
+            list.add(vo);
+        }
+        return list;
+    }
+
+    public List<FieldVO> getFieldList(MethodMetaInfo method, List<NamedType> inputs) {
         ArrayList<FieldVO> fieldList = Lists.newArrayList();
         for (NamedType namedType : inputs) {
             FieldVO vo = new FieldVO();
-            String k = namedType.getName();
+            String solName = namedType.getName();
             // 增加is前缀变量的特殊处理
-            if (StringUtils.startsWith(k, "is") && k.length() > 2 && Character.isUpperCase(k.charAt(2))) {
-                k = StringUtils.uncapitalize(StringUtils.substring(k, 2));
+            if (StringUtils.startsWith(solName, "is") && solName.length() > 2
+                    && Character.isUpperCase(solName.charAt(2))) {
+                solName = StringUtils.uncapitalize(StringUtils.substring(solName, 2));
             }
             String solType = namedType.getType();
             String length = PropertiesUtils.getGlobalProperty(ParserConstants.LENGTH, method.getContractName(),
-                    method.getName(), k, "0");
-            String sqlName = systemEnvironmentConfig.getNamePrefix() + StringStyleUtils.upper2underline(k)
+                    method.getName(), solName, "0");
+            String sqlName = systemEnvironmentConfig.getNamePrefix() + StringStyleUtils.upper2underline(solName)
                     + systemEnvironmentConfig.getNamePostfix();
-            vo.setSolidityName(k).setSqlName(sqlName).setJavaName(k).setSqlType(SolSqlTypeMappingUtils.fromSolBasicTypeToSqlType(solType))
-                    .setSolidityType(solType).setJavaType(SolJavaTypeMappingUtils.fromSolBasicTypeToJavaType(solType))
-                    .setTypeMethod(SolTypeMethodMappingUtils.fromSolBasicTypeToTypeMethod(solType)).setJavaCapName(StringUtils.capitalize(k))
-                    .setLength(Integer.parseInt(length));
+            vo.setSolidityName(solName).setSqlName(sqlName).setJavaName(solName)
+                    .setSqlType(SolSqlTypeMappingUtils.fromSolBasicTypeToSqlType(solType)).setSolidityType(solType)
+                    .setJavaType(SolJavaTypeMappingUtils.fromSolBasicTypeToJavaType(solType))
+                    .setTypeMethod(SolTypeMethodMappingUtils.fromSolBasicTypeToTypeMethod(solType))
+                    .setJavaCapName(StringUtils.capitalize(solName)).setLength(Integer.parseInt(length));
             log.debug("java name {}, java type {}, solidity type {}, type method {}", vo.getJavaName(),
                     vo.getJavaType(), vo.getSolidityType(), vo.getTypeMethod());
             fieldList.add(vo);

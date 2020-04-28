@@ -35,7 +35,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper=false)
 public class EventMetaInfo extends ContractStructureMetaInfo {
     private List<String> ignoreParams;
 }

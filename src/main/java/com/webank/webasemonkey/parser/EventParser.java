@@ -63,15 +63,13 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
                 continue;
             }
             EventMetaInfo event = new EventMetaInfo();
-            event.setContractName(clazz.getSimpleName());
-            event.setType("event");
-            event.setName(StringUtils.substringBefore(c.getSimpleName(), ParserConstants.EVENT_RESPONSE));
+            event.setName(StringUtils.substringBefore(c.getSimpleName(), ParserConstants.EVENT_RESPONSE))
+                    .setType("event").setContractName(clazz.getSimpleName());
             String generatedFlag = PropertiesUtils.getGlobalProperty(ParserConstants.MONITOR, event.getContractName(),
                     event.getName(), "generated", "on");
             if (generatedFlag != null && generatedFlag.equalsIgnoreCase("off")) {
                 continue;
             }
-
             String ignoreStr = PropertiesUtils.getPropertyWithoutDefault(ParserConstants.MONITOR,
                     event.getContractName(), event.getName(), ParserConstants.IGNORE_PARAM);
             List<String> ignoreParam = StrSpliter.split(ignoreStr, ',', 0, true, true);
@@ -108,9 +106,7 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
                             .setEntityType(typeVo.getJavaType());
                 } else {
                     JavaTypeEnum e = JavaTypeEnum.parse(javaType);
-                    vo.setSqlType(e.getSqlType())
-                            .setEntityType(e.getEntityType())
-                            .setTypeMethod(e.getTypeMethod());
+                    vo.setSqlType(e.getSqlType()).setEntityType(e.getEntityType()).setTypeMethod(e.getTypeMethod());
                 }
                 vo.setSqlName(sqlName).setJavaName(k).setJavaType(javaType).setJavaCapName(StringUtils.capitalize(k))
                         .setLength(Integer.parseInt(length));

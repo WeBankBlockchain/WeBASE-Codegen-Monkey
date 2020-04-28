@@ -19,7 +19,14 @@ CREATE TABLE ${table_name} (
 			}
 		}
 	 }
+	%>	
+	<%
+	for(entry in outputList){
+		var key = entry.sqlName;
+        var value = entry.sqlType;
 	%>
+	${key} ${value} NOT NULL,
+	<% } %>		
   	`updatetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
  	PRIMARY KEY (pk_id)
 ) COMMENT='${table_name}' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
