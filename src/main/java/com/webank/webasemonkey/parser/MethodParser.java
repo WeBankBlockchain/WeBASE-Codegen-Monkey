@@ -107,8 +107,10 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
             String solType = outputs.get(i).getType();
             String length = PropertiesUtils.getGlobalProperty(ParserConstants.LENGTH, method.getContractName(),
                     method.getName(), javaName, "0");
+            String sqlName =
+                    systemEnvironmentConfig.getNamePrefix() + javaName + systemEnvironmentConfig.getNamePostfix();
             FieldVO vo = new FieldVO();
-            vo.setJavaName(javaName).setJavaCapName(StringUtils.capitalize(javaName)).setSqlName(javaName)
+            vo.setJavaName(javaName).setJavaCapName(StringUtils.capitalize(javaName)).setSqlName(sqlName)
                     .setSqlType(SolSqlTypeMappingUtils.fromSolBasicTypeToSqlType(solType)).setSolidityType(solType)
                     .setJavaType(SolJavaTypeMappingUtils.fromSolBasicTypeToJavaType(solType))
                     .setTypeMethod(SolTypeMethodMappingUtils.fromSolBasicTypeToTypeMethod(solType))
