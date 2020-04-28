@@ -22,11 +22,9 @@ import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.fisco.bcos.web3j.abi.TypeReference;
 import org.fisco.bcos.web3j.protocol.ObjectMapperFactory;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition.NamedType;
-import org.fisco.bcos.web3j.tx.txdecode.BaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,10 +33,11 @@ import com.google.common.collect.Lists;
 import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.constants.AbiTypeConstants;
 import com.webank.webasemonkey.constants.ParserConstants;
-import com.webank.webasemonkey.enums.Web3jTypeEnum;
 import com.webank.webasemonkey.tools.PropertiesUtils;
+import com.webank.webasemonkey.tools.SolJavaTypeMappingUtils;
+import com.webank.webasemonkey.tools.SolSqlTypeMappingUtils;
+import com.webank.webasemonkey.tools.SolTypeMethodMappingUtils;
 import com.webank.webasemonkey.tools.StringStyleUtils;
-import com.webank.webasemonkey.tools.TypeReferenceUtils;
 import com.webank.webasemonkey.vo.FieldVO;
 import com.webank.webasemonkey.vo.MethodMetaInfo;
 
@@ -110,15 +109,14 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
             if (StringUtils.startsWith(k, "is") && k.length() > 2 && Character.isUpperCase(k.charAt(2))) {
                 k = StringUtils.uncapitalize(StringUtils.substring(k, 2));
             }
-            String type = namedType.getType().split(" ")[0];
-            String v = solidityType2SolidityReferenceType(type);
+            String solType = namedType.getType();
             String length = PropertiesUtils.getGlobalProperty(ParserConstants.LENGTH, method.getContractName(),
                     method.getName(), k, "0");
             String sqlName = systemEnvironmentConfig.getNamePrefix() + StringStyleUtils.upper2underline(k)
                     + systemEnvironmentConfig.getNamePostfix();
-            vo.setSolidityName(k).setSqlName(sqlName).setJavaName(k).setSqlType(Web3jTypeEnum.parse(v).getSqlType())
-                    .setSolidityType(v).setJavaType(Web3jTypeEnum.parse(v).getJavaType())
-                    .setTypeMethod(Web3jTypeEnum.parse(v).getTypeMethod()).setJavaCapName(StringUtils.capitalize(k))
+            vo.setSolidityName(k).setSqlName(sqlName).setJavaName(k).setSqlType(SolSqlTypeMappingUtils.fromSolBasicTypeToSqlType(solType))
+                    .setSolidityType(solType).setJavaType(SolJavaTypeMappingUtils.fromSolBasicTypeToJavaType(solType))
+                    .setTypeMethod(SolTypeMethodMappingUtils.fromSolBasicTypeToTypeMethod(solType)).setJavaCapName(StringUtils.capitalize(k))
                     .setLength(Integer.parseInt(length));
             log.debug("java name {}, java type {}, solidity type {}, type method {}", vo.getJavaName(),
                     vo.getJavaType(), vo.getSolidityType(), vo.getTypeMethod());
@@ -157,20 +155,6 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
             log.error("IOException: {}", e.getMessage());
         }
         return abiDefinition;
-    }
-
-    @SuppressWarnings("rawtypes")
-    public String solidityType2SolidityReferenceType(String type) {
-        try {
-            TypeReference tr = TypeReferenceUtils.getTypeRef(type);
-            if (StringUtils.endsWith(tr.getType().getTypeName(), ">")) {
-                return tr.getClassType().getSimpleName() + "<" + StringUtils.substringBefore(type, "[") + ">";
-            }
-            return TypeReferenceUtils.getTypeRef(type).getClassType().getSimpleName();
-        } catch (ClassNotFoundException | BaseException e) {
-            log.error("Exception: {}", e.getMessage());
-        }
-        return null;
     }
 
 }

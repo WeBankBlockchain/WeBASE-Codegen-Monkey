@@ -15,12 +15,18 @@
  */
 package com.webank.webasemonkey.tools;
 
+import org.apache.commons.lang3.StringUtils;
 import org.fisco.bcos.web3j.abi.TypeReference;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition;
 import org.fisco.bcos.web3j.tx.txdecode.BaseException;
 import org.fisco.bcos.web3j.tx.txdecode.ContractTypeUtil;
 import org.fisco.bcos.web3j.tx.txdecode.DynamicArrayReference;
 import org.fisco.bcos.web3j.tx.txdecode.StaticArrayReference;
+
+import com.webank.webasemonkey.bo.JavaArrayTypeBO;
+import com.webank.webasemonkey.bo.JavaBasicTypeBO;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * TypeReferenceUtils
@@ -30,6 +36,7 @@ import org.fisco.bcos.web3j.tx.txdecode.StaticArrayReference;
  * @data Apr 24, 2020 11:02:39 AM
  *
  */
+@Slf4j
 public class TypeReferenceUtils {
 
     public static TypeReference<?> getTypeRef(String solType) throws BaseException {
@@ -48,6 +55,27 @@ public class TypeReferenceUtils {
             typeReference = TypeReference.create(ContractTypeUtil.getType(solType), false);
         }
         return typeReference;
+    }
+
+    public static JavaBasicTypeBO convertType(String solType) {
+        try {
+            TypeReference t = getTypeRef(solType);
+            String json = JacksonUtils.toJson(t);
+            JavaBasicTypeBO bo = JacksonUtils.fromJson(json, JavaBasicTypeBO.class);
+            if (StringUtils.contains(bo.getClassType(), "Array")) {
+                JavaArrayTypeBO a = JacksonUtils.fromJson(json, JavaArrayTypeBO.class);
+                a.setArray(true);
+                return a;
+            } else {
+                bo.setArray(false);
+                return bo;
+            }
+
+        } catch (BaseException e) {
+            log.error("SolType {} can't be converted", solType);
+            return null;
+        }
+
     }
 
 }

@@ -15,10 +15,13 @@
  */
 package com.webank.webasemonkey.tools;
 
+import org.fisco.bcos.web3j.abi.TypeReference;
 import org.fisco.bcos.web3j.tx.txdecode.BaseException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.webank.webasemonkey.WebasemonkeyApplicationTests;
+import com.webank.webasemonkey.bo.JavaArrayTypeBO;
 
 /**
  * AbiTypeRefUtilsTest
@@ -30,14 +33,26 @@ import com.webank.webasemonkey.WebasemonkeyApplicationTests;
  */
 public class AbiTypeRefUtilsTest extends WebasemonkeyApplicationTests {
 
-   
-    
     @Test
     public void testTypeReference() throws BaseException {
         System.out.println(JacksonUtils.toJson(TypeReferenceUtils.getTypeRef("address")));
         System.out.println(JacksonUtils.toJson(TypeReferenceUtils.getTypeRef("bytes[]")));
         System.out.println(JacksonUtils.toJson(TypeReferenceUtils.getTypeRef("address[2]")));
         System.out.println(JacksonUtils.toJson(TypeReferenceUtils.getTypeRef("uint8[2]")));
+        TypeReference t = TypeReferenceUtils.getTypeRef("address[2]");
+        JavaArrayTypeBO bo = JacksonUtils.fromJson(JacksonUtils.toJson(t), JavaArrayTypeBO.class);
+        System.out.println();
+        Assertions.assertEquals("org.fisco.bcos.web3j.abi.datatypes.generated.StaticArray2", bo.getType().getRawType());
+        Assertions.assertEquals("org.fisco.bcos.web3j.abi.datatypes.Address",
+                bo.getType().getActualTypeArguments().get(0));    
+    }
+    
+    @Test
+    public void testJavaType() {
+        System.out.println(JacksonUtils.toJson(TypeReferenceUtils.convertType("uint[]")));
+        Assertions.assertTrue(TypeReferenceUtils.convertType("uint[]").isArray());
+        System.out.println(JacksonUtils.toJson(TypeReferenceUtils.convertType("int8")));
+        Assertions.assertTrue(!TypeReferenceUtils.convertType("int8").isArray());
 
     }
 }
