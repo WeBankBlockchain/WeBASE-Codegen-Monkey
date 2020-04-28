@@ -16,6 +16,7 @@
 package com.webank.webasemonkey.bo;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * JavaTypeBO
@@ -26,6 +27,7 @@ import lombok.Data;
  *
  */
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class JavaArrayTypeBO extends JavaBasicTypeBO{
     private Type type;
 }

@@ -268,8 +268,14 @@ if [ -d "$BMP/$BM" ];then
   LOG_INFO "Monkey already exist."
   cd $BMP/$BM
   git reset --hard HEAD
-  git pull
   git checkout $BRANCH_NAME
+  git pull
+  if [ $? == 0 ];then
+  	LOG_INFO "git pull success"
+  else
+     LOG_ERROR "git pull fail"
+     exit 1;
+  fi
 else
   LOG_INFO "Begin to download Monkey ..."
   mkdir -p $BMP
@@ -284,8 +290,14 @@ if [ -d "$BB" ];then
   LOG_INFO "Bee already exist."
   cd $BB
   git reset --hard HEAD
-  git pull
   git checkout $BRANCH_NAME
+  git pull
+  if [ $? == 0 ];then
+  	LOG_INFO "git pull success"
+  else
+     LOG_ERROR "git pull fail"
+     exit 1;
+  fi
 else
   LOG_INFO "Begin to download Bee ..."
   git clone https://github.com/WeBankFinTech/$BB.git
