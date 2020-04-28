@@ -16,7 +16,6 @@
 package com.webank.webasemonkey.parser;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -78,7 +77,7 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
                     event.getContractName(), event.getName(), ParserConstants.SHARDINGNO, "1"));
             event.setShardingNO(shardingNO);
             Field[] fields = c.getFields();
-            ArrayList<FieldVO> fieldList = Lists.newArrayList();
+            List<FieldVO> fieldList = Lists.newArrayList();
             for (Field f : fields) {
                 // web3sdk 2.0 has a Log type, skip it temporary
                 if (f.getType() == Log.class) {
@@ -89,7 +88,7 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
                 if (ignoreParam.contains(k)) {
                     log.info("Contract:{}, event:{}, ignores param:{}", event.getContractName(), event.getName(), k);
                     continue;
-                }
+                }            
                 String javaType = cleanType(f.getGenericType().getTypeName());
                 // get the personal length
                 String length = PropertiesUtils.getGlobalProperty(ParserConstants.LENGTH, event.getContractName(),
