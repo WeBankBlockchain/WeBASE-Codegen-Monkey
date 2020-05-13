@@ -151,7 +151,6 @@ fi
 
 LOG_INFO "system.nodeStr =  ${system_nodeStr} "
 LOG_INFO "system.groupId          =  ${system_groupId} "
-LOG_INFO "system.orgId          =  ${system_orgId} "
 LOG_INFO "system.dbUrl =  ${system_dbUrl} "
 LOG_INFO "system.dbUser =  ${system_dbUser} "
 LOG_INFO "system.dbPassword =  ${system_dbPassword} "
@@ -167,10 +166,6 @@ exit 1
 fi
 if  [ ! -n "${system_groupId}" ] ;then
 LOG_ERROR "invalid system groupId! Please check the application.properties."
-exit 1
-fi
-if  [ ! -n "${system_orgId}" ] ;then
-LOG_ERROR "invalid system orgId! Please check the application.properties."
 exit 1
 fi
 if  [ ! -n "${system_dbUrl}" ] ;then
