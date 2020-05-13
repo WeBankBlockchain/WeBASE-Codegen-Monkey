@@ -61,7 +61,6 @@ public class ApplicationPropParas implements ConfigGenerateParas {
         map.put("eventList", eventList);
         map.put("methodList", methodList);
         map.put("port", serverConfig.getPort());
-        map.put("orgId", systemEnvironmentConfig.getOrgId());
         map.put("nodeStr", systemEnvironmentConfig.getNodeStr());
         map.put("groupId", systemEnvironmentConfig.getGroupId());
         map.put("group", systemEnvironmentConfig.getGroup());

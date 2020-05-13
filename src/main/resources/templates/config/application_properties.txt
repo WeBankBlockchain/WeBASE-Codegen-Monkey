@@ -20,7 +20,6 @@ spring.jpa.properties.hibernate.show_sql=true
 spring.profiles.active=sharding-tables
 
 ## System config
-system.orgId=${orgId}
 system.nodeStr=${nodeStr}
 system.groupId=${groupId}
 system.configPath=config/

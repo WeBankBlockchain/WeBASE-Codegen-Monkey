@@ -34,8 +34,6 @@ import lombok.Data;
 @Data
 public class SystemEnvironmentConfig {
 
-    /** @Fields orgId : org Id */
-    private String orgId = "1000";
     /** @Fields nodeStr : [name]@[IP]:[PORT] */
     private String nodeStr;
     private int groupId;
