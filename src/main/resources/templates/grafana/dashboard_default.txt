@@ -284,7 +284,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": false,
-          "rawSql": "SELECT\n  block_timestamp AS \"time\",\n  block_height\nFROM block_detail_info\nWHERE\n  $__timeFilter(block_timestamp)\nORDER BY block_timestamp",
+          "rawSql": "SELECT\n  $__timeGroupAlias(block_timestamp,$__interval),\n  max(block_height) AS \"block_height\"\nFROM block_detail_info\nWHERE\n  $__timeFilter(block_timestamp)\nGROUP BY 1\nORDER BY $__timeGroup(block_timestamp,$__interval)",
           "refId": "A",
           "select": [
             [
@@ -293,6 +293,18 @@
                   "block_height"
                 ],
                 "type": "column"
+              },
+              {
+                "params": [
+                  "max"
+                ],
+                "type": "aggregate"
+              },
+              {
+                "params": [
+                  "block_height"
+                ],
+                "type": "alias"
               }
             ]
           ],
