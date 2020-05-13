@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.collect.Maps;
 import com.webank.webasemonkey.code.template.face.ConfigGenerateParas;
+import com.webank.webasemonkey.config.ButtonEnvironmentConfig;
 import com.webank.webasemonkey.config.ServerConfig;
 import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.config.ZookeeperConfig;
@@ -48,6 +49,8 @@ public class ApplicationPropParas implements ConfigGenerateParas {
 
     @Autowired
     private SystemEnvironmentConfig systemEnvironmentConfig;
+    @Autowired
+    private ButtonEnvironmentConfig buttonEnvironmentConfig;
     @Autowired
     private ServerConfig serverConfig;
     @Autowired
@@ -74,6 +77,8 @@ public class ApplicationPropParas implements ConfigGenerateParas {
         map.put("nameSpace", zookeeperConfig.getNamespace());
         map.put("startBlockHeight", systemEnvironmentConfig.getStartBlockHeight());
         map.put("startDate", systemEnvironmentConfig.getStartDate());
+
+        map.put("swagger", buttonEnvironmentConfig.getSwagger());
 
         return map;
     }

@@ -79,5 +79,7 @@ system.contractPath=${contractPath}
 system.startBlockHeight=${startBlockHeight}
 system.startDate=${startDate}
 
+button.swagger=${swagger}
+
 
 
