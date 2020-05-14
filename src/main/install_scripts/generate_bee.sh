@@ -281,7 +281,7 @@ else
   cd $BMP
   git clone https://github.com/WeBankFinTech/$BM.git
   cd $BM
-  git checkout $BRANCH_NAME
+  git checkout -b $BRANCH_NAME origin/$BRANCH_NAME
 fi
 cd $BASE_DIR
 
@@ -307,7 +307,7 @@ else
   LOG_INFO "Begin to download Bee ..."
   git clone https://github.com/WeBankFinTech/$BB.git
   cd $BB
-  git checkout $BRANCH_NAME
+  git checkout -b $BRANCH_NAME origin/$BRANCH_NAME
 fi
 cd $BASE_DIR
 
