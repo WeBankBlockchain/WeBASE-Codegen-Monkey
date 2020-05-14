@@ -265,6 +265,7 @@ if [ -d "$BMP/$BM" ];then
   ## rm cached files
   rm -rf src/main/java/com/webank/blockchain/
   rm -rf src/main/java/org/
+  git fetch
   git reset --hard HEAD
   git checkout $BRANCH_NAME
   git pull
@@ -278,11 +279,6 @@ else
   LOG_INFO "Begin to download Monkey ..."
   mkdir -p $BMP
   cd $BMP
-  ## rm cached files
-  rm -rf src/main/java/com/webank/bcosbee/generated
-  rm -rf src/main/java/com/webank/webasebee/generated
-  rm -rf src/main/java/com/webank/blockchain/
-  rm -rf src/main/java/org
   git clone https://github.com/WeBankFinTech/$BM.git
   cd $BM
   git checkout $BRANCH_NAME
@@ -292,6 +288,12 @@ cd $BASE_DIR
 if [ -d "$BB" ];then
   LOG_INFO "Bee already exist."
   cd $BB
+    ## rm cached files
+  rm -rf src/main/java/com/webank/bcosbee/generated
+  rm -rf src/main/java/com/webank/webasebee/generated
+  rm -rf src/main/java/com/webank/blockchain/
+  rm -rf src/main/java/org
+  git fetch
   git reset --hard HEAD
   git checkout $BRANCH_NAME
   git pull
