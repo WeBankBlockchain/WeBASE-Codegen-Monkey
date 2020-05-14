@@ -281,7 +281,16 @@
       "targets": [
         {
           "format": "time_series",
-          "group": [],
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "hide": false,
           "metricColumn": "none",
           "rawQuery": false,
           "rawSql": "SELECT\n  $__timeGroupAlias(block_timestamp,$__interval),\n  max(block_height) AS \"block_height\"\nFROM block_detail_info\nWHERE\n  $__timeFilter(block_timestamp)\nGROUP BY 1\nORDER BY $__timeGroup(block_timestamp,$__interval)",
