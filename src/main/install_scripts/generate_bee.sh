@@ -157,7 +157,9 @@ LOG_INFO "system.dbPassword =  ${system_dbPassword} "
 LOG_INFO "system.group          =  ${system_group} "
 LOG_INFO "system.baseProjectPath          =  ${system_baseProjectPath} "
 LOG_INFO "system.contractPackName =  ${system_contractPackName} "
+LOG_INFO "system.multiLiving = ${system_multiLiving} "
 LOG_INFO "server.port             =  ${server_port} "
+
 
 # begin to check config nt null
 if  [ ! -n "${system_nodeStr}" ] ;then
@@ -190,6 +192,10 @@ exit 1
 fi
 if  [ ! -n "${system_contractPackName}" ] ;then
 LOG_ERROR "invalid system contractPackName! Please check the application.properties."
+exit 1
+fi
+if  [ ! -n "${system_multiLiving}" ] ;then
+LOG_ERROR "invalid system multiLiving! Please check the application.properties."
 exit 1
 fi
 if  [ ! -n "${server_port}" ] ;then
