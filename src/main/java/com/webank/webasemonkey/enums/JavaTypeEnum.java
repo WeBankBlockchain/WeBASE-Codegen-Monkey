@@ -37,10 +37,10 @@ public enum JavaTypeEnum {
     BIGINTEGER("BigInteger", "Long", "bigint", "BigIntegerUtils.toLong"),
     BOOL("Boolean", "String", "varchar(8)", "String.valueOf"),
     STRING("String", "String", "varchar(255)", "String.valueOf"),
-    ByteArray("byte[]", "String", "varchar(10240)", "BytesUtils.bytesArrayToString" ),
-    LISTByteArray("List<byte[]>", "String", "varchar(10240)", "BytesUtils.bytesTypeListToString" ),
-    LISTString("List<String>", "String", "varchar(10240)", "BytesUtils.stringListToString" ),
-    LISTBigInteger("List<BigInteger>", "String", "varchar(4096)", "BytesUtils.numericTypeListToString" ),
+    ByteArray("byte[]", "String", "varchar(10240)", "String.valueOf" ),
+    LISTByteArray("List<byte[]>", "String", "varchar(10240)", "String.valueOf" ),
+    LISTString("List<String>", "String", "varchar(10240)", "String.valueOf" ),
+    LISTBigInteger("List<BigInteger>", "String", "varchar(4096)", "String.valueOf" ),
     LIST("List", "String", "varchar(10240)", "JacksonUtils.toJson" )
     ;
 
