@@ -48,7 +48,6 @@ public class SolTypeMethodMappingUtils {
 
         switch (solBasicType) {
             case "address":
-                return "AddressUtils.bigIntegerToString";
             case "string":
                 return "String.valueOf";
             case "bytes1":
