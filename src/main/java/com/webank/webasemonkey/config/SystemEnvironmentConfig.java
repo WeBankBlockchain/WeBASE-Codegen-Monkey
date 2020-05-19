@@ -62,6 +62,6 @@ public class SystemEnvironmentConfig {
 
     private String dbIdentifierSplit = "false";
 
-    private int encrptType = 0;
+    private int encryptType = 0;
 
 }

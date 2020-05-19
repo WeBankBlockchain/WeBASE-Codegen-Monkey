@@ -77,7 +77,7 @@ public class ApplicationPropParas implements ConfigGenerateParas {
         map.put("nameSpace", zookeeperConfig.getNamespace());
         map.put("startBlockHeight", systemEnvironmentConfig.getStartBlockHeight());
         map.put("startDate", systemEnvironmentConfig.getStartDate());
-        map.put("encryptType", systemEnvironmentConfig.getEncrptType());
+        map.put("encryptType", systemEnvironmentConfig.getEncryptType());
 
         map.put("swagger", buttonEnvironmentConfig.getSwagger());
 
