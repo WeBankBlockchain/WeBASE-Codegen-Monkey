@@ -79,6 +79,8 @@ system.contractPath=${contractPath}
 system.startBlockHeight=${startBlockHeight}
 system.startDate=${startDate}
 
+system.encryptType=${encryptType}
+
 button.swagger=${swagger}
 
 
