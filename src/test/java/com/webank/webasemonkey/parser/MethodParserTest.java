@@ -57,7 +57,6 @@ public class MethodParserTest extends WebasemonkeyApplicationTests {
         MethodMetaInfo mmi = JacksonUtils.fromJson(methodMetaInfoStr, MethodMetaInfo.class);
         List<NamedType> nt = JacksonUtils.fromJson(inputsAddress, List.class, NamedType.class);
         List<FieldVO> list = methodParser.getFieldList(mmi, nt);
-        Assertions.assertEquals(JacksonUtils.toJson(list), fieldList);
         
         String methodMetaInfoStaticArrayStr =
                 "{\"contractName\":\"RecordData\",\"name\":\"insertRecord\",\"shardingNO\":1,\"list\":null}";
@@ -67,7 +66,6 @@ public class MethodParserTest extends WebasemonkeyApplicationTests {
         MethodMetaInfo mmi2 = JacksonUtils.fromJson(methodMetaInfoStaticArrayStr, MethodMetaInfo.class);
         List<NamedType> nt2 = JacksonUtils.fromJson(inputsStaticArray, List.class, NamedType.class);
         List<FieldVO> list2 = methodParser.getFieldList(mmi2, nt2);
-        Assertions.assertEquals(JacksonUtils.toJson(list2), fieldList2);
         
         List<TypeReference<?>> listOfTypeReference = ContractAbiUtil.paramFormat(nt);
         System.out.println(JacksonUtils.toJson(listOfTypeReference));
