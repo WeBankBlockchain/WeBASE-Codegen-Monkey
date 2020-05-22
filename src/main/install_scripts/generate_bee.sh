@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 LANG=zh_CN.UTF-8
-BRANCH_NAME="code_refactor_2020.01"
+BRANCH_NAME="master"
 
 ##############################################################################
 ##
