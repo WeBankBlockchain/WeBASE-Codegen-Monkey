@@ -12,10 +12,10 @@ spring.shardingsphere.datasource.ds.max-active=160
 	 		name = c.name;	
 	 		shardingNO = c.shardingNO;
 	 		tmpNO = shardingNO - 1;
-			println("spring.shardingsphere.rules.sharding-rule.tables." + name + ".actual-data-nodes=ds." + name + "_$->{0.." + tmpNO + "}");
-			println("spring.shardingsphere.rules.sharding-rule.tables." + name + ".table-strategy.inline.sharding-column=block_height");
-			println("spring.shardingsphere.rules.sharding-rule.tables." + name + ".table-strategy.inline.algorithm-expression=" + name + "_$->{block_height % " + shardingNO + "}");
-			println("spring.shardingsphere.rules.sharding-rule.tables." + name + ".key-generator-column-name=pk_id");	 		
+			println("spring.shardingsphere.sharding.tables." + name + ".actual-data-nodes=ds." + name + "_$->{0.." + tmpNO + "}");
+			println("spring.shardingsphere.sharding.tables." + name + ".table-strategy.inline.sharding-column=block_height");
+			println("spring.shardingsphere.sharding.tables." + name + ".table-strategy.inline.algorithm-expression=" + name + "_$->{block_height % " + shardingNO + "}");
+			println("spring.shardingsphere.sharding.tables." + name + ".key-generator-column-name=pk_id");	 		
 	 		println();
 	 	}
 %>
