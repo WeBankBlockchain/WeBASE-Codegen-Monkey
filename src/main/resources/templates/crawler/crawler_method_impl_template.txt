@@ -8,10 +8,12 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.collections4.CollectionUtils;
 import org.fisco.bcos.web3j.abi.FunctionReturnDecoder;
 import org.fisco.bcos.web3j.abi.datatypes.Type;
 import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition.NamedType;
 import org.fisco.bcos.web3j.protocol.core.methods.response.Transaction;
+import org.fisco.bcos.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import ${group}.${projectName}.crawler.face.BcosMethodCrawlerInterface;
@@ -21,6 +23,7 @@ import com.webank.webasebee.common.tools.AddressUtils;
 import com.webank.webasebee.common.tools.BigIntegerUtils;
 import com.webank.webasebee.common.tools.BoolUtils;
 import com.webank.webasebee.common.tools.BytesUtils;
+import com.webank.webasebee.common.tools.JacksonUtils;
 import com.webank.webasebee.common.tools.MethodUtils;
 import lombok.extern.slf4j.Slf4j;
 import ${group}.webasebee.common.bo.contract.ContractMapsInfo;
@@ -36,7 +39,7 @@ public class ${methodName}MethodCrawlerImpl implements BcosMethodCrawlerInterfac
 	private ContractMapsInfo contractMapsInfo; 
 
 	@Override
-	public MethodBO transactionHandler(Transaction transaction, BigInteger blockTimeStamp,
+	public MethodBO transactionHandler(Transaction transaction, TransactionReceipt receipt, BigInteger blockTimeStamp,
 	 Map.Entry<String, String> entry, String methodName, Map<String, String> txHashContractAddress) {
 		log.debug("Begin process ${methodName} Transaction");
 		${methodName}BO entity = new ${methodName}BO();
@@ -58,15 +61,33 @@ public class ${methodName}MethodCrawlerImpl implements BcosMethodCrawlerInterfac
 		log.debug("input : {}", input);
 				
 		List<NamedType> list = contractMapsInfo.getMethodFiledsMap().get(mapKey);
-		List<Type> params = FunctionReturnDecoder.decode(input, MethodUtils.getMethodTypeReferenceList(list));
+		if (!CollectionUtils.isEmpty(list)) {
+			List<Type> params = FunctionReturnDecoder.decode(input, MethodUtils.getMethodTypeReferenceList(list));
 		
 		<%
 			for(var index = 0; index < list.~size; index++){
 				var javaCapName = list[index].javaCapName;
 				var typeMethod = list[index].typeMethod;
 		%>
-		entity.set${javaCapName}(${typeMethod}(params.get(${index}).getValue()));
+			entity.set${javaCapName}(${typeMethod}(params.get(${index}).getValue()));
 		<%  } %>
+		}
+	
+		List<NamedType> outputList = contractMapsInfo.getOutputMethodFiledsMap().get(mapKey);
+       	if (!CollectionUtils.isEmpty(outputList)) {
+            List<Type> outputParams = FunctionReturnDecoder.decode(receipt.getOutput(),
+                    MethodUtils.getMethodTypeReferenceList(outputList));
+                    <%
+			for(var index = 0; index < outputList.~size; index++){
+				var javaCapName = outputList[index].javaCapName;
+				var typeMethod = outputList[index].typeMethod;
+		%>
+			entity.set${javaCapName}(${typeMethod}(outputParams.get(${index}).getValue()));
+		<%  } %>
+        }
+        	
+		
+		
 		entity.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));	
 		entity.setIdentifier("${methodName}");			
 		

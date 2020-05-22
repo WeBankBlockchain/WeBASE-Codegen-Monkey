@@ -34,8 +34,6 @@ import lombok.Data;
 @Data
 public class SystemEnvironmentConfig {
 
-    /** @Fields orgId : org Id */
-    private String orgId = "1000";
     /** @Fields nodeStr : [name]@[IP]:[PORT] */
     private String nodeStr;
     private int groupId;
@@ -46,6 +44,7 @@ public class SystemEnvironmentConfig {
 
     private String group;
     private String contractPackName;
+    private String contractName;
     private String baseProjectPath;
     private int frequency = 5;
 
@@ -60,7 +59,9 @@ public class SystemEnvironmentConfig {
 
     private long startBlockHeight;
     private String startDate;
-    
+
     private String dbIdentifierSplit = "false";
+
+    private int encryptType = 0;
 
 }

@@ -15,6 +15,7 @@
  */
 package com.webank.webasemonkey.code.service;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,8 @@ public class CodeGenerateService {
     @Autowired
     private Map<String, EventGenerateParas> eventParasMap;
 
-    public void generateBee() throws ClassNotFoundException {
+    @SuppressWarnings("unchecked")
+    public void generateBee() throws ClassNotFoundException, IOException {
         ContractInfo info = contractInfoService.parseFromContract();
         // generate java code files for crawling event data from block chain network
         templateGenerateService.generate(info.getEventList(), eventParasMap);

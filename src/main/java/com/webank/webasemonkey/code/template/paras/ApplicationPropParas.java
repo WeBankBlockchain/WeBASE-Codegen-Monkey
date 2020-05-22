@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.collect.Maps;
 import com.webank.webasemonkey.code.template.face.ConfigGenerateParas;
+import com.webank.webasemonkey.config.ButtonEnvironmentConfig;
 import com.webank.webasemonkey.config.ServerConfig;
 import com.webank.webasemonkey.config.SystemEnvironmentConfig;
 import com.webank.webasemonkey.config.ZookeeperConfig;
@@ -49,6 +50,8 @@ public class ApplicationPropParas implements ConfigGenerateParas {
     @Autowired
     private SystemEnvironmentConfig systemEnvironmentConfig;
     @Autowired
+    private ButtonEnvironmentConfig buttonEnvironmentConfig;
+    @Autowired
     private ServerConfig serverConfig;
     @Autowired
     private ZookeeperConfig zookeeperConfig;
@@ -61,7 +64,6 @@ public class ApplicationPropParas implements ConfigGenerateParas {
         map.put("eventList", eventList);
         map.put("methodList", methodList);
         map.put("port", serverConfig.getPort());
-        map.put("orgId", systemEnvironmentConfig.getOrgId());
         map.put("nodeStr", systemEnvironmentConfig.getNodeStr());
         map.put("groupId", systemEnvironmentConfig.getGroupId());
         map.put("group", systemEnvironmentConfig.getGroup());
@@ -75,6 +77,9 @@ public class ApplicationPropParas implements ConfigGenerateParas {
         map.put("nameSpace", zookeeperConfig.getNamespace());
         map.put("startBlockHeight", systemEnvironmentConfig.getStartBlockHeight());
         map.put("startDate", systemEnvironmentConfig.getStartDate());
+        map.put("encryptType", systemEnvironmentConfig.getEncryptType());
+
+        map.put("swagger", buttonEnvironmentConfig.getSwagger());
 
         return map;
     }

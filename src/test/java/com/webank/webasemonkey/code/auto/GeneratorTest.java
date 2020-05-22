@@ -17,7 +17,8 @@ package com.webank.webasemonkey.code.auto;
 
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.webank.webasemonkey.WebasemonkeyApplicationTests;
@@ -33,12 +34,14 @@ import com.webank.webasemonkey.code.template.face.GenerateParas;
  */
 public class GeneratorTest extends WebasemonkeyApplicationTests {
 
+    @SuppressWarnings("rawtypes")
     @Autowired
     private Map<String, GenerateParas> parasMap;
 
     @Test
     public void go() {
         parasMap.forEach((k, v) -> System.out.println(k + " " + v));
+        Assertions.assertNotNull(parasMap);
     }
     
     

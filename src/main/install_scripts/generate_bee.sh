@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 LANG=zh_CN.UTF-8
+BRANCH_NAME="code_refactor_2020.01"
+
 ##############################################################################
 ##
 ##  WeBASE-Codegen-Monkey start up script for UN*X.
@@ -76,7 +78,7 @@ case "$1" in
         EXEC_OPTION=$BUILD_OPTION
         ;;
     *)
-        LOG_ERROR "invalid option! default run!"
+        LOG_INFO "default run!"
         EXEC_OPTION=$RUN_OPTION
 esac
 
@@ -84,6 +86,7 @@ LOG_INFO "EXEC_OPTION: $EXEC_OPTION [ build|run ]"
 
 #### config props
 APPLICATION_FILE="config/resources/application.properties"
+DEF_FILE="config/resources/*.def"
 APPLICATION_TMP_FILE="config/resources/application.properties.tmp"
 CONTRACT_DIR="config/contract"
 CERT_DIR="config/resources"
@@ -91,10 +94,14 @@ RESOURCE_DIR="src/main/resources"
 JAVA_CODE_DIR="src/main/java"
 BUILD_DIR="dist"
 
+BMP=".tools"
 BM="WeBASE-Codegen-Monkey"
 BB="WeBASE-Collect-Bee"
 BBCOMMON="WeBASE-Collect-Bee-common"
 BBC="WeBASE-Collect-Bee-core"
+BASE_DIR=`pwd`
+LOG_INFO "work dir is $BASE_DIR"
+
 
 #### check the config file exists.
 if [ -f "$APPLICATION_FILE" ];then
@@ -133,6 +140,7 @@ then
   while IFS='=' read -r key value
   do
     key=$(echo $key | tr '.' '_')
+    key=`echo $key |sed 's/^ *\| *$//g'`
     eval "${key}='${value}'"
   done < "$APPLICATION_TMP_FILE"
   rm -f $APPLICATION_TMP_FILE
@@ -141,9 +149,79 @@ else
   exit 1
 fi
 
+LOG_INFO "system.nodeStr =  ${system_nodeStr} "
+LOG_INFO "system.groupId          =  ${system_groupId} "
+LOG_INFO "system.dbUrl =  ${system_dbUrl} "
+LOG_INFO "system.dbUser =  ${system_dbUser} "
+LOG_INFO "system.dbPassword =  ${system_dbPassword} "
+LOG_INFO "system.group          =  ${system_group} "
+LOG_INFO "system.baseProjectPath          =  ${system_baseProjectPath} "
 LOG_INFO "system.contractPackName =  ${system_contractPackName} "
-LOG_INFO "system.group            =  ${system_group} "
+LOG_INFO "system.multiLiving = ${system_multiLiving} "
 LOG_INFO "server.port             =  ${server_port} "
+
+
+# begin to check config nt null
+if  [ ! -n "${system_nodeStr}" ] ;then
+LOG_ERROR "invalid system nodestr! Please check the application.properties."
+exit 1
+fi
+if  [ ! -n "${system_groupId}" ] ;then
+LOG_ERROR "invalid system groupId! Please check the application.properties."
+exit 1
+fi
+if  [ ! -n "${system_dbUrl}" ] ;then
+LOG_ERROR "invalid system dbUrl! Please check the application.properties."
+exit 1
+fi
+if  [ ! -n "${system_dbUser}" ] ;then
+LOG_ERROR "invalid system dbUser! Please check the application.properties."
+exit 1
+fi
+if  [ ! -n "${system_dbPassword}" ] ;then
+LOG_ERROR "invalid system dbPassword! Please check the application.properties."
+exit 1
+fi
+if  [ ! -n "${system_group}" ] ;then
+LOG_ERROR "invalid system group! Please check the application.properties."
+exit 1
+fi
+if  [ ! -n "${system_baseProjectPath}" ] ;then
+LOG_ERROR "invalid system baseProjectPath! Please check the application.properties."
+exit 1
+fi
+if  [ ! -n "${system_contractPackName}" ] ;then
+LOG_ERROR "invalid system contractPackName! Please check the application.properties."
+exit 1
+fi
+if  [ ! -n "${system_multiLiving}" ] ;then
+LOG_ERROR "invalid system multiLiving! Please check the application.properties."
+exit 1
+fi
+if  [ ! -n "${server_port}" ] ;then
+LOG_ERROR "invalid server port! Please check the application.properties."
+exit 1
+fi
+
+count=`find $BASE_DIR/$CONTRACT_DIR -type f -print |grep ".java" | wc -l`
+LOG_INFO "Find $count java files"
+if [[ $count -lt 1 ]];then
+  LOG_ERROR "Not find java files."
+  exit 1
+fi
+
+## begin to check java package name 
+LOG_INFO "Checking your java contract package name ..."
+for file in $BASE_DIR/$CONTRACT_DIR/*
+do
+  if head -n 1 $file | grep "${system_contractPackName}">/dev/null
+  then
+    continue
+  else
+    LOG_ERROR "Invalid java package name. Please make sure your config is equal to your package name."
+    exit 1
+  fi
+done
 
 # check the environment
 ## check server port is used
@@ -186,28 +264,70 @@ LOG_INFO "contractPath: $contractPath"
 group=$(echo ${system_group} | tr '.' '/')
 LOG_INFO "group: $group"
 
-rm -rf $BM
-git clone https://github.com/WeBankFinTech/$BM.git
-cd $BM
 
-git checkout V1.2.0
-cd ..
+if [ -d "$BMP/$BM" ];then
+  LOG_INFO "Monkey already exist."
+  cd $BMP/$BM
+  ## rm cached files
+  rm -rf src/main/java/com/webank/blockchain/
+  rm -rf src/main/java/org/
+  git fetch
+  git reset --hard HEAD
+  git checkout $BRANCH_NAME
+  git pull
+  if [ $? == 0 ];then
+  	LOG_INFO "git pull success"
+  else
+     LOG_ERROR "git pull fail"
+     exit 1;
+  fi
+else
+  LOG_INFO "Begin to download Monkey ..."
+  mkdir -p $BMP
+  cd $BMP
+  git clone https://github.com/WeBankFinTech/$BM.git
+  cd $BM
+  git checkout -b $BRANCH_NAME origin/$BRANCH_NAME
+fi
+cd $BASE_DIR
 
-rm -rf $BB
-git clone https://github.com/WeBankFinTech/$BB.git
-cd $BB
-git checkout V1.2.0
-cd ..
+if [ -d "$BB" ];then
+  LOG_INFO "Bee already exist."
+  cd $BB
+    ## rm cached files
+  rm -rf src/main/java/com/webank/bcosbee/generated
+  rm -rf src/main/java/com/webank/webasebee/generated
+  rm -rf src/main/java/com/webank/blockchain/
+  rm -rf src/main/java/org
+  git fetch
+  git reset --hard HEAD
+  git checkout $BRANCH_NAME
+  git pull
+  if [ $? == 0 ];then
+  	LOG_INFO "git pull success"
+  else
+     LOG_ERROR "git pull fail"
+     exit 1;
+  fi
+else
+  LOG_INFO "Begin to download Bee ..."
+  git clone https://github.com/WeBankFinTech/$BB.git
+  cd $BB
+  git checkout -b $BRANCH_NAME origin/$BRANCH_NAME
+fi
+cd $BASE_DIR
 
 # init config
-cd $BM
+cd $BMP/$BM
 mkdir -p $RESOURCE_DIR/
-cp -f ../$APPLICATION_FILE $RESOURCE_DIR/
+cp -f $BASE_DIR/$APPLICATION_FILE $RESOURCE_DIR/
+cp -f $BASE_DIR/$DEF_FILE $RESOURCE_DIR/
+
 LOG_INFO "copy application.properties done."
 mkdir -p $JAVA_CODE_DIR/$contractPath
-cp -f ../$CONTRACT_DIR/* $JAVA_CODE_DIR/$contractPath/
+cp -f $BASE_DIR/$CONTRACT_DIR/* $JAVA_CODE_DIR/$contractPath/
 mkdir -p ./$CONTRACT_DIR
-cp -f ../$CONTRACT_DIR/* ./$CONTRACT_DIR
+cp -f $BASE_DIR/$CONTRACT_DIR/* ./$CONTRACT_DIR
 LOG_INFO "copy java contract codes done."
 
 # build
@@ -219,26 +339,45 @@ cd $BUILD_DIR
 chmod +x WeBASE*
 $JAVACMD -jar WeBASE* 
 LOG_INFO "$BB generate done."
-cd ../../
-rm -rf $BM
+cd $BASE_DIR
+#rm -rf $BM
 
 cd $BB
+for file in $BASE_DIR/$CONTRACT_DIR/*
+do
+  file=${file##*/}
+  if [[ $file == *.jar ]];
+  then
+    cp -f $BASE_DIR/$CONTRACT_DIR/$file ./libs/
+  fi
+done
+
+
 cd $BBC
 mkdir -p $RESOURCE_DIR/
-cp -f  ../../$CERT_DIR/ca.crt $RESOURCE_DIR/
+cp -f  $BASE_DIR/$CERT_DIR/ca.crt $RESOURCE_DIR/
 # cp -f  ../$CERT_DIR/client.keystore $RESOURCE_DIR/
-cp -f  ../../$CERT_DIR/node.crt $RESOURCE_DIR/
-cp -f  ../../$CERT_DIR/node.key $RESOURCE_DIR/
+cp -f  $BASE_DIR/$CERT_DIR/node.crt $RESOURCE_DIR/
+cp -f  $BASE_DIR/$CERT_DIR/node.key $RESOURCE_DIR/
 
 LOG_INFO "copy certs done."
+
+
 mkdir -p ../$BBCOMMON/$JAVA_CODE_DIR/$contractPath
-cp -f ../../$CONTRACT_DIR/* ../$BBCOMMON/$JAVA_CODE_DIR/$contractPath/
+for file in $BASE_DIR/$CONTRACT_DIR/* 
+do
+  file=${file##*/}
+  if [[ $file == *.java ]];
+  then
+    cp -f $BASE_DIR/$CONTRACT_DIR/$file ../$BBCOMMON/$JAVA_CODE_DIR/$contractPath/
+  fi
+done
 mkdir -p ./$CONTRACT_DIR
-cp -f ../../$CONTRACT_DIR/* ./$CONTRACT_DIR
+cp -f $BASE_DIR/$CONTRACT_DIR/* ./$CONTRACT_DIR
 LOG_INFO "copy java contract codes done."
 
 
-cd ..
+cd $BASE_DIR/$BB
 bash gradlew clean bootJar
 
 LOG_INFO "$BB build done"

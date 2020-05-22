@@ -34,7 +34,6 @@ import com.webank.webasemonkey.enums.SubProjectEnum;
 import com.webank.webasemonkey.enums.SysTableEnum;
 import com.webank.webasemonkey.tools.PropertiesUtils;
 import com.webank.webasemonkey.tools.SqlNameUtils;
-import com.webank.webasemonkey.tools.StringStyleUtils;
 import com.webank.webasemonkey.vo.ContractInfo;
 import com.webank.webasemonkey.vo.ContractStructureMetaInfo;
 import com.webank.webasemonkey.vo.EventMetaInfo;

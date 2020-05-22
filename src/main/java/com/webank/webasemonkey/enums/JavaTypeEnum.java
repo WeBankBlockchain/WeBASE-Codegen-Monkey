@@ -37,8 +37,11 @@ public enum JavaTypeEnum {
     BIGINTEGER("BigInteger", "Long", "bigint", "BigIntegerUtils.toLong"),
     BOOL("Boolean", "String", "varchar(8)", "String.valueOf"),
     STRING("String", "String", "varchar(255)", "String.valueOf"),
-    ByteArray("byte[]", "String", "varchar(2048)", "BytesUtils.bytesArrayToString" ),
-    LIST("List", "String", "varchar(2048)", "JacksonUtils.toJson" )
+    ByteArray("byte[]", "String", "varchar(10240)", "String.valueOf" ),
+    LISTByteArray("List<byte[]>", "String", "varchar(10240)", "String.valueOf" ),
+    LISTString("List<String>", "String", "varchar(10240)", "String.valueOf" ),
+    LISTBigInteger("List<BigInteger>", "String", "varchar(4096)", "String.valueOf" ),
+    LIST("List", "String", "varchar(10240)", "JacksonUtils.toJson" )
     ;
 
     private String javaType;
@@ -48,7 +51,8 @@ public enum JavaTypeEnum {
 
     public static JavaTypeEnum parse(String javaType) {
         for (JavaTypeEnum type : JavaTypeEnum.values()) {
-            if (type.getJavaType().equalsIgnoreCase(StringUtils.substringBefore(javaType, "<"))) {
+            if ((type.getJavaType().equalsIgnoreCase(StringUtils.substringBefore(javaType, "<"))
+                    && !javaType.contains(">")) || type.getJavaType().equalsIgnoreCase(javaType)) {
                 return type;
             }
         }

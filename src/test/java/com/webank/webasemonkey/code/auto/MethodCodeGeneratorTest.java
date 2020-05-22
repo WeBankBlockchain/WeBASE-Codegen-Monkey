@@ -15,9 +15,11 @@
  */
 package com.webank.webasemonkey.code.auto;
 
+import java.io.IOException;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.webank.webasemonkey.WebasemonkeyApplicationTests;
@@ -36,12 +38,14 @@ public class MethodCodeGeneratorTest extends WebasemonkeyApplicationTests {
 	
 	@Autowired
     private CodeGenerateService codeGenerator;
+    @SuppressWarnings("rawtypes")
     @Autowired
     private Map<String, GenerateParas> parasMap;
 
     @Test
-    public void go() throws ClassNotFoundException {
+    public void go() throws ClassNotFoundException, IOException {
         parasMap.forEach((k, v) -> System.out.println(k + " " + v));
         codeGenerator.generateBee();
+        Assertions.assertNotNull(codeGenerator);
     }
 }

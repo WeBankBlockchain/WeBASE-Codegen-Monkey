@@ -16,8 +16,13 @@ public class ${class_name} extends MethodBO {
 	for(entry in list){
 		var javaName = entry.javaName;
         var javaType = entry.javaType;
-        var sqlName =  entry.sqlName;
-        var length = entry.length;
+	%>
+	private ${javaType} ${javaName};
+	<% } %>	
+	 <%
+	for(entry in outputList){
+		var javaName = entry.javaName;
+		var javaType = entry.javaType;
 	%>
 	private ${javaType} ${javaName};
 	<% } %>

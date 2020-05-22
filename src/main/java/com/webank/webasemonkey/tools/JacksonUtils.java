@@ -20,10 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
@@ -46,7 +43,6 @@ public class JacksonUtils {
 
     static {
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-        objectMapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
@@ -59,6 +55,7 @@ public class JacksonUtils {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     public static <T> T fromJson(String json, Class<T> c, Class...t) {
         try {
             return fromJsonWithException(json, c, t);
@@ -80,12 +77,14 @@ public class JacksonUtils {
         return objectMapper.readValue(json, clazz);
     }
 
+    @SuppressWarnings("rawtypes")
     public static <T> T fromJsonWithException(String json, Class<T> c, Class...t)
             throws JsonParseException, JsonMappingException, IOException {
         JavaType javaType = objectMapper.getTypeFactory().constructParametricType(c, t);
         return objectMapper.readValue(json, javaType);
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> T fromJsonWithException(String json, JavaType type)
             throws JsonParseException, JsonMappingException, IOException {
         T ret = (T) objectMapper.readValue(json, type);
@@ -100,6 +99,7 @@ public class JacksonUtils {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> List<T> fromJsonListWithException(String json, Class<T> c) throws IOException {
         JavaType type = getCollectionType(ArrayList.class, c);
         return (List<T>) objectMapper.readValue(json, type);
@@ -127,24 +127,9 @@ public class JacksonUtils {
         return ret;
     }
 
+    @SuppressWarnings("rawtypes")
     public static <T> T convertMap(Map map, Class<T> retClazz) {
         return objectMapper.convertValue(map, retClazz);
-    }
-
-    public static <T> List<T> strToList(String str, Class<T> clazz) {
-        JSONArray jsonArray = JSONArray.parseArray(str);
-        for (int i = 0; i < jsonArray.size(); i++) {
-            System.out.println(jsonArray.get(i));
-        }
-
-        T t = null;
-        List<T> list = new ArrayList<>();
-        for (int i = 0; i < jsonArray.size(); i++) {
-            String objStr = JSONObject.toJSONString(jsonArray.get(i));
-            t = (T) JSONObject.parseObject(objStr, clazz);
-            list.add(t);
-        }
-        return list;
     }
 
 }

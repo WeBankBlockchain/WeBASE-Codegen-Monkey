@@ -48,7 +48,7 @@ public class GrafanaPanelTableParas implements AtomicParas<ContractStructureMeta
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("list", list);
         String className = info.getContractName() + StringUtils.capitalize(info.getName());
-        String tableName = sqlNameUtils.getSqlName(info.getContractName(), info.getName());
+        String tableName = sqlNameUtils.getSqlName(info.getContractName(), info.getName()+ "_" + info.getType());
         map.put("table_name", tableName);
         map.put("title", className);
         return map;

@@ -43,6 +43,7 @@ public class GenerateParasFactory {
      * @param typeName
      * @return GenerateParas contains template path, generation path and render properties.
      */
+    @SuppressWarnings("rawtypes")
     public AtomicParas getParasByType(String typeName) {
         return parasMap.get(typeName);
     }

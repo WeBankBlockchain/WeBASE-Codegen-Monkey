@@ -18,6 +18,7 @@ package com.webank.webasemonkey.vo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 /**
  * ContractNameVO
@@ -30,6 +31,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Accessors(chain = true)
 public class ContractNameVO {
     private String contractName;
 

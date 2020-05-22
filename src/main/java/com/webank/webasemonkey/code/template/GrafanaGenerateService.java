@@ -59,7 +59,7 @@ public class GrafanaGenerateService {
     @Autowired
     private GrafanaDashboardParas grafanaDashboardParas;
 
-    public void genereate() throws ClassNotFoundException {
+    public void genereate() throws ClassNotFoundException, IOException {
         List<String> panels = Lists.newArrayList();
         ContractInfo info = contractInfoService.parseFromContract();
         List<ContractStructureMetaInfo> tablesList = Lists.newArrayList();

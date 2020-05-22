@@ -30,8 +30,6 @@ import com.webank.webasemonkey.tools.PackagePath;
 import com.webank.webasemonkey.vo.EventMetaInfo;
 import com.webank.webasemonkey.vo.FieldVO;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * EventBoRenderParas
  *

@@ -7,11 +7,16 @@ import java.math.BigInteger;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+import org.fisco.bcos.web3j.abi.EventValues;
 import org.fisco.bcos.web3j.crypto.Credentials;
 import org.fisco.bcos.web3j.protocol.Web3j;
+import org.fisco.bcos.web3j.protocol.core.methods.response.Log;
 import org.fisco.bcos.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.fisco.bcos.web3j.tx.gas.ContractGasProvider;
+import org.fisco.bcos.web3j.tx.txdecode.EventResultEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -54,29 +59,43 @@ public class ${contractName}${eventName}CrawlerImpl implements BcosEventCrawlerI
 	
 	@Override
 	public List<EventBO> handleReceipt(TransactionReceipt receipt, BigInteger blockTimeStamp) {
-		List<${eventName}EventResponse> ${eventName}EventResponseList = contract.get${eventName}Events(receipt);
-		List<EventBO> list = new ArrayList<>(${eventName}EventResponseList.size());
-		if(CollectionUtils.isEmpty(${eventName}EventResponseList)) {
-		    return list;
-		}
-		for (${eventName}EventResponse ${eventName}EventResponse : ${eventName}EventResponseList) {
-			${class_name} ${lowContractName}${eventName} = new ${class_name}();
-			${lowContractName}${eventName}.setIdentifier("${contractName}${eventName}");		
-			${lowContractName}${eventName}.setBlockHeight(receipt.getBlockNumber().longValue());
-			${lowContractName}${eventName}.setEventContractAddress(receipt.getContractAddress());
-			${lowContractName}${eventName}.setTxHash(receipt.getTransactionHash());
 			<%
-			for(entry in list){
-				var javaCapName = entry.javaCapName;
-				var javaName = entry.javaName;
-				var typeMethod = entry.typeMethod;
+				var upperEvent = strutil.toUpperCase(eventName);
 			%>
-			${lowContractName}${eventName}.set${javaCapName}(${typeMethod}(${eventName}EventResponse.${javaName}));
-			<% } %>
-			${lowContractName}${eventName}.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));
-			log.debug("depot ${eventName}:{}", ${lowContractName}${eventName}.toString());
-			list.add(${lowContractName}${eventName});
-		}
+		List<EventBO> list = new ArrayList<>();
+        try {
+            Map<String, List<List<EventResultEntity>>> map =
+                    contract.transactionDecoder.decodeEventReturnObject(receipt.getLogs());
+            map.forEach((k, v) -> {
+                String eventName = StringUtils.substringBefore(k, "(");
+                if (StringUtils.equalsAnyIgnoreCase(eventName, contract.${upperEvent}_EVENT.getName())) {
+                    List<List<EventResultEntity>> events = v;
+                    for (List<EventResultEntity> l : events) {
+                        ${class_name} ${lowContractName}${eventName} = new ${class_name}();
+                    
+                        ${lowContractName}${eventName}.setIdentifier("${contractName}${eventName}");		
+						${lowContractName}${eventName}.setBlockHeight(receipt.getBlockNumber().longValue());
+						${lowContractName}${eventName}.setEventContractAddress(receipt.getContractAddress());
+						${lowContractName}${eventName}.setTxHash(receipt.getTransactionHash());
+						
+						<%
+							for(var i=0;i<list.~size;i++){
+								var entry = list[i];
+								var javaCapName = entry.javaCapName;
+								var javaName = entry.javaName;
+								var typeMethod = entry.typeMethod;			
+						%>
+							${lowContractName}${eventName}.set${javaCapName}(${typeMethod}(l.get(${i}).getData()));
+						<% } %>
+							${lowContractName}${eventName}.setBlockTimeStamp(new Date(blockTimeStamp.longValue()));
+							log.debug("depot ${eventName}:{}", ${lowContractName}${eventName}.toString());
+							list.add(${lowContractName}${eventName});						
+                    }
+                }
+            });
+        } catch (Exception e) {
+            log.warn("Event parse error: {}", e);
+        }		
 		return list;
 	}
 }
