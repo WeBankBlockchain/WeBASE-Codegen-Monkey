@@ -48,7 +48,10 @@ dependencies {
     compile('com.ibeetl:beetl:2.9.3')
     
      // web3j依赖
-    compile ('org.fisco-bcos:web3sdk:2.3.0')
+    compile ('org.fisco-bcos:web3sdk:2.4.0') {
+        exclude group: 'com.alibaba', module: 'fastjson'
+    }
+    compile 'com.alibaba:fastjson:1.2.70'
 }
 
 test {
