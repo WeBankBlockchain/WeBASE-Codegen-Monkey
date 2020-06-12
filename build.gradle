@@ -42,16 +42,13 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
-    compile 'cn.hutool:hutool-all:5.3.0'
+    compile 'cn.hutool:hutool-all:5.3.7'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'   
     compile('com.ibeetl:beetl:2.9.3')
     
      // web3j依赖
-    compile ('org.fisco-bcos:web3sdk:2.4.0') {
-        exclude group: 'com.alibaba', module: 'fastjson'
-    }
-    compile 'com.alibaba:fastjson:1.2.70'
+    compile ('org.fisco-bcos:web3sdk:2.4.1-SNAPSHOT')
 }
 
 test {
