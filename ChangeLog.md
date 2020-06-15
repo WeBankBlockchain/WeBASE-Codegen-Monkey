@@ -1,6 +1,11 @@
 ## 更新历史
 
-### V1.3.0
+### V1.3.1 （2020-06-15）
+- 升级web3sdk到2.4.1
+- 升级Springboot到2.2.8
+- 删除fastjson
+
+### V1.3.0 （2020-05-26）
 - 添加github勋章，包括coderefactor、travisci、codecov、synk、codacy等。
 - 升级bee的gradle版本
 - 升级web3sdk版本
