@@ -52,7 +52,7 @@ public class EventEntityRenderParas implements EventGenerateParas {
         map.put("list", list);
         String className = event.getContractName() + event.getName();
         String tableName = sqlNameUtils.getSqlName(event.getContractName(), event.getName()) + "_event";
-        map.put("table_name", tableName);
+        map.put("table_name", systemEnvironmentConfig.getTablePrefix() + tableName + systemEnvironmentConfig.getTablePostfix());
         map.put("class_name", className);
         map.put("group", systemEnvironmentConfig.getGroup());
         map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_DB);
