@@ -166,6 +166,8 @@ LOG_INFO "system.baseProjectPath          =  ${system_baseProjectPath} "
 LOG_INFO "system.contractPackName =  ${system_contractPackName} "
 LOG_INFO "system.multiLiving = ${system_multiLiving} "
 LOG_INFO "server.port             =  ${server_port} "
+LOG_INFO "system.tablePrefix =  ${system_tablePrefix} "
+LOG_INFO "system.tablePostfix =  ${system_tablePostfix} "
 
 
 # begin to check config nt null
@@ -326,12 +328,10 @@ fi
 # replace table name check
 LOG_INFO "Replace table name check."
 cd $BASE_DIR
-tablePrefix=$(cat config/resources/application.properties | grep system\.tablePrefix | grep -v "#" | awk -F "=" '{print $2}')
-tablePostfix=$(cat config/resources/application.properties | grep system\.tablePostfix | grep -v "#" | awk -F "=" '{print $2}')
 # prefix/postfix not empty and not whitespace
-if [ ! -z "${tablePrefix//[[:blank:]]/}" ] || [ ! -z "${tablePostfix//[[:blank:]]/}" ]; then
-  prefix=${tablePrefix//[[:blank:]]}
-  postfix=${tablePostfix//[[:blank:]]/}
+if [ ! -z "${system_tablePrefix//[[:blank:]]/}" ] || [ ! -z "${system_tablePostfix//[[:blank:]]/}" ]; then
+  prefix=${system_tablePrefix//[[:blank:]]}
+  postfix=${system_tablePostfix//[[:blank:]]/}
   LOG_INFO "Replacing table name, tablePrefix=$prefix, tablePostfix=$postfix"
   newAccountInfoTable="${prefix}${ACCOUNT_INFO_TABLE}${postfix}"
   newBlockDetailInfoTable="${prefix}${BLOCK_DETAIL_INFO_TABLE}${postfix}"
