@@ -52,6 +52,8 @@ public class SystemEnvironmentConfig {
     private int crawlBatchUnit = 100;
 
     private String nameStyle = NameStyleEnum.UNDER_SCORE_CASE.getStyle();
+    private String tablePrefix = "";
+    private String tablePostfix = "";
     private String namePrefix = "";
     private String namePostfix = "";
 

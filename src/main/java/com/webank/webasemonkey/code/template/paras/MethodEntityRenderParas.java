@@ -57,7 +57,7 @@ public class MethodEntityRenderParas implements MethodGenerateParas {
         map.put("outputList", outputList);
         String className = method.getContractName() + StringUtils.capitalize(method.getName());
         String tableName = sqlNameUtils.getSqlName(method.getContractName(), method.getName()) + "_method";
-        map.put("table_name", tableName);
+        map.put("table_name", systemEnvironmentConfig.getTablePrefix() + tableName + systemEnvironmentConfig.getTablePostfix());
         map.put("class_name", className);
         map.put("group", systemEnvironmentConfig.getGroup());
         map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_DB);

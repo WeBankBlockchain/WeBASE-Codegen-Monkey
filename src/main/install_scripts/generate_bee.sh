@@ -102,6 +102,13 @@ BBC="WeBASE-Collect-Bee-core"
 BASE_DIR=`pwd`
 LOG_INFO "work dir is $BASE_DIR"
 
+#### system tables
+ENTITY_DIR="$BB/WeBASE-Collect-Bee-db/src/main/java/com/webank/webasebee/db/entity"
+ACCOUNT_INFO_TABLE="account_info"
+BLOCK_DETAIL_INFO_TABLE="block_detail_info"
+BLOCK_TASK_POOL_TABLE="block_task_pool"
+BLOCK_TX_DETAIL_INFO_TABLE="block_tx_detail_info"
+
 
 #### check the config file exists.
 if [ -f "$APPLICATION_FILE" ];then
@@ -159,6 +166,8 @@ LOG_INFO "system.baseProjectPath          =  ${system_baseProjectPath} "
 LOG_INFO "system.contractPackName =  ${system_contractPackName} "
 LOG_INFO "system.multiLiving = ${system_multiLiving} "
 LOG_INFO "server.port             =  ${server_port} "
+LOG_INFO "system.tablePrefix =  ${system_tablePrefix} "
+LOG_INFO "system.tablePostfix =  ${system_tablePostfix} "
 
 
 # begin to check config nt null
@@ -210,7 +219,7 @@ if [[ $count -lt 1 ]];then
   exit 1
 fi
 
-## begin to check java package name 
+## begin to check java package name
 LOG_INFO "Checking your java contract package name ..."
 for file in $BASE_DIR/$CONTRACT_DIR/*
 do
@@ -315,6 +324,35 @@ else
   cd $BB
   git checkout -b $BRANCH_NAME origin/$BRANCH_NAME
 fi
+
+# replace table name check
+LOG_INFO "Replace table name check."
+cd $BASE_DIR
+# prefix/postfix not empty and not whitespace
+if [ ! -z "${system_tablePrefix//[[:blank:]]/}" ] || [ ! -z "${system_tablePostfix//[[:blank:]]/}" ]; then
+  prefix=${system_tablePrefix//[[:blank:]]}
+  postfix=${system_tablePostfix//[[:blank:]]/}
+  LOG_INFO "Replacing table name, tablePrefix=$prefix, tablePostfix=$postfix"
+  newAccountInfoTable="${prefix}${ACCOUNT_INFO_TABLE}${postfix}"
+  newBlockDetailInfoTable="${prefix}${BLOCK_DETAIL_INFO_TABLE}${postfix}"
+  newBlockTaskPoolTable="${prefix}${BLOCK_TASK_POOL_TABLE}${postfix}"
+  newBlockTxDetailInfoTable="${prefix}${BLOCK_TX_DETAIL_INFO_TABLE}${postfix}"
+
+  cd $BASE_DIR/$ENTITY_DIR
+
+  if [ "$(uname)" == "Darwin" ]; then
+    sed -i "" "s/account_info/$newAccountInfoTable/g" AccountInfo.java
+    sed -i "" "s/block_detail_info/$newBlockDetailInfoTable/g" BlockDetailInfo.java
+    sed -i "" "s/block_task_pool/$newBlockTaskPoolTable/g" BlockTaskPool.java
+    sed -i "" "s/block_tx_detail_info/$newBlockTxDetailInfoTable/g" BlockTxDetailInfo.java
+  elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    sed -i "s/account_info/$newAccountInfoTable/g" AccountInfo.java
+    sed -i "s/block_detail_info/$newBlockDetailInfoTable/g" BlockDetailInfo.java
+    sed -i "s/block_task_pool/$newBlockTaskPoolTable/g" BlockTaskPool.java
+    sed -i "s/block_tx_detail_info/$newBlockTxDetailInfoTable/g" BlockTxDetailInfo.java
+  fi
+fi
+
 cd $BASE_DIR
 
 # init config
@@ -337,7 +375,7 @@ LOG_INFO "$BM build done"
 # run
 cd $BUILD_DIR
 chmod +x WeBASE*
-$JAVACMD -jar WeBASE* 
+$JAVACMD -jar WeBASE*
 LOG_INFO "$BB generate done."
 cd $BASE_DIR
 #rm -rf $BM
@@ -364,7 +402,7 @@ LOG_INFO "copy certs done."
 
 
 mkdir -p ../$BBCOMMON/$JAVA_CODE_DIR/$contractPath
-for file in $BASE_DIR/$CONTRACT_DIR/* 
+for file in $BASE_DIR/$CONTRACT_DIR/*
 do
   file=${file##*/}
   if [[ $file == *.java ]];
@@ -386,7 +424,7 @@ LOG_INFO "$BB build done"
 if [ "$EXEC_OPTION" == "$RUN_OPTION" ];then
 cd $BBC/$BUILD_DIR
 chmod +x WeBASE*
-$JAVACMD -jar WeBASE* 
+$JAVACMD -jar WeBASE*
 fi
 
 
