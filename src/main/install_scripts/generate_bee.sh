@@ -58,31 +58,43 @@ function check_java(){
    fi
 }
 
+function checkout_version(){
+  if [ ${ver} != "latest" ]; then
+    if [ $(git tag -l "V$ver") ]; then
+      git checkout V$ver
+    else
+      LOG_ERROR "bee version $ver is not exists, please check."
+      exit 1;
+    fi
+  fi
+}
 
-#### valid input args
-EXEC_OPTION="run"
-RUN_OPTION="run"
-BUILD_OPTION="build"
+### get argvs
+ver="latest"
+exec="run"
+while getopts "e:v:" arg
+do
+  case $arg in
+    e)
+      execArg=$(echo "$OPTARG" | tr '[:upper:]' '[:lower:]')
+      if [ "$execArg" != "run" ] && [ "$execArg" != "build" ]; then
+        LOG_ERROR "-e execute mode: [build|run]"
+      else
+        exec=$execArg
+      fi
+      ;;
+    v)
+      ver=$OPTARG
+      ;;
+    ?)
+      LOG_ERROR "unkonw argument\nusage: -e [build|run], -v [bee_version]"
+      exit 1
+      ;;
+  esac
+done
 
-case "$1" in
-    'run')
-        EXEC_OPTION=$RUN_OPTION
-        ;;
-    'RUN')
-        EXEC_OPTION=$RUN_OPTION
-        ;;
-    'build')
-        EXEC_OPTION=$BUILD_OPTION
-        ;;
-    'BUILD')
-        EXEC_OPTION=$BUILD_OPTION
-        ;;
-    *)
-        LOG_INFO "default run!"
-        EXEC_OPTION=$RUN_OPTION
-esac
-
-LOG_INFO "EXEC_OPTION: $EXEC_OPTION [ build|run ]"
+LOG_INFO "execute mode = $exec"
+LOG_INFO "bee version = $ver"
 
 #### config props
 APPLICATION_FILE="config/resources/application.properties"
@@ -298,6 +310,8 @@ else
   cd $BM
   git checkout -b $BRANCH_NAME origin/$BRANCH_NAME
 fi
+checkout_version
+
 cd $BASE_DIR
 
 if [ -d "$BB" ];then
@@ -324,6 +338,7 @@ else
   cd $BB
   git checkout -b $BRANCH_NAME origin/$BRANCH_NAME
 fi
+checkout_version
 
 # replace table name check
 LOG_INFO "Replace table name check."
@@ -420,8 +435,8 @@ bash gradlew clean bootJar
 
 LOG_INFO "$BB build done"
 
-
-if [ "$EXEC_OPTION" == "$RUN_OPTION" ];then
+if [ "$exec" == "run" ];then
+LOG_INFO "start to run $BB"
 cd $BBC/$BUILD_DIR
 chmod +x WeBASE*
 $JAVACMD -jar WeBASE*
