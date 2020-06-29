@@ -1,7 +1,7 @@
 ### Springboot server config
 server.port=${port}
 spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
-spring.jackson.time-zone=GMT+8
+spring.jackson.time-zone=Asia/Shanghai
 logging.file=webasebee-core.log
 logging.level.org.hibernate=ERROR 
 logging.level.org.fisco.bcos=ERROR 
