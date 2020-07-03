@@ -1,7 +1,7 @@
 ### Springboot server config
 server.port=${port}
 spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
-spring.jackson.time-zone=GMT+8
+spring.jackson.time-zone=Asia/Shanghai
 logging.file=webasebee-core.log
 logging.level.org.hibernate=ERROR 
 logging.level.org.fisco.bcos=ERROR 
@@ -17,6 +17,7 @@ spring.jpa.properties.hibernate.hbm2ddl.auto=update
 spring.jpa.properties.hibernate.dialect=${group}.${projectName}.config.MysqlConfig
 spring.jpa.hibernate.naming.physical-strategy=${group}.${projectName}.config.DatabaseNamingStrategy
 spring.jpa.properties.hibernate.show_sql=true
+spring.jpa.properties.hibernate.globally_quoted_identifiers=true
 spring.profiles.active=sharding-tables
 
 ## System config
