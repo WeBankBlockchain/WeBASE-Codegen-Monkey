@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 LANG=zh_CN.UTF-8
-BRANCH_NAME="dev-2.x"
+BRANCH_NAME="master"
 
 ##############################################################################
 ##
