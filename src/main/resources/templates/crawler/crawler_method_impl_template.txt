@@ -74,7 +74,7 @@ public class ${methodName}MethodCrawlerImpl implements BcosMethodCrawlerInterfac
 		}
 	
 		List<NamedType> outputList = contractMapsInfo.getOutputMethodFiledsMap().get(mapKey);
-       	if (!CollectionUtils.isEmpty(outputList)) {
+       	if (!CollectionUtils.isEmpty(outputList) && receipt.getStatus().equals("0x0")) {
             List<Type> outputParams = FunctionReturnDecoder.decode(receipt.getOutput(),
                     MethodUtils.getMethodTypeReferenceList(outputList));
                     <%
