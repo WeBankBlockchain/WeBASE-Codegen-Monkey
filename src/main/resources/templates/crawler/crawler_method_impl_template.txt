@@ -50,11 +50,11 @@ public class ${methodName}MethodCrawlerImpl implements BcosMethodCrawlerInterfac
 		String mapKey = null;
 		if(transaction.getTo() == null || transaction.getTo().equals(ContractConstants.EMPTY_ADDRESS)){
 			input = input.substring(2 + entry.getKey().length());
-			mapKey = entry.getValue() + entry.getValue();
+			mapKey = entry.getValue() + "_" + entry.getValue();
 			entity.setContractAddress(txHashContractAddress.get(entity.getTxHash()));
 		}else{
 			input = input.substring(10);
-			mapKey = methodName;
+			mapKey = entry.getValue() + "_" + methodName;
 			entity.setContractAddress(transaction.getTo());
 		}
 		
