@@ -20,13 +20,13 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.fisco.bcos.web3j.protocol.ObjectMapperFactory;
-import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition;
-import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition.NamedType;
+import org.fisco.bcos.sdk.abi.wrapper.ABIDefinition;
+import org.fisco.bcos.sdk.abi.wrapper.ABIDefinition.NamedType;
+import org.fisco.bcos.sdk.utils.ObjectMapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
@@ -60,12 +60,12 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
     private SystemEnvironmentConfig systemEnvironmentConfig;
 
     public List<MethodMetaInfo> parseToInfoList(Class<?> clazz) {
-        AbiDefinition[] abiDefinitions = getContractAbiList(clazz);
+        ABIDefinition[] abiDefinitions = getContractAbiList(clazz);
         if (ArrayUtil.isEmpty(abiDefinitions)) {
             return null;
         }
         List<MethodMetaInfo> lists = Lists.newArrayList();
-        for (AbiDefinition abiDefinition : abiDefinitions) {
+        for (ABIDefinition abiDefinition : abiDefinitions) {
             String abiType = abiDefinition.getType();
             if (abiType.equals(AbiTypeConstants.ABI_EVENT_TYPE) || abiDefinition.isConstant()) {
                 continue;
@@ -154,7 +154,7 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
      * @return
      * @return AbiDefinition[]
      */
-    public AbiDefinition[] getContractAbiList(Class<?> clazz) {
+    public ABIDefinition[] getContractAbiList(Class<?> clazz) {
         String abi = "";
         try {
             Field field = clazz.getField(ParserConstants.ABI);
@@ -169,10 +169,10 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
         }
 
         ObjectMapper objectMapper = ObjectMapperFactory.getObjectMapper();
-        AbiDefinition[] abiDefinition = null;
+        ABIDefinition[] abiDefinition = null;
 
         try {
-            abiDefinition = objectMapper.readValue(abi, AbiDefinition[].class);
+            abiDefinition = objectMapper.readValue(abi, ABIDefinition[].class);
         } catch (IOException e) {
             log.error("IOException: {}", e.getMessage());
         }

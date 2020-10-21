@@ -15,7 +15,7 @@
  */
 package com.webank.webasemonkey.enums;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

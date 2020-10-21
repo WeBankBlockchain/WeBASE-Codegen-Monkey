@@ -15,8 +15,7 @@
  */
 package com.webank.webasemonkey.tools;
 
-import com.webank.webasemonkey.bo.JavaArrayTypeBO;
-import com.webank.webasemonkey.bo.JavaBasicTypeBO;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * SolTypeMethod
@@ -29,17 +28,12 @@ import com.webank.webasemonkey.bo.JavaBasicTypeBO;
 public class SolTypeMethodMappingUtils {
 
     public static String fromSolBasicTypeToTypeMethod(String solBasicType) {
-        JavaBasicTypeBO bo = TypeReferenceUtils.convertType(solBasicType);
-        if(bo.isArray()) {
-            JavaArrayTypeBO a = (JavaArrayTypeBO) bo;
-            int type = a.getType().getArgType();
-            if(type == 1) {
+        if (StringUtils.contains(solBasicType, "[]")) {
+            if (StringUtils.contains(solBasicType, "int")) {
                 return "BytesUtils.numericTypeListToString";
-            }
-            else if (type == 2) {
+            } else if (StringUtils.contains(solBasicType, "byte")) {
                 return "BytesUtils.bytesTypeListToString";
-            }
-            else if (type == 4) {
+            } else if (StringUtils.contains(solBasicType, "bool")) {
                 return "BoolUtils.toBoolean";
             } else {
                 return "BytesUtils.stringListToString";

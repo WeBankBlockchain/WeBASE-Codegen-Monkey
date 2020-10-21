@@ -18,13 +18,7 @@ package com.webank.webasemonkey.parser;
 import java.util.List;
 import java.util.Map;
 
-import org.fisco.bcos.web3j.abi.TypeReference;
-import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition.NamedType;
-import org.fisco.bcos.web3j.protocol.core.methods.response.AbiDefinition.NamedType.Type;
-import org.fisco.bcos.web3j.tx.txdecode.BaseException;
-import org.fisco.bcos.web3j.tx.txdecode.ContractAbiUtil;
-import org.fisco.bcos.web3j.tx.txdecode.DynamicArrayReference;
-import org.junit.jupiter.api.Assertions;
+import org.fisco.bcos.sdk.abi.wrapper.ABIDefinition.NamedType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -48,7 +42,7 @@ public class MethodParserTest extends WebasemonkeyApplicationTests {
 
     @SuppressWarnings("unchecked")
     @Test
-    public void testGetField() throws BaseException, ClassNotFoundException {
+    public void testGetField() throws ClassNotFoundException {
         String methodMetaInfoStr =
                 "{\"contractName\":\"AccessRestriction\",\"name\":\"revokeUser\",\"shardingNO\":1,\"list\":null}";
         String inputsAddress = "[{\"name\":\"_user\",\"type\":\"address\",\"type0\":null,\"indexed\":false}]";
@@ -67,6 +61,7 @@ public class MethodParserTest extends WebasemonkeyApplicationTests {
         List<NamedType> nt2 = JacksonUtils.fromJson(inputsStaticArray, List.class, NamedType.class);
         List<FieldVO> list2 = methodParser.getFieldList(mmi2, nt2);
         
+        /*
         List<TypeReference<?>> listOfTypeReference = ContractAbiUtil.paramFormat(nt);
         System.out.println(JacksonUtils.toJson(listOfTypeReference));
         System.out.println(JacksonUtils.toJson(ContractAbiUtil.paramFormat(nt2)));
@@ -77,6 +72,7 @@ public class MethodParserTest extends WebasemonkeyApplicationTests {
            TypeReference<?> tr = DynamicArrayReference.create(type.getBaseName(), n.isIndexed());
            System.out.println(tr.getClass().getSimpleName());
         }     
+        */
     }
     
     

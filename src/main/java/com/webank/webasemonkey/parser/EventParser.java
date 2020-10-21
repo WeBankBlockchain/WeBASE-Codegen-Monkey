@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.fisco.bcos.web3j.protocol.core.methods.response.Log;
+import org.fisco.bcos.sdk.model.TransactionReceipt.Logs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -80,7 +80,7 @@ public class EventParser implements ContractJavaParserInterface<EventMetaInfo> {
             List<FieldVO> fieldList = Lists.newArrayList();
             for (Field f : fields) {
                 // web3sdk 2.0 has a Log type, skip it temporary
-                if (f.getType() == Log.class) {
+                if (f.getType() == Logs.class) {
                     continue;
                 }
                 FieldVO vo = new FieldVO();

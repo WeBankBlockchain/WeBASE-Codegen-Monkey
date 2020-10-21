@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.fisco.bcos.web3j.abi.datatypes.Address;
+import org.fisco.bcos.sdk.abi.datatypes.Address;
 
 
 /**
