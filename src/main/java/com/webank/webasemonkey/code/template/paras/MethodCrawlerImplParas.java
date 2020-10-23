@@ -58,6 +58,7 @@ public class MethodCrawlerImplParas implements MethodGenerateParas {
         map.put("methodName", name);
         map.put("oriMethodName", method.getName());
         map.put("group", systemEnvironmentConfig.getGroup());
+        map.put("contractPackName", systemEnvironmentConfig.getContractPackName());
         map.put("projectName", PackageConstants.PROJECT_PKG_NAME + "." + PackageConstants.SUB_PROJECT_PKG_PARSER);
         return map;
     }

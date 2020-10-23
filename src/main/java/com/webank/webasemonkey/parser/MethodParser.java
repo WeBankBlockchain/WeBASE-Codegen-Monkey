@@ -79,7 +79,7 @@ public class MethodParser implements ContractJavaParserInterface<MethodMetaInfo>
             method.setType("method").setContractName(clazz.getSimpleName());
             log.debug("method name : {}", abiDefinition.getName());
             if (abiType.equals(AbiTypeConstants.ABI_CONSTRUCTOR_TYPE)) {
-                method.setName(clazz.getSimpleName());
+                method.setName("constructor");
             } else {
                 method.setName(abiDefinition.getName());
             }
