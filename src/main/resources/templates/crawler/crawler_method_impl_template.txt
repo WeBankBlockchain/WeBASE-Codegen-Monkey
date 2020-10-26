@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.fisco.bcos.sdk.abi.ABICodec;
 import org.fisco.bcos.sdk.client.Client;
 import org.fisco.bcos.sdk.client.protocol.model.JsonTransactionResponse;
@@ -42,16 +43,19 @@ public class ${methodName}MethodCrawlerImpl implements BcosMethodCrawlerInterfac
 
 	@Override
 	public MethodBO transactionHandler(JsonTransactionResponse transaction, TransactionReceipt receipt, Date blockTimeStamp,
-	  String methodName, Map<String, String> txHashContractAddress) {
+	  String methodName) {
 		log.debug("Begin process ${methodName} Transaction");
 		${methodName}BO entity = new ${methodName}BO();
 		entity.setTxHash(transaction.getHash());
 		entity.setBlockHeight(transaction.getBlockNumber().longValue());
-		ABICodec abiCodec = new ABICodec(client.getCryptoSuite());
-		
-		entity.setContractAddress(receipt.getContractAddress());
+		ABICodec abiCodec = new ABICodec(client.getCryptoSuite());		
 		entity.setBlockTimeStamp(blockTimeStamp);	
 		entity.setIdentifier("${methodName}");	
+		if (StringUtils.equals(methodName, "constructor")) {
+            entity.setContractAddress(receipt.getContractAddress());
+        } else {
+            entity.setContractAddress(receipt.getTo());
+        }
 				
 		try {			
 			List<Object> params =
