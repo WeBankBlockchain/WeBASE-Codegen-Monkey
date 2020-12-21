@@ -19,7 +19,9 @@
 > 强梁者不得其死——吾将以为教父。
 > -- 老子
 
-代码自动生成组件：WeBASE-Codegen-Monkey是WeBASE数据导出工具的代码生成组件，可帮助用户自动生成基于[FISCO BCOS](https://github.com/FISCO-BCOS/FISCO-BCOS/tree/master)的数据导出组件[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)。
+**目前本项目处于维护模式，新特性和新功能请移步：** https://github.com/WeBankBlockchain/Data-Export 
+
+代码自动生成组件：WeBASE-Codegen-Monkey是WeBASE数据导出工具的代码生成组件，可帮助用户自动生成基于[FISCO BCOS](https://github.com/FISCO-BCOS/FISCO-BCOS/tree/master)的数据导出组件[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)。 
 
 只需要在一个配置文件中进行少量简单的配置，同时按照要求提供相关的智能合约信息；当前版本可支持自动生成[WeBASE-Collect-Bee](https://github.com/WeBankFinTech/WeBASE-Collect-Bee/tree/master)。
 
